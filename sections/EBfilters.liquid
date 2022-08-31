@@ -1,0 +1,97 @@
+<script>
+  window.bg_collection = false
+  {% if collection == collections[settings.collection_hombre] %}
+  window.bg_collection = 'hombre'
+  {% endif %}
+  {% if collection == collections[settings.collection_mujer] %}
+  window.bg_collection = 'mujer'
+  {% endif %}
+  {% if collection == collections[settings.collection_nicho] %}
+  window.bg_collection = 'nicho'
+  {% endif %}
+  {% if collection == collections[settings.collection_unisex] %}
+  window.bg_collection = 'unisex'
+  {% endif %}
+  {% if collection == collections[settings.collection_kids] %}
+  window.bg_collection = 'kids'
+  {% endif %}
+
+  window.collection = "{{ collection.handle }}"
+  window.collection_sortby = 'price-descending'
+  window.selected_tags = [];
+  window.collection_products = [];
+
+
+  window.mobile_items_per_row = {{ section.settings.grid_mobile_items_per_row | times: 1 }};
+  window.tablet_items_per_row = 2;
+  window.product_show_secondary_image = true;
+  window.show_unavailable_products = true;
+  window.send_unavailable_to_bottom = true;
+
+  window.n_prod = {% paginate collection.products by 1000 %}{{ collection.products.size }} {% assign sp_paginate_by = paginate.page_size %} {% endpaginate %};
+
+  window.no_products_text = '{{  section.settings.text_no_products   }} | {{  section.settings.text_no_products_sub   }}'
+
+  {% if section.settings.image_no_results %}
+  {% assign image_no_results = section.settings.image_no_results | image_url %}
+  window.image_no_results = '{{ image_no_results }}'
+  {% else %}
+  window.image_no_results = false
+  {% endif %}
+
+  function escapeRegExp(string) {
+    return string.replace(/[.*+\-?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
+  }
+  function replaceAll(str, find, replace) {
+    return str.replace(new RegExp(escapeRegExp(find), 'g'), replace);
+  }
+
+  ///LOAD PRODUCTOS   
+  var url = location.pathname + '?view=ajax'
+  console.log('url', url, window.collection_sortby);
+
+  fetch(url, {
+    credentials: 'same-origin',
+    method: 'GET'
+  }).then(function (response) {
+    response.text().then(function (content) {
+      console.log('---------PRODUCTS--------');
+      var content_filtered = replaceAll(content, ',]', ']')
+      window.collection_products = JSON.parse(content_filtered)
+
+      DT.colFilter.init(window.collection_products);
+    });
+  });
+
+</script>
+ 
+
+{% schema %}
+{
+"name": "Filtros",
+"settings": [
+{
+"type": "header",
+"content": "Sin resultados"
+},
+{
+"type": "image_picker",
+"id": "image_no_results",
+"label": "Imagen sin resultados"
+},
+{
+"type": "text",
+"id": "text_no_products",
+"label": "Text",
+"default": "No hay productos"
+}
+,
+{
+"type": "text",
+"id": "text_no_products_sub",
+"label": "Sub-text",
+"default": "Prueba otra búsqueda"
+}
+]
+}
+{% endschema %}

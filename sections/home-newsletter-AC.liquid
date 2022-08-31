@@ -1,0 +1,63 @@
+<section class="home-newsletter">
+{%- assign formId = 'Contact_' | append: section.id -%}
+
+     
+    <div class="newsletter-image">
+        <div class="image-background">
+        </div>
+            <img src="{{ section.settings.img_newsletter | image_url }}" alt="">
+    </div>
+
+    <div class="newsletter-info"> 
+        <h4 class="section-title">{{ section.settings.titular }}</h4>
+        <br>
+        {% if section.settings.texto_secundario != '' %}
+        {{ section.settings.texto_secundario }}
+        {% endif %}
+        <div class="footer-submit">
+        {{  section.settings.html_form }}
+        </div> 
+    </div>
+
+
+</section>
+ 
+{% schema %}
+{
+  "name": "AC subscription ", 
+  "settings": [ 
+        {
+        "type": "image_picker",
+        "id": "img_newsletter",
+        "label": "Imagen",
+        "info":"PNG, la imagen será rotada para encajar en el diseño"
+        }, 
+        {
+        "type": "text",
+        "id": "titular",
+        "label": "Titular",
+        "default": "Siempre hay más de un perfume diseñado para ti "
+        },
+        {
+        "type": "richtext",
+        "id": "texto_secundario",
+        "label": "Texto secundario",
+        "default": "<p>¡Descúbrelo en nuestro catálogo!</p>"
+        },
+        {
+            "type": "html",
+            "id": "html_form",
+            "label": "HTML del form",
+            "default": "<div><p>Aquí el HTML del form</p></div>"
+         }
+        
+   ],
+   "presets": [
+   {
+       "category":"Home",
+       "name": "Newsletter AC"
+    }
+   ]
+}
+{% endschema %}
+

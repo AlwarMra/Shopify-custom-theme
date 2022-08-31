@@ -1,0 +1,266 @@
+<section class="container page-width home-banner-section">
+    
+        <div class="home-banner-text-container">
+            {% if section.settings.subtitle !=blank %} <p class="subtitle">{{ section.settings.subtitle }}</p>{% endif %}
+            <h4 class="section-title">{{ section.settings.title }}</h4>
+            {% if section.settings.extra_text !=blank %}<p>{{ section.settings.extra_text }}</p>{% endif %}
+        </div>
+        <div class="banner-btns {% if section.blocks.size == 3 %} three{% endif %}">
+            {% for block in section.blocks %}
+            <a href="{{ block.settings.url }}" class="button">{{ block.settings.btn_text }}</a>
+            {% endfor %}
+        </div>       
+
+    <div class="bottom-disclaimers">
+        {% assign delivery_price = settings.envio_gratis_importe | replace: '.','' | money %}
+        <p>{{ 'announce.tryandbuy' | t }}</p>
+        <p>{{ 'announce.envio_precio' | t: price: delivery_price }}</p>
+        <p class="desktop">{{ 'announce.envio' | t }}</p>
+    </div>
+</section>
+
+<style>
+    .home-banner-section {
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background: {{ section.settings.back_color }};
+        background-image: url('{{ section.settings.img_mv | image_url }}');
+        color: {{ section.settings.text_color }};
+        padding: 1rem;
+        position: relative;
+        margin-bottom: 5rem;
+    }
+    .home-banner-text-container {
+        max-width: 80%;
+        padding-top: 2rem;
+    }
+    .tp-widget-wrapper {
+        text-align: left !important;
+    }
+    .home-banner-text-container,
+    .home-banner-text-container .section-title,
+    .home-banner-text-container p{
+        text-align: left;
+        color: {{ section.settings.text_color }};
+        line-height: 1.5;
+    }
+    .home-banner-text-container .section-title {
+        line-height: 1;
+        letter-spacing: 0;
+    }
+    .home-banner-text-container .section-title {
+        margin-bottom: 1rem;
+        font-family: 'futura-Bold';
+    }
+    .home-banner-text-container p {
+        margin-bottom: 1.5rem;
+    }
+    .home-banner-section .trustpilot-widget{
+        width: 230px;
+        right: 20px;
+        margin-bottom: 1.8rem;
+    }
+
+    .bottom-disclaimers {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        padding: 1rem;
+        width: 100%;
+        background: {{ section.settings.disclaimer_back }};
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .bottom-disclaimers p {
+        text-align: center;
+        color: {{ section.settings.disclaimer_text }};
+        line-height: 1.5;
+
+    }
+    .bottom-disclaimers .mobile {
+        display: none;
+    }
+    .banner-btns a {
+        background: {{ section.settings.back_color }};
+        color: {{ section.settings.text_color_btns }};
+        display: inline-block;
+        padding: 15px 30px;
+        width: 150px;
+        margin-right: 1rem;
+        font-size: 1.5rem;
+        text-align: center;
+    }
+    .banner-btns.three a:last-child {
+        display: block;
+        width: 318px;
+        margin: 0;
+    }
+    @media(min-width: 768px) {
+        .home-banner-section {
+            margin-top: 3rem;
+        }
+        .home-banner-section .aspect-ratio-box{
+            display: none;
+        }
+        .home-banner-text-container {
+            padding-top: 5rem;
+            max-width: 70%;
+        }
+        .home-banner-section {
+            background-image: url('{{ section.settings.img_dk | image_url }}');
+            min-height: 500px;
+        }
+        .home-banner-text-container {
+            margin: 0 auto;
+        }
+        .home-banner-section .trustpilot-widget{
+            width: 100%;
+            right: 0;
+        }
+        .banner-btns a {
+            font-size: 2rem;
+            width: 200px;
+        }
+        .banner-btns.three a:last-child {
+            display: none;
+        }
+        .home-banner-text-container,
+        .home-banner-text-container .section-title,
+        .home-banner-text-container p,
+        .banner-btns{
+        text-align: center;
+        }   
+        .home-banner-text-container .section-title {
+        letter-spacing: 3px;
+        line-height: 1.5;
+        }
+        .home-banner-text-container p {
+            font-size: 1.2rem;
+        }
+        .home-banner-text-container .section-title {
+            font-size: 1.5rem;
+        }   
+        .bottom-disclaimers .mobile {
+            display: block;
+        }   
+    }
+</style>
+
+{% schema %}
+{
+    "name":"Home: top baner",
+    "settings":[
+        {
+            "id":"title",
+            "label":"Title",
+            "type":"text",
+            "default":"Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime, eos."
+        },
+        {
+            "id":"subtitle",
+            "label":"Subtitle",
+            "type":"text",
+            "default":"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Debitis, ullam tempore?"
+        },
+        {
+            "id":"extra_text",
+            "label":"Extra text",
+            "type":"text",
+            "default":"Lorem. ipsum dolor."
+        },
+        {
+            "type":"color",
+            "id":"back_color",
+            "default":"#000000",
+            "label":"Background color"
+        },
+        {
+            "type":"color",
+            "id":"text_color",
+            "default":"#ffffff",
+            "label":"Text color"
+        },
+        {
+            "type":"color",
+            "id":"text_color_btns",
+            "default":"#ffffff",
+            "label":"Text color buttons"
+        },
+        {
+            "type":"image_picker",
+            "id":"img_mv",
+            "label":"Image (Mobile)"
+        },
+        {
+            "type":"image_picker",
+            "id":"img_dk",
+            "label":"Image (desktop)"
+        },
+        {
+            "type":      "select",
+            "id":        "mostrar_valoracion",
+            "label":     "show_reviews",
+            "options": [
+                { 
+                "value": "true",
+                "label": "Show"
+                },
+                { 
+                "value": "false",
+                "label": "Hide"
+                }
+                ]
+        },
+        {
+            "type":"select",
+            "id":"theme_color",
+            "label":"Trustpilot color",
+            "default":"dark",
+            "options": [
+                {"value":"dark", "label":"Dark"},
+                {"value":"light", "label":"Light"}
+            ]
+        },
+        {
+            "id":"disclaimer_back",
+            "type":"color",
+            "default":"#A9A9A9",
+            "label":"Disclaimer background color"
+        },
+        {
+            "id":"disclaimer_text",
+            "type":"color",
+            "default":"#ffffff",
+            "label":"Disclaimer background color"
+        }
+    ],
+    "blocks": [
+        {
+            "name":"button",
+            "type":"button",
+            "limit":3,
+            "settings":[
+                {
+                    "type":"text",
+                    "id":"btn_text",
+                    "label":"Button text",
+                    "default":"Lorem"
+                },
+                {
+                    "type":"url",
+                    "id":"url",
+                    "label":"URL"
+                }
+            ]
+        }
+    ],
+    "presets":[
+        {
+            "category":"Home",
+            "name":"Home: top banner"
+        }
+    ]
+}
+{% endschema %}

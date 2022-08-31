@@ -1,0 +1,29 @@
+{% assign desc = collection.description | split: '==TEXTO==' %}
+{% assign desc1 = desc[1] %}
+<div class="collection-welcoming"> 
+    <h1 class="section-title">
+        {{collection.title | upcase }}
+    </h1>
+    <p class="col-wel-text">{{ 'general.perfumes_colecciones_html' | t }}</p>
+    {% if desc1 != blank %}<div class="collection-claimer" style="margin-top: 1rem;">{{ desc1 }}</div>{% endif %}
+</div>
+
+<style>
+    {% if collection.image %}
+    .collection-welcoming {
+        background-image: url('{{ collection.image.src | image_url }}');  
+          background-position: unset;
+          background-repeat: no-repeat;
+            background-size: cover;
+    }
+    .collection-welcoming {
+        background-position: cover;
+    }
+    .collection-welcoming .section-title,
+    .collection-welcoming .col-wel-text,
+    .collection-welcoming .section-title, .collection-welcoming p, .collection-welcoming span {
+        color: var(--main-color) !important;
+    }
+    
+    {% endif %}
+</style>

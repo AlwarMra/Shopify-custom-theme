@@ -1,0 +1,20 @@
+<predictive-search class="search-modal__form" data-loading-text="{{ 'accessibility.loading' | t }}">
+    <form action="{{ routes.search_url }}" method="get" role="search" style="width: 100%;" class="search">
+        <input name="options[prefix]" type="hidden" value="last">
+        <div class="search-input-container">
+            <input id="in_search" class="nav-input nav-link-hide" name="q" placeholder="{{ 'general.busca_tu_perfume_o_marca' | t }}" type="search" value="" role="combobox" aria-expanded="false" aria-owns="predictive-search-results-list" aria-controls="predictive-search-results-list" aria-haspopup="listbox" aria-autocomplete="list" autocorrect="off" autocomplete="off" autocapitalize="off" spellcheck="false">
+            <a href="#" id="btn_search">
+                {% render 'icon' with 'searcher' %}
+            </a>
+        </div>
+        <div class="predictive-search predictive-search--header" data-predictive-search tabindex="-1">
+
+            <div class="predictive-search__loading-state">
+                <svg aria-hidden="true" class="spinner" focusable="false" role="presentation" viewbox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
+                    <circle class="path" cx="33" cy="33" fill="none" r="30" stroke-width="6"></circle>
+                </svg>
+            </div>
+        </div>
+        <span aria-hidden="true" class="predictive-search-status visually-hidden" role="status" style="display: none;"></span>
+    </form>
+</predictive-search>

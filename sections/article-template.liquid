@@ -1,0 +1,86 @@
+<div class="article-wrapper">
+    <div class="article-content">
+      <span class="article-date"> 
+        {% comment %}{% assign fecha_articulo =  article.published_at | date: '%B %e, %Y ' %}{% endcomment %}
+        {%- include 'dateTranslate', dateString:article.published_at -%}
+      </span>
+      <h1 class="section-title">{{ article.title }}</h1>
+      {{ article.content }}
+
+      <div class="form-catalogue"> 
+        <div class="footer-submit">
+          {{ pages['faldon-articulos'].content }}     
+        </div>  
+      </div> 
+
+      <span class="article-date"><strong>{{ 'blog.escrito_por' | t }} {{ article.author }}</strong></span>
+
+      <div class="article-share-buttons">
+        <a class="share-button item-facebook" href="https://www.facebook.com/sharer.php?u={{ share_url }}" target="_blank" rel="noopener">{%- include 'icon' with 'facebook' -%}</a>
+        <a class="share-button item-twitter" href="https://twitter.com/share?{% if twitter_text != blank %}text={{twitter_text}}&{% endif %}url={{ share_url }}" target="_blank" rel="noopener">{%- include 'icon' with 'twitter' -%}</a>
+        <a class="share-button item-pinterest" href="https://pinterest.com/pin/create/button/?url={{ share_url }}{% if pinterest_image != blank %}&media={{ pinterest_image }}{% endif %}&description={{ pinterest_description }}" target="_blank" rel="noopener">{%- include 'icon' with 'pinterest' -%}</a>
+      </div>
+
+
+
+      <div class="related-articles">
+            {% capture all_the_tags %}{% for tag in article.tags %}{{ tag }} {% endfor %}{% endcapture %}
+            {% assign current = article.id %}
+            {% assign count = 0 %}
+            {% for article in blog.articles %}
+            {% unless article.id == current %}
+                {% for tag in article.tags %}
+                    {% if all_the_tags contains tag %}  
+                        {%- include 'article-item', article: article -%}  
+                        {% assign count = count | plus:1 %}            
+                    {% endif %}
+                {% endfor %}
+            {% endunless %} 
+            {% if count == 3 %}{% break %}{% endif %}
+            {% endfor %} 
+
+
+        {% if section.settings.featured_article_1  != '' %}
+            {% assign article = articles[section.settings.featured_article_1] %}
+            {% if article %} 
+            {%- include 'article-item', article: article -%}
+            {% endif %}
+            {% if section.settings.featured_article_2  != '' %}
+            {% assign article = articles[section.settings.featured_article_2] %} 
+            {%- include 'article-item', article: article -%}
+            {% endif %} 
+            {% if section.settings.featured_article_3 != '' %}
+            {% assign article = articles[section.settings.featured_article_3] %} 
+            {%- include 'article-item', article: article -%}
+            {% endif %} 
+        {% endif %}
+        </div>
+    </div>
+  </div>
+
+
+
+{% schema %}
+  {
+    "name": "Página de artículo",
+    "settings": [
+      {
+      "type": "article",
+      "id": "featured_article_1",
+      "label": "Articlo 1"
+      } 
+      ,
+      {
+      "type": "article",
+      "id": "featured_article_2",
+      "label": "Articlo 2"
+      } 
+      ,
+      {
+      "type": "article",
+      "id": "featured_article_3",
+      "label": "Articlo 3"
+      }   
+    ]
+  }
+{% endschema %}

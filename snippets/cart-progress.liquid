@@ -1,0 +1,24 @@
+{% assign EG_importe = settings.envio_gratis_importe | times: 100 %}
+{% assign EG_importe_money = EG_importe | money %}
+{% assign EG_falta = EG_importe  | minus: cart.total_price %}
+{% assign EG_falta_money = EG_falta | money %}
+
+{% assign parte = EG_falta | times: 1000  | divided_by: EG_importe   %}
+{% assign progress_w =  1000 | minus: parte | divided_by: 10  %} 
+
+
+{% if settings.envio_gratis_show %}
+  <!-- {% if cart.total_price >= 0  and cart.total_price < EG_importe %}  -->
+      {% assign MSG  = settings.envio_gratis_text | replace: 'XX',  EG_falta_money  %}
+  {% else %}
+     {% assign MSG  = settings.envio_gratis_text | replace: 'XX', EG_importe_money  %} 
+  {% endif %} 
+
+
+  {% if MSG %}
+    <progress id="progress" max="100" value="{{progress_w}}"></progress>
+    <p class="EG_text" style="display:block;clear:both; "> 
+    {{ MSG }} 
+    </p>
+<!-- {% endif %} -->
+{% endif %} 

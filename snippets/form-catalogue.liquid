@@ -1,0 +1,12 @@
+<div class="form-catalogue">
+    <h3>{{ 'general.conoce_equivalencias' | t | upcase }}</h3>
+     <div class="footer-submit">
+              {% form 'customer'  %} 
+                <input type="email" required="required" name="contact[email]" placeholder="{{ 'general.newsletter_form.email_placeholder' | t | upcase }}">
+                <button type="submit"> {{ 'general.newsletter_form.descargar' | t | upcase }} </button>
+            {% endform %}    
+            </div> 
+     {% comment %} 
+    <p class="article-subscribe">Al subscribirte aceptas la <a href="/pages/aviso-legal-perfumes-equivalencia-divain">política de privacidad</a> de DIVAIN.</p>
+    {% endcomment %}
+</div>

@@ -1,0 +1,73 @@
+{% include 'product-tags' | prod: product %}
+{% assign descripcion_producto_extra = product.description | split: settings.product_decription_separator | last  %}
+  <section class="container test">
+        <div class="container-fluid">
+            <div class="extra-info">
+                <h3 class="section-title">{{ section.settings.titulo }}</h3>
+                <h4 class="section-title subtitle">{% if familias_arr and intensidad_txt and estacion and uso %}{{ 'general.Perfume_equivalente_a' | t }}{% endif %} {{ imitation_product }}</h4>
+                
+              {% if familias_arr and intensidad_txt and estacion and uso %}
+              <table class="extra-info-table">
+                    <tr>
+                        <th class="table-head"><h3>{{'general.familia_olfativa' | t }}</h3></th>
+                        <td class="table-content">{{ familias_arr | join: ' '}}{% if subfamilia %} {{ subfamilia }}{% endif %}{% if subfamilia2 %} {{ subfamilia2 }}{% endif %}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th class="table-head"><h3>{{ 'general.intensidad.Intensidad' | t }}</h3></th>
+                        <td class="table-content">{{ intensidad_txt }}</td>
+                    </tr>
+                    <tr>
+                        <th class="table-head"><h3>{{'general.Estacion' | t }}</h3></th>
+                        <td class="table-content">{{ estacion }}</td>
+                    </tr>
+                    <tr>
+                        <th class="table-head"><h3>{{'general.Uso' | t }}</h3></th>
+                        <td class="table-content">{{ uso }}</td>
+                    </tr>
+                </table>
+              {% endif %}
+                {% include 'iconos-confianza' %}
+
+                <div class="panel-wrapper container-width" style="margin: 0 auto;"> 
+                    {% assign descripcion_parts =  descripcion_producto_extra | split: '<p>---</p>'  %} 
+                    <div class="extra-info-text toggled" id="toggle-text"> 
+                            {% if descripcion_parts.size  == 2  %}
+                                <span id="toggle-text-1" >{{ descripcion_parts[0] }} </span>
+                                <span id="toggle-text-2" style="display: none; opacity:0" >{{ descripcion_parts[1]  }} </span>
+                            {% else %}
+                                 <span id="toggle-text-1" >{{ descripcion_producto_extra  }} </span>
+                            {% endif %} 
+                    </div>
+                    {% if descripcion_parts.size  == 2  %}
+                        <div class="fade"></div>
+                        <a id="info-toggle" class="arrow-toggle" href="#"><span class="select-icon">{% include 'icon' with 'select-arrow' %}</span><span class="show-info-text">{{ 'product.Ver_mas_sobre_el_perfume' | t }}</span></a>
+                    {% endif %} 
+                </div>
+
+               
+               
+            </div>
+        </div>
+   </section>      
+                 
+
+    {% schema %}
+    {
+      "name": "Descripción extra", 
+      "settings": [
+            {
+                "type": "text",
+                "id": "titulo",
+                "label": "Título",
+                "default": "Descripción adicional del producto"
+             },
+             {
+                "type": "text",
+                "id": "titulo_seccion_texto",
+                "label": "Título sección más información",
+                "default": "Más información sobre el perfume"
+             } 
+       ]
+    }
+    {% endschema %}

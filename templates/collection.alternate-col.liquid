@@ -1,0 +1,21 @@
+{% comment %}{% section 'collection-top-background' %}{% endcomment %}
+{% section 'breadcrumbs' %}
+{% section 'collection-welcoming' %}
+
+<div class="collection-layout">
+  <div class="collection-grid"> 
+    <div id="filter-column">{% render 'collection-filter-controls' %}</div> 
+    <div>
+      <div class="subcollections subcol-desktop">
+        {% render 'nested-filters' %}
+      </div>
+
+      {% section 'collection-cards' %}  
+      {% render 'collection-description' %}
+  </div>
+  </div>
+</div>
+ 
+{{ 'filtros.min.js' | asset_url | script_tag }}
+
+{% section 'EBFilters' %}

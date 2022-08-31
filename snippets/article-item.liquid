@@ -1,0 +1,13 @@
+<article class="article-item">
+    {%- if article.image != blank -%}
+    {%- assign image_url = article.image -%}
+    <a href="{{ article.url }}">
+      <div class="image-container">
+        <img class="" src="{{ image_url | img_url: 'x600' }}" alt="{{ article.image.alt | escape }}">
+      </div>
+        <p class="section-title">
+          {{ article.title }}
+        </p>
+    </a>
+  {%- endif -%}
+</article>

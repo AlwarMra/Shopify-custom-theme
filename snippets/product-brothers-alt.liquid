@@ -1,0 +1,68 @@
+<div class="product-brother-container">
+  
+    {% liquid
+    assign prod_bro = ''
+    assign categoria = ''
+    assign catBro = ''
+    assign count = 0
+    
+    for tag in product.tags
+      unless tag contains 'nicho'
+        if tag contains 'categoria'
+            assign categoria = tag
+        endif
+      endunless
+    endfor
+    assign index = 'now' | date: '%S'
+    assign index = index | times: collections['all'].products.size
+    assign index = index | divided_by: 60
+    %}
+      
+    {% if categoria contains 'accesorios' or categoria == '' %}
+       {% for prod_bro in collections['all'].products limit:2 offset:0 %}
+        <div class="product-brother">
+          <div class="img-container">
+            <a alt="{{ prod_bro.handle }}" href="{{ prod_bro.url }}"><img src="{{ prod_bro.images[0] | img_url: 'x150' }}"></a>
+          </div>
+          <div class="text">
+            <p>{{ prod_bro.title }}</p>
+            <p>{{ prod_bro.price | money }}</p>
+            <p><a class="button-add" data-rel="{{ prod_bro.variants[0].id }}" data-compared="{{ prod_bro.variants[0].compare_at_price }}">{{ 'botones.add_to_cart' | t }}</a></p>
+          </div>
+        </div>
+    
+       {% endfor %}
+    {% else %}
+       {% for prod_bro in collections['all'].products offset:0 %}
+      
+         {% for tag_bro in prod_bro.tags  %}
+           {% if tag_bro contains 'categoria' %}
+             {% unless tag contains 'nicho'  %}
+              {%	assign catBro = tag_bro %}
+            {%  endunless  %}
+           {% endif %}
+         {% endfor %}
+      
+          {% if categoria == catBro %}
+        <div class="product-brother">
+          <div class="img-container">
+            <a alt="{{ prod_bro.handle }}" href="{{ prod_bro.url }}"><img src="{{ prod_bro.images[0] | img_url: 'x150' }}"></a>
+          </div>
+          <div class="text">
+            <p>{{ prod_bro.title }}</p>
+            <p>{{ prod_bro.price | money }}</p>
+            <p><a class="button-add" data-rel="{{ prod_bro.variants[0].id }}" data-compared="{{ prod_bro.variants[0].compare_at_price }}">{{ 'botones.add_to_cart' | t }}</a></p>
+          </div>
+        </div>  		
+          
+          {% assign count = count | plus: 1 %}
+          {% endif %}
+      
+          {% if count == 2 %}
+          {% break %}
+          {% endif %}
+       {% endfor %}
+    {% endif %}
+    
+    
+    </div>

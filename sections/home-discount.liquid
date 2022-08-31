@@ -1,0 +1,116 @@
+{%assign descuento_1 = section.settings.discount_1 %}
+{%assign texto_descuento_1 = section.settings.discount_text_1 %}
+{%assign descuento_2 = section.settings.discount_2 %}
+{%assign texto_descuento_2 = section.settings.discount_text_2 %}
+ 
+
+<section class="home-discount">
+
+  <div class="discount-card">
+    <div class="discount-text">
+      <a href="{{ section.settings.link_1 }}"> 
+      <p class="discount-percentage"><span class="discount-number">-{{descuento_1}}%</span><br>{{ 'general.descuento' | t | upcase }}</p>
+      </a>
+      <p class="discount-info">{{texto_descuento_1}}</p>
+    </div>
+    <div class="discount-photo">
+      <a href="{{ section.settings.link_1 }}" class="aspect-ratio-box"> 
+      <img class="lazyload" data-src="{{ section.settings.img_discount_1 | image_url }}" alt="">
+      </a>
+      {% if section.settings.discount_code_1 != '' %}<p class="discount-code">{{ section.settings.discount_code_1 }}</p>{% endif %}
+    </div>
+  </div>
+
+  <div class="discount-card">
+    <div class="discount-text">
+      <a href="{{ section.settings.link_2 }}"> 
+      <p class="discount-percentage"><span class="discount-number">-{{descuento_2}}%</span><br>{{ 'general.descuento' | t | upcase }}</p>
+      </a>
+      <p class="discount-info">{{texto_descuento_2}}</p>
+    </div>
+    <div class="discount-photo">
+      <a href="{{ section.settings.link_1 }}" class="aspect-ratio-box"> 
+      <img class="lazyload" data-src="{{ section.settings.img_discount_2 | image_url }}" alt="">
+      </a>
+        {% if section.settings.discount_code_2 != '' %}<p class="discount-code">{{ section.settings.discount_code_2 }}</p>{% endif %}
+    </div>
+  </div>
+
+
+</section>
+ 
+{% schema %}
+{
+  "name": "Descuentos", 
+  "settings": [ 
+  {
+  "type": "header",
+  "content": "Descuento 1"
+  },
+    {
+      "type": "text",
+      "id": "discount_1",
+      "label": "Primer descuento",
+      "default": "15"
+    },
+    {
+      "type": "text",
+      "id": "discount_text_1",
+      "label": "Texto primer descuento",
+      "default": "POR CADA AMIGO QUE COMPRE EN DIVAIN"
+    },
+    {
+      "type": "image_picker",
+      "id": "img_discount_1",
+      "label": "Imagen primer descuento"
+    },
+     {
+      "type": "text",
+      "id": "discount_code_1",
+      "label": "Código descuento 1" 
+    },
+    {
+      "id": "link_1",
+      "type": "url",
+      "label": "Enlace del descuento" 
+      }, 
+    {
+  "type": "header",
+  "content": "Descuento 2"
+  },
+    {
+      "type": "text",
+      "id": "discount_2",
+      "label": "Segundo descuento",
+      "default": "10"
+    },
+    {
+      "type": "text",
+      "id": "discount_text_2",
+      "label": "Texto segundo descuento",
+      "default": "COMPRANDO 3 PERFUMES O MÁS"
+    },
+    {
+      "type": "image_picker",
+      "id": "img_discount_2",
+      "label": "Imagen segundo descuento"
+    },
+    {
+      "type": "text",
+      "id": "discount_code_2",
+      "label": "Código descuento 2" 
+    },
+    {
+      "id": "link_2",
+      "type": "url",
+      "label": "Enlace del descuento" 
+    }
+   ],
+   "presets": [
+   {
+       "category":"Home",
+       "name": "Promos descuentos"
+    }
+   ]
+}
+{% endschema %}

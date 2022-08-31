@@ -1,0 +1,50 @@
+<!-- Product title and meta --> 
+{%- capture datos -%} 
+{%- for block in section.blocks -%}
+{{block.settings.product }};{{block.settings.txt_title }};{{block.settings.txt_meta }}%|%
+{% endfor %}
+<!-- Specific data is set to be placed here in addition to the block's data -->
+{%- endcapture -%}
+
+{%- assign lineas = datos | split: '%|%' -%} 
+{%- for linea in lineas %}{%- assign datos_prod = linea | split: ';' -%}{%- assign handle = datos_prod[0] | strip -%} 
+	{%- if handle == product.handle -%}<title>{{ datos_prod[1] | strip }}</title>
+  	 <meta name="description" content="{{ datos_prod[2] | escape }}">
+      {%- break -%}
+	{%- endif -%}
+{%- endfor -%}
+
+ 
+
+{% schema %}
+{
+  "name": "Product title and meta",
+  "settings": [ 
+     
+  ],
+  "blocks": [
+      {
+        "type": "product-title-and-meta",
+        "name": "Product title and meta",
+        "settings": [
+          {
+            "type": "product",
+            "id": "product",
+            "label": "Product"
+          },
+		  {
+            "type": "text",
+            "id": "txt_title",
+            "label": "Título"
+          },
+		   {
+            "type": "text",
+            "id": "txt_meta",
+            "label": "Descripción"
+          }
+			
+        ]
+      }
+    ]
+}
+{% endschema %}

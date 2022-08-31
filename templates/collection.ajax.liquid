@@ -1,0 +1,6 @@
+{%- if template == 'collection.ajax' -%} 
+{%- layout none -%} 
+{% paginate collection.products by 1000  %}
+[{% for product in collection.products %}{"pr_id":{{ product.id}},"title": "{{ product.title}}","handle": "{{ product.handle}}","created_at":  "{{ product.created_at}}","tags": {{ product.tags | json }},"price": {{ product.variants[0].price }},"compare_at_price_max": {{ product.compare_at_price_max}},"available": {{ product.available}},"variants":  {{ product.variants | json }},"images":  {{ product.images | json }},"featured_image": "{{ product.featured_image}}","collections":[{% for col in product.collections %}"{{col.handle}}",{%endfor%}] },{% endfor %}]
+{% endpaginate %}  
+{% endif %}

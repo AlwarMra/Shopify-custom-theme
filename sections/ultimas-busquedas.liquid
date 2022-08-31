@@ -1,0 +1,72 @@
+<section id="ultimas-busquedas" class="container">
+    <div class="last-search cards-section" style="background: var(--contrast-color);">
+        <div class="container-fluid cards-section">
+            <h2 class="section-title main-title">{{ section.settings.title_part_1 }} <span class="underline">{{
+                    section.settings.title_part_2 }} </span></h2>
+            <div id="dv_last_prods"></div>
+            <div class="cards-arrows">
+                <span id='btn_cards_prev'>{% include 'icon' with 'left-arrow' %}</span>
+                <span id='btn_cards_next'>{% include 'icon' with 'right-arrow' %}</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+{% if template contains 'product' %}
+<script>
+    window.paramsUltimas = true;
+    {% for tag in product.tags %}
+    {% if tag == 'SEARCHANISE_IGNORE' %}
+    window.paramsUltimas = false;
+    {% endif %}
+    {% endfor %}
+</script>
+{% endif %}
+
+<script>
+    window.anadelo = '{{ 'botones.anadelo_por' | t }}';
+    window.ultimas_n = {{ section.settings.n_prods }};
+    window.ultimas_shop = '{{ shop.url}}';
+</script>
+
+
+
+{% schema %}
+{
+"name": "Últimas búsquedas",
+"settings": [
+{
+"type": "text",
+"id": "title_part_1",
+"label": "Título parte sin subrayado",
+"default": "Lo que dicen"
+},
+{
+"type": "text",
+"id": "title_part_2",
+"label": "Título parte con subrayado",
+"default": "nuestros clientes"
+},
+{
+"type": "range",
+"id": "n_prods",
+"min": 5,
+"max": 30,
+"step": 1,
+"unit": "pr",
+"label": "Número productos mostrados",
+"default": 16
+}
+
+],
+"presets": [
+{
+"category":"Producto",
+"name": "Últimas búsquedas"
+}
+]
+}
+{% endschema %}

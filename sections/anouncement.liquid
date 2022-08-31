@@ -1,0 +1,243 @@
+{%- if section.settings.enable_bar -%}
+{%- unless section.settings.home_page_only and template != 'index' -%}
+<div class="announcement" style="background: {{ section.settings.an_color }}">
+
+  {% if section.settings.enable_rotation %}
+  <div class="text-rotator">
+    <div class="rotator-slider">
+      <div class="mask">
+        <ul>
+          {% for block in section.blocks %}
+          {% assign my_canonical_link = shop.url | append : block.settings.link%}
+          <li style="text-align: center;" class="banner_{{forloop.index}} hidden">
+            <div class="quote">
+              {%- if block.settings.link -%}
+              {%if block.settings.link %}<a href="{{ block.settings.link }}">{% endif %}<p>{{ block.settings.content }}
+                </p>{%if
+                block.settings.link %}</a>{% endif %}
+              {%- else -%}
+              <p>{{ block.settings.content }}</p>
+              {%- endif -%}
+            </div>
+          </li>
+          {% endfor %}
+          {% assign last = '' %}
+          {% for block in section.blocks %}
+          {% assign last = forloop.length | plus: 1 %}
+          {% break %}
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  </div>
+  {% else %}
+
+  <p style="color:{{ section.settings.tx_color }}">
+    {%- if section.settings.link -%}<a href="{{ section.settings.link }}">{%- endif -%}
+      {{ section.settings.subtext }}
+      {%- if section.settings.link -%}</a>{%- endif -%}
+  </p>
+
+  {% endif %}
+
+
+</div>
+{%- endunless -%}
+{%- endif -%}
+<style>
+  @media(max-width: 768px) {
+    .announcement {
+      background: {{ section.settings.an_color_mv }} !important;
+    }
+  }
+.text-rotator {
+  width: 100%;
+  height: 46px;
+}
+  
+.rotator-slider {
+  width: 100%;
+  overflow: visible;
+  position: relative;
+  margin:auto;
+}
+.mask {
+  overflow: hidden;
+  margin:auto;
+  height:46px;
+}
+.rotator-slider ul {
+  margin: 0;
+  padding: 0;
+  position: relative;
+  height:46px;
+}
+
+.rotator-slider li {
+  width: 100%;
+  position: absolute;
+  list-style: none;
+  display:none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.rotator-slider .quote {
+    -webkit-transition: color 0.2s ease-in-out;
+    transition: color 0.2s ease-in-out;
+    letter-spacing: 0.2em;
+}
+.rotator-slider .quote a {
+    text-decoration: none;
+}
+.rotator-slider .quote p {
+    text-decoration: none;
+}
+.rotator-slider .source {
+  font-size: 20px;
+  text-align: right;
+}
+.rotator-slider li.hidden {
+  display:none
+}
+.rotator-slider li.anim {
+  display:inherit;
+  -moz-animation: cycle {{ section.settings.secs}}s linear infinite;
+  -webkit-animation: cycle {{ section.settings.secs}}s linear infinite;
+  animation: cycle {{ section.settings.secs}}s linear infinite;
+   display: flex;
+  justify-content: center;
+  align-items: center;
+}
+@-moz-keyframes cycle {
+  0% {
+     opacity: 0;
+  }
+  15% {
+     opacity: 1;
+  }
+  50% {
+    opacity: 1;
+  }
+  85% {
+   opacity: 1;
+  }
+  100% {
+
+    opacity: 0;
+
+  }
+
+}
+@-webkit-keyframes cycle {
+  0% {
+     opacity: 0;
+  }
+  15% {
+     opacity: 1;
+  }
+  50% {
+    opacity: 1;
+  }
+  85% {
+   opacity: 1;
+  }
+  100% {
+    opacity: 0;
+
+  }
+}  
+</style>
+<script>
+  window.rotate = {{ section.settings.enable_rotation }};
+  window.n_rotation = {{ section.blocks.size  }};
+  window.rotation_secs = {{ section.settings.secs | times: 1000 }};
+</script>
+{% schema %}
+{
+"name": "Announcement bar",
+"settings": [
+{
+"type": "checkbox",
+"id": "enable_bar",
+"label": "Activa",
+"default": true
+},
+{
+"type": "checkbox",
+"id": "home_page_only",
+"label": "Solo en la home",
+"default": false
+},
+{
+"type": "text",
+"id": "subtext",
+"label": "Subtexto",
+"default": "Reclamo atractivo",
+"info":"If rotation bar is deactivated, this will be seen"
+},
+{
+"type": "url",
+"id": "link",
+"label": "Enlace"
+},
+{
+"type":"color",
+"id":"tx_color",
+"label":"Text color",
+"default":"#f8b38a"
+},
+{
+"type":"color",
+"id":"an_color_mv",
+"label":"Background color (mobile)",
+"default":"#e8c981"
+},
+{
+"type":"color",
+"id":"an_color",
+"label":"Background color",
+"default":"#e8c981"
+},
+{
+	"type":"header",
+	"content":"Rotation"
+},
+{
+"type": "checkbox",
+"id": "enable_rotation",
+"label": "Activar",
+"default": false
+},
+{
+            "type": "range",
+            "id":     "secs",
+            "min":       1,
+            "max":       10,
+            "step":       1 ,
+            "unit":      "Sec",
+            "label":     "Duración frases",
+            "default":    3
+          }
+],
+	"blocks":[
+		{
+          "type": "Text",
+          "name": "Text",
+          "settings": [
+				{
+                  "type": "textarea",
+                  "id": "content",
+                  "label": "Text",
+                  "default":"<span style='font-weight: 800'>ENVÍO GRATIS</span> EN PEDIDOS DE +75€ EN PENÍNSULA"
+                },
+                {
+                  "type": "url",
+                  "id": "link",
+                  "label": "Link"
+                }
+		   ]
+         }
+	]
+}
+{% endschema %}

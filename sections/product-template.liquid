@@ -1,0 +1,420 @@
+{{ 'product-template.css' | asset_url | stylesheet_tag }}
+{% include 'product-tags' | prod: product %} 
+{%- if pack -%}
+{%- capture marca_str -%} {{ 'product.muestras' | t }} {%- endcapture -%}
+{%- assign marca = marca_str -%}
+{%- assign marca_col = pack_col -%}
+{%- else -%}
+{%- capture marca_handle -%} {{ marca | handle }} {%- endcapture -%}
+{%- assign marca_col = marca_handle -%}
+{%- endif -%}
+{%- liquid
+
+  assign free = false
+  assign freeId = false
+  for variant in product.variants
+  if variant.price == 0 and variant.inventory_policy == 'continue'
+  assign freeId = variant.id
+  assign free = true 
+  endif 
+  endfor
+
+
+  assign zero = false
+  for variant in product.variants
+  if variant.price == 0 
+  assign zero = true
+  endif
+  endfor
+  
+  assign size = product.variants.size
+  
+  if zero
+    assign size = size | minus: 1
+   endif
+    
+  assign notas = ''
+  assign frasco = ''
+  assign ingredientes = ''
+  assign caracteristicas = ''
+
+  assign notas_title =  'product.notas' | t 
+  assign frasco_title =  'product.Envase' | t 
+  assign ingredientes_title =  'product.ingredientes' | t 
+  assign caracteristicas_title =  'product.caracteristicas' | t 
+
+  if product.description contains '<notas>'
+    assign notas = product.description | split: '<notas>' | last | remove: '<notas>' | split: '</notas>' | first
+  endif
+
+  if product.description contains '<frasco>'
+    assign frasco = product.description | split: '<frasco>' | last | remove: '<frasco>' | split: '</frasco>' | first
+  endif
+
+  if product.description contains '<ingredientes>'
+    assign ingredientes = product.description | split: '<ingredientes>' | last | remove: '<ingredientes>' | split: '</ingredientes>' | first
+  endif
+
+  if product.description contains '<caracteristicas>'
+    assign caracteristicas = product.description | split: '<caracteristicas>' | last | remove: '<caracteristicas>' | split: '</caracteristicas>' | first
+  endif
+%}
+<section id="product-template" data-handle="{{ product.handle }}">
+  <div class="container page-width product-page">
+
+    <p class="breadcrumbs" style="padding: 2rem 0;" data-id="{{ randomNumber }}">
+      <a href="/" title="{{ 'general.home' | t }}">{{ 'general.home' | t }}</a> /    
+      <a href="/collections/{{ marca | handleize }}">{{ marca }}</a> /
+      <span href="{{ product.url }}" >{{ product.title }}</span>
+    </p>
+
+    <div class="product-grid">
+          <div class="product-title">
+            {% if TIENDA == 'DE' %}
+            <h1>{{ titulo_producto }}</h1>
+            {% else %}
+            <p>{{ titulo_producto }}{% unless marca == 'DIVAIN' %}{{ 'general.inspirado_en' | t | downcase }}{% endunless %}</p>
+            <h1>{{ imitation_product }}</h1>
+            {% endif %}  
+          </div>
+
+        <div class="product-image-container" style="position:relative">
+          {% if oferta %}<p class="card-offer">{{ oferta }}</p>{% endif %}
+          <div class="main-product-carousel">
+                {% for media in product.media %}
+                {% if forloop.first %}
+                {%- assign img_url = media.preview_image.src | img_url: '1x1' | replace: '_1x1.', '_600x.' -%}
+              <img src="{{ img_url }}" alt="{{ media.preview_image.alt }}">
+              {% else %}
+              {% if media.media_type contains 'video' -%}
+           		{{ media | video_tag: controls: true, loop: true, image_size: "720x", mute:true, class: 'carousel-cell-video' }}           
+              {% else %}
+                <img data-flickity-lazyload-srcset="
+                {% if media.preview_image.width >= 165 %}{{ media.preview_image.src | img_url: '165x' }} 165w,{% endif %}
+                {% if media.preview_image.width >= 360 %}{{ media.preview_image.src | img_url: '360x' }} 360w,{% endif %}
+                {% if media.preview_image.width >= 520 %}{{ media.preview_image.src | img_url: '520x' }} 520w,{% endif %}
+                {% if media.preview_image.width >= 720 %}{{ media.preview_image.src | img_url: '720x' }} 720w{% endif %}"     
+                data-flickity-lazyload-src="{{ media.preview_image.src | img_url: '500x' }}"
+                alt="{{ media.preview_image.alt }}"
+                class="carousel-cell-image">
+              {% endif %}
+              {% endif %}  
+              {% endfor %}
+            </div>
+            <div class="product-images">
+                <div class="aspect-ratio-box main-img-container">
+                  <img id="main-img" src="{{ product.featured_image | img_url: '600x' }}" {{ image.alt }}>
+                </div>
+               {% for media in product.media %}
+              	{% if media.media_type contains 'video' -%}                
+                  {{ media | video_tag: controls: true, loop: true, image_size: "720x", mute:true, autoplay: true, class: "main-video" }}  
+              	{% endif %}
+              	{% endfor %}
+                <div class="product-thumbnails">
+                  {% for media in product.media %}
+                  <div class="aspect-ratio-box">
+                    {% if media.media_type contains 'video' -%}<span class="video-icon">{% render 'icon' with 'icon-video' %}</span>{% endif %}
+                    <img 
+                    {% if media.media_type contains 'video' -%}data-video="video"{% endif %}
+                    src="{{ media.preview_image.src | img_url: '360x' }}" 
+                    alt="{{ media.preview_image.alt }}" 
+                    {% if forloop.first %}class="active"{% endif %}
+                    data-image="{{media.preview_image.src }}">
+                  </div>
+                  {% endfor %}
+                </div>
+              {% if oferta %}<p class="card-offer">{{ oferta }}</p>{% endif %}
+            </div>
+            
+        </div>
+
+
+
+
+        <div class="product-content">
+          <div class="product-reviews mb-1">
+          </div>
+          <div class="variant-btns mb-1">
+            {% if size  > 1 %}
+            {% for variant in product.variants %}
+            {% unless variant.price == 0 %}
+            <div data-id="{{ variant.id }}" 
+            data-compared="{{ variant.compare_at_price }}"
+            {% if forloop.first %}
+            class="variant-btn variant-selected"
+            {% if free %}data-free="{{ free }}"{% endif %}
+            {% else %}
+            class="variant-btn" data-free="false"
+            {% endif %}
+            {% assign data_image = variant.image.src %}
+            {% if forloop.first and data_image == blank%}
+            {% assign data_image = product.featured_image.src %}
+            {% endif %}
+            data-image="{{data_image }}">
+            
+              {{ variant.title }}
+            </div>
+            {% endunless %}
+            {% endfor %}
+            {% endif %}
+          </div>
+
+          <div class="price mb-1">
+            {% for variant in product.variants %}
+            {% unless variant.price == 0  %}
+            {%- if variant.compare_at_price > variant.price -%}
+            <p class="product-price" data-id="{{ variant.id }}" {% unless forloop.first %} style="display: none;" {% endunless %}>
+              <span>{{ variant.price |  money | strip_html }}</span>
+              <span class="crossed-price">{{ variant.compare_at_price | money | strip_html }}</span>
+            </p>
+            {% else %}
+            <p class="product-price" data-id="{{ variant.id }}" {% unless forloop.first %} style="display: none;" {% endunless %}>
+              <span>{{ variant.price | money | strip_html }}</span>
+            </p>
+            {% endif %}
+            {% endunless %}
+            {% endfor %}
+          </div>
+          
+          {% if TIENDA == 'ES' %}
+          {% render 'scalapay-widget', price: product.price, hidePrice:false, enabled: true, includejs:'No' %}
+          {% endif %}
+
+          <div class="buy-btn mb-1">
+            {% form 'product', product, class: "price-and-add general-product-form" %}
+
+              <input id="variant" type="text" style="display: none;" data-q="1" data-compared="{{  product.variants[0].compare_at_price }}" value="{{  product.variants[0].id }}" data-free="{{ free }}" data-free-id="{{ freeId }}">
+
+              {% if product.variants[0].inventory_quantity > 0 or product.variants[0].inventory_policy == 'continue' %}
+              <button class="button button-add-p mainProd" data-free="{{ freeId }}"  data-variant="{{  product.variants[0].id }}" data-compared="{{  product.variants[0].compare_at_price }}">{{ 'botones.add_to_cart' | t | upcase }}</button>
+              <a href="javascript:;" id="add_to_cart" class="mainProd button-buy read-more go-checkout" data-free="{{ freeId }}" data-variant="{{  product.variants[0].id }}" data-compared="{{  product.variants[0].compare_at_price }}">{{ 'botones.comprar_ahora' | t | capitalize }}</a>
+              {% else %}
+
+              <button  class="button button-out ">{{ 'botones.agotado' | t | upcase }}</button>
+
+              {% if notify %}
+              <div id="layering"></div>
+              {% endif %}
+
+              {% endif %}
+              <div id="product-wishlist">
+                <div class="love-container love-product" data-handle="{{ product.handle }}">
+                    <span class="love-icon">
+                        {% render 'icon' with 'love' %}
+                    </span>
+                    <span class="love-text">{{ 'wishlist.wishlist_out' | t }}</span>
+                </div>
+            </div>
+            {% endform %}
+            </div>
+
+            {% if settings.show_usp %}
+            <div class="usp mb-1" style="background: {{ settings.usp_back }};">
+              <p>{{ 'product.envio_gratis' | t }}</p>
+              <p>{{ 'product.envio_tiempo' | t }}</p>
+              <p>{{ 'product.envio_devol' | t }}</p>
+            </div>
+            {% endif %}
+
+          <div class="prod-desc mb-1">
+            
+            {{ product.description | split: settings.product_decription_separator | first | remove: ingredientes | remove: notas | remove: frasco | remove: caracteristicas }}
+
+            <div class="desc-tags">
+              {% if familias_arr != blank %}
+              <p>
+                <span class="desc-sub">{{'general.familia_olfativa' | t }}:</span> {{ familias_arr | join: ' '}}{% if subfamilia %} {{ subfamilia }}{% endif %}{% if subfamilia2 %} {{ subfamilia2 }}{% endif %}
+              </p>
+              {% endif %}
+
+              {% if intensidad_txt !=blank %}
+              <p>
+                <span class="desc-sub">{{ 'general.intensidad.Intensidad' | t }}:</span> 
+                {{ intensidad_txt }}
+              </p>
+              {% endif %}
+              
+              {% if estacion and estacion != blank %}
+              <p>
+                <span class="desc-sub">{{'general.Estacion' | t }}:</span> {{ estacion }}
+              </p>
+              {% endif %}
+              
+              {% if uso and uso!= blank %}
+              <p>
+                <span class="desc-sub">{{'general.Uso' | t }}:</span> {{ uso }}
+              </p>
+              {% endif %}
+            </div>
+
+            <div class="accordion">
+              {% if notas != blank %}
+              <div class="accordion-container">
+                <h3 class="accordion-title">{{ notas_title }}<span></span></h3>
+                <div class="accordion-content">
+                  {{ notas | remove: notas_title }}
+                </div>
+              </div>
+              {% endif %}
+
+              {% if frasco != blank %}
+              <div class="accordion-container">
+                <h3 class="accordion-title">{{ frasco_title }}<span></span></h3>
+                <div class="accordion-content">
+                  {{ frasco  | remove: frasco_title }}
+                </div>
+              </div>
+              {% endif %}
+ 
+              {% if ingredientes != blank %}
+              <div class="accordion-container">
+                <h3 class="accordion-title">{{ ingredientes_title }}<span></span></h3>
+                <div class="accordion-content">
+                  {{ ingredientes | remove: ingredientes_title }}
+                </div>
+              </div>
+              {% endif %}
+
+              {% if caracteristicas != blank %}
+                <div class="accordion-container">
+                  <h3 class="accordion-title">{{ caracteristicas_title }}<span></span></h3>
+                  <div class="accordion-content">
+                    {{ caracteristicas | remove: caracteristicas_title }}
+                  </div>
+                </div>
+              {% endif %}
+            </div>
+
+
+          </div>
+
+          <div class="prod-share mb-1">
+          <div class="share-btn btn-facebook">
+              <a target="_blank" href="https://www.facebook.com/sharer.php?u={{shop.url}}{{ product.url }}"><span class="icon"> {% render 'icon' with 'facebook' %}</span></a>
+          </div>
+          <div class="share-btn btn-pinterest">
+              <a target="_blank" href="https://pinterest.com/pin/create/button/?url={{shop.url}}{{ product.url }}&media={{ product.featured_image | img_url: 'medium' }}&description={{ product.description | strip_html | truncate: 150, '' }}"><span class="icon"> {% render 'icon' with 'pinterest' %}</span></a>
+          </div>
+          <div class="share-btn btn-email">
+              <a target="_blank" href="mailto:?subject={{ product.title }}&body={{ product.description | strip_html | truncate: 150, '' }} {{ product.url }}"><span class="icon"> {% render 'icon' with 'email' %}</span></a>
+          </div>
+          </div>
+
+          <div id="sticky-cart">
+            <div class="sticky-cart-content">
+              <div>
+              {% for variant in product.variants %}
+              {% unless variant.price == 0 %}
+            {%- if variant.compare_at_price > variant.price -%}
+            <p class="product-price" data-id="{{ variant.id }}" {% unless forloop.first %} style="display: none;" {% endunless %}>
+              <span>{{ variant.price |  money | strip_html }}</span>
+              <span class="crossed-price">{{ variant.compare_at_price | money | strip_html }}</span>
+            </p>
+            {% else %}
+            <p class="product-price" data-id="{{ variant.id }}" {% unless forloop.first %} style="display: none;" {% endunless %}>
+              <span>{{ variant.price | money | strip_html }}</span>
+            </p>
+            {% endif %}
+            {% endunless %}
+            {% endfor %}
+          </div>
+          <div>
+            {% if product.variants[0].inventory_quantity > 0 or product.variants[0].inventory_policy == 'continue' %}
+            <button class="button button-add-p mainProd" data-free="{{ freeId }}"  data-variant="{{  product.variants[0].id }}" data-compared="{{  product.variants[0].compare_at_price }}">{{ 'botones.add_to_cart' | t | upcase }}</button>
+            {% else %}
+            <button  class="button button-out ">{{ 'botones.agotado' | t | upcase }}</button>
+            {% endif %}
+          </div>
+          </div>
+          </div>
+        </div>
+
+    </div>
+  </div>
+</section>
+<script>  
+  
+  {% assign current_variant = product.selected_or_first_available_variant %}
+  {% assign cat = '' %}
+  {% for tag in product.tags %}
+  {% if tag contains 'categoria' %}
+  {% assign tag = tag | split: 'categoria:' %}
+  {% assign cat = tag[1] %}
+  {% endif %}
+  {% endfor %}
+
+
+  dataLayer.push({
+      'event': 'detail',
+      'ecommerce': {
+          'detail': {
+              'products': [{
+                  'name': "{{ product.title }}",
+                  'id': "{{ product.variants[0].sku }}",
+                  'price': {{ product.price }},
+          'brand': "{{ marca }}",
+          'category': '{{ cat }}',
+      }]
+  }
+      }
+   });
+</script>
+{%- assign current_variant = product.selected_or_first_available_variant -%}
+
+{% comment %} Google wants to know when to check your price again {% endcomment %}
+{%- assign days_price_is_valid = 1 -%}
+{%- assign seconds_in_a_day = 86400 -%}
+{%- assign seconds_price_valid = days_price_is_valid | times: seconds_in_a_day -%}
+
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org/",
+  "@type": "Product",
+  "name": {{ product.title | json }},
+  "url": {{ shop.url | append: product.url | json }},
+  {%- if product.featured_media.preview_image -%}
+    {%- assign image_size = product.featured_media.preview_image.width | append: 'x' -%}
+    "image": [
+      {{ product.featured_media.preview_image | img_url: image_size | prepend: "https:" | json }}
+    ],
+  {%- endif -%}
+  "description": {{ product.description | strip_html | json }},
+  "sku": {{ current_variant.sku | json }},
+  "category": {{ product.type | json }},
+  {%- if product.metafields.reviews.rating.value != blank -%}
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "{{ product.metafields.reviews.rating.value }}",
+      "ratingCount": "{{ product.metafields.reviews.rating_count.value }}",
+      "bestRating": "{{ product.metafields.reviews.rating.value.scale_max }}",
+      "worstRating": "{{ product.metafields.reviews.rating.value.scale_min }}"
+    },
+  {%- endif -%}
+  "brand": {
+    "@type": "Organization",
+    "name": "Divain"
+  },
+  "offers": [
+    {%- for variant in product.variants -%}
+      {
+        "@type" : "Offer",
+        {%- if variant.sku != blank -%}
+          "sku": {{ variant.sku | json }},
+        {%- endif -%}
+        "availability" : "http://schema.org/{% if product.available %}InStock{% else %}OutOfStock{% endif %}",
+        "price" : {{ variant.price | divided_by: 100.00 | json }},
+        "priceCurrency" : {{ cart.currency.iso_code | json }},
+        "priceValidUntil": "{{ 'now' | date: '%s' | plus: seconds_price_valid | date: '%Y-%m-%d'}}",
+        "url" : {{ shop.url | append: variant.url | json }}
+      }{% unless forloop.last %},{% endunless %}
+    {%- endfor -%}
+  ]
+}
+</script>
+{% schema %}
+{
+  "name": "Producto",
+  "settings": [
+  ]
+}
+{% endschema %}

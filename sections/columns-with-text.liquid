@@ -1,0 +1,341 @@
+<section class="home-collection-picker columns-with-text" style="background: {{ section.settings.back_color }}">
+    <h3 class="section-title" style="margin-top:0; padding-top: 1.5rem; display: block;">{{ section.settings.title }}</h3>
+    <div class="home-collection-cards">
+
+        <div class="collection-card">
+            {% if section.settings.card_url_1 %}
+            <a href="{{ section.settings.card_url_1 }}" class="collection-img">
+                {% else %}
+                <div class="collection-img">
+                    {% endif %}
+                    <div class="aspect-ratio-box">
+                        <img data-src="{{ section.settings.card_img_1  | img_url: 'x360'}}" class="lazyload">
+                    </div>
+                    {% if section.settings.card_url_1 == blank %}
+                </div>
+                {% else %}
+            </a>
+            {% endif %}
+            <p class="columns-text"><span>{{ section.settings.card_text_1 }}</span></p>
+          <span class="cool-arrow">{% render 'icon' with 'cool-arrow' %}</span>
+        </div>
+
+
+        <div class="collection-card">
+            {% if section.settings.card_url_2 %}
+            <a href="{{ section.settings.card_url_2 }}" class="collection-img">
+                {% else %}
+                <div class="collection-img">
+                    {% endif %}
+                    <div class="aspect-ratio-box">
+                        <img data-src="{{ section.settings.card_img_2  | img_url: 'x360'}}" class="lazyload">
+                    </div>
+                    {% if section.settings.card_url_2 == blank %}
+                </div>
+                {% else %}
+            </a>
+            {% endif %}
+            <p class="columns-text"><span>{{ section.settings.card_text_2 }}</span></p>
+          <span class="cool-arrow">{% render 'icon' with 'cool-arrow' %}</span>
+        </div>
+
+        <div class="collection-card">
+            {% if section.settings.card_url_3 %}
+            <a href="{{ section.settings.card_url_3 }}" class="collection-img">
+                {% else %}
+                <div class="collection-img">
+                    {% endif %}
+                    <div class="aspect-ratio-box">
+                        <img data-src="{{ section.settings.card_img_3  | img_url: 'x360'}}" class="lazyload">
+                    </div>
+
+
+                    {% if section.settings.card_url_3 == blank %}
+                </div>
+                {% else %}
+            </a>
+            {% endif %}
+            <p class="columns-text"><span>{{ section.settings.card_text_3 }}</span></p>
+          <span class="cool-arrow">{% render 'icon' with 'cool-arrow' %}</span>
+        </div>
+
+
+        <div class="collection-card" style="margin-bottom: 0; padding-bottom:3rem;">
+            {% if section.settings.card_url_4 %}
+            <a href="{{ section.settings.card_url_4 }}" class="collection-img">
+                {% else %}
+                <div class="collection-img">
+                    {% endif %}
+                    <div class="aspect-ratio-box">
+                        <img data-src="{{ section.settings.card_img_4  | img_url: 'x360'}}" class="lazyload">
+                    </div>
+
+
+                    {% if section.settings.card_url_4 == blank %}
+                </div>
+                {% else %}
+            </a>
+            {% endif %}
+            <p class="columns-text"><span>{{ section.settings.card_text_4 }}</span></p>
+        </div>
+
+        <p class="columns-text-main">{{section.settings.main_text }}</p>
+        {% if section.settings.main_url %}
+        <a href="{{ section.settings.main_url }}" class="button button-column-text">{{ section.settings.btn_text }}</a>
+        {% endif %}
+    </div>
+</section>
+<style>
+    .columns-with-text {
+        {% if section.settings.back_img_mv %}
+        background-image: url('{{ section.settings.back_img_mv | img_url: 'x600' }}') !important;
+        background-position:center !important;
+        background-repeat: no-repeat !important;
+        background-size: cover !important;
+        {% endif %}
+    }
+
+    .columns-with-text .collection-img {
+        max-width: 150px;
+        max-height: 150px;
+    }
+
+    .columns-with-text .aspect-ratio-box img {
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    .columns-with-text .collection-card {
+        position: relative;
+      margin: 1rem auto  0 !important;
+    }
+
+    .columns-text {
+        position: relative;
+        text-align: center;
+        line-height: 25px;
+        padding: 1rem .5rem;
+
+        border: 3px solid {{ section.settings.border_color_text}};
+    }
+
+    .collection-img {
+        border: 0px solid transparent !important;
+    }
+
+    .cool-arrow {
+        display: none;
+    }
+
+    @media(min-width: 768px) {
+        .columns-with-text {
+            {% if section.settings.back_img_ds %}
+            background-image: url('{{ section.settings.back_img_ds | img_url: 'x1400' }}') !important;
+            background-position:center !important;
+            background-repeat: no-repeat !important;
+            background-size: cover !important;
+            {% else %}
+            background: {{ section.settings.back_color }} !important;
+            {% endif %}
+        }
+      .columns-with-text .home-collection-cards {
+      	justify-content: center !important;
+      }
+     .columns-with-text .collection-card {
+        position: relative;
+      margin: 2rem 0  0 !important;
+    }
+        .columns-text {
+            height: 110px;
+        }
+
+        .columns-with-text .section-title {
+            margin-bottom: -1rem;
+        }
+
+        .columns-text span {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90%;
+        }
+    }
+
+    @media(min-width: 1024px) {
+        .cool-arrow {
+          width: 50px;
+          height: 50px;
+        {% if section.settings.show_arrow %}
+            display: block;
+        {% endif %}
+            position: absolute;
+            top 20%;
+            left: 85%;
+            width: 50px;
+            top: 25%;
+        }
+      .cool-arrow svg {
+      	height: 30px;
+        width: 70px;
+      }
+      .cool-arrow path {
+        fill: {{ section.settings.arrow_color }} !important;
+      }
+    }
+</style>
+
+{% schema %}
+{
+"name": "Columns with text",
+"settings": [
+{
+"type":"text",
+"id":"title",
+"label":"Title"
+},
+{
+"type":"textarea",
+"id":"main_text",
+"label":"Main text"
+},
+{
+"type":"text",
+"id":"btn_text",
+"label":"Button Text"
+},
+{
+"type":"url",
+"id":"main_url",
+"label":"Button Url"
+},
+{
+"type":"image_picker",
+"id":"back_img_mv",
+"label":"Background image (mobile)"
+},
+{
+"type":"image_picker",
+"id":"back_img_ds",
+"label":"Background image (desktop)"
+},
+{
+"type":"color",
+"id":"back_color",
+"label":"Background color",
+"default":"#e8c981"
+},
+{
+"type":"color",
+"id":"border_color_text",
+"label":"Text border color",
+"default":"transparent"
+},
+{
+"type":"checkbox",
+"id":"show_arrow",
+"label":"Show cool arrows (desktop only)",
+"default":true
+},
+{
+"type":"color",
+"id":"arrow_color",
+"label":"Arrow color",
+"default":"#e8c981"
+},
+{
+"type":"header",
+"content":"First card"
+},
+{
+"type":"image_picker",
+"id":"card_img_1",
+"label":"Image"
+},
+{
+"type":"textarea",
+"id":"card_text_1",
+"label":"Text"
+},
+{
+"type":"url",
+"id":"card_url_1",
+"label":"Image url (optional)"
+},
+
+
+{
+"type":"header",
+"content":"Second card"
+},
+{
+"type":"image_picker",
+"id":"card_img_2",
+"label":"Image"
+},
+{
+"type":"textarea",
+"id":"card_text_2",
+"label":"Text"
+},
+{
+"type":"url",
+"id":"card_url_2",
+"label":"Image url (optional)"
+},
+
+
+
+{
+"type":"header",
+"content":"Third card"
+},
+{
+"type":"image_picker",
+"id":"card_img_3",
+"label":"Image"
+},
+{
+"type":"textarea",
+"id":"card_text_3",
+"label":"Text"
+},
+{
+"type":"url",
+"id":"card_url_3",
+"label":"Image url (optional)"
+},
+
+
+
+{
+"type":"header",
+"content":"Fourth card"
+},
+{
+"type":"image_picker",
+"id":"card_img_4",
+"label":"Image"
+},
+{
+"type":"textarea",
+"id":"card_text_4",
+"label":"Text"
+},
+{
+"type":"url",
+"id":"card_url_4",
+"label":"Image url (optional)"
+}
+
+
+],
+"presets": [
+{
+"category":"Home",
+"name": "Columns with text"
+}
+]
+}
+{% endschema %}

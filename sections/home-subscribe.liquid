@@ -1,0 +1,121 @@
+<section class="subscription-section lazyload" {% if section.settings.back_img %}data-bg="{{ section.settings.back_img | img_url: 'x1200' }}"{% endif %}>
+
+  <div class="subscription-section-container">
+  <div class="">
+  <h3 class="section-title">{{ section.settings.title }}</h3>
+  <p class="subtitle">{{ section.settings.subtitle }}</p>  
+  </div>
+
+  <div class="">
+    <a class="button" href="{{ section.settings.subs_link }}">{{ section.settings.btn_text }}</a>
+  </div>
+  </div>
+</section>
+
+
+<style>
+
+  .subscription-section {
+  	padding: .5rem 1rem;
+    {% if section.settings.back_img %}
+    {% else %}
+    background-color: var(--contrast-color);
+    {% endif %}
+          
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+    .subscription-section .title {
+    padding-top: 10px;
+    }
+  .subscription-section .subtitle {
+  	  	text-align: center;
+    width: 80%;
+    margin: .5rem auto;
+  }
+  .subscription-section-container {
+  	max-width: 1200px;
+    margin: 0 auto;
+  }
+  .subscription-section .button {
+  	padding: 1rem;
+    width: 100%;
+    text-align: center;
+    font-size: 1rem;
+    display: inline-block;
+    background: {{ section.settings.text_back_color }};
+    color: {{ section.settings.text_color }};
+  }
+  
+  @media(min-width: 764px) {
+    .subscription-section-container {
+    	display: flex;
+      	flex-direction: row-reverse;
+      align-items: center;
+    }
+      .subscription-section-container div {
+        margin: 1rem;
+        width: 50%;
+      }
+    .subscription-section .title {
+    }
+     .subscription-section .subtitle {
+       margin: 1rem auto;
+    }
+  }
+</style>
+{% schema %}
+  {
+    "name": "Subscription",
+    "settings": [
+      {
+		"id":"title",
+		"type":"text",
+		"label":"Title",
+		"default":"Title"
+	  },
+	  {
+		"id":"subtitle",
+		"type":"text",
+		"label":"Subtitle",
+		"default":"Subtitle"
+	  },
+		{
+		"id":"back_img",
+		"label":"Background image",
+		"type":"image_picker"
+		},
+	{
+		"id":"subs_link",
+		"label":"Link",
+		"type":"url"
+	},
+	{
+		"id":"btn_text",
+		"label":"Button text",
+		"type":"text",
+		"default":"Descarga nuestro catálogo"
+		},
+		{
+		"type":"color",
+		"label":"Button text color",
+		"id":"text_color",
+		"default":"#ffffff"
+		},
+		{
+		"type":"color",
+		"label":"Button background color",
+		"id":"text_back_color",
+		"default":"#000000"
+		}
+
+],
+   "presets": [
+   {
+       "category":"Home",
+       "name": "Subscription"
+    }
+   ]
+  }
+{% endschema %}

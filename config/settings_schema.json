@@ -1,0 +1,647 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Divain Theme",
+    "theme_version": "1.0.0",
+    "theme_author": "Divain",
+    "theme_documentation_url": "https:\/\/github.com\/Shopify\/themekit",
+    "theme_support_url": "https:\/\/github.com\/Shopify\/themekit\/issues"
+  },
+  {
+    "name": "Styles",
+    "settings": [
+      {
+        "type": "color",
+        "label": "Color principal",
+        "id": "main_color",
+        "default": "#ffd0bb"
+      },
+      {
+        "type": "color",
+        "label": "Color secundario",
+        "id": "secondary_color",
+        "default": "#fff8f5"
+      },
+      {
+        "type": "color",
+        "label": "Color de contraste",
+        "id": "contrast_color",
+        "default": "#ffffff"
+      },
+      {
+        "type": "color",
+        "label": "Color texto",
+        "id": "main_text_color",
+        "default": "#373636"
+      },
+      {
+        "type": "color",
+        "label": "Color texto acentuado",
+        "id": "accent_text_color",
+        "default": "#242f3e"
+      },
+      {
+        "type":"header",
+        "content":"Checkout"
+      },
+      {
+        "type": "color",
+        "label": "Color banner checkout",
+        "id": "color_banner_ck",
+        "default": "#FFC0CB"
+      },
+      {
+        "type":"image_picker",
+        "label":"Checkout banner image",
+        "id":"img_banner_ck"
+      }
+    ]
+  },
+  {
+    "name": "Cart",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Texto promocional"
+      },
+      {
+        "type": "checkbox",
+        "label": "Activar",
+        "default": false,
+        "id": "show_cart_text"
+      },
+      {
+        "type": "textarea",
+        "id": "cart_text",
+        "label": "Texto",
+        "default": "2 perfumes - 20% de descuento <br> 4 perfumes - 30% de descuento <br> 6 perfumes - 40% de descuento"
+      },
+      {
+        "type": "header",
+        "content": "Envío gratis"
+      },
+      {
+        "type": "checkbox",
+        "label": "Activar",
+        "default": true,
+        "id": "envio_gratis_show"
+      },
+      {
+        "type": "text",
+        "id": "envio_gratis_importe",
+        "label": "Importe con Envío gratis",
+        "info": "p.e: 25.00 (con dos decimales y separado por un punto)",
+        "default": "25.00"
+      },
+      {
+        "type": "text",
+        "id": "envio_gratis_text",
+        "label": "Texto del mensaje",
+        "info": " Poner XX en el lugar del precio",
+        "default": "Te faltan XX€ para Envío Gratis"
+      },
+      {
+        "type": "text",
+        "id": "envio_gratis_text_finish",
+        "label": "Texto del umbral",
+        "default": "¡Gastos de envío gratis!"
+      },
+      {
+        "type": "header",
+        "content": "Código descuento"
+      },
+      {
+        "type": "checkbox",
+        "label": "Activar mensaje",
+        "default": false,
+        "id": "show_code_message"
+      },
+      {
+        "type": "text",
+        "label": "Mensaje",
+        "id": "code_discount_text"
+      },
+      {
+        "type": "header",
+        "content": "Crossed sell"
+      },
+      {
+        "type": "collection",
+        "label": "Venta cruzada",
+        "id": "crossed_sell"
+      }
+    ]
+  },
+  {
+    "name": "Marcas y familias",
+    "settings": [
+      {
+        "type": "link_list",
+        "id": "menu_marcas",
+        "label": "Menú MARCAS"
+      },
+      {
+        "type": "link_list",
+        "id": "menu_familias",
+        "label": "Menú FAMILIAS OLFATIVAS"
+      }
+    ]
+  },
+  {
+    "name": "Colecciones principales",
+    "settings": [
+      {
+        "type": "collection",
+        "id": "collection_hombre",
+        "label": "Colección Hombre"
+      },
+      {
+        "type": "collection",
+        "id": "collection_mujer",
+        "label": "Colección Mujer"
+      },
+      {
+        "type": "collection",
+        "id": "collection_unisex",
+        "label": "Colección Unisex"
+      },
+      {
+        "type": "collection",
+        "id": "collection_kids",
+        "label": "Colección Kids"
+      },
+      {
+        "type": "collection",
+        "id": "collection_nicho",
+        "label": "Colección Nicho"
+      },
+      {
+        "type": "collection",
+        "id": "collection_mascotas",
+        "label": "Colección Mascotas"
+      }
+    ]
+  },
+  {
+    "name": "Imágenes Confianza",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "img_confianza_1",
+        "label": "Imagen confianza 1"
+      },
+      {
+        "type": "text",
+        "id": "alt_confianza_1",
+        "label": "Alt imagen 1",
+        "default": "No testado en animales"
+      },
+      {
+        "type": "image_picker",
+        "id": "img_confianza_2",
+        "label": "Imagen confianza 2"
+      },
+      {
+        "type": "text",
+        "id": "alt_confianza_2",
+        "label": "Alt imagen 2",
+        "default": "Muestras gratis"
+      },
+      {
+        "type": "image_picker",
+        "id": "img_confianza_3",
+        "label": "Imagen confianza 3"
+      },
+      {
+        "type": "text",
+        "id": "alt_confianza_3",
+        "label": "Alt imagen 3",
+        "default": "Entrega 24h"
+      },
+      {
+        "type": "image_picker",
+        "id": "img_confianza_4",
+        "label": "Imagen confianza 4"
+      },
+      {
+        "type": "text",
+        "id": "alt_confianza_4",
+        "label": "Alt imagen 4",
+        "default": "Devolucion 14 dias"
+      },
+      {
+        "type": "image_picker",
+        "id": "img_confianza_5",
+        "label": "Imagen confianza 5"
+      },
+      {
+        "type": "text",
+        "id": "alt_confianza_5",
+        "label": "Alt imagen 5",
+        "default": "Tienda 100% segura"
+      },
+      {
+        "type": "image_picker",
+        "id": "img_confianza_6",
+        "label": "Imagen confianza 6"
+      },
+      {
+        "type": "text",
+        "id": "alt_confianza_6",
+        "label": "Alt imagen 6",
+        "default": "Calidad garantizada"
+      },
+      {
+        "type": "image_picker",
+        "id": "img_confianza_7",
+        "label": "Imagen confianza 7"
+      },
+      {
+        "type": "text",
+        "id": "alt_confianza_7",
+        "label": "Alt imagen 7",
+        "default": "Vegan"
+      },
+      {
+        "type": "image_picker",
+        "id": "img_confianza_8",
+        "label": "Imagen confianza 8"
+      },
+      {
+        "type": "text",
+        "id": "alt_confianza_8",
+        "label": "Alt imagen 8",
+        "default": "Planet First"
+      }
+    ]
+  },
+  {
+    "name": "Producto",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Descripción principal y descripción extra"
+      },
+      {
+        "type": "color",
+        "id": "btn_color_first",
+        "default": "#ffd0bb",
+        "label": "Color botón 1"
+      },
+      {
+        "type": "color",
+        "id": "btn_color_border",
+        "default": "transparent",
+        "label": "Color border botones"
+      },
+      {
+        "type": "text",
+        "id": "product_decription_separator",
+        "label": "Separador de la descripción de producto",
+        "default": "<h5>Más información<\/h5>",
+        "info": "HTML que separa la descripción principal de la extra"
+      },
+      {
+        "type": "header",
+        "content": "USP"
+      },
+      {
+        "type": "checkbox",
+        "default": true,
+        "id": "show_usp",
+        "label": "Mostrar USP"
+      },
+      {
+        "type": "color",
+        "label": "Fondo USP",
+        "default": "#fffaf6",
+        "id": "usp_back"
+      },
+      {
+        "type": "header",
+        "content": "Alternative template"
+      },
+      {
+        "type": "color",
+        "id": "product_template_back",
+        "label": "Template background color",
+        "default": "#373636"
+      },
+      {
+        "type": "color",
+        "id": "product_template_text",
+        "label": "Template text color",
+        "default": "#ffffff"
+      },
+      {
+        "type": "header",
+        "content": "Alternative template (2)"
+      },
+      {
+        "type": "color",
+        "id": "product_template_back_2",
+        "label": "Template background color",
+        "default": "#E2B2D5"
+      },
+      {
+        "type": "color",
+        "id": "product_template_text_2",
+        "label": "Template text color",
+        "default": "#373636"
+      },
+      {
+        "type": "header",
+        "content": "Product brothers"
+      },
+      {
+        "type": "text",
+        "id": "title_brother",
+        "label": "Título parte sin subrayado",
+        "default": "También te puede interesar..."
+      },
+      {
+        "type": "collection",
+        "id": "col_brother_1",
+        "label": "First collection"
+      },
+      {
+        "type": "collection",
+        "id": "col_brother_2",
+        "label": "Second collection"
+      },
+      {
+        "type": "collection",
+        "id": "col_brother_3",
+        "label": "Third collection"
+      }
+    ]
+  },
+  {
+    "name": "Banner",
+    "settings": [
+      {
+        "type": "textarea",
+        "id": "banner_handles",
+        "label": "Handles",
+        "info": "Write down all pages' handles in which you want this section to be displayed, separate them with commas and without spaces, i.e., handle-1,handle-2,handle-3"
+      },
+      {
+        "type": "text",
+        "id": "banner_title",
+        "label": "Title",
+        "default": "Title"
+      },
+      {
+        "type": "text",
+        "id": "banner_subtitle",
+        "label": "Subitle",
+        "default": "Subtitle"
+      },
+      {
+        "type": "color",
+        "id": "banner_text_color",
+        "label": "Text color",
+        "default": "#000"
+      },
+      {
+        "type": "text",
+        "id": "banner_btn_text",
+        "label": "Button text",
+        "default": "Button text"
+      },
+      {
+        "type": "url",
+        "id": "banner_btn_url",
+        "label": "Button url"
+      },
+      {
+        "type": "color",
+        "id": "banner_btn_text_color",
+        "label": "Button text color",
+        "default": "#fff"
+      },
+      {
+        "type": "color",
+        "id": "banner_btn_back_color",
+        "label": "Button color",
+        "default": "#07b8ff"
+      },
+      {
+        "type": "color",
+        "id": "banner_back_color",
+        "label": "Background color",
+        "default": "#ffc0cb"
+      },
+      {
+        "type": "image_picker",
+        "id": "banner_img_mv",
+        "label": "Mobile background image"
+      },
+      {
+        "type": "image_picker",
+        "id": "banner_img_ds",
+        "label": "Mobile desktop image"
+      }
+    ]
+  },
+  {
+    "name": "Gastos envío",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Importe gastos de envío"
+      },
+      {
+        "type": "text",
+        "id": "gastos_envio",
+        "label": "Importe gastos de envío en euros con decimales",
+        "default": "2,50",
+        "info": "Usar coma y dos decimales, ejemplo 2,50, sin el €"
+      }
+    ]
+  },
+  {
+    "name": "Favicon",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "favicon",
+        "label": "Image",
+        "info": "32 x 32px .png recommended"
+      }
+    ]
+  },
+  {
+    "name": "Etiquetas de oferta",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Etiquetas categoría"
+      },
+      {
+        "type": "color",
+        "id": "category_color",
+        "label": "Background color",
+        "default": "#ffd0bb"
+      },
+      {
+        "type": "color",
+        "id": "category_color_tx",
+        "label": "Text color",
+        "default": "#FFF"
+      },
+      {
+        "type": "header",
+        "content": "categoría:Home"
+      },
+      {
+        "type": "text",
+        "id": "home_text",
+        "label": "Home tag text",
+        "default": "Home"
+      },
+      {
+        "type": "color",
+        "id": "home_color",
+        "label": "Background color",
+        "default": "#ffd0bb"
+      },
+      {
+        "type": "color",
+        "id": "home_color_tx",
+        "label": "Text color",
+        "default": "#FFF"
+      },
+      {
+        "type": "header",
+        "content": "Oferta2:x"
+      },
+      {
+        "type": "paragraph",
+        "content": "Estas etiquetas son independiente de las demás, puede conpaginarse con cualquier de las otras tres (abajo)"
+      },
+      {
+        "type": "text",
+        "id": "oferta2_text",
+        "label": "Text",
+        "default": "????"
+      },
+      {
+        "type": "color",
+        "id": "offer_color2",
+        "label": "Oferta background color",
+        "default": "#EFAB16"
+      },
+      {
+        "type": "color",
+        "id": "offer_color_tx2",
+        "label": "Oferta text color",
+        "default": "#FFF"
+      },
+      {
+        "type": "text",
+        "id": "special",
+        "label": "Text",
+        "default": "Special"
+      },
+      {
+        "type": "color",
+        "id": "special_color",
+        "label": "Background color",
+        "default": "#EFAB16"
+      },
+      {
+        "type": "color",
+        "id": "special_color_tx",
+        "label": "Text color",
+        "default": "#FFF"
+      },
+      {
+        "type": "header",
+        "content": "Resto tags"
+      },
+      {
+        "type": "paragraph",
+        "content": "Solo una de estas etiquetas se verá, el criterio de selección es descendente en caso de que haya dos o más al mismo tiempo."
+      },
+      {
+        "type": "header",
+        "content": "oferta:x"
+      },
+      {
+        "type": "paragraph",
+        "content": "El texto de la etiqueta se tomará del tag del producto que reemplace la x, i.e., oferta:-20%, oferta:verano, etc."
+      },
+      {
+        "type": "color",
+        "id": "offer_color",
+        "label": "Oferta background color",
+        "default": "#EFAB16"
+      },
+      {
+        "type": "color",
+        "id": "offer_color_tx",
+        "label": "Oferta text color",
+        "default": "#FFF"
+      },
+      {
+        "type": "header",
+        "content": "musthave"
+      },
+      {
+        "type": "text",
+        "id": "must_have_text",
+        "label": "Text",
+        "default": "Must have"
+      },
+      {
+        "type": "color",
+        "id": "musthave_color",
+        "label": "Must have background color",
+        "default": "#EFAB16"
+      },
+      {
+        "type": "color",
+        "id": "musthave_color_tx",
+        "label": "Must have text color",
+        "default": "#FFF"
+      },
+      {
+        "type": "header",
+        "content": "novedad"
+      },
+      {
+        "type": "text",
+        "id": "novedad_text",
+        "label": "Text",
+        "default": "New"
+      },
+      {
+        "type": "color", 
+        "id": "novedad_color",
+        "label": "Novedad background color",
+        "default": "#EFAB16"
+      },
+      {
+        "type": "color",
+        "id": "novedad_color_tx",
+        "label": "Novedad have text color",
+        "default": "#FFF"
+      }
+    ]
+  },
+  {
+    "name": "Pages NO INDEX",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Provide page's handle separated with a semicolon, i.e., handle-1;handle-2;handle-3; etc."
+      },
+      {
+        "type": "textarea",
+        "label": "Handles",
+        "id": "handles"
+      }
+    ]
+  }
+]

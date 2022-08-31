@@ -1,0 +1,138 @@
+{%- assign TIENDA = shop.url | split: '.' | last | upcase  %}
+{% paginate collection.products by section.settings.n_prods_collection %}
+{% if paginate.current_page == 1 %}
+{% comment %}
+<section class="collection-cards mas-vendidos-section">
+
+  <div class="mas-vendidos-title-container">
+  <h2 style="width: auto; padding-left: 20px;" class="section-title mas-vendidos-title ">{{ section.settings.title_part_1 }} <span class="underline">{{
+      section.settings.title_part_2 }} </span></h2>
+
+
+  </div>
+ 
+  <div class="best-sellers-cards">
+    <div class="best-sellers-container" id ="all-best">
+    {% for prod in collection.products limit: section.settings.n_prods_mas_vendidos %}
+    {% include 'collection-card' with prod | is_best_seller : true %}
+    {% assign current_variant = prod.selected_or_first_available_variant %}
+    <script>
+      var impression = {
+        'name': "{{ prod.title }}",
+        'id': '{{ prod.variants[0].sku }}',
+        'price': {{ prod.price }},
+      'brand': '{{ marca }}',
+        'category': '{{ categoria }}',
+          'list': 'Más vendidos - Collection', // nombre del listado en que aparece
+            'position': {{ forloop.index }} 
+                     }
+      for (let i = 0; dataLayer.length > i; i++) {
+        if (dataLayer[i].event == 'impression') { dataLayer[i].ecommerce.impressions.push(impression) }
+      }
+    </script>
+    {% endfor %}
+    </div>
+    
+  </div>
+</section>
+{% endcomment %}
+<section class="collection-cards mas-vendidos-sub-section" id="Collection__Products">
+  <div class="best-sellers-cards">
+    {% for prod in collection.products %}
+    {% include 'collection-card' with prod %}
+    {% assign current_variant = prod.selected_or_first_available_variant %}
+    <script>
+      var impression = {
+        'name': "{{ prod.title }}",
+        'id': '{{ prod.variants[0].sku }}',
+        'price': {{ prod.price }},
+      'brand': '{{ marca }}',
+        'category': '{{ categoria }}',
+          'list': 'Más vendidos - Collection', // nombre del listado en que aparece
+            'position': {{ forloop.index }} 
+                     }
+      for (let i = 0; dataLayer.length > i; i++) {
+        if (dataLayer[i].event == 'impression') { dataLayer[i].ecommerce.impressions.push(impression) }
+      }
+    </script>
+    {% endfor %}
+    {% include 'pagination' %}
+  </div>
+</section>
+{% else %}
+<section class="collection-cards" id="Collection__Products">
+  {% for prod in collection.products %}
+  {% include 'collection-card' with prod %}
+  {% assign current_variant = prod.selected_or_first_available_variant %}
+  <script>
+    var impression = {
+      'name': "{{ prod.title }}",
+      'id': '{{ prod.variants[0].sku }}',
+      'price': {{ prod.price }},
+    'brand': '{{ marca }}',
+      'category': '{{ categoria }}',
+        'list': 'Collection', // nombre del listado en que aparece
+          'position': {{ forloop.index }} 
+      }
+    for (let i = 0; dataLayer.length > i; i++) {
+      if (dataLayer[i].event == 'impression') { dataLayer[i].ecommerce.impressions.push(impression) }
+    }
+  </script>
+  {% endfor %}
+  {% include 'pagination' %}
+</section>
+{% endif %}
+{% endpaginate %}
+
+<script>
+  window.page_size = {{ section.settings.n_prods_collection | times: 1 }};
+
+</script>
+{% schema %}
+{
+"name": "Collection cards",
+"settings": [
+{
+"type": "header",
+"content": "Más vendidos"
+},
+{
+"type": "text",
+"id": "title_part_1",
+"label": "Título parte sin subrayado",
+"default": "Más"
+},
+{
+"type": "text",
+"id": "title_part_2",
+"label": "Título parte con subrayado",
+"default": "Vendidos"
+},
+{
+"type": "range",
+"id": "n_prods_mas_vendidos",
+"min": 3,
+"max": 5,
+"step": 1,
+"unit": "pr",
+"label": "Número productos mostrados en más vendidos",
+"default": 3
+},
+{
+"type": "header",
+"content": "Productos colección"
+},
+{
+"type": "range",
+"id": "n_prods_collection",
+"min": 12,
+"max": 36,
+"step": 4,
+"unit": "pr",
+"label": "Número productos mostrados en la colección",
+"default": 16
+}
+]
+}
+
+{% endschema %}

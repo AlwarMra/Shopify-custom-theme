@@ -1,0 +1,75 @@
+<div class="cart">  
+  {% if cart.item_count > 0 %}
+  <h1 class="section-title ">{{ 'general.carrito' | t }}</h1>
+  <form action="/cart" method="post" novalidate>
+ 
+    <div class="cart-info">
+      <div class="cart-header">
+        <div class="cart-header-elem col1"><p>{{ 'general.producto' | t }}</p></div>
+        <div class="cart-header-elem col2  desktop"><p>{{ 'general.cantidad' | t }}</p></div>
+        <div class="cart-header-elem col3 desktop"><p>{{ 'general.total' | t }}</p></div>
+      </div>
+
+      {% for item in cart.items %}
+          {% include 'cart-item' %}
+      {% endfor %}
+
+    </div>
+
+    <div class="end-cart">
+      {% if settings.show_cart_text %}
+      <div style="background: var(--main-color); display: inline-block; padding: 1rem; margin-bottom: 1rem;"><p style="text-align: right;">{{ settings.cart_text }}</p></div><br>
+      <div class="gratis-container" style="display: inline-block; padding: 1rem; margin-bottom: 1rem; border: 2px solid var(--main-color);"><p class="envio-gratis" style="text-align: right;"></p></div>
+      {% endif %} 
+      {% if cart.original_total_price > cart.total_price %}
+      <p class="subtotal" style="margin-bottom: 1rem;"><span class="crossed-price">{{ cart.original_total_price | money }}</span></p>
+      {% endif %}
+      <p class="subtotal"><span>{{ 'general.subtotal' | t | capitalize }}: </span>{{ cart.total_price | money }}</p>
+            {% assign t = false %}
+      {% for item in cart.items %}
+          {% if item.vendor contains 'Rise' %}
+      {% assign t = true %}
+          {% endif %}
+      {% endfor %}
+      {% if cart.item_count  > 1 or t == true %} 
+        {% assign total_total = cart.total_price %}
+        {% assign gastos = 0 %}
+      {% else %} 
+        {% assign gastos = settings.gastos_envio | replace: ',', '' %}
+        {% assign total_total = cart.total_price | plus: gastos %}
+      {% endif %}
+ 
+
+      <p class="total"><span>{{ 'general.total' | t | capitalize }}: </span>{{ total_total | minus: gastos | money }}</p> 
+      {% assign iva = cart.total_price | divided_by : 1.21 %}
+        
+      <p class="iva_incluido"> ({{  'general.iva_incluido' | t }}:{{ cart.total_price | minus: iva | money }})</p> 
+       
+      
+      <button type="submit" name="checkout" id="cart_page_checkout" class="button button-register go-checkout">{{ 'general.tramitar_pedido' | t }}</button>
+    </div>
+    </form>
+
+    {% else %}
+
+    <div class="cart-empty mobile">
+       <h3 class="section-title">{{ 'general.no_tienes_productos' | t | capitalize }}</h3>
+      <a href="/collections" class="button button-register">{{ 'general.seguir_comprando' | t | capitalize }}</a>
+    </div>
+    {% endif %}
+  </div>
+<script src="https://cdn.pagefly.io/static/assets/pf-custom-shopify-cart.min.js" defer></script>
+
+<style type="text/css">
+  #btn_open_side_cart, .footer-contact, .inside-web-links {
+    display: none !important;
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Cart",
+  "settings": [
+  ]
+}
+{% endschema %}  

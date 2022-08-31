@@ -1,0 +1,212 @@
+<div class="account">
+
+<div class="account-container" data-section-type="addresses" data-section-id="addresses">
+  <header class="PageHeader">
+    <a href="/account" class="title-logout">{{ 'customers.volver_a_mi_cuenta' | t | upcase}}</a>
+
+    <div class="SectionHeader">
+      <h1 class="account-title">{{ 'customers.mis_direcciones' | t | upcase}}</h1>
+
+      {%- if customer.addresses_count == 0 -%}
+        <p class="account-text">{{ 'customers.no_hay_direcciones_guardadas' | t }}</p> 
+      {%- endif -%}
+
+        <button type="button" class="button button-register" style="max-width: 250px;" data-action="open-modal" aria-controls="modal-address-new">{{ 'customers.anadir_nueva_direccion' | t | upcase}}</button>
+    </div>
+  </header>
+
+  {%- if customer.addresses_count > 0 -%}
+    {%- paginate customer.addresses by 9 -%}
+      <div class="flex-addresses">
+        {%- for address in customer.addresses -%}
+            <div class="flex-item">
+              {%- if address == customer.default_address -%}
+                <h2 class="account-title">{{ 'customers.direccion_por_defecto' | t }}</h2>
+              {%- else -%}
+                {%- assign position = paginate.current_page | times: forloop.index -%}
+                <h2 class="account-title">{{ 'customers.direccion' | t }} {{ position: position }}</h2>
+              {%- endif -%}
+
+              <div class="Segment__Content">
+                {{ address | format_address | replace: '<p>', '<p class="account-text"><span>' | replace_first: '<br>', '</span><br>' }}
+
+                <div class="post-delete-buttons">
+                  <button class="post-button" data-action="open-modal" aria-controls="modal-{{ address.id }}">Editar</button>
+                  <button class="post-button" onclick="Shopify.CustomerAddress.destroy({{ address.id }}); return false">Borrar</button>
+                </div>
+              </div>
+            </div>
+        {%- endfor -%}
+      </div>
+
+      {%- include 'pagination' -%}
+    {%- endpaginate -%}
+  {%- endif -%}
+</div>
+
+
+
+
+
+
+
+
+
+{% comment %}FORM FOR NEW ADDRESS{% endcomment %}
+
+<div id="modal-address-new" class="modal-close" aria-hidden="true" role="dialog" data-scrollable>
+
+    <div class="modal-content">
+
+        <span class="close">&times;</span>
+
+        <header class="">
+            <h3 class="section-title">{{ 'customers.anadir_direccion' | t | upcase}}</h3>
+            <p class="form-text">{{ 'customers.rellena_los_siguientes_datos' | t }}:</p>
+        </header>
+
+        <div class="modal-inputs">
+            {% form 'customer_address', customer.new_address, class: 'account-form adress-form' %}
+            <div class="form-item">
+                <input type="text" name="address[first_name]" value="{{ form.first_name }}" placeholder="Nombre" aria-label="{{ 'customer.addresses.first_name' | t }}" autofocus>
+            </div>
+
+            <div class="form-item">
+                <input type="text" name="address[last_name]" value="{{ form.last_name }}" placeholder="Apellido" aria-label="{{ 'customer.addresses.last_name' | t }}">
+            </div>
+
+            <div class="form-item">
+                <input type="text" name="address[company]" value="{{ form.company }}" placeholder="Empresa" aria-label="{{ 'customer.addresses.company' | t }}">
+            </div>
+
+            <div class="form-item">
+                <input type="text" name="address[phone]" value="{{ form.phone }}" placeholder="Teléfono" aria-label="{{ 'customer.addresses.phone' | t }}">
+            </div>
+
+            <div class="form-item">
+                <input type="text" name="address[address1]" value="{{ form.address1 }}" placeholder="Dirección 1" aria-label="{{ 'customer.addresses.address1' | t }}">
+            </div>
+
+            <div class="form-item">
+                <input type="text" name="address[address2]" value="{{ form.address2 }}" placeholder="Dirección 2" aria-label="{{ 'customer.addresses.address2' | t }}">
+            </div>
+
+            <div class="form-item">
+                <input type="text" name="address[city]" value="{{ form.city }}" placeholder="Ciudad" aria-label="{{ 'customer.addresses.city' | t }}">
+            </div>
+
+            <div class="Form__Group">
+                <div class="form-item">
+                <div class="select-country">
+                  <span class="select-icon">{% include 'icon' with 'select-arrow' %}</span>
+                    <select name="address[country]" title="">{{ all_country_option_tags }}</select>
+                </div>
+                </div>
+
+                <div class="form-item">
+                <input type="text" name="address[zip]" value="{{ form.zip }}" placeholder="Código postal" aria-label="{{ 'customer.addresses.zip' | t }}">
+                </div>
+            </div>
+
+            <div class="form-item" style="display: none">
+              <div class="select-country">
+                <span class="select-icon">{% include 'icon' with 'select-arrow' %}</span>
+                <select name="address[province]" title="{{ 'customer.addresses.province' | t }}"></select>
+                </div>
+            </div>
+
+            <div class="">
+              <label for="address-new[default]" class="privacy-acceptance">
+                <input type="checkbox" class="checkbox_gold" name="address[default]" id="address-new[default]" value="0">
+                <span class="form-text"> {{ 'customers.establecer_direccion_predeterminada' | t }}</span> 
+              </label>
+            </div>
+
+            <button class="button button-register">{{ 'customers.anadir_direccion' | t | upcase}}</button>
+            {% endform %}
+        </div>
+    </div>
+
+</div>
+
+{% comment %}FORM FOR EXISTING ADDRESSES{% endcomment %}
+
+{%- paginate customer.addresses by 9 -%}
+  {%- for address in customer.addresses -%}
+
+    <div id="modal-{{ address.id }}" class="modal-address-put modal-close" aria-hidden="true" role="dialog" data-scrollable>
+
+
+
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <header class="">
+          <h3 class="section-title">{{ 'customers.editar_una_direccion' | t | }}</h3>
+          <p class="form-text">{{ 'customers.rellena_los_siguientes_datos' | t }}:</p>
+        </header>
+
+        {% form 'customer_address', address, class: 'account-form adress-form' %}
+          <div class="form-item">
+            <input type="text" name="address[first_name]" value="{{ form.first_name }}" placeholder="Nombre" aria-label="{{ 'customer.addresses.first_name' | t }}" autofocus>
+          </div>
+
+          <div class="form-item">
+            <input type="text" name="address[last_name]" value="{{ form.last_name }}" placeholder="Apellido" aria-label="{{ 'customer.addresses.last_name' | t }}">
+          </div>
+
+          <div class="form-item">
+            <input type="text" name="address[company]" value="{{ form.company }}" placeholder="Empresa" aria-label="{{ 'customer.addresses.company' | t }}">
+          </div>
+
+          <div class="form-item">
+            <input type="text" name="address[phone]" value="{{ form.phone }}" placeholder="Teléfono" aria-label="{{ 'customer.addresses.phone' | t }}">
+          </div>
+
+          <div class="form-item">
+            <input type="text" name="address[address1]" value="{{ form.address1 }}" placeholder="Dirección 1" aria-label="{{ 'customer.addresses.address1' | t }}">
+          </div>
+
+          <div class="form-item">
+            <input type="text" name="address[address2]" value="{{ form.address2 }}" placeholder="Dirección 2" aria-label="{{ 'customer.addresses.address2' | t }}">
+          </div>
+
+          <div class="form-item">
+            <input type="text" name="address[city]" value="{{ form.city }}" placeholder="Ciudad" aria-label="{{ 'customer.addresses.city' | t }}">
+          </div>
+
+          <div class="Form__Group">
+            <div class="form-item">
+                <div class="select-country">
+                  <span class="select-icon">{% include 'icon' with 'select-arrow' %}</span>
+                <select name="address[country]" title="País" data-default="{{ form.country }}">{{ all_country_option_tags }}</select>
+              </div>
+            </div>
+
+            <div class="form-item">
+              <input type="text" name="address[zip]" value="{{ form.zip }}" placeholder="Código Postal" aria-label="{{ 'customer.addresses.zip' | t }}">
+            </div>
+          </div>
+
+          <div class="form-item " style="display: none">
+            <div class="select-country">
+            <span class="select-icon">{% include 'icon' with 'select-arrow' %}</span>
+            <select name="address[province]" title="Provincia" data-default="{{ form.province }}"></select>
+            </div>
+          </div>
+
+          <div class="">
+            <label for="address-{{ address.id }}[default]" class="privacy-acceptance">
+              <input type="checkbox" class="checkbox_gold" id="address-{{ address.id }}[default]" name="address[default]" {% if address.id == customer.default_address.id %}value="1" checked{% endif %}>
+              
+              <span class="form-text">{{ 'customers.establecer_direccion_predeterminada' | t }}</span></label>
+          </div>
+
+          <button class="button button-register">{{ 'customers.editar' | t | upcase }}</button>
+        {% endform %}
+      </div>
+    </div>
+  {%- endfor -%}
+{%- endpaginate -%}
+
+
+</div>

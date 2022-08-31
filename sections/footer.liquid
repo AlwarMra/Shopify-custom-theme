@@ -1,0 +1,195 @@
+<footer>
+
+  <section class="container">
+      <div class="container-fluid">
+          <div class="bottom-contact-social">
+            <div class="footer-logo-container">
+              <div class="logo">
+                  <a href="/">
+                      <img class="" alt="logo" src="{{'logo-footer.svg' | asset_url }}">
+                  </a>
+                  <p>{{ section.settings.texto_footer }}</p>
+              </div>
+          <div class="footer-submit"> 
+              {{  section.settings.html_form }} 
+          </div>
+            </div>
+              <div class="social-icons">
+                 {% if section.settings.link_facebook !='' %}<a href="{{ section.settings.link_facebook }}" target="_blank" id="facebook-icon">{% include 'icon' with 'facebook' %}</a>{% endif %}
+                 {% if section.settings.link_instagram !=''%}<a href="{{ section.settings.link_instagram }}" target="_blank" id="instagram-icon">{% include 'icon' with 'instagram' %}</a>{% endif %}
+                 {% if section.settings.link_pinterest !=''%}<a href="{{ section.settings.link_pinterest }}" target="_blank"id="pinterest-icon">{% include 'icon' with 'pinterest' %}</a>{% endif %}
+                 {% if section.settings.link_youtube !=''%}<a href="{{ section.settings.link_youtube }}" target="_blank"id="youtube-icon">{% include 'icon' with 'youtube' %}</a>{% endif %}
+                 {% if section.settings.link_linkedin !=''%}<a href="{{ section.settings.link_linkedin }}" target="_blank"id="linkedin-icon">{% include 'icon' with 'linkedin' %}</a>{% endif %}
+              </div>
+              <div class="inside-web-links">
+
+                  {%- assign footer_menu_handle = section.settings.footer-menu | default: 'footer-menu' -%}
+                  {%- assign footer_menu = linklists[footer_menu_handle] -%}
+
+                  {%- assign footer_menu_1 = linklists[section.settings.footer-menu-1] -%} 
+                  {%- assign footer_menu_2 = linklists[section.settings.footer-menu-2] -%} 
+                  {%- assign footer_menu_3 = linklists[section.settings.footer-menu-3] -%} 
+                  {%- assign footer_menu_4 = linklists[section.settings.footer-menu-4] -%} 
+                  {%- assign footer_ofuscated = linklists[section.settings.footer-ofuscated] -%}
+                
+                  <div class="inside-web-link-container">
+                      {%- for link in footer_menu_1.links -%} 
+                      <span><a href="{{ link.url }}">{{ link.title | title }}</a></span>
+                      {% endfor %} 
+                      {% if section.settings.ofus_pos == 'first' %}
+                      	{% for link in footer_ofuscated.links  %}
+                    	<span class="ofuscate" data-link="{{ link.url }}">{{ link.title | title }}</span>
+                    	{% endfor %}
+                      {% endif %}
+                  </div> 
+                  <div class="inside-web-link-container">
+                      {%- for link in footer_menu_2.links -%} 
+                      <span><a href="{{ link.url }}">{{ link.title | title }}</a></span>
+                      {% endfor %} 
+                        {% if section.settings.ofus_pos == 'second' %}
+                      	{% for link in footer_ofuscated.links  %}
+                    	<span class="ofuscate" data-link="{{ link.url }}">{{ link.title | title }}</span>
+                    	{% endfor %}
+                      {% endif %}
+                  </div> 
+                  <div class="inside-web-link-container">
+                      {%- for link in footer_menu_3.links -%} 
+                      <span><a href="{{ link.url }}">{{ link.title | title }}</a></span>
+                      {% endfor %} 
+                       {% if section.settings.ofus_pos == 'third' %}
+                      	{% for link in footer_ofuscated.links  %}
+                    	<span class="ofuscate" data-link="{{ link.url }}">{{ link.title | title }}</span>
+                    	{% endfor %}
+                      {% endif %}
+                  </div> 
+                  <div class="inside-web-link-container">
+                      {%- for link in footer_menu_4.links -%} 
+                      <span><a href="{{ link.url }}">{{ link.title | title }}</a></span>
+                      {% endfor %} 
+                    	{% if section.settings.ofus_pos == 'fourth' %}
+                      	{% for link in footer_ofuscated.links  %}
+                    	<span class="ofuscate" data-link="{{ link.url }}">{{ link.title | title }}</span>
+                    	{% endfor %}
+                      {% endif %}
+                  </div> 
+              </div>
+          </div>
+      </div>
+  </section>
+
+
+  <section>
+      <div class="bottom-footer">
+          <div class="credit-cards">
+              {% for type in shop.enabled_payment_types %}
+                  {{ type | payment_type_svg_tag: class:'payment-icon' }}
+              {% endfor %}
+              {% render 'icon' with 'scalapay' %}
+          </div>
+      </div>
+  </section>
+
+</footer>
+
+<style>
+  
+  .ofuscate {
+  	cursor: pointer;
+  }
+  
+  
+  
+</style>
+
+<script>
+const ofusLinks = document.querySelectorAll('.ofuscate');
+
+
+   Array.from(ofusLinks).forEach(function(elem) {
+     elem.addEventListener('click', ()=> {                        
+       window.location.href = elem.getAttribute('data-link')
+       })
+    })
+
+</script>
+{% schema %}
+{ 
+"name": "Footer", 
+"settings": [
+      {
+          "type": "text",
+          "id": "texto_footer",
+          "label": "Texto Footer",
+          "default": "La tienda online de perfumes de equivalencia más grande del mundo. Más de 400 fragancias inspiradas en reconocidas marcas de la moda."
+       }, 
+        {
+          "type": "link_list",
+          "id": "footer-menu-1",
+          "label": "Menu del Footer 1"
+        },
+        {
+          "type": "link_list",
+          "id": "footer-menu-2",
+          "label": "Menu del Footer 2"
+        },
+        {
+          "type": "link_list",
+          "id": "footer-menu-3",
+          "label": "Menu del Footer 3"
+        },
+        {
+          "type": "link_list",
+          "id": "footer-menu-4",
+          "label": "Menu del Footer 4"
+        }, 
+        {
+          "type": "link_list",
+          "id": "footer-ofuscated",
+          "label": "Menú ofuscado"
+        },
+		{	
+			"type":"select",
+			"id":"ofus_pos",
+			"label":"Ofuscated menu column position",
+			"default":"first",
+			"options": [
+				{"value":"first", "label":"First"},
+				{"value":"second", "label":"Second"},
+				{"value":"third", "label":"Third"},
+				{"value":"fourth", "label":"Fourth"}
+			]
+		},
+        {
+          "type": "text",
+          "id": "link_facebook",
+          "label": "Facebook"
+        },
+        {
+          "type": "text",
+          "id": "link_instagram",
+          "label": "Instagram"
+        },
+        {
+          "type": "text",
+          "id": "link_pinterest",
+          "label": "Pinterest"
+        },
+        {
+          "type": "text",
+          "id": "link_youtube",
+          "label": "Youtube"
+        },
+        {
+          "type": "text",
+          "id": "link_linkedin",
+          "label": "Linkedin"
+        },
+      {
+          "type": "html",
+          "id": "html_form",
+          "label": "HTML del form",
+          "default": "<div><p>Aquí el HTML del form</p></div>"
+       }
+]  
+}
+{% endschema %}

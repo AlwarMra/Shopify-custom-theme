@@ -1,0 +1,29 @@
+<article class="blog-item {{ style }} {% if forloop.index==2 and is_home_list %} hide-desktop{% endif %}">
+    <div class="blog-item-image">
+        <a href="{{ article.url }}">
+            <img src="{{ article.image | img_url: 'x600' }}" alt="{{ article.title }}">
+        </a>
+    </div>
+
+    <div class="article-info">
+        <a class="article-tag" href="{{ blog.url }}/tagged/{{ article.tags.first | handle }}">
+            <p class="article-date">{{ article.tags.first }}</p>
+        </a>
+        <div class="article-info-flex">
+            <h2 class="section-title"><a href="{{ article.url }}">{{ article.title }}</a></h2>
+            <div class="article-excerpt">
+            {% if article.excerpt.size > 0 %}
+            {{ article.excerpt }}
+            <br>
+            <a href="{{ article.url }}" class="read-more">{{ 'blog.leer_mas' | t | capitalize}}</a>
+            {% else %}
+            <p>{{ article.content | strip_html | truncatewords: 50 }}</p>
+            <br>
+            <a href="{{ article.url }}" class="read-more">{{ 'blog.leer_mas' | t | capitalize}}</a>
+            {% endif %}
+        </div>
+    </div>
+    </div>
+
+
+</article> 

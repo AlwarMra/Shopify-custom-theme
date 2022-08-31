@@ -1,0 +1,11 @@
+<div class="zoom-popup" style="display: none;">
+  <div class="zoom-popup-container aspect-ratio-box">
+    <img class="main-zoom-img" src="">
+    <span class="close-zoom-popup">{% include 'icon' with 'close' %}</span>
+  </div>
+  <div class="zoom-popup-thumbnails">
+    {% for image in product.images %}
+    <img src="{{ image | img_url: '150x' }}" alt="{{ image.alt }}">
+    {% endfor %}
+  </div>
+</div>

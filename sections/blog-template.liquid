@@ -1,0 +1,18 @@
+<div class="article-wrapper">
+    
+    <div class="article-content">
+    {% paginate blog.articles by 12 %}
+    {% for article in blog.articles offset: 1%} 
+        {% unless forloop.index == 2 %}
+            {% include 'blog-item' , style: 'full', is_home_list: true  %} 
+        {% else %} 
+            {% include 'blog-item' , style: 'wide', is_home_list: true  %} 
+        {%endunless%} 
+    {% endfor %}
+
+    {% if paginate.pages > 1 %}
+    {% include 'pagination' %}
+    {% endif %}
+    {% endpaginate %}
+    </div>
+</div>

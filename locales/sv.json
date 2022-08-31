@@ -1,0 +1,320 @@
+{
+    "general": {
+      "404": {
+        "title": "kunde inte hittas",
+        "subtext_html": "Sidan du sökte kunde inte hittas"
+      },
+      "de": "från",
+      "Similar_a": "Likvärdig",
+      "Perfume_equivalente_a": "parfym som liknar",
+      "inspirado_en": "Inspirerad av",
+      "dia": "dag",
+      "noche": "natt",
+      "familia_olfativa": "Doftfamilj",
+      "colecciones": "kollektion",
+      "Estacion": "Årstid",
+      "Uso": "Användning",
+      "descuento": "rabatt",
+      "perfumes_de_equivalencia": "Likvärdiga parfymer",
+      "buscar_perfumes_de_equivalencia": "Sök likvärdiga parfymer",
+      "encuentra_tu_perfume_divain": "Sök din DIVAIN-parfym",
+      "busca_tu_perfume_o_marca": "Sök din parfym eller märke",
+      "cerrar": "stäng",
+      "completa_pedido": "Slutför din beställning:",
+      "volver": "gå tillbaka",
+      "mas_vendidos": "Best Sellers",
+      "marcas": "Märken",
+      "todas_las_marcas": "Alla märken",
+      "conoce_equivalencias": "Upptäck alla våra likvärdiga parfymer",
+      "iva_incluido": "moms ingår",
+      "no_tienes_productos": "Varukorgen är tom",
+      "carrito": "varukorg",
+      "tramitar_pedido": "gå till betalning",
+      "seguir_comprando": "fortsätt handla",
+      "total": "totalpris",
+      "subtotal": "delsumma",
+      "gastos_envio": "fraktkostnad",
+      "producto": "vara",
+      "cantidad": "antal",
+      "borrar": "Ta bort",
+      "perfumes_colecciones_html": "Likvärdiga parfymer.<br>Över 600 högkvalitativa dofter",
+      "intensidad": {
+        "Intensidad": "Intensitet  ",
+        "Baja": "Låg",
+        "Media": "Mellan",
+        "Fuerte": "Hög"
+      },
+      "newsletter_form": {
+        "email_placeholder": "e-post",
+        "confirmacion": "bekräftelse",
+        "descargar": "ladda ner"
+      },
+      "error": "felmeddelande",
+      "home": "startsidan",
+      "buscar_marca": "hitta ditt märke",
+      "pagination": {
+        "previous_page": "sidan innan",
+        "go_to_page": "gå till sida nummer",
+        "next_page": "nästa sida"
+      }
+    },
+    "product": {
+      "precio": "pris",
+      "addto": "lägg till",
+      "Envase": "Parfymflaska",
+      "notas": "Doftnoter.",
+      "ingredientes": "Innehållsförteckning",
+      "caracteristicas": "Egenskaper",
+      "opiniones": "omdömen",
+      "Ver_menos_sobre_el_perfume": "se mindre om parfymen",
+      "Ver_mas_sobre_el_perfume": "se mer om parfymen",
+      "envio_gratis": "Fri leverans på beställningar över 410 kronor",
+      "envio_tiempo": "Leveranstid: 8-9 arbetsdagar",
+      "envio_devol": "Kostnadsfri varuretur 100% pengarna-tillbaka-garanti",
+      "muestras": "parfymprover",
+      "muestras_error": "Du kan fortfarande välja parfymprover",
+      "muestra_gratis": "Gratisprov",
+      "tryandbuy": "TRY & BUY",
+      "trybuy_link": "\/pages\/divain-try-buy",
+      "reviews":"Recensioner om {{ title }} {{ imitation }}"
+    },
+    "botones": {
+      "comprar_ahora": "Köp nu",
+      "add_to_cart": "Lägg till vara",
+      "anadelo_por": "Lägg till för",
+      "sin_stock": "Kommer snart",
+      "agotado": "Finns ej i lager",
+      "agotado_2": "Slutsåld",
+      "all_marcas": "Alla märken",
+      "ver_mas": "visa mer",
+      "seguir_redes": "FÖLJ OSS PÅ INSTAGRAM",
+      "download":"Ladda ner"
+    },
+    "pack": {
+      "Precio_del_pack": "pris om köpes tillsammans i set"
+    },
+    "categorias": {
+      "todos": "Alla",
+      "hombre": "Man",
+      "mujer": "Kvinna",
+      "unisex": "Unisex",
+      "nicho": "Nisch",
+      "kids": "Barn",
+      "mascotas": "husdjur",
+      "accesorios": "tillbehör"
+    },
+    "familias": {
+      "acuatica": "Vattennoter",
+      "amaderada": "Tränoter",
+      "almizcle": "Mysk",
+      "citrica": "Citrus",
+      "chipre": "Sandelträ",
+      "cuero": "Läder",
+      "especiada": "Kryddig",
+      "fougere": "Fougère",
+      "floral": "Blommig",
+      "frutal": "Fruktig",
+      "oriental": "Österländsk",
+      "vainilla": "Vanilj",
+      "aromatica": "aromatisk",
+      "gourmand": "gourmand",
+      "verde": "grön",
+      "amaderado": "Tränoter",
+      "aldehidica": "aldehyd",
+      "ambar": "bärnsten"
+    },
+    "filtros": {
+      "filtros": "filter",
+      "ordenar": "Sortera",
+      "ordenar_por": "Sortera efter",
+      "precio_menor_a_mayor": "Pris hög till låg",
+      "precio_mayor_a_menor": "Pris låg till hög",
+      "nuevo_a_antiguo": "Nyare produkter",
+      "antiguo_a_nuevo": "Äldre produkter",
+      "filtrar_coleccion_por": "Sortera XXXXX efter",
+      "filtrar_por": "Sortera efter",
+      "intensidad": "Intensitet ",
+      "familias_olfativas": "Doftgrupper",
+      "estacion": "Årstid",
+      "invierno": "Vinter",
+      "primavera": "Vår",
+      "verano": "Sommar",
+      "otono": "Höst",
+      "filtrar": "filter",
+      "limpiar": "ta bort",
+      "genero": "Kön",
+      "momento": "Ögonblick",
+      "filtrar_familia": "Dela upp efter grupp"
+    },
+    "customers": {
+      "contrasena": "lösenord",
+      "nombre": "förnamn",
+      "apellido": "efternamn",
+      "email": "e-post",
+      "entrar_en_mi_cuenta": "Gå in på mitt DIVAIN-konto",
+      "introduce_email_y_pass": "Vänligen använd e-postadress samt lösenord",
+      "olvide_pass": "Har du glömt bort lösenordet?",
+      "entrar": "Gå in",
+      "crear_cuenta": "Skapa konto",
+      "recuperar_contrasena": "Återställ lösenord",
+      "recuperado_con_exito": "Ditt lösenord är återställt",
+      "recuperar": "Återställ",
+      "recuerdas_tu_contrasena": "Kommer du ihår ditt lösenord ",
+      "volver_a_entrar": "Gå tillbaka till inloggning",
+      "logout": "Logga ut",
+      "mi_cuenta": "mitt konto",
+      "bienvenido": "välkommen tillbaka",
+      "mis_pedidos": "mina beställningar",
+      "no_tienes_pedidos": "Du har inga beställningar",
+      "pedido": "Beställning",
+      "fecha": "datum",
+      "estado_pago": "Betalningsstatus",
+      "estado_entrega": "Leveransstatus",
+      "total": "totalbelopp",
+      "sin_direcciones": "Ingen adress angiven",
+      "no_hay_direcciones_guardadas": "du har inte sparat någon adress",
+      "gestionar_direcciones": "uppdatera address",
+      "direcciones": "adresser",
+      "activar_cuenta": "kontoaktivering",
+      "introduce_la_contrasena": "fyll I lösenord",
+      "enviar": "skicka in",
+      "declinar": "avböj",
+      "volver_a_mi_cuenta": "Tillbaka till Mitt Konto",
+      "mis_direcciones": "mina adresser",
+      "anadir_nueva_direccion": "lägg till adress",
+      "direccion_por_defecto": "Default adress",
+      "direccion": "adress",
+      "rellena_los_siguientes_datos": "vänligen fyll i information enligt följande",
+      "establecer_direccion_predeterminada": "Välj som huvudsaklig adress",
+      "anadir_direccion": "lägg till adress",
+      "editar_una_direccion": "ändra adress",
+      "editar": "ändra",
+      "pedido_realizado_el": "Beställning gjord den ",
+      "pedido_cancelado_el": "Beställning avbeställd den",
+      "producto": "vara",
+      "cantidad": "antal",
+      "descuento": "rabatt",
+      "subtotal": "totalpris",
+      "direccion_envio": "leveransadress",
+      "direccion_facturacion": "fakturaadress",
+      "crea_tu_cuenta_divain": "Skapa Ditt Divain-konto",
+      "crear_mi_cuenta": "Skapa konto",
+      "reiniciar_pass": "Återställ lösenord",
+      "introduce_nueva_contrasena": "Fyll i nytt lösenord",
+      "reset": "Återställ",
+      "cumple": "Födelsedag",
+      "preference": "jag föredrar",
+      "edit_mis_datos": "Ändra Mitt Konto"
+    },
+    "blog": {
+      "todo": "allt",
+      "leer_mas": "läs vidare",
+      "escrito_por": "skriven av"
+    },
+    "gift_card": {
+      "issued": {
+        "subtext": "Här är ditt presentkort",
+        "illustration_alt": "Presentkorts-bild",
+        "disabled": "Ditt presentkort är ogiltigt",
+        "expired": "Ditt presentkort har förfallit {{ expiry }}.",
+        "expires_on": "giltigt till och med {{ expiry }}.",
+        "redeem_html": "använd den här koden för att använda presentkortet",
+        "shop_link": "börja handla",
+        "code": "kod",
+        "initial_amount_html": "startbelopp: {{initial_amount}}",
+        "remaining_balance_html": "Remaining: {{balance}}",
+        "add_to_apple_wallet": "Lägg till Min Apple Wallet"
+      }
+    },
+    "announce": {
+      "entrega": "Leveranstid: 8-9 arbetsdagar",
+      "devolucion": "14 dagars returrätt",
+      "trust": "säkert: 4.7\/5 hos Trustpilot",
+      "tryandbuy": "Try&Buy gratis retur",
+      "envio_precio": "Gratis frakt från {{ price }}",
+      "envio": "Leveranstid: 8-9 arbetsdagar"
+    },
+    "wishlist": {
+      "wishlist_out": "Lägg till varan till önskelistan?",
+      "wishlist_in": "Varan är i Önskelistan",
+      "add_all": "Lägg till alla",
+      "copiar": "Kopiera",
+      "copiado": "Kopierad!",
+      "add_all_message": "Lägga till allt-meddelande",
+      "wishlist_share_title": "Divain wishlist",
+      "wishlist_share_text": "Se min Önskelista!"
+    },
+    "search": {
+      "no_results": "No results for “{{ terms }}” Check the grammar or try with any other term",
+      "results_with_count": {
+        "one": "{{ count }} result was found for \"{{ terms }}\"",
+        "other": "{{ count }} results were found for \"{{ terms }}\""
+      },
+      "title": "Search results",
+      "page": "Page",
+      "products": "Products",
+      "collections": "Categories",
+      "search_for": "Search “{{ terms }}”",
+      "predictive_empty":"Vi har inte hittat det du letade efter. Ladda ner katalogen för att se alla våra parfymer!",
+      "catalogue_link":"https://cdn.shopify.com/s/files/1/0552/4940/3951/files/SE_Katalog_Divain_juni.pdf?v=1654012145"
+    },
+    "shopify": {
+      "checkout": {
+        "alternative_payment_method_banner": {
+          "or": ""
+        },
+        "general": {
+          "continue_to_shipping_method": ""
+        },
+        "payment_gateway": {
+          "cash_on_delivery_label": ""
+        },
+        "banner_text_html":"Fortfarande oregistrerad? <a href='/login'>Gör det här!</a>"
+      }
+    },
+    "pagefly": {
+      "products": {
+        "product": {
+          "regular_price": "Regular price",
+          "sold_out": "Sold out",
+          "unavailable": "Unavailable",
+          "on_sale": "Sale",
+          "quantity": "Quantity",
+          "add_to_cart": "Add to cart",
+          "back_to_collection": "Back to {{ title }}",
+          "view_details": "View details"
+        }
+      },
+      "article": {
+        "tags": "Tags:",
+        "all_topics": "All topics",
+        "by_author": "by {{ author }}",
+        "posted_in": "Posted in",
+        "read_more": "Read more",
+        "back_to_blog": "Back to {{ title }}"
+      },
+      "comments": {
+        "title": "Leave a comment",
+        "name": "Name",
+        "email": "Email",
+        "message": "Message",
+        "post": "Post comment",
+        "moderated": "Please note, comments must be approved before they are published",
+        "success_moderated": "Your comment was posted successfully. We will publish it in a little while, as our blog is moderated.",
+        "success": "Your comment was posted successfully! Thank you!",
+        "comments_with_count": {
+          "one": "{{ count }} comment",
+          "other": "{{ count }} comments"
+        }
+      },
+      "password_page": {
+        "login_form_message": "Enter store using password:",
+        "login_form_password_label": "Password",
+        "login_form_password_placeholder": "Your password",
+        "login_form_submit": "Enter",
+        "signup_form_email_label": "Email",
+        "signup_form_success": "We will send you an email right before we open!",
+        "password_link": "Enter using password"
+      }
+    }
+  }

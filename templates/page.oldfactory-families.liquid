@@ -1,0 +1,14 @@
+<div class="marcas">
+    <div class="collection-welcoming"> 
+        <h1 class="collection-page-title">
+            <p>{{ 'general.perfumes_de_equivalencia' | t | upcase }}</p>
+            <p>{{ page.title | upcase }}</p>
+        </h1>
+    </div>
+
+    {% section 'oldfactory-families' %}
+
+    {% assign familias = linklists[ settings.menu_familias ] %}
+
+</div>
+

@@ -1,0 +1,321 @@
+{
+    "general": {
+      "404": {
+        "title": "Niet gevonden",
+        "subtext_html": "De pagina die je zoekt is niet gevonden"
+      },
+      "de": "van",
+      "Similar_a": "Vergelijkbaar met",
+      "Perfume_equivalente_a": "Parfum vergelijkbaar met",
+      "inspirado_en": "Geïnspireerd door",
+      "dia": "dag",
+      "noche": "nacht",
+      "familia_olfativa": "Olfactorische familie",
+      "colecciones": "Collecties",
+      "Estacion": "Seizoen",
+      "Uso": "Aanbevolen gebruik",
+      "descuento": "korting",
+      "perfumes_de_equivalencia": "VERGELIJKBARE PARFUMS",
+      "buscar_perfumes_de_equivalencia": "ZOEK VERGELIJKBARE PARFUMS",
+      "encuentra_tu_perfume_divain": "Vind jouw DIVAIN parfum",
+      "busca_tu_perfume_o_marca": "Zoek jouw DIVAIN parfum of merk...",
+      "cerrar": "Sluiten",
+      "volver": "Terugkeren",
+      "mas_vendidos": "Meest verkocht",
+      "marcas": "Merken",
+      "todas_las_marcas": "Alle merken",
+      "conoce_equivalencias": "Ontdek al onze vergelijkbare parfums",
+      "iva_incluido": "Inclusief BTW",
+      "completa_pedido": "Rond uw bestelling af:",
+      "no_tienes_productos": "Je winkelwagen is leeg",
+      "carrito": "Winkelwagen",
+      "tramitar_pedido": "VERDER NAAR BESTELLEN",
+      "seguir_comprando": "GA DOOR MET WINKELEN",
+      "total": "Totaal",
+      "subtotal": "Subtotaal",
+      "gastos_envio": "Verzendkosten",
+      "producto": "Product",
+      "cantidad": "Hoeveelheid",
+      "envio_gratuito": "Gratis verzending bij een bestelling van minimaal 30€",
+      "borrar": "Verwijderen",
+      "perfumes_colecciones_html": "Gelijkwaardigheid parfums.<br>Meer dan 600 hoogwaardige geuren",
+      "intensidad": {
+        "Intensidad": "Intensiteit",
+        "Baja": "Laag",
+        "Media": "Gemiddeld",
+        "Fuerte": "Hoog"
+      },
+      "newsletter_form": {
+        "email_placeholder": "E-mail",
+        "confirmacion": "Bedankt voor je aanmelding!",
+        "descargar": "Downloaden"
+      },
+      "error": "Foutmelding",
+      "home": "Homepagina",
+      "buscar_marca": "Vind jouw merk",
+      "pagination": {
+        "previous_page": "Ga naar de vorige pagina",
+        "go_to_page": "Ga naar pagina",
+        "next_page": "Ga naar de volgende pagina "
+      }
+    },
+    "product": {
+      "precio": "Prijs",
+      "addto": "TOEVOEGEN AAN",
+      "Envase": "Flesje",
+      "notas": "Olfactorische noten",
+      "ingredientes": "Ingrediënten",
+      "caracteristicas": "Kenmerken",
+      "opiniones": "Klantbeoordelingen",
+      "Ver_menos_sobre_el_perfume": "Toon minder over dit parfum",
+      "Ver_mas_sobre_el_perfume": "Toon meer over dit parfum",
+      "envio_gratis": " Gratis verzending bij een bestelling van minimaal 30€",
+      "envio_tiempo": "Ontvang je bestelling binnen 3-5 werkdagen",
+      "envio_devol": " Gratis retourneren en krijg het volledige aankoopbedrag terug",
+      "muestras": "Monsters",
+      "muestras_error": "Je hebt nog steeds de keuze uit samples!",
+      "muestra_gratis": "Gratis sample",
+      "tryandbuy": "TRY & BUY",
+      "trybuy_link": "\/pages\/try-buy",
+      "reviews":"Beoordelingen over {{ title }} {{ imitation }}"
+    },
+    "botones": {
+      "comprar_ahora": "Koop nu",
+      "add_to_cart": "Toevoegen aan winkelwagen",
+      "anadelo_por": "VOEG TOE VOOR ",
+      "sin_stock": "Binnenkort beschikbaar",
+      "agotado": "Uitverkocht",
+      "agotado_2": "Tijdelijk uitverkocht",
+      "ver_mas": "Bekijk meer",
+      "seguir_redes": "Volg in de media",
+      "all_marcas": "",
+      "download":"Downloaden"
+    },
+    "pack": {
+      "Precio_del_pack": "Prijs per verpakking"
+    },
+    "categorias": {
+      "todos": "Alles",
+      "hombre": "Heren",
+      "mujer": "Dames",
+      "unisex": "Unisex",
+      "nicho": "Niche",
+      "kids": "Kinderen",
+      "mascotas": "Huisdieren",
+      "accesorios": "Accessoires"
+    },
+    "familias": {
+      "acuatica": "Aquatisch",
+      "amaderada": "Houtachtig",
+      "almizcle": "Muskus",
+      "citrica": "Citrus",
+      "chipre": "Chypre",
+      "cuero": "Leer",
+      "especiada": "Kruidig",
+      "fougere": "Fougère",
+      "floral": "Bloemig",
+      "frutal": "Fruitig",
+      "oriental": "Oriëntaals",
+      "vainilla": "Vanille",
+      "aromatica": "Aromatisch",
+      "gourmand": "Gourmand",
+      "verde": "Groen",
+      "amaderado": "Houtachtig",
+      "aldehidica": "Aldehyde",
+      "ambar": "Amber"
+    },
+    "filtros": {
+      "filtros": "Filters",
+      "ordenar": "Soort",
+      "ordenar_por": "Sorteren op",
+      "precio_menor_a_mayor": "Prijs hoog naar laag",
+      "precio_mayor_a_menor": "Prijs laag naar hoog",
+      "nuevo_a_antiguo": "Nieuwere producten",
+      "antiguo_a_nuevo": "Oudere producten",
+      "filtrar_por": "Filtrar por",
+      "filtrar_coleccion_por": "Filter XXXXX op",
+      "intensidad": "Intensiteit",
+      "familias_olfativas": "Olfactorische familie",
+      "estacion": "Seizoen",
+      "invierno": "Winter",
+      "primavera": "Lente",
+      "verano": "Zomer",
+      "otono": "Herfst",
+      "filtrar": "Filteren",
+      "limpiar": "Filters wissen",
+      "genero": "Geslacht",
+      "momento": "Moment",
+      "filtrar_familia": "Filteren op familie"
+    },
+    "customers": {
+      "entrar_en_mi_cuenta": "Inloggen bij mijn DIVAIN account",
+      "introduce_email_y_pass": "Voer alsjeblieft je e-mail en wachtwoord in",
+      "olvide_pass": "Wachtwoord vergeten?",
+      "entrar": "Inloggen",
+      "crear_cuenta": "Account aanmaken",
+      "recuperar_contrasena": "Wachtwoord opnieuw instellen",
+      "recuperado_con_exito": "Wachtwoord succesvol gewijzigd",
+      "recuperar": "Opnieuw instellen",
+      "recuerdas_tu_contrasena": "Heb je je wachtwoord onthouden?",
+      "volver_a_entrar": "Keer terug om in te loggen",
+      "logout": "Uitloggen",
+      "mi_cuenta": "Mijn account",
+      "bienvenido": "Welkom terug,",
+      "mis_pedidos": "Mijn bestellingen",
+      "no_tienes_pedidos": "Je hebt nog geen bestelling gedaan",
+      "pedido": "Bestelling",
+      "fecha": "Datum",
+      "estado_pago": "Status van de betaling",
+      "estado_entrega": "Status van de bestelling",
+      "total": "totaal",
+      "sin_direcciones": "Geen adressen",
+      "no_hay_direcciones_guardadas": "Er zijn geen adressen opgeslagen",
+      "gestionar_direcciones": "Adressen beheren",
+      "direcciones": "Adressen",
+      "activar_cuenta": "Account activeren",
+      "introduce_la_contrasena": "Voer alsjeblieft een wachtwoord in",
+      "enviar": "Versturen",
+      "declinar": "Afwijzen",
+      "volver_a_mi_cuenta": "Keer terug naar mijn account",
+      "mis_direcciones": "Mijn adressen",
+      "anadir_nueva_direccion": "Voeg een nieuw adres toe",
+      "direccion_por_defecto": "Standaard adres",
+      "direccion": "Adres",
+      "rellena_los_siguientes_datos": "Vul alsjeblieft de volgende gegevens in",
+      "establecer_direccion_predeterminada": "Gebruik als standaard adres",
+      "anadir_direccion": "Voeg adres toe",
+      "editar_una_direccion": "Wijzig adres",
+      "editar": "Wijzigen",
+      "pedido_realizado_el": "Bestelling geplaatst op",
+      "pedido_cancelado_el": "Bestelling geannuleerd op",
+      "producto": "product",
+      "cantidad": "Aantal",
+      "descuento": "korting",
+      "subtotal": "subtotaal",
+      "direccion_envio": "Afleveradres",
+      "direccion_facturacion": "Factuuradres",
+      "crea_tu_cuenta_divain": "Maak een DIVAIN account aan",
+      "crear_mi_cuenta": "Maak mijn account aan",
+      "reiniciar_pass": "Wachtwoord wijzigen",
+      "introduce_nueva_contrasena": "Voer alsjeblieft een nieuw wachtwoord in",
+      "reset": "Wijzigen",
+      "contrasena": "Wachtwoord",
+      "nombre": "Voornaam",
+      "apellido": "Achternaam",
+      "email": "E-mail",
+      "cumple": "Verjaardag",
+      "preference": "Voorkeur",
+      "edit_mis_datos": "Mijn profiel bewerken"
+    },
+    "blog": {
+      "todo": "Alles",
+      "leer_mas": "Lees meer",
+      "escrito_por": "Geschreven door"
+    },
+    "gift_card": {
+      "issued": {
+        "subtext": "Hier is je cadeaukaart!",
+        "illustration_alt": "Gift card afbeelding",
+        "disabled": "Je cadeaukaart is gedeactiveerd.",
+        "expired": "Je cadeaukaart is verlopen {{ expiry }}.",
+        "expires_on": "Je cadeaukaart verloopt op {{ expiry }}.",
+        "redeem_html": "Gebruik deze code om je cadeaukaart in te wisselen",
+        "shop_link": "Begin met winkelen",
+        "code": "Code",
+        "initial_amount_html": "Bedrag: {{initial_amount}}",
+        "remaining_balance_html": "Resterend bedrag: {{balance}}",
+        "add_to_apple_wallet": "Toevoegen aan Apple Wallet"
+      }
+    },
+    "announce": {
+      "entrega": "Ontvang je bestelling binnen 5-7 werkdagen",
+      "devolucion": "14 dagen retourgarantie",
+      "trust": "4,7\/5 op Truspilot",
+      "tryandbuy": "Try&Buy gratis retour",
+      "envio_precio": "Gratis verzending vanaf {{ price }}",
+      "envio": "Ontvang je bestelling binnen 5-7 werkdagen"
+    },
+    "wishlist": {
+      "wishlist_out": "VOEG HET TOE AAN JE WISHLIST!",
+      "wishlist_in": "WIL HET NIET: NEEM HET",
+      "add_all": "Voeg alles toe",
+      "copiar": "Kopiëren",
+      "copiado": "Gekopieerd!",
+      "add_all_message": "Voeg alle producten toe!",
+      "wishlist_share_title": "Divain wishlist",
+      "wishlist_share_text": "Neem een kijkje op mijn verlanglijstje!"
+    },
+    "search": {
+      "no_results": "Geen resultaten voor “{{ termen }}” Controleer de grammatica of probeer met een andere term",
+      "results_with_count": {
+        "one": "{{ count }} resultaat gevonden voor \"{{ terms }}\"",
+        "other": "{{ count }} resultaten zijn gevonden voor \"{{ terms }}\""
+      },
+      "title": "Zoekresultaten",
+      "page": "Bladzijde",
+      "products": "Producten",
+      "collections": "Categorieën",
+      "search_for": "Zoeken “{{ terms }}”",
+      "predictive_empty":"We hebben niet gevonden wat u zocht. Download de catalogus om al onze parfums te zien!",
+      "catalogue_link":"https://cdn.shopify.com/s/files/1/0550/5076/4485/files/NL_Catalogus_Divain_juni.pdf?v=1654009481"
+    },
+    "shopify": {
+      "checkout": {
+        "alternative_payment_method_banner": {
+          "or": ""
+        },
+        "general": {
+          "continue_to_shipping_method": ""
+        },
+        "payment_gateway": {
+          "cash_on_delivery_label": ""
+        },
+        "banner_text_html":"Nog niet ingeschreven? <a href='/login'>Doe het hier!</a>"
+      }
+    },
+    "pagefly": {
+      "products": {
+        "product": {
+          "regular_price": "Regular price",
+          "sold_out": "Sold out",
+          "unavailable": "Unavailable",
+          "on_sale": "Sale",
+          "quantity": "Quantity",
+          "add_to_cart": "Add to cart",
+          "back_to_collection": "Back to {{ title }}",
+          "view_details": "View details"
+        }
+      },
+      "article": {
+        "tags": "Tags:",
+        "all_topics": "All topics",
+        "by_author": "by {{ author }}",
+        "posted_in": "Posted in",
+        "read_more": "Read more",
+        "back_to_blog": "Back to {{ title }}"
+      },
+      "comments": {
+        "title": "Leave a comment",
+        "name": "Name",
+        "email": "Email",
+        "message": "Message",
+        "post": "Post comment",
+        "moderated": "Please note, comments must be approved before they are published",
+        "success_moderated": "Your comment was posted successfully. We will publish it in a little while, as our blog is moderated.",
+        "success": "Your comment was posted successfully! Thank you!",
+        "comments_with_count": {
+          "one": "{{ count }} comment",
+          "other": "{{ count }} comments"
+        }
+      },
+      "password_page": {
+        "login_form_message": "Enter store using password:",
+        "login_form_password_label": "Password",
+        "login_form_password_placeholder": "Your password",
+        "login_form_submit": "Enter",
+        "signup_form_email_label": "Email",
+        "signup_form_success": "We will send you an email right before we open!",
+        "password_link": "Enter using password"
+      }
+    }
+  }

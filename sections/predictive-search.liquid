@@ -1,0 +1,90 @@
+<div id="predictive-search-results">
+  <div class="predictive-arrow">
+<div class="predictive-arrow-outer"></div>
+<div class="predictive-arrow-inner {% if predictive_search.resources.products.size > 0 or predictive_search.resources.collections.size > 0%} arrow-color{% endif %}"></div>
+</div>
+{%- if predictive_search.resources.products.size > 0 -%} 
+<h2 id="predictive-search-products" class="predictive-search__heading">
+{{ 'search.products' | t }}
+
+<svg aria-hidden="true" focusable="false" role="presentation" class="spinner" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
+<circle class="path" fill="none" stroke-width="6" cx="33" cy="33" r="30"></circle>
+</svg>
+</h2>
+{%- endif -%}
+
+{%- if predictive_search.resources.products.size == 0 -%} 
+<div class="predictive-empty">
+  <p>{{ 'search.predictive_empty' | t }}</p>
+  <a href="{{ 'general.catalogue_link' | t }}" target="_blank" class="button">{{ 'botones.download' | t }}</a>
+</div>
+{%- endif -%}
+
+<ul id="predictive-search-results-list" class="predictive-search__results-list list-unstyled" role="listbox" aria-labelledby="predictive-search-products">
+
+{%- for product in predictive_search.resources.products limit: 4 -%}
+{% unless product.variants[0].price == 0 %}
+<li id="predictive-search-option-{{ forloop.index }}" class="predictive-search__list-item" role="option" aria-selected="false">
+<a href="{{ product.url }}" class="predictive-search__item predictive-search__item--link link link--text" tabindex="-1">
+{%- if product.featured_media != blank -%}
+<img class="predictive-search__image"
+src="{{ product.images[0] | img_url: '150x' }}"
+alt="{{ product.featured_media.alt }}"
+width="50"
+height="{{ 50 | divided_by: product.images[0].aspect_ratio }}"
+>
+{%- endif -%}
+<div class="predictive-search__item-content predictive-search__item-content--centered">
+<h3 class="predictive-search__item-heading h5">{{ product.title }}</h3> 
+<p class="predictive-search__item-description">{{ product.description | strip_html | truncate: 120 }}</p>     
+{%- if product.variants[0].compare_at_price > product.price -%}
+<p style="white-space: nowrap;"><span class="crossed-price" style="margin-right: 3px;">{{ product.variants[0].compare_at_price | money }}</span>
+<span class="offer-price">{{ product.variants[0].price | money }}</span></p>
+{% else %}
+{{ product.variants[0].price | money }}
+{% endif %}
+</div>
+</a>
+</li>
+{% endunless %}
+{%- endfor -%}
+
+
+
+
+<li id="predictive-search-option-search-keywords" class="predictive-search__list-item" role="option">
+<button class="predictive-search__item predictive-search__item--term link link--text h5 animate-arrow predictive-button" tabindex="-1">
+<span>{{ 'search.search_for' | t: terms: predictive_search.terms }}</span>
+</button>
+</li> 
+</ul>
+
+{%- if predictive_search.resources.collections.size > 0 -%} 
+<p id="predictive-search-products" class="predictive-search__heading">
+{{ 'search.collections' | t }}
+</p>
+{%- endif -%}
+<ul id="predictive-search-results-list-cols" class="predictive-search__results-list list-unstyled" role="listbox" aria-labelledby="predictive-search-products">
+{%- for collection in predictive_search.resources.collections limit: 5  -%}
+<li id="predictive-search-option-cols-{{ forloop.index }}" class="predictive-search__list-item" role="option" aria-selected="false">
+<a href="{{ collection.url }}">{{collection.title}}</a>
+</li>
+{% endfor %}
+</ul>
+
+
+
+<div class="predictive-search__loading-state" aria-hidden="true">
+<svg aria-hidden="true" focusable="false" role="presentation" class="spinner" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
+<circle class="path" fill="none" stroke-width="6" cx="33" cy="33" r="30"></circle>
+</svg>
+</div>
+</div>
+
+<span style="display: none;" class="hidden" data-predictive-search-live-region-count-value>
+{%- if search.results_count == 0 -%}
+{{ 'search.no_results' | t: terms: predictive_search.terms }}
+{%- else -%}
+{{ 'search.results_with_count' | t: terms: predictive_search.terms, count: predictive_search.resources.products.size }}
+{%- endif -%}
+</span>

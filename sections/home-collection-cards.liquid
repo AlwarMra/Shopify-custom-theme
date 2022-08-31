@@ -1,0 +1,175 @@
+<section class="home-collection-cards container page-width">
+    <div class="home-col-text-container">
+        <p class="section-title">{{ section.settings.title }}</p>
+        <h2 class="subtitle">{{ section.settings.subtitle }}</h2>
+    </div>
+
+    <div class="home-col-slider">
+        {% for block in section.blocks %}
+        
+            {% assign col = block.settings.col %}
+            {% if block.settings.img %}
+            {% assign img = block.settings.img | img_url: 'large' %}
+            {% else %}
+            {% assign img = col.image | img_url: 'large' %}
+            {% endif %}
+            <div class="home-col-card">
+                <div class="aspect-ratio-box">
+                    <img class="lazyload" data-src="{{ img }}" alt="{{ img.alt }}">
+                </div>
+                <div class="col-card-text">
+                    <p class="col-card-title">{{ col.title | downcase | capitalize }}</p>
+                    <p class="col-card-desc">
+                        {% if block.settings.desc != blank %}
+                        {{ block.settings.desc }}
+                        {% else %}
+                        {{ col.desription | truncatewords: 20, '...' }}
+                        {% endif %}
+                    </p>
+                    <a href="{{ col.url }}" class="button">
+                        {% if block.settings.btn_text != blank %}
+                        {{ block.settings.btn_text }}
+                        {% else %}
+                        {{ 'botones.ver_mas' | t }}
+                        {% endif %}                       
+                    </a>
+                </div>
+
+            </div>
+
+        {% endfor %}
+    </div>
+
+</section>
+
+<style>
+
+    .home-col-text-container .subtitle{
+        text-align: center;
+        font-family: 'SFProText-Regular';
+        margin-top: 1rem;
+    }
+    .home-collection-cards{
+        margin: 3rem auto;
+    }
+    .home-col-slider {
+        max-width: 70%;
+        margin: 0 auto;
+    }
+.home-col-card {
+    width: 100%;
+    margin: 2rem;
+    background: var(--secondary-color);
+    box-shadow: 0 0 15px 0 rgb(0 0 0 / 30%);
+}
+.home-col-card .aspect-ratio-box {
+    padding-top: 75%;
+}
+.home-col-card .col-card-text {
+    text-align: center;
+}
+.home-col-card .col-card-title {
+    font-family: 'amalfi';
+    font-size: 2rem;
+    margin: 2rem 0;
+    line-height: 1.5;
+}
+.home-col-card .col-card-desc {
+    line-height: 1.2;
+    margin: 1rem 0;
+    font-size: 1.2rem;
+}
+.home-col-card .button {
+    padding: 10px 20px;
+    width: 80%;
+    display: inline-block;
+    background: var(--main-color);
+    color: var(--contrast-color);
+    font-size: 1rem;
+}
+.home-col-slider .flickity-button {
+    background: var(--main-color);
+    color: var(--secondary-color);
+    width: 40px;
+    height: 40px;    
+} 
+    .home-col-slider .flickity-prev-next-button.next {
+        right: -22px;       
+    }
+    .home-col-slider .flickity-prev-next-button.previous {
+        left: -22px;   
+    }
+    .home-col-slider .dot {
+        background: var(--secondary-color);
+        width: 15px;
+        height: 15px;
+    }
+    .home-col-slider .dot.is-selected {
+        background: var(--main-color);
+    }
+@media(min-width: 768px) {
+    .home-col-card {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        width: 90%;
+    }
+    .home-col-slider {
+        max-width: 92%;
+    }
+    .home-col-slider .flickity-button {
+    color: var(--main-color);
+    background: var(--secondary-color);
+    } 
+}
+</style>
+
+
+{% schema %}
+{
+    "name":"Home: collection cards",
+    "settings":[
+        {
+            "id":"title",
+            "type":"text",
+            "label":"Title",
+            "default":"Lorem impsum"
+        },
+        {
+            "id":"subtitle",
+            "type":"text",
+            "label":"Subtitle",
+            "default":"Lorem impsum"
+        }
+    ],
+    "blocks":[
+        {
+            "name":"Collection",
+            "type":"collection",
+            "settings":[
+                {
+                    "id":"col",
+                    "label":"Collection",
+                    "type":"collection"
+                },
+                {
+                    "id":"img",
+                    "type":"image_picker",
+                    "label":"Image (optional)"
+                },
+                {
+                    "id":"desc",
+                    "type":"textarea",
+                    "label":"Description (optional)"
+                }
+
+            ]
+        }
+    ],
+    "presets":[
+        {
+            "category":"Home",
+            "name":"Home: collection cards"
+        }
+    ]
+}
+{% endschema %}

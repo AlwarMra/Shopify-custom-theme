@@ -1,0 +1,43 @@
+<div class="blog blog-background">
+  <div class="blog-container">
+    {% section 'blog-header' %}
+    {%- for article in blog.articles -%}
+    {%- if forloop.first -%}
+
+    <div class="blog-hero-wrapper">
+      <div class="blog-hero" style=" width: 100%; background-image: url('{{ article.image | img_url: 'x900' }}')">
+      </div>
+      <div class="blog-hero-info">
+        <div class="article-info">
+          <a class="article-tag" href="{{ blog.url }}/tagged/{{ article.tags.first | handle }}">
+            <p class="article-date">{{ article.tags.first }}</p>
+          </a>
+          <h2 class="section-title"><a href="{{ article.url }}">{{ article.title }}</a></h2>
+          <div class="article-excerpt">
+            {% if article.excerpt.size > 0 %}
+            {{ article.excerpt }}
+            {% else %}
+            <p>{{ article.content | strip_html | truncatewords: 100 }}</p>
+            {% endif %}
+          </div>
+          <a href="{{ article.url }}" class="read-more">{{ 'blog.leer_mas' | t | capitalize}}</a>
+        </div>
+      </div>
+      <div class="hero-hide-info">
+        <p class="hero-tag">{{ article.tags.first }}</p>
+        <a class="hero-title" href="{{ article.url }}"> {{ article.title  }} </a>
+        <a href="{{ article.url }}" class="button button-account">{{ 'blog.leer_mas' | t | upcase }}</a>
+      </div>
+    </div>
+
+    {%- endif -%}
+    {%- endfor -%}
+
+    <div class="blog-flex">
+      {% section 'blog-template' %}
+      {% section 'side-blog' %}
+    </div>
+
+
+  </div>
+</div>

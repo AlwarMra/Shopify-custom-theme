@@ -1,0 +1,101 @@
+<section class="trustinfo-section lazyload" data-bg="{{ section.settings.back_img | img_url: 'x1200' }}">
+  <h2 class="section-title" style="padding: 2rem 0;">{{ section.settings.title }}</h2>
+
+  <div class="trust-container">
+  {% for block in section.blocks %}
+    <div class="trust-row">
+    <img class="lazyload" data-src="{{ block.settings.trust_img | img_url:'x200' }}" width="70" height="70">
+      <p>{{ block.settings.trust_text }}</p>
+    </div>
+  {% endfor %}
+  </div>
+</section>
+
+
+<style>
+  .trustinfo-section {
+    {% if section.settings.back_img %}
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+      {% else %}
+      background: #fff8f5;
+      {% endif %}
+  }
+  .trust-container {
+  	max-width: 1200px;
+    margin: 0 auto;
+  }
+  .trust-row {
+  	display: flex;
+    align-items: center;
+    margin: 1rem;
+  }
+  .trust-row img {
+  	width: 150px;
+    height: 150px;
+  }
+   .trust-row p {
+	font-size: 1.3rem;
+   } 
+  @media(min-width: 764px){
+  .trust-container {
+    display: flex;
+    justify-content: space-between;
+        flex-wrap:wrap;
+  }
+    .trust-row {
+    width: 45%;
+    }
+  }
+  @media(min-width: 1024px){
+    .trust-row {
+    width: 30%;
+    }
+  }
+</style>
+
+{% schema %}
+  {
+    "name": "Trust info",
+    "settings": [
+            {
+                "type": "text",
+                "id": "title",
+                "label": "Title",
+                "default": "La excelencia a tu alcance"
+            },
+      {
+      "type":"image_picker",
+      "id":"back_img",
+      "label":"Background image"
+      }
+],
+	"blocks": [
+	
+	{
+	"type":"Image",
+	"name":"Trust",
+	"settings": [
+		{
+			"id":"trust_img",
+			"label":"Image",
+			"type":"image_picker"
+		},
+		{
+			"type":"text",
+			"label":"Text",
+			"id":"trust_text"
+		}
+	]
+	}
+
+	],
+        "presets": [
+        {
+            "category":"Home",
+            "name": "Trust info"
+         }
+        ]
+  }
+{% endschema %}

@@ -1,0 +1,286 @@
+<section class="home-top">
+    <div class="container">
+            <header>
+                <div class="section-title-wrapper">
+                    <h1 class="section-title">
+                        <span class="divain-name">DIVAIN. </span>
+                        <span class="after-logo">
+                            {{ section.settings.frase_principal }} 
+                        </span>
+                    </h1>
+                    <p class="current-price"> 
+                    {% assign separador = ',' %}
+                        {% if section.settings.separador == 'punto' %}
+                            {% assign separador = '.' %}
+                        {% endif %}
+                    {% assign price_parts = section.settings.precio | split: separador %} 
+                        <span class="euro">{% if section.settings.posicion_moneda == 'antes' %}{{ section.settings.simbolo_moneda }}{% endif %}{{ price_parts[0] }}{{ separador}}</span><span class="cents">{{ price_parts[1] }}{% if section.settings.posicion_moneda == 'despues' %}{{ section.settings.simbolo_moneda }}{% endif %}</span>
+                    </p>
+                </div>
+                {% if section.settings.frase_secundaria != ''  %}
+                <p class="subheading">{{ section.settings.frase_secundaria }}</p>
+                {% endif %}
+            </header>
+
+
+            <div class="home-collection-cards"> 
+
+            {% if  section.settings.col_1 %}
+            {% assign my_collection = collections[ section.settings.col_1 ]%}
+                <div class="home-top-card odd">
+                    <div class="home-top-image">
+                        <div class="border_01"></div>
+                        <div class="border_02"></div>
+                        {% assign col_url = my_collection.url %}
+                        {% if section.settings.col_1_link %}{% assign col_url = section.settings.col_1_link %}{% endif %}
+                        {% assign img_col = my_collection.image.src | image_url %}
+                        {% if section.settings.img_col_1 %}
+                        {% assign img_col = section.settings.img_col_1.src  | image_url %}
+                        {% endif %} 
+                        <a href="{{ col_url }}" class="border_image" style="background-image: url('{{img_col}}')"></a> 
+                    </div>
+                    {% assign col_title = my_collection.title  %}
+                    {% if section.settings.col_1_title != ''  %}
+                    {% assign col_title = section.settings.col_1_title %}
+                    {% endif %}
+                    <h2 class="collection-title">{{ col_title }}</h2> 
+                    {% assign btn_text = section.settings.col_1_btn_text  %} 
+                    <a class="button home-collection-link" href="{{ col_url }}">{{ btn_text }}</a>
+                </div>
+            {% endif %}
+
+            {% if  section.settings.col_2 %}
+            {% assign my_collection = collections[ section.settings.col_2 ] %}
+                <div class="home-top-card even">
+                    <div class="home-top-image">
+                        <div class="border_01"></div>
+                        <div class="border_02"></div>
+                        {% assign col_url = my_collection.url %}
+                        {% if section.settings.col_2_link %}{% assign col_url = section.settings.col_2_link %}{% endif %}
+                        {% assign img_col = my_collection.image.src | image_url %}
+                        {% if section.settings.img_col_2 %}
+                        {% assign img_col = section.settings.img_col_2 | image_url %}
+                        {% endif %} 
+                        <a href="{{ col_url }}" class="border_image" style="background-image: url('{{img_col}}')"></a> 
+                    </div>
+                    {% assign col_title = my_collection.title  %}
+                    {% if section.settings.col_2_title != ''  %}
+                    {% assign col_title = section.settings.col_2_title %}
+                    {% endif %}
+                    <h2 class="collection-title">{{ col_title }}</h2> 
+                    {% assign btn_text = section.settings.col_2_btn_text  %} 
+                    <a class="button home-collection-link" href="{{ col_url }}">{{ btn_text }}</a>
+                </div>
+            {% endif %}
+
+            {% if  section.settings.col_3 %}
+            {% assign my_collection = collections[ section.settings.col_3 ]%}
+                <div class="home-top-card odd">
+                    <div class="home-top-image">
+                        <div class="border_01"></div>
+                        <div class="border_02"></div>
+                        {% assign col_url = my_collection.url %}
+                        {% if section.settings.col_3_link %}{% assign col_url = section.settings.col_3_link %}{% endif %}
+                        {% assign img_col = my_collection.image.src | image_url %}
+                        {% if section.settings.img_col_3 %}
+                        {% assign img_col = section.settings.img_col_3  | image_url %}
+                        {% endif %} 
+                        <a href="{{ col_url }}" class="border_image" style="background-image: url('{{img_col}}')"></a> 
+                    </div>
+                    {% assign col_title = my_collection.title  %}
+                    {% if section.settings.col_3_title != ''  %}
+                    {% assign col_title = section.settings.col_3_title %}
+                    {% endif %}
+                    <h2 class="collection-title">{{ col_title }}</h2> 
+                    {% assign btn_text = section.settings.col_3_btn_text  %} 
+                    <a class="button home-collection-link" href="{{ col_url }}">{{ btn_text }}</a>
+                </div>
+            {% endif %} 
+            </div>
+    </div>
+</section>
+
+
+{% schema %}
+{
+  "name": "Home top collections", 
+  "settings": [ 
+        {
+        "type": "text",
+        "id": "frase_principal",
+        "label": "Frase principal",
+        "default": "Tus perfumes de equivalencia por "
+        },
+        {
+        "type": "text",
+        "id": "precio",
+        "label": "Precio (con decimales)",
+        "default": "17,95",
+        "info":"usar coma como separador"
+        },
+        {
+            "type":      "select",
+            "id":        "separador",
+            "label":     "Separador",
+            "options": [
+                { 
+                "value": "coma",
+                "label": "Coma"
+                },
+                { 
+                "value": "punto",
+                "label": "Punto"
+                }
+            ],
+            "default":   "coma"
+            },
+            {
+            "type": "text",
+            "id": "simbolo_moneda",
+            "label": "Símbolo moneda",
+            "default": "€" 
+            }, 
+            {
+            "type":      "select",
+            "id":        "posicion_moneda",
+            "label":     "Posición símbolo moneda",
+            "options": [
+                { 
+                "value": "antes",
+                "label": "Antes del precio"
+                },
+                { 
+                "value": "despues",
+                "label": "Después del precio"
+                }
+            ],
+            "default":   "despues"
+            }
+            ,
+             {
+                "type": "text",
+                "id": "frase_secundaria",
+                "label": "Frase secundaria",
+                "default": "Descubre cerca de 500 fragancias de alta calidad"
+             },
+            {
+            "type":      "select",
+            "id":        "mostrar_valoracion",
+            "label":     "Mostrar valoración",
+            "options": [
+                { 
+                "value": "true",
+                "label": "Sí"
+                },
+                { 
+                "value": "false",
+                "label": "No"
+                }
+             ]
+            },
+ 
+            {
+            "type": "header",
+            "content": "Colecciones"
+            },
+ 
+            {
+            "type":      "collection",
+            "id":        "col_1",
+            "label":     "Colección 1" 
+            },
+             {
+            "type": "image_picker",
+            "id": "img_col_1",
+            "label": "Imagen de la colección 1"
+            },
+            {
+            "type": "text",
+            "id": "col_1_title",
+            "label": "Título colección alternativo",
+            "info": "Dejar en blanco para título colección"
+             },
+            {
+            "type": "text",
+            "id": "col_1_btn_text",
+            "label": "Texto botón",
+            "default": "ELIGE TU PERFUME"
+            },
+            {
+            "id": "col_1_link",
+            "type": "url",
+            "label": "Enlace del botón",
+            "info": "Dejar en blanco para link a colección"
+            }
+            ,
+            {
+            "type":      "collection",
+            "id":        "col_2",
+            "label":     "Colección 2" 
+            },
+             {
+            "type": "image_picker",
+            "id": "img_col_2",
+            "label": "Imagen de la colección 2"
+            },
+            {
+            "type": "text",
+            "id": "col_2_title",
+            "label": "Título colección 2 alternativo",
+            "info": "Dejar en blanco para título colección"
+             },
+            {
+            "type": "text",
+            "id": "col_2_btn_text",
+            "label": "Texto botón",
+            "default": "ELIGE TU PERFUME"
+            },
+            {
+            "id": "col_2_link",
+            "type": "url",
+            "label": "Enlace del botón",
+            "info": "Dejar en blanco para link a colección"
+            },
+
+
+
+             {
+            "type":      "collection",
+            "id":        "col_3",
+            "label":     "Colección 3" 
+            },
+             {
+            "type": "image_picker",
+            "id": "img_col_3",
+            "label": "Imagen de la colección 3"
+            },
+            {
+            "type": "text",
+            "id": "col_3_title",
+            "label": "Título colección 3 alternativo",
+            "info": "Dejar en blanco para título colección"
+             },
+            {
+            "type": "text",
+            "id": "col_3_btn_text",
+            "label": "Texto botón",
+            "default": "ELIGE TU PERFUME"
+            },
+            {
+            "id": "col_3_link",
+            "type": "url",
+            "label": "Enlace del botón",
+            "info": "Dejar en blanco para link a colección"
+            }
+
+             
+
+   ],
+   "presets": [
+   {
+       "category":"Home",
+       "name": "Selector categorías principal"
+    }
+   ]
+}
+{% endschema %}

@@ -1,0 +1,87 @@
+<div class="search-top-bar">
+
+    <div class="collection-welcoming search"> 
+      <div class="collection-page-title">
+          <p>{{ 'general.encuentra_tu_perfume_divain' | t | upcase }}</p> 
+          
+          <form action="/search" method="get" role="search" class="searcher-bar">
+            <input type="hidden" name="type" value="product">
+            <input type="search" name="q" value="{{ search.terms | escape }}" placeholder="{{ 'general.busca_tu_perfume_o_marca' | t }}">
+          <button type="submit">{% include 'icon' with 'searcher' %}</button>
+          </form>  
+      </div>
+    </div>
+    
+  </div>
+  
+  
+  <div class="collection-layout">
+    <div class="collection-grid" style="display: block;">  
+      <section class="collection-cards"  id="Collection__Products">
+    
+        {% for prod in search.results limit: 100 %}
+          {% if prod.object_type  == 'product' %}
+            {% unless prod.variants[0].price == 0 %}
+              {% include 'collection-card' with prod %} 
+            {% endunless %}
+          {% endif %}
+        {% endfor %}    
+      </section> 
+    </div>
+  </div>
+  </div>
+  
+  
+   
+  {{ 'filtros.min.js' | asset_url | script_tag }}
+  <script>
+    window.bg_collection = false
+  
+    window.collection = "search"
+    window.money_format = "{{ shop.money_format }}";
+    window.collection_sortby =  "best-selling"  ;
+    window.selected_tags = [];
+    window.collection_products = [];
+     
+    window.page_size = 50; 
+    window.mobile_items_per_row = 0;
+    window.tablet_items_per_row = 2; 
+    window.product_show_secondary_image = true;
+    window.show_unavailable_products = true;
+    window.send_unavailable_to_bottom = true; 
+    
+    window.n_prod = {{ search.results_count }}; // {% paginate search.results by 1000  %}{{ search.results.size }}{% assign sp_paginate_by = paginate.page_size %}{% endpaginate %};
+    
+    window.buy_button_text =  "{{ 'botones.anadelo_por' | t | upcase }}" ;
+    window.similar_a = "{{ 'general.Similar_a' | t | capitalize}}"; 
+    window.de = "{{ 'general.de' | t | capitalize}}";
+   
+   
+    window.no_products_text = '{{  section.settings.text_no_products   }} | {{  section.settings.text_no_products_sub   }}'
+    window.image_no_results = false
+        
+    function escapeRegExp(string) {
+      return string.replace(/[.*+\-?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
+    }
+    function replaceAll(str, find, replace) {
+      return str.replace(new RegExp(escapeRegExp(find), 'g'), replace);
+    }
+    ///LOAD PRODUCTOS   
+      const queryString = window.location.search;
+  
+      const after = queryString.substring(queryString.lastIndexOf('&q=')+1)
+      var url = ' https://' + location.hostname + '/search?type=product&' + after + '&view=ajax';
+      console.log('url', url);
+  
+       fetch(url, {
+         credentials: 'same-origin',
+         method: 'GET'
+       }).then(function (response) {
+         response.text().then(function (content) {
+        var content_filtered = replaceAll(content, ',]', ']')
+        window.collection_products = JSON.parse(content_filtered)
+        DT.colFilter.init(window.collection_products); 
+         });
+       });
+  </script>  
+  

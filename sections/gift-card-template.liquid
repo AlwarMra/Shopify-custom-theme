@@ -1,0 +1,205 @@
+{{ 'product-template.css' | asset_url | stylesheet_tag }}
+{% include 'product-tags' | prod: product %} 
+{%- if pack -%}
+{%- capture marca_str -%} {{ 'product.muestras' | t }} {%- endcapture -%}
+{%- assign marca = marca_str -%}
+{%- assign marca_col = pack_col -%}
+{%- else -%}
+{%- capture marca_handle -%} {{ marca | handle }} {%- endcapture -%}
+{%- assign marca_col = marca_handle -%}
+{%- endif -%}
+{%- liquid
+
+  assign free = false
+  assign freeId = false
+  for variant in product.variants
+  if variant.price == 0 and variant.inventory_policy == 'continue'
+  assign freeId = variant.id
+  assign free = true 
+  endif 
+  endfor
+%}
+<section id="product-template">
+  <div class="container page-width product-page">
+    <div class="product-grid">
+          <div class="product-title">
+            <h1>{{ product.title }}</h1>
+          </div>
+
+        <div class="product-image-container">
+        
+            <div class="main-product-carousel">
+                {% for image in product.images %}
+                {% if forloop.first %}
+                {%- assign img_url = image | img_url: '1x1' | replace: '_1x1.', '_600x.' -%}
+              <img src="{{ img_url }}" alt="{{ image.alt }}">
+              {% else %}
+                <img data-flickity-lazyload-srcset="
+                {% if image.width >= 165 %}{{ image | img_url: '165x' }} 165w,{% endif %}
+                {% if image.width >= 360 %}{{ image | img_url: '360x' }} 360w,{% endif %}
+                {% if image.width >= 520 %}{{ image | img_url: '520x' }} 520w,{% endif %}
+                {% if image.width >= 720 %}{{ image | img_url: '720x' }} 720w{% endif %}"     
+                data-flickity-lazyload-src="{{ image | img_url: '500x' }}"
+                alt="{{ image.alt }}"
+                class="carousel-cell-image">
+              {% endif %}  
+              {% endfor %}
+            </div>
+            <div class="product-images">
+                <div class="aspect-ratio-box">
+                  <img id="main-img" src="{{ product.featured_image | img_url: '600x' }}" {{ image.alt }}>
+                </div>
+                <div class="product-thumbnails">
+                  {% for image in product.images %}
+                  <div class="aspect-ratio-box">
+                    <img 
+                    src="{{ image | img_url: '360x' }}" 
+                    alt="{{ image.alt }}" 
+                    {% if forloop.first %}class="active"{% endif %}>
+                  </div>
+                  {% endfor %}
+                </div>
+            </div>
+            
+        </div>
+
+
+
+
+        <div class="product-content">
+          <div class="variant-btns mb-1">
+            {% for variant in product.variants %}
+            {% unless variant.price == 0 %}
+            <div data-id="{{ variant.id }}" 
+            data-compared="{{ variant.compare_at_price }}"
+            {% if forloop.first %}
+            class="variant-btn variant-selected"
+            {% if free %}data-free="{{ free }}"{% endif %}
+            {% else %}
+            class="variant-btn" data-free="false"
+            {% endif %}>
+            
+              {{ variant.title }}
+            </div>
+            {% endunless %}
+            {% endfor %}
+          </div>
+
+          <div class="price mb-1">
+            {% for variant in product.variants %}
+            {% unless variant.price == 0 %}
+            {%- if variant.compare_at_price > variant.price -%}
+            <p class="product-price" data-id="{{ variant.id }}" {% unless forloop.first %} style="display: none;" {% endunless %}>
+              <span>{{ variant.price |  money | strip_html }}</span>
+              <span class="crossed-price">{{ variant.compare_at_price | money | strip_html }}</span>
+            </p>
+            {% else %}
+            <p class="product-price" data-id="{{ variant.id }}" {% unless forloop.first %} style="display: none;" {% endunless %}>
+              <span>{{ variant.price | money | strip_html }}</span>
+            </p>
+            {% endif %}
+            {% endunless %}
+            {% endfor %}
+          </div>
+
+          <div class="buy-btn mb-1">
+            {% form 'product', product, class: "price-and-add general-product-form" %}
+
+              <input id="variant" type="text" style="display: none;" data-q="1" data-compared="{{  product.variants[0].compare_at_price }}" value="{{  product.variants[0].id }}" data-free="{{ free }}" data-free-id="{{ freeId }}">
+
+
+              <button class="button button-add-p">{{ 'botones.add_to_cart' | t | upcase }}</button>
+              <a href="javascript:;" id="add_to_cart" class="button-buy read-more">{{ 'botones.comprar_ahora' | t | capitalize }}</a>
+
+              <div id="product-wishlist">
+                <div class="love-container love-product" data-handle="{{ product.handle }}">
+                    <span class="love-icon">
+                        {% render 'icon' with 'love' %}
+                    </span>
+                    <span class="love-text">{{ 'wishlist.wishlist_out' | t }}</span>
+                </div>
+            </div>
+            {% endform %}
+            </div>
+
+          <div class="prod-desc mb-1">
+            {{ product.description }}
+          </div>
+
+          <div class="prod-share mb-1">
+          <div class="share-btn btn-facebook">
+              <a target="_blank" href="https://www.facebook.com/sharer.php?u={{ product.url }}"><span class="icon"> {% render 'icon' with 'facebook' %}</span></a>
+          </div>
+          <div class="share-btn btn-pinterest">
+              <a target="_blank" href="https://pinterest.com/pin/create/button/?url={{ product.url }}&media={{ product.featured_image | img_url: 'medium' }}&description={{ product.description | truncate: 150, '' | strip_html }}"><span class="icon"> {% render 'icon' with 'pinterest' %}</span></a>
+          </div>
+          <div class="share-btn btn-email">
+              <a target="_blank" href="mailto:?subject={{ product.title }}&body={{ product.description | truncate: 150, '' | strip_html }} {{ product.url }}"><span class="icon"> {% render 'icon' with 'email' %}</span></a>
+          </div>
+          </div>
+          <div id="sticky-cart">
+            <div class="sticky-cart-content">
+              <div>
+              {% for variant in product.variants %}
+              {% unless variant.price == 0 %}
+            {%- if variant.compare_at_price > variant.price -%}
+            <p class="product-price" data-id="{{ variant.id }}" {% unless forloop.first %} style="display: none;" {% endunless %}>
+              <span>{{ variant.price |  money | strip_html }}</span>
+              <span class="crossed-price">{{ variant.compare_at_price | money | strip_html }}</span>
+            </p>
+            {% else %}
+            <p class="product-price" data-id="{{ variant.id }}" {% unless forloop.first %} style="display: none;" {% endunless %}>
+              <span>{{ variant.price | money | strip_html }}</span>
+            </p>
+            {% endif %}
+            {% endunless %}
+            {% endfor %}
+          </div>
+          <div>
+            {% if product.variants[0].inventory_quantity > 0 or product.variants[0].inventory_policy == 'continue' %}
+            <button class="button button-add-p">{{ 'botones.add_to_cart' | t | upcase }}</button>
+            {% else %}
+            <button  class="button button-out ">{{ 'botones.agotado' | t | upcase }}</button>
+            {% endif %}
+          </div>
+          </div>
+          </div>
+        </div>
+
+    </div>
+  </div>
+</section>
+<script>
+
+  {% assign current_variant = product.selected_or_first_available_variant %}
+  {% assign cat = '' %}
+  {% for tag in product.tags %}
+  {% if tag contains 'categoria' %}
+  {% assign tag = tag | split: 'categoria:' %}
+  {% assign cat = tag[1] %}
+  {% endif %}
+  {% endfor %}
+
+
+  dataLayer.push({
+      'event': 'detail',
+      'ecommerce': {
+          'detail': {
+              'products': [{
+                  'name': "{{ product.title }}",
+                  'id': '{{ product.variants[0].sku }}',
+                  'price': {{ product.price }},
+          'brand': '{{ marca }}',
+          'category': '{{ cat }}',
+      }]
+  }
+      }
+   });
+</script>
+{% schema %}
+{
+  "name": "Producto",
+  "settings": [
+  ]
+}
+{% endschema %}

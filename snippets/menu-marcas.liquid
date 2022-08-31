@@ -1,0 +1,39 @@
+<div class="mega-menu desktop-menu">
+  <div class="mega-submenu">
+    <div class="megamenu-column">
+        <ul class="marcas-list-menu">
+          {% assign n_links = 0 %}
+          {% assign letras_in = '' %}  
+          {% assign marcas = linklists[menu_marcas]  %}
+          {% assign sortedLinks = marcas.links | sort: 'title' %}
+          {% for sub_link in sortedLinks %}  
+            {% assign inicial = sub_link.title | split: '' | first %} 
+            {% if letras_in contains inicial %}  
+            <li class="">
+              <a href="{{ sub_link.url }}" class="">{{ sub_link.title | escape }}</a>
+            </li>
+            {% assign n_links = n_links | plus: 1 %}
+            {% else %}
+            <li class="initial">{{ inicial }}</li>
+            <li class="">
+              <a href="{{ sub_link.url }}" class="">{{ sub_link.title | escape }}</a>
+            </li>
+            {% assign n_links = n_links | plus: 2 %}
+            {% assign letras_in = letras_in | append: inicial %} 
+            {% endif %}
+            {% if n_links >= 23 %}
+        </ul>
+    </div>
+    
+  <div class="megamenu-column">
+    <ul class="marcas-list-menu">
+      {% assign n_links = 0 %}
+      {% endif %}
+      {% endfor %}
+    </ul>
+  </div>
+
+  </div>
+
+
+</div>

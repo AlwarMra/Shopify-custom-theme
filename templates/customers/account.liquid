@@ -1,0 +1,81 @@
+<div class="account">
+
+<div class="account-container">
+
+  <header class="">
+    <a href="/account/logout" class="section-title title-logout">{{ 'customers.logout' | t }}</a>
+
+    <div class="my-account-header">
+      <h1 class="section-title">{{  'customers.mi_cuenta' | t | upcase }}</h1> 
+      <p class="account-text">{{ 'customers.bienvenido' | t }}, {{ customer.first_name }}</p>
+      <a style="width: auto; display: inline-block;"  href="/account?view=edit" class="button button-register">{{ 'customers.edit_mis_datos' | t | upcase }}</a> 
+    </div>
+  </header>
+
+        {%- comment -%}
+        --------------------------------------------------------------------------------------------------------------------
+        ORDER HISTORY
+        --------------------------------------------------------------------------------------------------------------------
+        {%- endcomment -%}
+    <div class="account-flex" style="margin-top: 4rem;">
+        <div class="account-orders-flex">
+            {%- if customer.orders.size == 0 -%}
+                <h2 class="account-title" style="margin-top:0;">{{ 'customers.mis_pedidos' | t | upcase }}</h2>
+                    <p class="account-text">{{ 'customers.no_tienes_pedidos' | t }}</p>
+            {%- else -%}
+                {%- paginate customer.orders by 25 -%}
+                    <table class="orders-table">
+                        <thead class="orders-table-header">
+                            <tr>
+                            <th class="account-title">{{ 'customers.pedido' | t | upcase }}</th>
+                            <th class="account-title">{{ 'customers.fecha' | t | upcase }}</th>
+                            <th class="account-title">{{ 'customers.estado_pago' | t | upcase }}</th>
+                            <th class="account-title">{{ 'customers.estado_entrega' | t | upcase }}</th>
+                            <th class="account-title">{{ 'customers.total' | t | upcase }}</th>
+                            </tr>
+                        </thead>
+                        <tbody class="orders-table-body">
+                            {%- for order in customer.orders -%}
+                            <tr>
+                                <td class="account-text"><a href="{{ order.customer_url }}" class="read-more">{{ order.name }}</a></td>
+                                <td class="account-text">{{ order.created_at | date: '%B %e, %Y ' }}</td>
+                                <td class="account-text">{{ order.financial_status_label }}</td>
+                                <td class="account-text">{{ order.fulfillment_status_label }}</td>
+                                <td class="account-text">{{ order.total_price | money_without_trailing_zeros }}</td>
+                            </tr>
+                            {%- endfor -%}
+                        </tbody>
+                    </table>
+                {%- include 'pagination' -%}
+                {%- endpaginate -%}
+            {%- endif -%}
+        </div>
+
+        {%- comment -%}
+        --------------------------------------------------------------------------------------------------------------------
+        ADDRESS
+        --------------------------------------------------------------------------------------------------------------------
+        {%- endcomment -%}
+
+        <div class="account-addresses-flex">
+                {%- if customer.addresses_count == 0 -%}
+                <h2 class="account-title">{{ 'customers.sin_direcciones' | t | upcase }}</h2>
+
+                    <p class="account-text">{{ 'customers.no_hay_direcciones_guardadas' | t  }}</p> 
+
+                    <div class="">
+                    <a href="/account/addresses" class="button button-register">{{ 'customers.gestionar_direcciones' | t | upcase }}</a>
+                </div>
+                {%- else -%}
+                <h2 class="account-title">{{ 'customers.direcciones' | t | upcase }}</h2>
+
+                    {{ customer.default_address | format_address | replace: '<p>', '<p class="account-text"><span>' | replace_first: '<br>', '</span><br>' }}
+                    <div class="">
+                        <a href="/account/addresses" class="button button-register">{{ 'customers.gestionar_direcciones' | t | upcase }}</a>
+                    </div>
+                {%- endif -%}
+        </div>
+    </div>
+
+</div>
+</div>

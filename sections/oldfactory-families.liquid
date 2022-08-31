@@ -1,0 +1,70 @@
+
+<div class="collection-list bubble-background-2">
+
+        <div class="home-collection-cards">
+            {% for block in section.blocks %}
+            {% assign my_collection = collections[block.settings.col] %}
+        {% assign col_url = my_collection.url %}
+        {% assign col_title = my_collection.title %}
+        {% assign col_description = my_collection.description %}
+        {% assign col_img = my_collection.image.src | image_url %}
+        {% if block.settings.img %}
+        {% assign col_img = block.settings.img.src | image_url %}
+        {% endif %}
+        <div class="collection-card">
+            <div class="collection-img">
+                <a href="{{col_url}}" style="background-image: url('{{ col_img }}'); top: 0; left: 0;" alt="{{col_title}}"></a>
+            </div>
+            {% if block.settings.collection_title != blank %}
+            {% assign col_title = block.settings.collection_title %}
+            {% endif %}
+            <a class="button home-collection-link" style="min-height: 60px; line-height: 2.2;" href="{{ col_url }}">{{ col_title | upcase }}</a>
+
+            {% if block.settings.collection_description != blank %}
+            {% assign col_description = block.settings.collection_description %}
+            <div class="collection-description"><p>{{ col_description }}</p></div>
+            {% else %}
+            <div class="collection-description">{{ col_description }}</div>
+            {% endif %}
+        </div> 
+        {%endfor%}
+    </div>
+</div>
+
+
+{% schema %}
+{
+    "name":"Familias olfativas",
+    "settings": [
+    
+    ],
+    "blocks": [
+    {
+      "type": "collection",
+      "name": "Colección",
+      "settings": [
+        {
+          "type":"collection",
+          "id":"col",
+          "label":"Colección"
+        },
+        {
+          "type":"image_picker",
+          "id":"img",
+          "label":"Imagen (optional)"
+        }, 
+        {
+            "type":"text",
+            "id":"collection_title",
+            "label":"Collection title (optional)"
+        },
+        {
+            "type":"textarea",
+            "id":"collection_description",
+            "label":"Collection description (optional)"  
+        }         
+      ]
+    }
+  ]
+}
+{% endschema %}

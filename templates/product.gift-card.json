@@ -1,0 +1,26 @@
+{
+    "sections":{ 
+        "main":{
+            "type":"gift-card-template"
+        },
+        "product-rate": {
+            "type":"product-rating-and-reviews" 
+        },
+        "product-brothers": {
+            "type":"product-brothers"
+        },
+        "product-banner": {
+            "type":"product-banner"
+        },
+        "product-bottom": {
+            "type":"product-bottom"
+        }
+    },
+    "order": [
+        "main",
+        "product-rate",
+        "product-brothers",
+        "product-banner",
+        "product-bottom"
+    ]
+}

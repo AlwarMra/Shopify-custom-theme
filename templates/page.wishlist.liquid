@@ -1,0 +1,95 @@
+{% section 'wishlist-top-background' %}
+<div class="page" style="background: #FFF2D0; padding: 2.5rem 0;">
+    <div class="loading-wish" style="display: none;">
+        <p>Loading...</p>
+        {% include 'loading' %}
+    </div>
+    <div class="add-all-container" style="display: none;">
+        <div class="paramsContainer">
+            <div>
+                <input readonly="readonly" type="text" id="paramsUrl">
+                <button id="copy" class="button">{{ 'wishlist.copiar' | t | upcase }}</button>
+                <div class="share-wishlist" style="position:relative; top: 9px;margin-bottom:1rem;">
+
+                    <span style="display:none;" id="share-mb" class="icon">{% include 'icon' with 'share' %}</span>
+
+                    <a style="display:none;" id="share-whatsapp" class="share-button item-whatsapp" href=""
+                        data-action="share/whatsapp/share" target="_blank" rel="noopener">{%- include 'icon' with
+                        'whatsapp' -%}</a>
+
+                    {% comment %}
+                    {% endcomment %}
+                    <a style="display:none;" id="share-mail" class="share-button item-mail" href="" rel="noopener">{%-
+                        include 'icon' with 'gmail' -%}</a>
+
+                    <a style="display:none;" id="share-facebook" class="share-button item-facebook" href=""
+                        target="_blank" rel="noopener">{%-
+                        include 'icon' with 'facebook' -%}</a>
+                </div>
+            </div>
+            <div>
+                <span>{{ 'wishlist.add_all_message' | t }}</span>
+                <button id="add_all" class="button">
+                    {{ 'wishlist.add_all' | t | upcase }}
+                </button>
+            </div>
+        </div>
+
+    </div>
+    <div class="best-sellers-cards collection-cards" id="wishlist-page">
+        <script type="text/template" id="wishlist_template">
+
+            <div class="card" data-categoria="<%= categoria %>">
+                <a class="linkable-card" href="<%= url %>">
+                    <div class="card-img aspect-ratio-box">
+                        <img class="lazyload" data-src="<%= image %>">
+                        <img class="lazyload hidden-img" data-src="<%= image_2 %>">
+                            <%= oferta %>
+                            <div class="love-container" data-compared="<%= compare_at_price %>" data-id="<%= id %>" data-handle="<%= handle %>" data-free="<% if  (free) { %><%=free%><% } else { %>false<%  }%>">
+                                <span class="love-icon">
+                                    {% include 'icon' with 'love' %}
+                                </span> 
+                            </div>
+                    </div>
+
+                    <div class="card-whole-text">  
+                        <div class="card-rating">
+                            
+                        </div>       
+                        <h3 class="card-title">
+                            <p><span class="card-title-top"><%= title %> - <%= similar %></span><br>
+                                <span class="product-name"><%= name %> <%= of %> <%= marca %></span>
+                            </p>
+                        </h3>  
+            
+                        <% if  (available) { %>
+                        <button id="add_to_cart-<%= id %>-card" class="button button-add"
+                                data-compared="<%= compare_at_price %>"
+                                data-variant="<%= id %>" data-free="<% if  (free) { %><%=free%><% } else { %>false<%  }%>">
+                                <span>{{'botones.anadelo_por' | t}}</span> <span class="crossed-price"><%= compare_price_format %></span>  <span class="offer-price"><%= price_format %></span></button>       
+            
+                                <% } else { %>
+                            <button style="background-color: #ffede6; font-weight: bold;" class="button button-add">{{'botones.agotado' | t | upcase }}</button>
+                            <%  } %>
+                    </div>
+                </a>
+            </div>
+    </script>
+    </div>
+</div>
+<style>
+    #copy::before {
+        position: absolute;
+        bottom: 108%;
+        content: '{{ 'wishlist.copiado' | t }}';
+        background: #000;
+        text-align: center;
+        color: white;
+        opacity: 0;
+        padding: .5rem;
+        left: 50%;
+        transform: translateX(-50%);
+        transition: all .3s ease-in-out;
+        border-radius: 4px;
+    }
+</style>

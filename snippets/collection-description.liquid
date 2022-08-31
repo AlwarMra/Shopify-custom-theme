@@ -1,0 +1,11 @@
+{% if collection.description != blank %}  
+{% assign coldescription = collection.description | split: '<div style="text-align: center;">===x===</div>' | first  %}
+{% assign desc = coldescription | split: '==TEXTO==' | first %}
+<div class="panel-wrapper">
+  <a href="#" class="show btn_show" id="btn_show_desc"><span id="btn_show_desc_text">{% render 'icon' with 'select-arrow' %}</span></a> 
+  <div class="panel description_panel">
+    {{desc}} 
+  </div> 
+  <div class="fade"></div> 
+</div>  
+{% endif %}

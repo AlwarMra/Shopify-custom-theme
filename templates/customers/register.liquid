@@ -1,0 +1,62 @@
+{%- assign TIENDA = shop.url | split: '.' | last | upcase  %}
+
+<section data-section-id="reset-password" data-section-type="reset-password">
+  <div class="account-page">
+    <form class="account-form create-customer" id="createCustomer" method="get">
+      <header class="">
+        <h1 class="section-title">{{ 'customers.crea_tu_cuenta_divain' | t  }}</h1> 
+        <p class="form-text">{{ 'customers.rellena_los_siguientes_datos' | t }}:</p>
+      </header>
+
+      {%- if form.errors -%}
+        <div class="Form__Alert Alert Alert--error">
+          <ul class="Alert__ErrorList">
+            {%- for field in form.errors -%}
+              {%- if field == 'form' -%}
+                <li class="Alert__ErrorItem">{{ form.errors.messages[field] }}</li>
+              {%- else -%}
+                <li class="Alert__ErrorItem"><strong>{{ form.errors.translated_fields[field] }}</strong> {{ form.errors.messages[field] }}</li>
+              {%- endif -%}
+            {%- endfor -%}
+          </ul>
+        </div>
+      {%- endif -%}
+      <input type="hidden" name="t" value="{{ TIENDA }}">
+      <div class="form-item">
+        <input type="text"    name="first_name" aria-label="{{ 'customers.nombre' | t }}" placeholder="{{ 'customers.nombre' | t }}" autofocus>
+      </div>
+      <div class="form-item">
+        <input type="text"   name="last_name" aria-label="{{ 'customers.apellido' | t }}" placeholder="{{ 'customers.apellido' | t }}">
+      </div>
+
+      <div class="form-item">
+        <input type="email"   name="email" aria-label="{{ 'customers.email' | t }}" placeholder="{{ 'customers.email' | t }}" required="required">
+      </div>
+
+      <div class="form-item">
+        <input type="password"   name="password" aria-label="{{ 'customers.contrasena' | t }}" placeholder="{{ 'customers.contrasena' | t }}" required="required">
+      </div>
+
+        <div class="form-item">
+          <label for="birthday"><p style="font-size: .75rem; text-align: left; margin-bottom: 5px;">{{ 'customers.cumple' | t }}</p>
+        	<input type="date" name="birthday" value="" required="required">
+            </label>
+        </div>
+                
+      <div class="form-item">      
+        <div class="select-country">         
+          <span class="select-icon">{% include 'icon' with 'select-arrow' %}</span>         
+          <p style="font-size: .75rem; text-align: left; margin-bottom: 5px;">{{ 'customers.preference' | t }}</p>
+          <select name="preference" title="">
+            <option value="hombre" selected="selected">{{ 'categorias.hombre' | t }}</option>
+            <option value="mujer">{{ 'categorias.mujer' | t }}</option>
+            <option value="unisex">{{ 'categorias.unisex' | t }}</option>
+          </select>  
+        </div> 
+      </div>  
+    
+    
+      <button type="submit" class="button button-account">{{ 'customers.crear_mi_cuenta' | t | upcase}}</button>
+    </form>
+</div>
+</section>

@@ -1,0 +1,326 @@
+{% assign align_class = section.settings.align_class %}
+
+<section class="home-top- home-top-background">
+    <div class="container">
+            <header>
+                {% if section.settings.frase_secundaria != ''  %}
+                <p class="subheading {{ align_class }}" style="color:{{ section.settings.color_frase_principal }}">{{ section.settings.frase_secundaria }}</p>
+                {% endif %}
+
+                <div class="section-title-wrapper">
+                    <h1 class="section-title {{ align_class }}"  style="color:{{ section.settings.color_frase_principal }}">  
+                            {{ section.settings.frase_principal }}  
+                      {% if section.settings.show_code %}
+                      <p class="home-promo-code"><span>{{ section.settings.code_text }} </span><span id="home-promo-code">{{ section.settings.code_promo_text }}</span></p>
+                      {% endif %}
+                    </h1> 
+                </div>
+            </header>
+
+{% assign my_collection = collections[ section.settings.col_1 ]%}
+            <div class="home-top-cards {{ align_class }}"> 
+                {% assign col_url = my_collection.url %}
+                        {% if section.settings.col_1_link %}{% assign col_url = section.settings.col_1_link %}{% endif %}
+                        {% assign img_col = my_collection.image.src | image_url %}
+                        {% if section.settings.img_col_1 %}
+                        {% assign img_col = section.settings.img_col_1.src  | image_url %}
+                        {% endif %} 
+                          {% assign col_title = my_collection.title  %}
+                        {% if section.settings.col_1_title != ''  %}
+                        {% assign col_title = section.settings.col_1_title %}
+                        {% endif %}
+           
+               <a href="{{ col_url }}" class="button"
+                  style="background:{{ section.settings.color_fondo_boton}} !important;
+                            color:{{ section.settings.color_texto_boton}} !important;"
+                  >{{ col_title }}</a>
+            
+            </div>
+    </div>
+</section>
+<style> 
+ 
+    .home-top-background{ 
+        background-image: url('{{ section.settings.img_fondo_video | image_url }}');  
+    }
+
+    #shopify-section-{{ section.id }} .home-top-cards{  
+        width:40%
+    }
+
+    #shopify-section-{{ section.id }} .trustpilot-widget{   
+        background: rgba(255,255,255,.5);
+        padding: 10px;
+        width: 50%;
+        margin: auto;
+        margin-top: 20px;
+    }
+    #shopify-section-{{ section.id }} .card-title{  
+        font-size: 25px;;
+    }
+
+	#shopify-section-{{ section.id }} .home-top-cards{  
+   		    width: 100%;
+         display: block;
+          padding-top: 5rem;
+    padding-bottom: 5rem;
+   
+    }
+	#shopify-section-{{ section.id }} .home-top-cards.to_left{  
+   		    width: 100%;
+         display: block; 
+    } 
+ 	#shopify-section-{{ section.id }} .home-top-cards .button{  
+   		   zoom:1.5; 
+    }
+
+  	#shopify-section-{{ section.id }} .home-top-cards.center{  
+   		    width: 100%;
+         display: block; 
+      	text-align:center;
+    }
+  
+ 	#shopify-section-{{ section.id }} .home-top-cards.to_right{  
+   		    width: 100%;
+         display: block; 
+      	text-align:right;
+    }
+  .home-promo-code {
+  	padding-top: 1rem;
+  }
+  .home-promo-code, .home-promo-code span {
+    font-size: {{ section.settings.code_font_size }}px;
+    color: {{ section.settings.code_color }} !important;
+  
+  }
+  #home-promo-code {
+   	position: relative;
+    display: inline-block;
+    padding: 1rem;
+    cursor:pointer;
+    color: {{ section.settings.code_promo_color }} !important;
+  	background: {{ section.settings.code_promo_back }};
+  }
+  
+  
+      #home-promo-code::before {
+        position: absolute;
+        top: 108%;
+        content: '{{ 'wishlist.copiado' | t }}';
+        background: #000;
+        text-align: center;
+        color: white;
+        opacity: 0;
+        padding: .5rem;
+        left: 50%;
+        transform: translateX(-50%);
+        transition: all .3s ease-in-out;
+        border-radius: 4px;
+        font-size: 15px;
+    }
+  #home-promo-code.copied:before {
+  opacity: .7;
+}
+  @media(max-width:768px) {
+
+   .home-top-background{ 
+      background-image: url('{{ section.settings.img_fondo_movil | image_url }}');  
+        }
+   
+    #shopify-section-{{ section.id }} .card-title{  
+      font-size: 18px;;
+    } 
+
+    #shopify-section-{{ section.id }} .trustpilot-widget{   
+      width: 100%; 
+    }
+
+
+  }
+
+</style>
+ 
+{% schema %}
+{
+  "name": "Home top (2 colecciones)", 
+  "settings": [ 
+		{
+			"type":"header",
+			"content":"Imágenes"
+		},
+        {
+        "type": "image_picker",
+        "id": "img_fondo_video",
+        "label": "Imagen fondo sección" 
+        },
+        {
+            "type": "image_picker",
+            "id": "img_fondo_movil",
+            "label": "Imagen fondo Móvil" 
+       },
+		{
+			"type":"header",
+			"content":"Textos"
+		},
+        {
+            "type":      "select",
+            "id":        "align_class",
+            "label":     "Alinear a",
+            "default":"center",
+            "options": [
+                { 
+                "value": "to_left",
+                "label": "Izquierda"
+                },
+                { 
+                "value": "to_right",
+                "label": "Derecha"
+                },
+                { 
+                "value": "center",
+                "label": "Centro"
+                }
+                ]
+            },
+        
+
+        {
+        "type": "text",
+        "id": "frase_secundaria",
+        "label": "Frase secundaria",
+        "default": "Descubre cerca de 500 fragancias de alta calidad"
+        }, 
+        {
+        "type": "text",
+        "id": "frase_principal",
+        "label": "Frase principal",
+        "default": "Tus perfumes de equivalencia por "
+        },
+        {
+        "type":      "color",
+        "id":        "color_frase_principal",
+        "label":     "Color rótulos",
+        "default":   "#050505" 
+        },
+ 		 {
+        "type":      "color",
+        "id":        "color_fondo_boton",
+        "label":     "Color botón",
+        "default":   "#000000" 
+        },
+ 		{
+        "type":      "color",
+        "id":        "color_texto_boton",
+        "label":     "Color texto botón",
+        "default":   "#ffffff" 
+        },
+		{
+			"type":"header",
+			"content":"Código"
+		},
+		{
+			"type":"checkbox",
+			"default":true,
+			"id":"show_code",
+			"label":"¿Mostrar?"
+		},
+		{
+			"type":"text",
+			"id":"code_text",
+			"label":"Texto código",
+			"default":"CÓDIGO"
+		},
+		{
+			"type":"text",
+			"id":"code_promo_text",
+			"label":"Código promoción",
+			"default":"SHINY2"
+        
+		},
+		{
+			"type":"range",
+			"unit":"px",
+			"min":16,
+			"max":45,
+			"default":30,
+			"id":"code_font_size",
+			"label":"Font size"
+		},
+		{
+			"type":"color",
+			"id":"code_color",
+			"default":"#fff",
+			"label":"Text color"
+		},
+		{
+			"type":"color",
+			"id":"code_promo_color",
+			"default":"#3C096D",
+			"label":"Code color"
+		},
+		{
+			"type":"color",
+			"id":"code_promo_back",
+			"default":"#fff",
+			"label":"Code background color"
+		},
+		{
+			"type":"header",
+			"content":"Valoraciones"
+		},
+        {
+        "type":      "select",
+        "id":        "mostrar_valoracion",
+        "label":     "Mostrar valoración",
+        "options": [
+            { 
+            "value": "true",
+            "label": "Sí"
+            },
+            { 
+            "value": "false",
+            "label": "No"
+            }
+            ]
+        	},
+ 
+            {
+            "type": "header",
+            "content": "Colecciones"
+            },
+ 
+            {
+            "type":      "collection",
+            "id":        "col_1",
+            "label":     "Colección 1" 
+            },
+             {
+            "type": "image_picker",
+            "id": "img_col_1",
+            "label": "Imagen de la colección 1"
+            },
+            {
+            "type": "text",
+            "id": "col_1_title",
+            "label": "Título colección alternativo",
+            "info": "Dejar en blanco para título colección"
+             }, 
+            {
+            "type":      "color",
+            "id":        "color_col_1",
+            "label":     "Color Rótulo colección 1",
+            "default":   "#050505" 
+            }
+          
+            
+             
+
+   ],
+   "presets": [ 
+   {
+       "category":"Home",
+       "name": "Home top BG 1 boton"
+    }
+   ]
+}
+{% endschema %}

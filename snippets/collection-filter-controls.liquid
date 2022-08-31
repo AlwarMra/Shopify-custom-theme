@@ -1,0 +1,200 @@
+{%- assign TIENDA = shop.url | split: '.' | last | upcase  %}
+<div class="filter">
+  <div class="flex" style="display: flex;margin: 0 auto; width: 90%;">
+    <div class="filter-door filtering">
+        <p class="filter-collection-page">{{ 'filtros.filtrar' | t }}</p>
+        <a class="filter-toggle" class="arrow-toggle" href="#">
+          <span class="select-icon">{% render 'icon' with 'filter' %}</span>
+        </a>
+    </div>
+
+    <div class="filter-door filter-order mobile">
+      <p class="filter-collection-page">{{'filtros.ordenar' | t }}</p>
+      <a class="filter-toggle" class="arrow-toggle" href="#">
+        <span class="select-icon">{% render 'icon' with 'order' %}</span>
+      </a>   
+    </div>
+  </div>
+
+
+  {% unless template.name == 'search' %}
+  <div class="filter-door filter-search mobile">
+    <input type="search" name="search-col" id="search-col" value="" placeholder="{{ 'general.busca_tu_perfume_o_marca' | t }}">
+    <span class="select-icon">{% render 'icon' with 'searcher' %}</span>
+  </div>
+  {% endunless %}
+
+  <div class="toggle-content">
+
+          <div class="first-filter">
+
+              
+
+                  <div class="filter-collection"> 
+                      <button id="btn_limpiar" class="button full" >{{ 'filtros.limpiar' | t  }} </button>
+                      {% if collection == collections[settings.collection_hombre] or
+                          collection == collections[settings.collection_mujer] or 
+                       collection == collections[settings.collection_nicho] or 
+                       collection == collections[settings.collection_unisex] or
+                       collection == collections[settings.collection_kids] %} 
+                            <span class="filter-title">{{ 'filtros.filtrar_coleccion_por' | t  | replace: 'XXXXX' , collection.title  }}</span>
+                       {% endif %} 
+
+                    
+                      <span class="filter-title">{{ 'filtros.genero' | t }}</span> 
+                      <ul class="collection-list-odor">
+                        
+                        {% capture m %}{{ 'categorias.mujer' | t }}{% endcapture %}
+                        {% capture h %}{{ 'categorias.hombre' | t }}{% endcapture %}
+                        {% capture u %}{{ 'categorias.unisex' | t }}{% endcapture %}
+                        
+                        {% if collection.title == m %} 
+                        <li class="selected-item has_products"><a class="btn_filtro_categoria" data-categoria="todos" href="#">{{ 'categorias.mujer' | t }}</a></li>
+                        {% elsif collection.title == h %}
+                        <li class="selected-item has_products"><a class="btn_filtro_categoria" data-categoria="todos" href="#">{{ 'categorias.hombre' | t }}</a></li>
+                        {% elsif collection.title == u %}
+                        <li class="selected-item has_products"><a class="btn_filtro_categoria" data-categoria="todos" href="#">{{ 'categorias.unisex' | t }}</a></li>
+                        {% else %}
+                        <li class="selected-item has_products"><a class="btn_filtro_categoria" data-categoria="todos" href="#">{{ 'categorias.todos' | t }}</a></li>
+                        {% endif %}
+                        {% unless collection.title == h %}
+                          <li ><a class="btn_filtro_categoria disabled" data-categoria="hombre" href="#">{{ 'categorias.hombre' | t }}</a></li>
+                        {% endunless %}
+                        {% unless collection.title == m %}
+                          <li><a class="btn_filtro_categoria disabled" data-categoria="mujer" href="#">{{ 'categorias.mujer' | t }}</a></li>
+                        {% endunless %}
+                         {% comment %} <li class="break-item"></li>{% endcomment %}
+                        {% unless collection.title == u %}
+                          <li><a class="btn_filtro_categoria disabled" data-categoria="unisex" href="#">{{ 'categorias.unisex' | t }}</a></li>
+                        {% endunless %}
+                          <li><a class="btn_filtro_categoria disabled" data-categoria="nicho" href="#">{{ 'categorias.nicho' | t }}</a></li>
+                          <li><a class="btn_filtro_categoria disabled" data-categoria="kids" href="#">{{ 'categorias.kids' | t }}</a></li>
+                      </ul>                    
+                    
+                  </div> 
+          </div>
+          {% unless TIENDA == 'DE' %}
+          <div class="filter-brands" style="padding: 0 5%;">
+            <span class="filter-title">{{ 'general.marcas' | t  }}</span>
+            <p class="filter-family-open"><span>{{ 'general.marcas' | t }}</span><span class="select-icon">{% render 'icon' with 'select-arrow' %}</span></p>
+            <div class="brands-cards">
+              <div class="brand-card-container scrollbar">              
+              </div>
+            </div>
+          </div>
+          {% endunless %}
+          <div class="filter-moment" style="padding: 0 5%;">
+            <span class="filter-title">{{ 'filtros.momento' | t  }}</span> 
+            <div class="day-night-selector">
+                    <a href="#" class="btn_filtro_uso day-selector disabled" data-uso="dia" >
+                        <p class="day-night-title">{{ 'general.dia' | t | capitalize }}</p>
+                    </a>
+                    
+                    <a href="#" class="btn_filtro_uso night-selector disabled" data-uso="noche">
+                        <p class="day-night-title">{{ 'general.noche' | t | capitalize }}</p>
+                    </a>
+            </div>
+          </div>
+    
+         <div class="filter-intensity   intensity-flex show_mobile" style=" text-align: left; padding: 0 5%;">
+            <span class="filter-title">{{ 'filtros.intensidad' | t  }}</span>
+                      <ul>
+                        <li><a href="#" class="intensity " data-intensity_level="1">{{ 'general.intensidad.Baja' | t }}</a></li>
+                        <li><a href="#" class="intensity" data-intensity_level="2">{{ 'general.intensidad.Media' | t }}</a></li>
+                        <li><a href="#" class="intensity" data-intensity_level="3">{{ 'general.intensidad.Fuerte' | t }}</a></li>
+                      </ul> 
+          </div> 
+          
+    <span class="filter-title" style="padding: 0 5%;">{{ 'filtros.estacion' | t  }}</span>
+           <div class="filter-season">
+            <label class="season-selector" for="winter"><input class="season-checker" type="checkbox" data-estacion="invierno"><span>{{ 'filtros.invierno' | t  }}</span></label>
+            <label class="season-selector" for="spring"><input class="season-checker" type="checkbox" data-estacion="primavera"><span>{{ 'filtros.primavera' | t  }}</span></label>
+            <label class="season-selector" for="summer"><input class="season-checker" type="checkbox" data-estacion="verano"><span>{{ 'filtros.verano' | t  }}</span></label>
+            <label class="season-selector" for="autumn"><input class="season-checker" type="checkbox" data-estacion="otono"><span>{{ 'filtros.otono' | t  }}</span></label>
+          </div>     
+          
+          <div class="filter-intensity   intensity-flex hide_mobile">
+            <span class="filter-title">{{ 'filtros.intensidad' | t  }}</span>
+                      <ul>
+                        <li><a href="#" class="intensity " data-intensity_level="1">{{ 'general.intensidad.Baja' | t }}</a></li>
+                        <li><a href="#" class="intensity" data-intensity_level="2">{{ 'general.intensidad.Media' | t }}</a></li>
+                        <li><a href="#" class="intensity" data-intensity_level="3">{{ 'general.intensidad.Fuerte' | t }}</a></li>
+                      </ul> 
+          </div> 
+
+          <div class="filter-oldfactory">
+                  <span class="filter-title">{{ 'filtros.familias_olfativas' | t  }}</span>
+            <p class="filter-family"><span>{{ 'filtros.filtrar_familia' | t }}</span><span class="select-icon">{% render 'icon' with 'select-arrow' %}</span></p>
+                  <div class="oldfactory-cards">
+                    <div class="odor-card-container scrollbar">
+                      <a href="#" class="odor-card disabled" data-familia="acuatica">
+                          <p class="odor-type">{{ 'familias.acuatica' | t  }}</p>
+                      </a>
+
+                        <a href="#" class="odor-card disabled" data-familia="amaderada">
+                          <p class="odor-type">{{ 'familias.amaderada' | t  }}</p>
+                      </a>
+
+                        <a href="#" class="odor-card disabled" data-familia="almizcle">
+                          <p class="odor-type">{{ 'familias.almizcle' | t  }}</p>
+                      </a>
+
+                        <a href="#" class="odor-card disabled" data-familia="citrica">
+                          <p class="odor-type">{{ 'familias.citrica' | t  }}</p>
+                      </a>
+
+                        <a href="#" class="odor-card disabled" data-familia="chipre">
+                          <p class="odor-type">{{ 'familias.chipre' | t  }}</p>
+                      </a>
+
+                        <a href="#" class="odor-card disabled" data-familia="cuero">
+                          <p class="odor-type">{{ 'familias.cuero' | t }}</p>
+                      </a>
+
+                        <a href="#" class="odor-card disabled" data-familia="especiada">
+                          <p class="odor-type">{{ 'familias.especiada' | t }}</p>
+                      </a>
+
+                        <a href="#" class="odor-card disabled" data-familia="fougere">
+                          <p class="odor-type">{{ 'familias.fougere' | t }}</p>
+                      </a>
+
+                        <a href="#" class="odor-card disabled" data-familia="floral">
+                          <p class="odor-type">{{ 'familias.floral' | t }}</p>
+                      </a>
+
+                        <a href="#" class="odor-card disabled" data-familia="frutal">
+                          <p class="odor-type">{{ 'familias.frutal' | t }}</p>
+                      </a>
+                  
+                        <a href="#" class="odor-card disabled" data-familia="oriental">
+                          <p class="odor-type">{{ 'familias.oriental' | t }}</p>
+                      </a>
+
+                        <a href="#" class="odor-card disabled" data-familia="vainilla">
+                          <p class="odor-type">{{ 'familias.vainilla' | t }}</p>
+                      </a>
+                    </div>
+                  </div>
+          </div>
+      <div class="filter-buttons">
+          <button  class="button button-clean">{{ 'filtros.limpiar' | t  }}</button><button  class="button button-filter">{{ 'filtros.filtrar' | t  }}</button>
+      </div>
+  </div>  
+
+  <div class="toggle-order">
+    <input type="hidden" value="best-selling" id="order-value">
+    <a href="#" class="order-card" data-order="price-descending">
+      <p class="order-type">{{ 'filtros.precio_mayor_a_menor' | t }}</p>
+    </a>
+    <a href="#" class="order-card" data-order="price-ascending">
+      <p class="order-type">{{ 'filtros.precio_menor_a_mayor' | t }}</p>
+    </a>
+    <a href="#" class="order-card" data-order="created-ascending">
+      <p class="order-type">{{ 'filtros.antiguo_a_nuevo' | t }}</p>
+    </a>
+    <a href="#" class="order-card" data-order="created-descending">
+      <p class="order-type">{{ 'filtros.nuevo_a_antiguo' | t }}</p>
+    </a>
+  </div>
+</div>

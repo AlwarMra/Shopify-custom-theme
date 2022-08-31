@@ -1,0 +1,68 @@
+{%- liquid
+    assign TIENDA = shop.url | split: '.' | last | upcase
+    
+    assign similar_a = 'general.Similar_a' | t
+    assign product_title_parts = product.title | split: '|'
+    assign titulo_producto = product_title_parts[0] 
+    assign imitation_product = product_title_parts[1]
+    assign imitation_product = imitation_product | replace: similar_a, ' '
+    assign marca = 'Divain'
+    
+    for tag in product.tags 
+    assign tag = tag | strip 
+    assign tag_parts = tag | split: ':'
+    
+    if tag_parts[0] == 'marca'
+    assign marca = tag_parts[1]
+    break
+    endif
+    
+    endfor
+    
+    %}
+    
+    <section class="container test" style="background: {{ section.settings.back_color }};">
+         <div class="">
+             <div class="extra-info">
+                 <div class="rating">
+                     <h3 class="section-title">
+                       {% if TIENDA == 'DE' or product.variants[0].title != '100ml' or marca == 'Divain' %}
+                       {{ section.settings.title }}
+                           {% else %}
+                       {{ 'product.reviews' | t: title: titulo_producto, imitation: imitation_product }}
+                       {% endif %}
+                   </h3>
+                 </div>
+             </div>
+         </div>
+     </section>
+    
+    {% schema %}
+    {
+      "name": "Rating and review", 
+      "settings": [  
+                {
+                    "type": "text",
+                    "id": "title",
+                    "label": "Title",
+                    "default": "Lo que dicen"
+                },
+                {
+                    "type":"color",
+                    "id":"back_color",
+                    "label":"Color de fondo",
+                    "default":"#fffaf6"
+                }
+       ],
+       "presets": [
+       {
+           "category":"Reviews",
+           "name": "Opiniones"
+        }
+       ]
+    }
+    {% endschema %}
+    
+    
+    
+        

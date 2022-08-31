@@ -1,0 +1,112 @@
+<section class="image-with-text-section">
+    <div class="grid">
+        <div class="image-text-content">
+            <h3 class="section-title">{{ section.settings.title }}</h3>
+            <p class="subtitle">{{ section.settings.content }}</p>
+            <a class="button" href="{{ section.settings.link }}">{{ section.settings.btn_text }}</a>
+        </div>
+        {% comment %} {% endcomment %}
+        <div class="aspect-ratio-box">
+            <img class="mobile lazyload" data-src="{{ section.settings.img_mb | img_url: 'large' }}" alt="{{ section.settings.img_mb.alt }}">
+            <img class="desktop lazyload" data-src="{{ section.settings.img_dk | img_url: 'large'  }}" alt="{{ section.settings.img_dk.alt }}">
+        </div>
+    </div>
+</section>
+
+<style>
+    .image-with-text-section {
+        background: var(--main-color);
+    }
+    .grid {
+        padding: 30px 15px;
+    }
+.image-text-content  {
+    text-align: center;
+}
+.image-text-content .section-title{
+    white-space: nowrap;
+    font-size: 1.3rem;
+    margin-top: 2rem;
+    font-family: 'amalfi';
+}
+.image-text-content .subtitle{
+    line-height: 1.5;
+}
+.image-text-content .section-title, 
+.image-text-content .subtitle,
+.image-text-content .button{
+    margin-bottom: 2rem;
+    color: var(--contrast-color);
+}
+.image-text-content .button {
+    display: inline-block;
+    font-size: 1rem;
+    background: var(--secondary-color);
+    color: var(--main-color);
+}
+
+@media(min-width: 768px){
+    .image-with-text-section .grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-gap: 1rem;
+        max-width: 1000px;
+        margin: 0 auto;
+    }
+    .image-text-content  {
+    text-align: left;
+    }
+    .image-text-content .section-title{ 
+        text-align: left;
+        margin-top: 20%;
+        font-size: 2rem;
+    }
+}
+
+</style>
+{% schema %}
+{
+"name": "Image with text", 
+"settings": [ 
+        {
+            "type": "text",
+            "id": "title",
+            "label": "Title",
+            "default": "Lorem ipsum dolor"
+        },
+        {
+            "type": "textarea",
+            "id": "content",
+            "label": "Content",
+            "default": "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Id accusantium facilis eaque, soluta qui voluptates nulla dolores quisquam magni atque officiis molestias repudiandae aut, velit nobis. Aspernatur autem alias similique."
+        },
+        {
+            "type":"image_picker",
+            "label":"Image mobile",
+            "id":"img_mb"
+        },
+        {
+            "type":"image_picker",
+            "label":"Image desktop",
+            "id":"img_dk"
+        },
+        {
+            "type":"url",
+            "id":"link",
+            "label":"URL"
+        },
+        {
+            "type": "text",
+            "id": "btn_text",
+            "label": "Button text",
+            "default": "Lorem ipsum dolor"
+        }
+ ],
+ "presets": [
+ {
+     "category":"Image",
+     "name": "Image with text"
+  }
+ ]
+}
+{% endschema %}

@@ -1,0 +1,144 @@
+{% if section.blocks.size == 2 %}
+{% assign class = 'grid-2' %}
+{% elsif  section.blocks.size == 3 %}
+{% assign class = 'grid-3' %}
+{% elsif  section.blocks.size ==4 %}
+{% assign class = 'grid-4' %}
+{% endif %}
+
+<section class="our-services" {% if template.name == 'collection' %}style="background: var(--secondary-color);"{% endif %}>
+    <h2 class="section-title">{{ section.settings.header_text }}</h2>
+    <div style="background: var(--secondary-color);">
+      <div class="page-width container services-container {{ class }}">
+        {% for block in section.blocks %}
+        <div class="home-service">
+            <span class="aspect-ratio-box">
+                <img class="lazyload" data-src="{{ block.settings.service_img | img_url: 'x360' }}" alt="{{ section.settings.img.alt }}">
+            </span>
+            <h3>{{ block.settings.title }}</h3>
+            <p class="service-info">{{ block.settings.text_content }}</p>
+            <a class="read-more" href="{{ block.settings.url }}">{{ block.settings.link_text }}</a>
+        </div>
+        {% endfor %}
+    	</div>
+      </div>
+</section>
+<style>
+  {% if template.name != 'collection' %}
+  .our-services {
+      margin: 2rem 0;
+  }
+  {% endif %}
+.our-services .section-title {
+    padding: 2rem;
+}
+  
+  .services-container {
+  	text-align: center;
+    padding: 2rem 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+	grid-gap: 1rem;
+  }
+  
+  .services-container .home-service {
+    width: 100%;
+  	max-width: 200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction:column;
+    justify-content: space-between;
+  }
+  .home-service h3 {
+  	margin-bottom: 1rem;
+    font-family: futura-bold;
+    font-size: 1.2rem;
+   }
+
+  .home-service .service-info {
+  	margin-bottom: 1rem;
+    line-height: 1.5;
+    font-size: 1rem;
+    display: none;
+  }
+  .home-service a {
+  	margin: 0 auto;    
+  }
+  @media(min-width: 768px) {
+    .home-service .service-info {
+    	display: block;
+    }
+    .services-container {
+    	grid-gap: 2rem;
+    }
+        .services-container.grid-2{
+    	grid-template-columns: 1fr 1fr;
+    }
+    .services-container.grid-3{
+    grid-template-columns: 1fr 1fr 1fr;
+    }
+        .services-container.grid-4{
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    }
+  }
+</style>
+{% schema %}
+{
+    "name": "Home services",
+     "settings": [
+            {
+             "type":"text",
+             "id":"header_text",
+             "label":"Title",
+             "default":"Our services"
+            }         
+
+        ],
+        
+    "blocks":[
+    {
+        "name":"Service",
+        "type":"service",
+        "limit":4,
+        "settings": [
+            {
+                "type":"image_picker",
+                "id":"service_img",
+                "label":"Image",
+                "info":"Squared images are a must"
+            },
+            {
+                "type":"text",
+                "id":"title",
+                "label":"Title",
+                "default":"Our service"
+            },
+            {
+                "type":"textarea",
+                "id":"text_content",
+                "label":"Text",
+                "default":"Lorem ipsum dolor sit amet consectetur, adipisicing elit."
+            },
+            {
+                "type":"url",
+                "id":"url",
+                "label":"URL"                
+            },
+            {
+                "type":"text",
+                "id":"link_text",
+                "label":"Link text",
+                "default":"Lorem ipsum"
+            }
+        ]
+    }
+    ],
+    "presets":[
+        {
+       "category":"Home",
+       "name": "Our services"
+        }
+    ]
+
+  }
+{% endschema %}

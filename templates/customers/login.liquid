@@ -1,0 +1,101 @@
+<!-- /templates/customers/login.liquid -->
+
+<section data-section-id="login" data-section-type="login">
+  <div class="account-page">
+      {%- assign is_recover_active = false -%}
+
+      {%- form 'recover_customer_password' -%}
+        {%- if form.errors or form.posted_successfully? -%}
+          {%- assign is_recover_active = true -%}
+        {%- endif -%}
+      {%- endform -%}
+
+      {%- comment -%}
+      --------------------------------------------------------------------------------------------------------------------
+      CUSTOMER LOGIN FORM
+      --------------------------------------------------------------------------------------------------------------------
+      {%- endcomment -%}
+
+      {%- if is_recover_active -%}
+        {%- assign login_default_visibility = 'display: none' -%}
+      {%- else -%}
+        {%- assign login_default_visibility = 'display: block' -%}
+      {%- endif -%}
+
+      {%- form 'customer_login', name: 'login', class: 'login-form account-form', id: 'customer_login' -%}
+        <header>
+          <h1 class="section-title">{{ 'customers.entrar_en_mi_cuenta' | t }}</h1>
+          <p class="form-text">{{ 'customers.introduce_email_y_pass' | t  }}</p>
+        </header>
+
+        {%- if form.errors -%}
+          <p class="form-text">
+            {{- form.errors.messages['form'] -}}
+
+            {% comment ------HACER: TRADUCIR FORM ERRORS %} {{ form.errors.messages[field] | replace: "can't be blank", "YOUR TRANSLATION" }} {% endcomment %}
+          </p>
+        {%- endif -%}
+
+        <div class="form-item">
+          <input id="CustomerEmail" type="email" name="customer[email]" required="required" placeholder="Email" autofocus>
+        </div>
+
+        <div class="form-item">
+          <input type="password" name="customer[password]" required="required" placeholder="{{ 'customers.contrasena' | t  }}">
+          <button class="recovery-password-button" data-action="toggle-recover-form">{{ 'customers.olvide_pass' | t  }}</button>
+        </div>
+
+        <button type="submit" class="button button-account">{{ 'customers.entrar' | t | upcase}}</button>
+
+            <a href="/account/register" class="button button-register">{{ 'customers.crear_cuenta' | t | upcase }}</a>
+      {%- endform -%}
+
+      {%- comment -%}
+      --------------------------------------------------------------------------------------------------------------------
+      CUSTOMER RECOVERY FORM
+      --------------------------------------------------------------------------------------------------------------------
+      {%- endcomment -%}
+
+
+
+      {%- form 'recover_customer_password', name: 'recover', class: 'recovery-form account-form', id: 'recover_customer_password', style: 'display:none' -%}
+        <header>
+          <h1 class="section-title">{{ 'customers.recuperar_contrasena' | t }}</h1>
+
+          {%- unless form.posted_successfully? -%}
+            <p class="form-text">{{ 'customers.introduce_email_y_pass' | t }}</p>
+          {%- endunless -%}
+        </header>
+
+        {%- if form.errors -%}
+          <p class="form-text">
+            {{- form.errors.messages['form'] -}}
+            {% comment ------HACER: TRADUCIR FORM ERRORS %} {{ form.errors.messages[field] | replace: "can't be blank", "YOUR TRANSLATION" }} {% endcomment %}
+     
+          </p>
+        {%- endif -%}
+
+        {%- if form.posted_successfully? -%}
+          <p class="form-text"> 
+            {{ 'customers.recuperado_con_exito' | t }} 
+          </p>
+        {%- endif -%}
+
+        <div class="form-item">
+          <input type="email" name="email" required="required" placeholder="Email" aria-label="{{ 'customer.recover_password.email' | t }}" autofocus>
+        </div>
+
+        <button type="submit" class="button button-register">{{ 'customers.recuperar' | t | upcase }}</button>
+
+        <div class="form-item">
+          <span class="form-text text-recovery">{{ 'customers.recuerdas_tu_contrasena' | t  }}  </span>
+          <button type="button" class="button-back"  data-action="toggle-recover-form-login">{{ 'customers.volver_a_entrar' | t  }}  </button>
+        </div>
+      {%- endform -%}
+  </div>
+</section>
+
+
+
+
+{% section 'home-service' %}

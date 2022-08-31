@@ -1,0 +1,141 @@
+ 
+
+<section class="home-discount">
+   
+    <div class="discount-card">
+      
+      <div class="discount-text">
+        <p class="discount-percentage">
+          <a href="{{ section.settings.link_1 }}"> 
+          <span class="discount-number doblebanner">{{ section.settings.txt_title_1 }}</span><br>
+            {% if section.settings.txt_subtitle_1 != '' %}
+             {{ section.settings.txt_subtitle_1  }}
+            {% endif %}
+           </a>
+        </p>
+        {% if section.settings.txt_info_1 != '' %}
+        <p class="discount-info">{{ section.settings.txt_info_1 }}</p>
+        {% endif %}
+      </div>
+      <div class="discount-photo">
+        <a href="{{ section.settings.link_1 }}" class="aspect-ratio-box"> 
+        <img class="lazyload" data-src="{{ section.settings.img_banner_1 | image_url }}" alt="">
+        </a>
+        {% if section.settings.txt_faldon_foto_1 != '' %}<p class="discount-code">{{ section.settings.txt_faldon_foto_1 }}</p>{% endif %}
+      </div>
+      
+    </div>
+
+    
+    <div class="discount-card">
+      
+      <div class="discount-text">
+        <p class="discount-percentage">
+          <a href="{{ section.settings.link_2 }}" > 
+          <span class="discount-number doblebanner">{{ section.settings.txt_title_2 }}</span><br>
+          {% if section.settings.txt_subtitle_2 != '' %}
+          {{ section.settings.txt_subtitle_2  }}
+         {% endif %} 
+           </a>
+        </p>
+        {% if section.settings.txt_info_2 != '' %}
+        <p class="discount-info">{{ section.settings.txt_info_2 }}</p>
+        {% endif %} 
+      </div>
+      <div class="discount-photo">
+        <a href="{{ section.settings.link_2 }}" class="aspect-ratio-box"> 
+        <img class="lazyload" data-src="{{ section.settings.img_banner_2 | image_url }}" alt="">
+        </a>
+        {% if section.settings.txt_faldon_foto_2 != '' %}<p class="discount-code">{{ section.settings.txt_faldon_foto_2 }}</p>{% endif %}
+      </div> 
+    </div> 
+
+</section>
+ 
+{% schema %}
+{
+  "name": "Doble banner", 
+  "settings": [ 
+  {
+  "type": "header",
+  "content": "Banner 1"
+  },
+    {
+      "type": "text",
+      "id": "txt_title_1",
+      "label": "Texto principal",
+      "default": "Texto 1"
+    },
+    {
+      "type": "text",
+      "id": "txt_subtitle_1",
+      "label": "Texto secundario",
+      "default": "Texto 2"
+    },
+    {
+      "type": "text",
+      "id": "txt_info_1",
+      "label": "Texto info",
+      "default": "Texto más largo"
+    },
+    {
+      "type": "image_picker",
+      "id": "img_banner_1",
+      "label": "Imagen banner"
+    },
+     {
+      "type": "text",
+      "id": "txt_faldon_foto_1",
+      "label": "Texto faldon foto" 
+    },
+    {
+      "id": "link_1",
+      "type": "url",
+      "label": "Enlace del banner" 
+      }, 
+    {
+  "type": "header",
+  "content": "Banner 2"
+  },
+  {
+    "type": "text",
+    "id": "txt_title_2",
+    "label": "Texto principal",
+    "default": "Texto 1"
+  },
+  {
+    "type": "text",
+    "id": "txt_subtitle_2",
+    "label": "Texto secundario",
+    "default": "Texto 1"
+  },
+  {
+    "type": "text",
+    "id": "txt_info_2",
+    "label": "Texto info",
+    "default": "Texto más largo"
+  },
+  {
+    "type": "image_picker",
+    "id": "img_banner_2",
+    "label": "Imagen banner"
+  },
+   {
+    "type": "text",
+    "id": "txt_faldon_foto_2",
+    "label": "Texto faldon foto" 
+  },
+  {
+    "id": "link_2",
+    "type": "url",
+    "label": "Enlace del banner" 
+    }
+   ],
+   "presets": [
+   {
+       "category":"Home",
+       "name": "Doble banner"
+    }
+   ]
+}
+{% endschema %}

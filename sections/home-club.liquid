@@ -1,0 +1,315 @@
+<section class="home-club container page-width">
+    <div class="overlay-container">
+        <h4 class="section-title">{{ section.settings.title }}</h4>    
+        <div class="overlay-tabs">
+            <div class="accordion-container">
+                <p class="accordion-title">{{ section.settings.tab_title_1 }}<span></span></p>
+                <div class="accordion-content"><p>{{ section.settings.tab_content_1 }}</p></div>
+            </div>
+            <div class="accordion-container">
+                <p class="accordion-title">{{ section.settings.tab_title_2 }}<span></span></p>
+                <div class="accordion-content"><p>{{ section.settings.tab_content_2 }}</p></div>
+            </div>
+        </div>
+        <div class="overlay-text">
+            <p class="text-title">{{ section.settings.tab_title_1 }}</p>
+            <p class="text-content">{{ section.settings.tab_content_1 }}</p>
+            <p class="text-title">{{ section.settings.tab_title_2 }}</p>
+            <p class="text-content">{{ section.settings.tab_content_2 }}</p>
+        </div>
+
+        <div class="overlay-images">
+            <div class="aspect-ratio-box">
+                <img class="lazyload" data-src="{{ section.settings.img_1 | img_url: 'large' }}" alt="{{ section.settings.img_1.alt }}">
+            </div>
+            <div class="aspect-ratio-box overlayed">
+                <img class="lazyload" data-src="{{ section.settings.img_2 | img_url: 'large' }}" alt="{{ section.settings.img_1.alt }}">
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="home-club-banner" style="background: var(--secondary-color);">
+    <div class="container page-width home-club-grid">
+        <div class="banner-text-container">
+            <h4 class="section-title">
+                {{ section.settings.title_banner }}
+            </h4>
+            <p class="subtitle">{{ section.settings.subtitle_banner }}</p>
+            <a href="{{ section.settings.btn_url }}" class="button">{{ section.settings.btn_text }}</a>
+        </div>
+        <div class="aspect-ratio-box">
+            <img class="lazyload" data-src="{{ section.settings.banner_img | img_url: 'large' }}" alt="{{ section.settings.banner_img.alt }}">
+        </div>
+    </div>
+</section>
+
+<style>
+
+.home-club   {
+    padding: 1rem;
+    margin: 4rem auto;
+}
+
+.home-club .section-title, .home-club-banner {
+    margin-bottom: 3rem;
+}
+.home-club .overlay-text,
+.home-club-grid .aspect-ratio-box {
+    display: none;
+}
+.overlay-tabs .accordion-container{
+    margin-bottom: 2rem;
+        border: 3px solid var(--main-color);
+}
+.overlay-tabs .accordion-title{
+        cursor: pointer;
+        padding: 1rem;
+        position: relative;
+        font-family: 'Futura-Medium';
+}
+.overlay-tabs .accordion-title span {
+        display: block;
+        position: absolute;
+        height: 14px;
+        width: 14px;
+        right: 20px;
+        top: 23px; 
+    }
+    .overlay-tabs .accordion-title span::before {
+        content: "";
+        width: 14px;
+        height: 3px;
+        border-radius: 2px;
+        background-color: var(--text-accent);
+        position: absolute;
+        transform: rotate(90deg);
+        transition: all .3s ease-in-out;
+    }
+    .overlay-tabs .acc-active .accordion-title span::before {
+        transform: rotate(0);
+    }
+
+    .overlay-tabs  .accordion-title span::after {
+        content: "";
+        width: 14px;
+        height: 3px;
+        border-radius: 2px;
+        background-color: var(--text-accent);
+        position: absolute;       
+    }
+    .overlay-tabs .accordion-content {
+        width: 100%;
+        color: var(--text-color);
+        -webkit-transition: all .3s ease-in-out;
+        transition: all .3s ease-in-out;
+        opacity: 0;
+        height: auto;
+        max-height: 0;
+        overflow: hidden;
+        padding: 0 10px;
+        line-height: 1.5;
+    }
+    .overlay-tabs .accordion-container.acc-active .accordion-content {
+        padding: 15px 10px 10px;
+        opacity: 1;
+        height: auto;
+        max-height: 3000px;
+    }
+    .overlay-images {
+        position: relative;
+        margin-bottom: 4rem;
+    }
+    .overlay-images .aspect-ratio-box {
+        width: 65%;
+        padding-top: 65%;
+    }
+    .overlay-images .aspect-ratio-box.overlayed{
+        position: absolute;
+        position: absolute;
+        top: 25%;
+        left: 25%;
+        padding-top: 60%;
+        width: 75%;
+    }
+    .banner-text-container {
+        text-align: center;
+        padding: 2rem;
+    }
+    .banner-text-container .section-title,
+    .banner-text-container .subtitle {
+        margin-bottom: 1rem;
+    }
+    .banner-text-container .section-title {
+        font-family: 'futura-Bold';
+    }
+    .banner-text-container .subtitle {
+        font-size: 1.2rem;
+    }
+    .banner-text-container .button {
+        color: var(--contrast-color);
+        background: var(--main-color);
+        padding: 10px 20px;
+        display: inline-block;
+        margin-bottom: 10px;
+        font-size: 1rem;
+    }
+@media(min-width:900px){
+    .overlay-container {
+        display: grid;
+        grid-template-columns: 1.5fr 1fr;
+        grid-gap: 2rem;
+    }
+    .overlay-container .section-title {
+        grid-row: 1;
+        grid-column: 2;  
+        text-align: left;
+    }
+    .overlay-container .overlay-text {
+        grid-row: 1;
+        grid-column: 2;
+        padding-top: 4rem;
+    }
+    .overlay-container .overlay-images {
+        grid-column: 1;
+    }
+    .home-club .overlay-text {
+        display: block;
+    }
+    .overlay-tabs {
+        display: none;
+    }
+    .overlay-text .text-title,
+    .overlay-text .text-content {
+        margin-bottom: 2rem;   
+        line-height: 1.5;     
+    }
+    .overlay-text .text-title {
+        font-family: 'futura-Bold';
+    }
+    .overlay-text .text-content a {
+        text-decoration: underline;
+    }
+    .home-club {
+        margin-bottom: 10rem;
+    }
+    .home-club-banner {
+        margin-bottom: 12rem;
+    }
+    .home-club-grid {
+        position: relative;
+    }
+    .banner-text-container {
+        width: 45%;
+        margin-left: 7rem;
+    }
+    .banner-text-container,
+    .banner-text-container .section-title {
+        text-align: left;
+    }
+    .home-club-grid .aspect-ratio-box{
+        display: block;
+        position: absolute;
+        width: 40%;
+        top: 50%;
+        padding-top: 40%;
+        left: 55%;
+        transform: translateY(-50%);
+    }
+}
+@media(min-width:1000px){
+    .home-club {
+        margin-bottom: 14rem;
+    }
+}
+</style>
+
+{% schema %}
+{
+    "name":"Home: join club",
+    "settings":[
+        {
+            "type":"text",
+            "id":"title",
+            "label":"Title",
+            "default":"Lorem, ipsum dolor."
+        },
+        {
+            "type":"header",
+            "content":"tabs"
+        },
+        {
+            "type":"text",
+            "id":"tab_title_1",
+            "label":"Tab title 1",
+            "default":"Lorem, ipsum dolor"
+        },
+        {
+            "type":"textarea",
+            "id":"tab_content_1",
+            "label":"Tab content 1",
+            "default":"Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quidem, aliquam? Aperiam ratione dolor mollitia. Reiciendis aspernatur illum impedit ullam debitis!"
+        },
+        {
+            "type":"text",
+            "id":"tab_title_2",
+            "label":"Tab title 2",
+            "default":"Lorem, ipsum dolor"
+        },
+        {
+            "type":"textarea",
+            "id":"tab_content_2",
+            "label":"Tab content 2",
+            "default":"Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quidem, aliquam? Aperiam ratione dolor mollitia. Reiciendis aspernatur illum impedit ullam debitis!"
+        },
+        {
+            "type":"header",
+            "content":"Content"
+        },
+        {
+            "type":"image_picker",
+            "id":"img_1",
+            "label":"Overlay image 1"
+        },
+        {
+            "type":"image_picker",
+            "id":"img_2",
+            "label":"Overlay image 1"
+        },
+        {
+            "type":"text",
+            "id":"title_banner",
+            "label":"Title banner",
+            "default":"Lorem, ipsum dolor"
+        },
+        {
+            "type":"text",
+            "id":"subtitle_banner",
+            "label":"Subtitle banner",
+            "default":"Lorem ipsum dolor, sit amet consectetur adipisicing elit. Assumenda, laborum?"
+        },
+        {
+            "type":"url",
+            "label":"Button url",
+            "id":"btn_url"
+        },
+        {
+            "type":"text",
+            "label":"Button text",
+            "id":"btn_text",
+            "default":"Lorem"
+        },
+        {
+            "type":"image_picker",
+            "label":"Banner image",
+            "id":"banner_img"
+        }
+    ],
+    "presets":[
+        {
+            "category":"Home",
+            "name":"Home: join club"
+        }
+    ]
+}
+{% endschema %}

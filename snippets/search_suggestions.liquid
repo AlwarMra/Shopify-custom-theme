@@ -1,0 +1,132 @@
+
+ <div id="autosuggest">
+    <div id="autosuggest_inner"></div>
+ </div>
+ <style>
+    #suggest_container { position:relative; overflow:visible; }
+    #autosuggest {  
+            background: white;
+            border:1px solid #a8a8a8;
+            padding:5px;
+            display:none;
+            z-index:100;
+            }
+    .dv_suggestion{
+        padding: 5px;
+    }
+
+    .dv_suggestion_separator{
+        background: #bfbfbf;
+        color: white;
+        width: 100%;
+        font-size: 11px;
+        padding: 5px;
+        letter-spacing: 2px;
+        line-height: 12px;
+        padding-top: 7px;
+        }
+</style> 
+
+<script>
+ 
+  function get_search(val, callback){
+         var url = '/search/suggest.json?q='+ val +'&resources[type]=product,collection'
+
+          console.log('url', url); 
+
+          $.ajax({
+            type: 'GET',
+            url: url, 
+            success: function(data) {
+                console.log('[[--SEARCH--]]', data.resources.results.collections); 
+                var results = {
+                    products : data.resources.results.products,
+                    collections:  data.resources.results.collections
+                }
+                callback( results ) 
+            },
+            dataType: 'JSON',
+        });
+
+
+}
+ 
+function autocomplete(the_input_el) {
+  
+  the_input_el.addEventListener("input", function(e) {
+
+      var val = $(this).val();   console.log('search >>>', val ) 
+      if (!val || val == '') {  $('#autosuggest').hide(); return false;  }
+       
+
+
+    var pos = $('#in_search').position(); 
+    var width = $('#in_search').outerWidth();
+   
+    $('#autosuggest').css({
+        position: "absolute",
+        top: (pos.top + 40) + "px",
+        left: (pos.left + 20) + "px",
+        width: (width - 20)
+    }) 
+ 
+
+     
+      get_search(val,function(results){
+ 
+            var n_results = results.products.length + results.collections.length
+
+            $('#autosuggest_inner').html('')
+
+            if( n_results == 0 ){ 
+                $('#autosuggest').hide()
+                return
+            }
+
+            //PRODUCTOS
+            if( results.products.length > 0) {
+                  $('#autosuggest_inner').append('<div class="dv_suggestion_separator">'
+                            +' PRODUCTOS '
+                            +'</div>')
+
+                _.each( results.products, function(prod){
+                    console.log('[[--prod--]]', prod.title)
+                    var prod_el = document.createElement("DIV"); 
+                        prod_el.innerHTML = '<div class="dv_suggestion">'
+                            +'<a class="search_link" href="/products/'+ prod.handle +'">'
+                            +'' + prod.title + '</a></div>';
+                        $('#autosuggest_inner').append(prod_el);
+                        $('#autosuggest').show() 
+                }) 
+            
+            }
+
+            //COLECCIONES
+            if( results.collections.length > 0) {
+                  $('#autosuggest_inner').append('<div class="dv_suggestion_separator">'
+                            +' COLECCIONES '
+                            +'</div>')
+                _.each( results.collections, function(col){
+                    console.log('[[--prod--]]', col.title)
+                    var prod_el = document.createElement("DIV"); 
+                        prod_el.innerHTML = '<div class="dv_suggestion">'
+                            +'<a class="search_link" href="/collections/'+ col.handle +'">'
+                            +'' + col.title + '</a></div>';
+                        $('#autosuggest_inner').append(prod_el);
+                        $('#autosuggest').show() 
+                }) 
+            
+            }
+
+
+            
+        
+        })  
+  }); 
+}
+ 
+autocomplete(document.getElementById("in_search"));
+
+ 
+
+</script>

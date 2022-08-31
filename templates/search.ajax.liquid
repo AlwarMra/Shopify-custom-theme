@@ -1,0 +1,6 @@
+{%- if template == 'search.ajax' -%} 
+{%- layout none -%} 
+{% paginate search.results by 1000  %}
+[{% for item in search.results %}{"pr_id":{{ item.id}},"title": "{{ item.title}}","handle": "{{ item.handle}}","created_at":  "{{ item.created_at}}","tags": {{ item.tags | json }},"price": {{ item.price}},"compare_at_price_max": {{ item.compare_at_price_max}},"available": {{ item.available}},"variants":  {{ item.variants | json }},"images":  {{ item.images | json }},"featured_image": "{{ item.featured_image}}","collections":[{% for col in item.collections %}"{{col.handle}}",{%endfor%}] },{% endfor %}]
+{% endpaginate %}  
+{% endif %}

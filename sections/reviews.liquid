@@ -1,0 +1,59 @@
+<section class="container reviews" style="padding-bottom: 3rem;">
+  <div class="">
+      <div class="extra-info"> 
+              <div>
+                  <h2 class="section-title">{{ section.settings.title }}</h2>
+                  {% if section.settings.subtitle != blank %}<p class="subtitle">{{ section.settings.subtitle }}</p>{% endif %}  
+              </div>
+          
+      </div>
+  </div>
+</section>
+
+<style>
+.reviews .section-title {
+  margin: 2rem 0;
+}
+  .reviews .subtitle {
+      text-align: center;
+  width: 80%;
+  margin: .5rem auto 2rem;
+    font-size: 1.2rem !important;
+}
+.reviews .extra-info .rating {
+  margin-top: 0;
+}
+.reviews-content {
+  max-width: 1200px;
+  padding-bottom: 2rem;
+  position: relative;
+  margin: 0 auto;
+}
+</style>
+
+{% schema %}
+{
+  "name": "Reviews",
+  "settings": [
+          {
+              "type": "text",
+              "id": "title",
+              "label": "Title",
+              "default": "Tú también te vas a enamorar"
+          },
+          {
+              "type": "text",
+              "id": "subtitle",
+              "label": "Subtitle",
+              "default": "Nuestros clientes nos recomiendan ¡y repiten!"
+          }
+],
+ "presets": [
+ {
+      "category":"Home",
+     "name": "Reviews"
+  }
+
+ ]
+}
+{% endschema %}

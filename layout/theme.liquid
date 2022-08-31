@@ -1,0 +1,261 @@
+{% comment %}
+Divaint Theme v. 2.0.0 - NEW UI
+{% endcomment %}
+<!doctype html>
+<html>
+
+<head>
+
+  <meta charset="utf-8">
+  <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+  <link rel="alternate" hreflang="x-default" href="{{ canonical_url }}" />
+
+
+  {%- if settings.favicon != nil -%}
+  <link rel="shortcut icon" type="image/x-icon" href="{{ settings.favicon | img_url: '180x180' }}">
+  <link rel="apple-touch-icon" href="{{ settings.favicon | img_url: '180x180' }}" />
+  <link rel="apple-touch-icon" sizes="57x57" href="{{ settings.favicon | img_url: '57x57' }}" />
+  <link rel="apple-touch-icon" sizes="60x60" href="{{ settings.favicon | img_url: '60x60' }}" />
+  <link rel="apple-touch-icon" sizes="72x72" href="{{ settings.favicon | img_url: '72x72' }}" />
+  <link rel="apple-touch-icon" sizes="76x76" href="{{ settings.favicon | img_url: '76x76' }}" />
+  <link rel="apple-touch-icon" sizes="114x114" href="{{ settings.favicon | img_url: '114x114' }}" />
+  <link rel="apple-touch-icon" sizes="180x180" href="{{ settings.favicon | img_url: '180x180' }}" />
+  <link rel="apple-touch-icon" sizes="228x228" href="{{ settings.favicon | img_url: '228x228' }}" />
+  {%- else -%}
+  <link rel="shortcut icon" type="image/x-icon" href="{{ 'favicon.png' | asset_url }}">
+  {%- endif -%}
+  <link rel="preconnect dns-prefetch" href="https://fonts.shopifycdn.com" />
+  <link rel="preconnect dns-prefetch" href="https://cdn.shopify.com" />
+  <link rel="preconnect dns-prefetch" href="https://v.shopify.com" />
+  <link rel="preconnect dns-prefetch" href="https://cdn.shopifycloud.com" />
+  <link rel="preconnect dns-prefetch" href="//ajax.googleapis.com" />
+
+  <link rel="preload" href="{{ 'futura.woff' | asset_url }}" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="{{ 'FuturaPT-Medium.woff' | asset_url }}" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="{{ 'Futura-Bold.woff' | asset_url }}" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="{{ 'SFUIText-Regular.woff' | asset_url }}" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="{{ 'DINNeuzeitGroteskW01-Bold.woff' | asset_url }}" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="{{ 'DIN-Neuzeit-Grotesk-Light.woff' | asset_url }}" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="{{ 'open-sans.woff' | asset_url }}" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="{{ 'Amalfi-Coast.woff' | asset_url }}" as="font" type="font/woff2" crossorigin>
+
+  <!-- desindexar las colecciones filtradas con tags -->
+  {% if request.page_type == 'collection' %}
+  {% assign n_url_parts = request.path | split: '/' | size %}
+  {% if n_url_parts >= 4 %}
+  <meta name="robots" content="noindex">
+  {% endif %}
+  {% endif %}
+  <!--  -->
+
+  <!-- Páginas excluidas -->
+  {% render paginas_excluidas %}
+
+  {% if template contains 'page' %}
+  {% render 'pages_no_index' %}
+  {% elsif template contains 'collection' %}
+  {% section 'collections_no_index' %}
+  {% endif %}
+
+  <!--  -->
+
+  <!-- Meta title and description -->
+  {% if request.page_type == 'product' %}
+  {% render product_title_and_meta %}
+  
+  {% elsif request.page_type == 'collection' %}
+  {% render collection_title_and_meta %}
+  {% else %}
+
+  {% if seo_page %}
+  <title>{{ seo_title }}</title>
+  {% else %}
+  <title>{{ page_title }}</title>
+  {% endif %}
+  
+  {%- if page_description -%}
+  <meta name="description" content="{{ page_description | escape }}">
+  {% elsif default_description %}
+  <meta name="description" content="{{ default_description | escape }}">
+  {%- endif -%}
+  {%- endif -%}
+  <!--  -->
+  {% assign can_url = canonical_url | split: '?page=' %}
+  {% assign can_url = can_url[0] %}
+  <link rel="canonical" href="{{ can_url }}">
+
+  {% render 'social-meta-tags' %}
+
+  <meta content="width=device-width,initial-scale=1,shrink-to-fit=no" name="viewport">
+
+  {{ content_for_header }}
+  {% render 'cookie-consent' %}
+  {% render 'critical-css' %}
+  {{ 'theme.min.css' | asset_url | stylesheet_tag }} 
+
+  <link rel="preload" href="{{ 'lazyload.js' | asset_url }}" as="script">
+  <script type="text/javascript" src="{{ 'lazyload.js' | asset_url }}"></script>
+  {% render 'js-general' %} 
+  <script src="{{ 'vendor.js' | asset_url }}" defer="defer"></script>
+  <script src="{{ 'application.min.js' | asset_url }}" defer="defer"></script>
+  <script src="{{ 'cart.min.js' | asset_url }}" defer="defer"></script>
+  <script src="{{ 'wishlist.min.js' | asset_url }}" defer="defer"></script>
+  <script src="{{ 'predictive-search.min.js' | asset_url }}" defer="defer"></script>
+
+  {% render 'pagefly-header' %}
+  {% render head_scripts %}
+  <meta name="facebook-domain-verification" content="l619bfo3f5emgczrnkcsd43wrp4ys2" />
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "url": "{{ shop.url }}",
+      "logo": "{{'logo.svg' | asset_url }}"
+    } 
+   </script>
+</head>
+
+<body>
+  {%- assign body_scripts = TIENDA | append: '_body_scripts' -%}
+  {%- include body_scripts -%}
+
+  <div class="page-overlay"></div>
+  {% if template != 'cart' %}
+  {% include 'cart-modal' %}
+  {% endif %}
+
+  {% section 'anouncement' %}
+  {% section 'header' %}
+  {% if template != 'index' %}
+  {% unless template.suffix == 'home' or template.suffix == 'alternate-col' or template.suffix == 'alternate-simplified'  %}
+  {%section 'breadcrumbs' %}
+  {% endunless %}
+  {% endif %}
+  <main role="main" style="overflow-x: hidden;">
+    {% section 'page-banner' %}
+    {{ content_for_layout }}
+  </main>
+  {% section 'footer' %}
+
+  {%- render footer_scripts -%}
+
+</body>
+
+<style>
+  .show_mobile {
+    display: none !important;
+  }
+
+  @media(max-width: 768px) {
+
+    .hide_mobile {
+      display: none !important;
+    }
+
+    .show_mobile {
+      display: block !important;
+    }
+  }
+
+  .rp-micro-app-dummy-icon-container {
+    z-index: 1000 !important;
+  }
+
+    {% if template contains 'product' %}
+
+  @media(max-width: 768px) {
+    .rp-micro-app-dummy-icon-container {
+      bottom: 75px !important;
+    }
+  }
+
+    {% endif %}
+
+  .most-sold .space-between ul li {
+    line-height: 1.313rem;
+  }
+
+
+  div.snize-ac-results li.snize-category a.snize-view-link,
+  div.snize-ac-results li,
+  div.snize-ac-results li a.snize-view-link {
+    font-family: futura;
+  }
+
+  div.snize-ac-results li.snize-label {
+    text-align: left;
+    padding: 10px;
+    font-size: 12px;
+    font-weight: bold;
+    background: var(--main-color);
+    color: black;
+  }
+
+  div.snize-ac-results div.snize-arrow-inner.snize-arrow-inner-label {
+    border-bottom: 13px solid var(--main-color);
+
+  }
+
+  .buying-div .current-price {
+    font-size: 1.5em !important;
+    margin: 0 !important;
+  }
+
+  #__pf {
+    opacity: 1 !important;
+  }
+  #cookies-popup img {
+  	display: inherit;
+    width: auto;
+    height: auto;
+  }
+  #cookies-title,
+  #cookies-body,
+  .otCookiesNotification .previewBox.left-side{
+  	font-family: 'futura';
+  }
+
+  .otCookiesNotification #cookies-wrapper{
+      transform: translateX(-50%);
+    width: 350px;
+    bottom: 50vh !important; 
+    left: 50% !important;
+  }
+  .otCookiesNotification #opacityBackground {
+  	z-index: 35;
+  }
+  @media(min-width: 768px) {
+    .otCookiesNotification #cookies-wrapper {
+  	width: 420px;
+    }
+  }
+  {% if TIENDA == 'UK' %}
+  .iva_incluido {
+  	display: none;
+  }
+  {% endif %}
+</style>
+<script>
+
+//Check if cookie bar is visible
+const observer = new MutationObserver((mutations, obs) => {
+  const cookieBar = document.getElementById('cookies-wrapper');
+    const cookieBack = document.getElementById('opacityBackground');
+  if (cookieBar) {
+    if(window.getComputedStyle(cookieBar).display === 'block'){
+      cookieBack.style.display = 'block';
+      obs.disconnect();
+      return;
+    } else {
+    	obs.disconnect();
+    }
+    }
+  });
+
+  observer.observe(document, {
+    childList: true,
+    subtree: true
+  });
+</script>
+
+</html>

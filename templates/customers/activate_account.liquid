@@ -1,0 +1,42 @@
+<section data-section-id="activate-account" data-section-type="activate-account">
+  <div class="account-page">
+    {%- form 'activate_customer_password', name: 'activate', class: 'account-form', id: 'activate_customer_password' -%}
+    <header>
+      <h1 class="section-title">{{ 'customers.activar_cuenta' | t }}</h1>
+      <p class="form-text">{{ 'customers.introduce_la_contrasena' | t }}</p>
+    </header>
+
+    {%- if form.errors -%}
+    <div class="">
+      <ul class="form-item">
+        {%- for field in form.errors -%}
+        {%- if field == 'form' -%}
+        <li class="form-text">{{ form.errors.messages[field] }}</li>
+        {%- else -%}
+        <li class="form-text"><strong>{{ form.errors.translated_fields[field] }}</strong> {{ form.errors.messages[field]
+          }}</li>
+        {%- endif -%}
+        {%- endfor -%}
+      </ul>
+    </div>
+    {%- endif -%}
+
+    <div class="form-item">
+      <input type="password" class="Form__Input" name="customer[password]"
+        aria-label="{{ 'customer.activate_account.password' | t }}" placeholder="{{ 'customers.contrasena' | t }}" autofocus>
+    </div>
+
+    <div class="form-item">
+      <input type="password" class="Form__Input" name="customer[password_confirmation]"
+        aria-label="{{ 'customer.activate_account.password_confirmation' | t }}" placeholder="Confirmar contraseña">
+    </div>
+
+    <div class="Form__Submit">
+      <div class="ButtonGroup">
+        <button type="submit" class="button button-account">{{ 'customers.enviar' | t }}</button>
+        <button type="submit" class="button button-register" name="decline">{{ 'customers.declinar' | t }}</button>
+      </div>
+    </div>
+    {%- endform -%}
+  </div>
+</section>

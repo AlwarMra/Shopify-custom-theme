@@ -1,0 +1,166 @@
+{% if template == 'product' or template == 'search'  %}
+  <style> #shopify-section-breadcrumbs, .breadcrumbs {padding: 0;}</style>
+{% endif %}
+
+
+{% unless template.name == 'index' 
+    or template.name == 'cart' 
+    or template.name == 'list-collections' 
+    or template.name == '404'
+    or template.name == 'search' 
+    or template.name == 'product'
+    %}
+
+{% assign t = template | split: '.' | first %}
+
+{% capture home_link %}<a href="/" title="{{ 'general.home' | t }}">{{ 'general.home' | t }}</a>{% endcapture%}
+  
+{% case t %}
+  {% when 'page' %} 
+  {% capture second_link %}<a href="{{ page.url }}" title="{{ page.title }}">{{ page.title }}</a>{% endcapture%}
+  <p class="breadcrumbs">
+    {{home_link}} / {{ second_link }}
+  </p>
+ 
+  {% comment %}
+  {% when 'product' %}
+    
+    <!-- {% assign my_collection = true %}  -->
+    {% if collection.url %}
+        {% assign my_collection = collection %} 
+        <p class="breadcrumbs">
+          {{ collection.title | link_to: collection.url }}
+        </p>
+    {% else %} 
+    {% assign bc_collection = collections[section.settings.default_collection].handle %} 
+            {%- for block in section.blocks -%}
+                {%- assign col = collections[block.settings.mother_collection] -%}
+                {%- for col_p in product.collections -%} 
+                    {%- if col_p.handle == col.handle -%} 
+                        {%- assign bc_collection = col.handle -%}
+                        {%- break -%}
+                    {%- endif -%}
+                    {%- endfor -%} 
+            {%- endfor -%}  
+    	{% assign my_collection = collections[bc_collection] %}  
+    {% endif %}
+
+      {% capture second_link %}
+        / {{ my_collection.title | link_to: my_collection.url }} / <a href="{{ product.url }}" >{{ product.title }}</a>
+      {% endcapture%}
+      <p class="breadcrumbs">
+        {{home_link}} {{ second_link }}
+      </p>
+  {% endcomment %}
+  {% when 'collection' and collection.handle %}
+
+        {% if current_tags %}
+        {% capture second_link_1 %}{{ collection.title | link_to: collection.url }}{% endcapture%}
+        {% capture tag_url %}{{ collection.url }}/{{ current_tags | join: "+"}}{% endcapture %}
+        {% capture second_link_2 %} <a href="{{ tag_url }}" >{{ current_tags | join: " + "}}</a>{% endcapture %}
+
+        {% capture second_link %}{{ second_link_1 }} / {{ second_link_2 }}{% endcapture%}
+        
+        <p class="breadcrumbs bread-col">
+          {{home_link}} / {{ second_link }}
+        </p>
+  
+
+        {% else %}
+        {% capture second_link %}<a href="{{ collection.url }}" title="{{ collection.title }}">{{ collection.title }}</a>{% endcapture%}
+    
+        <p class="breadcrumbs">
+          {{home_link}} / {{ second_link }}
+        </p>
+  
+
+        {% endif %}
+
+  {% when 'blog' %}
+  {% if current_tags %}
+  {% capture first_link %}
+  {{ blog.title | link_to: blog.url }}</li>
+  {% endcapture %}
+   {% capture tag_url %}{{blog.url}}/tagged/{{ current_tags | join: "+" }}{% endcapture %}
+
+   {% capture second_link %}{{ first_link }} / <a href="{{ tag_url }}" aria-current="page">{{ current_tags | join: " + " }}</a>
+   {% endcapture %}
+
+   <p class="breadcrumbs">
+    {{home_link}} / {{ second_link }}
+  </p>
+{% else %}
+  <p class="breadcrumbs">
+    {{home_link}} / <a href="{{ blog.url }}" aria-current="page">{{ blog.title }}</a>
+  </p>
+{% endif %}
+
+
+  <script> 
+    var breadElem = document.getElementById('shopify-section-breadcrumbs');
+    breadElem.classList.add('blog-background');
+  </script>
+
+
+
+
+  {% when 'article' %}
+  {% capture first_link %}
+  {{ blog.title | link_to: blog.url }}</li>
+  {% endcapture %}
+
+
+  <p class="breadcrumbs">
+  {% if article.tags[0] %}
+    {{home_link }} / {{ first_link }} /
+    <a href="/blogs/{{ blog.handle }}/tagged/{{ article.tags[0] | handle }}">{{ article.tags[0] }}</a> / <a href="{{ article.url }}" aria-current="page">{{ article.title }}</a>
+    {% else %}
+    <p class="breadcrumbs">
+      {{home_link }} / {{ first_link }} / <a href="{{ article.url }}" aria-current="page">{{ article.title }}</a>
+      {% endif %}
+  </p>
+
+
+  <script> 
+    var breadElem = document.getElementById('shopify-section-breadcrumbs');
+    breadElem.classList.add('blog-background');
+  </script>
+
+  {% else %}
+
+      <!-- {{ home_link }} /  -->
+      <p class="breadcrumbs"> {{ home_link }} / <a href="{{ request.path }}" aria-current="page">{{ page_title }}</a> </p>
+   
+  {% endcase %}
+ 
+  <!-- <p class="breadcrumbs">  {{ home_link }} / <a href="{{ request.path }}" aria-current="page">{{ page_title }}</a> </p> -->
+
+    
+ {% endunless %}
+  
+{% schema %}
+{
+  "name": "Breadcrumbs",
+  "max_blocks": 20, 
+   "settings": [
+		    {
+          "type": "collection",
+          "id": "default_collection",
+          "label": "Colección por defecto"
+        } 
+   ],
+  "blocks": [
+    {
+      "type": "collection",
+      "name": "Collection",
+      "settings": [
+        {
+          "type": "collection",
+          "id": "mother_collection",
+          "label": "Colección troncal"
+        }  
+      ]
+    }
+  ]
+}
+{% endschema %}

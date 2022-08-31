@@ -1,0 +1,32 @@
+{
+    "sections":{ 
+        "main":{
+            "type":"product-template"
+        },
+        "product-rate": {
+            "type":"product-rating-and-reviews" 
+        },
+        "upsell": {
+            "type": "upsell-products",
+            "settings": {
+            }
+        },  
+        "product-brothers": {
+            "type":"product-brothers"
+        },
+        "product-banner": {
+            "type":"product-banner"
+        },
+        "product-bottom": {
+            "type":"product-bottom"
+        }
+    },
+    "order": [
+        "main",
+        "product-rate",
+        "upsell",
+        "product-brothers",
+        "product-banner",
+        "product-bottom"
+    ]
+}

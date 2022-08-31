@@ -1,0 +1,70 @@
+<!-- {% for collection in collections %}
+  {% unless collection.handle == 'frontpage' %}
+    {% capture collection_title %}{{ collection.title | escape }}{% endcapture %}
+    <a href="{{ collection.url }}">More {{ collection_title }} &rsaquo;</a>
+    {% for product in collection.products limit:5 %}
+      {% assign grid_item_width = 'large--one-fifth medium--one-half' %}
+      <div>
+        <a href="{{ product.url | within: collection }}">{{ product.title }}</a>
+        {{ product.price | money }}
+        {% unless product.available %}<br><strong>sold out</strong>{% endunless %}
+        <a href="{{ product.url | within: collection }}">
+          <img src="{{ product.featured_image.src | img_url: 'large' }}" alt="{{ product.featured_image.alt | escape }}">
+        </a>
+      </div>
+    {% endfor %}
+  {% endunless %}
+{% endfor %} -->
+
+<div class="collection-list">
+
+    <h2 class="section-title"><span class="underline">COLECCIONES</span></h2>
+    <div class="home-collection-cards">
+      {% for block in section.blocks %}
+      {% assign my_collection = collections[block.settings.col] %}
+      {% assign col_url = my_collection.url %}
+      {% assign col_title = my_collection.title %}
+      {% assign col_img = my_collection.image.src | image_url %}
+      {% if block.settings.img %}
+      {% assign col_img = block.settings.img.src | image_url %}
+      {% endif %}
+      <div class="collection-card">
+        <div class="collection-img">
+            <a href="{{col_url}}" style="background-image: url('{{ col_img }}')" alt="{{col_title}}"></a>
+        </div>
+        <a class="button home-collection-link" href="{{ col_url }}">{{ col_title | upcase }}</a>
+      </div> 
+      {%endfor%}
+    </div>
+    
+    </div>
+    
+    {% schema %}
+    {
+      "name":"Lista de colecciones",
+      "settings": [
+      
+      ],
+      "blocks": [
+        {
+          "type": "collection",
+          "name": "Colección",
+          "limit":4,
+          "settings": [
+            {
+              "type":"collection",
+              "id":"col",
+              "label":"Colección"
+            },
+            {
+              "type":"image_picker",
+              "id":"img",
+              "label":"Imagen"
+            }        
+          ]
+        }
+      ]
+    }
+    {% endschema %}
+    
+    

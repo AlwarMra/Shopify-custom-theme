@@ -1,0 +1,37 @@
+{% if section.settings.products.count > 0 %}
+<div class="upsell-section" style="background: var(--contrast-color); padding: 1rem;">
+    <div class="container-fluid">
+      <h3 class="section-title">{{ section.settings.title }}</h3>
+      <div class="most-sold">
+      {% for prod in section.settings.products %}
+        {% render 'collection-card' prod: prod %}
+      {% endfor %}
+      </div>
+    </div>
+  </div>
+{% endif %}
+
+{% schema %}
+  {
+    "name": "Upsell products",
+    "settings": [
+        {
+            "type":"text",
+            "id":"title",
+            "label":"Title"
+        },
+        {
+          "type": "product_list",
+          "id": "products",
+          "label": "Products"
+        }
+
+	]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

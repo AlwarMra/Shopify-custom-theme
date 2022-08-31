@@ -1,0 +1,138 @@
+<section class="page-width container" style="padding: 0 20px 4rem;">
+    {% if section.settings.title !=blank %}
+    <h4 class="section-title" style="margin-bottom: 2rem;">{{ section.settings.title }}</h4>
+    {% endif %}
+    <div class="home-accordion">
+        {% for block in section.blocks %}
+        <div class="accordion-container">
+            {% if block.settings.html_label == 'h2' %}<h2 class="accordion-title">
+            {% elsif block.settings.html_label == 'h3' %}<h3 class="accordion-title">
+            {% elsif block.settings.html_label == 'h4' %}<h4 class="accordion-title">
+            {% elsif block.settings.html_label == 'h5' %}<h5 class="accordion-title">
+            {% endif %}
+                {{ block.settings.title }}<span></span>
+            {% if block.settings.html_label == 'h2' %}</h2>
+            {% elsif block.settings.html_label == 'h3' %}</h3>
+            {% elsif block.settings.html_label == 'h4' %}</h4>
+            {% elsif block.settings.html_label == 'h5' %}</h5>
+            {% endif %}
+
+            <div class="accordion-content">
+                <p>{{ block.settings.content }}</p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+<style>
+    .home-accordion .accordion-container {
+        margin-bottom: 1.5rem;
+        border: 3px solid var(--main-color);
+    }
+    .home-accordion .accordion-title{
+        cursor: pointer;
+        padding: 1rem;
+        position: relative;
+        font-family: 'Futura-Medium';
+    }
+    .home-accordion .accordion-title span {
+        display: block;
+        position: absolute;
+        height: 14px;
+        width: 14px;
+        right: 20px;
+        top: 23px; 
+    }
+
+    .home-accordion .accordion-title span::before {
+        content: "";
+        width: 14px;
+        height: 3px;
+        border-radius: 2px;
+        background-color: var(--text-accent);
+        position: absolute;
+        transform: rotate(90deg);
+        transition: all .3s ease-in-out;
+    }
+    .home-accordion .acc-active .accordion-title span::before {
+        transform: rotate(0);
+    }
+    .home-accordion .accordion-title span::after {
+        content: "";
+        width: 14px;
+        height: 3px;
+        border-radius: 2px;
+        background-color: var(--text-accent);
+        position: absolute;       
+    }
+    .home-accordion .accordion-content {
+        width: 100%;
+        color: var(--text-color);
+        -webkit-transition: all .3s ease-in-out;
+        transition: all .3s ease-in-out;
+        opacity: 0;
+        height: auto;
+        max-height: 0;
+        overflow: hidden;
+        padding: 0 10px;
+        line-height: 1.5;
+    }
+
+    .home-accordion .accordion-container.acc-active .accordion-content {
+        padding: 15px 10px 10px;
+        opacity: 1;
+        height: auto;
+        max-height: 3000px;
+    }
+
+</style>
+{% schema %}
+{
+    "name":"Home tabs",
+    "settings": [
+    {
+        "type":"text",
+        "label":"Title",
+        "id":"title"
+    }
+    ],
+    "blocks": [
+        {
+            "name":"Tab",
+            "type":"tab",
+            "settings": [
+            {
+                "type":"select",
+                "label":"HTML tag",
+                "default":"h2",
+                "id":"html_label",
+                "options": [
+                { "value": "h2", "label": "h2"},
+                { "value": "h3", "label": "h3"},
+                { "value": "h4", "label": "h4"},
+                { "value": "h5", "label": "h5"}
+                ]
+   
+            },
+            {
+                "id":"title",
+                "label":"Title",
+                "type":"text",
+                "default":"Cool tab title"
+            },
+            {
+                "id":"content",
+                "label":"Content",
+                "type":"textarea"
+            }
+            ]
+        }
+    ],
+    "presets": [
+    {
+        "category":"Home",
+        "name": "Home tabs"
+         }
+    ]
+}
+{% endschema %}

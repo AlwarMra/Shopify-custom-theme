@@ -1,0 +1,171 @@
+{% if section.blocks.size == 2 %}
+{% assign class = 'grid-2' %}
+{% elsif  section.blocks.size == 3 %}
+{% assign class = 'grid-3' %}
+{% endif %} 
+
+<section class="discovery-cards">
+    <div class="discovery-text-container">
+        <h2 class="section-title">{{ section.settings.title }}</h2>
+        <p class="subtitle">{{ section.settings.subtitle }}</p>
+    </div>
+    <div class="" style="background: var(--secondary-color);">
+        <div class="container page-width grid {{ class }}">
+        {% for block in section.blocks %}
+                <div class="discovery-card">
+                    <div>
+                        <div class="aspect-ratio-box">
+                            <img class="lazyload" data-src="{{ block.settings.img | img_url: 'large' }}" alt="{{ block.settings.img.alt }}">
+                        </div>
+                        <div class="discovery-card-content">
+                            <h3 class="section-title">{{ block.settings.title }}</h3>
+                            <p class="">{{ block.settings.desc }}</p>
+                        </div>
+                    </div>
+                    <div class="discovery-btn">
+                        <a class="button" href="{{ block.settings.url }}">{{ block.settings.btn_text }}</a>
+                    </div>
+                </div>
+        {% endfor %}
+        </div>
+</div>
+</section>
+
+<style>
+    .discovery-cards {
+        margin: 4rem auto;
+    }
+    .discovery-cards .container-fluid {
+        overflow: visible;
+    }
+    .discovery-cards .subtitle {
+        text-align: center;
+        font-family: 'SFProText-Regular';
+        margin-top: 1rem;
+    }
+    .discovery-text-container {
+        margin-bottom: 5rem;
+    }
+    .discovery-cards .grid {
+        display: grid;
+        grid-gap: 2rem;
+        margin: 0 auto;
+        padding-bottom: 0;
+    }
+    .discovery-cards .grid.grid-2 {
+        grid-template-columns: 1fr 1fr;
+    }
+    .discovery-cards .grid.grid-3 {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+    .discovery-card  {
+        max-width: 420px;
+        margin: 0 auto 2rem;
+        position: relative;
+        bottom: 4rem;
+        display: flex;
+        flex-flow: column;
+        justify-content: space-between;
+        background: var(--contrast-color);   
+        box-shadow: 0 0 10px 0 rgb(0 0 0 / 10%); 
+    }
+    .discovery-card-content {
+        padding: 1rem;
+        text-align: center;
+    }
+    .discovery-card .aspect-ratio-box {
+        padding-top: 56.25%;
+    }
+    .discovery-card-content .section-title {
+        padding-bottom: 1rem;
+    }
+    .discovery-card-content p {
+        line-height: 1.5;
+    }
+    .discovery-btn {
+        padding: 0 1rem 1rem;
+        text-align: center;
+    }
+    .discovery-card a {
+        color: var(--contrast-color);
+        background: var(--main-color);
+        padding: 10px 20px;
+        display: inline-block;
+        margin-bottom: 10px;
+        font-size: 1rem;
+        width: 100%;
+    }
+    @media(max-width: 768px) {
+        .discovery-cards .grid {
+            display: block;
+        }
+    }
+    @media(min-width: 768px) {
+        .discovery-card .aspect-ratio-box {
+        padding-top: 75%;
+    }
+    }
+</style>
+
+{% schema %}
+{
+    "name":"Discover cards",
+    "settings": [
+        {
+            "id":"title",
+            "type":"text",
+            "label":"Title",
+            "default":"Lorem impsum"
+        },
+        {
+            "id":"subtitle",
+            "type":"text",
+            "label":"Subtitle",
+            "default":"Lorem impsum"
+        }
+    ],
+    "blocks": [
+        {
+            "name":"Card",
+            "type":"card",
+            "limit":3,
+            "settings": [
+                {
+                    "type":"image_picker",
+                    "id":"img",
+                    "label":"Image"
+                },
+                {
+                    "id":"title",
+                    "type":"text",
+                    "label":"Title",
+                    "default":"Lorem impsum"
+                },
+                {
+                    "id":"desc",
+                    "type":"textarea",
+                    "label":"Description",
+                    "default":"Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi at, dolor esse accusamus culpa quisquam quod voluptas voluptatibus totam dolorum unde dicta iusto itaque ratione autem nisi quaerat, vel magni?"
+                },
+                {
+                    "id":"url",
+                    "type":"url",
+                    "label":"URL"
+                },
+                {
+                    "id":"btn_text",
+                    "label":"Button text",
+                    "type":"text",
+                    "default":"Button text"
+                }
+            ]
+        }
+    ],
+    "presets": [
+        {
+        "category":"Home",
+        "name": "Discover cards"
+         }
+    ]
+}
+{% endschema %}

@@ -1,0 +1,202 @@
+<section class="home-collection-picker container">
+    <div class="container-fluid bubble-background">
+
+        <h3 class="section-title">Elige tu perfume de equivalencia DIVAIN:</h3>
+
+        <div class="home-collection-cards"> 
+            {% if  section.settings.col_1 %}
+                {% assign my_collection = collections[ section.settings.col_1 ] %} 
+                <div class="collection-card">
+                    <div class="collection-img">
+                            {% assign img_col = my_collection.image.src | img_url: 'x360' %}
+                            {% if section.settings.img_col_1 %}
+                                {% assign img_col = section.settings.img_col_1  | img_url: 'x360' %}
+                            {% endif %} 
+
+                        <img class="lazyload" data-src="{{ img_col }}" alt="">
+                    </div>
+                    {% assign col_url = my_collection.url %}
+                    {% if section.settings.col_1_link %}
+                    {% assign col_url = section.settings.col_1_link %}
+                    {% endif %} 
+                    <a class="button home-collection-link" href="{{ col_url }}">{{ section.settings.col_1_btn_text }}</a>
+                </div> 
+            {% endif %}
+
+            {% if  section.settings.col_2 %}
+                {% assign my_collection = collections[ section.settings.col_2 ] %} 
+                <div class="collection-card">
+                    <div class="collection-img">
+                            {% assign img_col = my_collection.image.src | img_url: 'x360' %}
+                            {% if section.settings.img_col_2 %}
+                                {% assign img_col = section.settings.img_col_2  | img_url: 'x360' %}
+                            {% endif %} 
+
+                        <img class="lazyload" data-src="{{ img_col }}" alt="">
+                    </div>
+                    {% assign col_url = my_collection.url %}
+                    {% if section.settings.col_2_link %}
+                    {% assign col_url = section.settings.col_2_link %}
+                    {% endif %} 
+                    <a class="button home-collection-link" href="{{ col_url }}">{{ section.settings.col_2_btn_text }}</a>
+                </div> 
+            {% endif %}
+
+
+            {% if  section.settings.col_3 %}
+                {% assign my_collection = collections[ section.settings.col_3 ] %} 
+                <div class="collection-card">
+                    <div class="collection-img">
+                            {% assign img_col = my_collection.image.src | img_url: 'x360' %}
+                            {% if section.settings.img_col_3 %}
+                                {% assign img_col = section.settings.img_col_3  | img_url: 'x360' %}
+                            {% endif %} 
+
+                        <img class="lazyload" data-src="{{ img_col }}" alt="">
+                    </div>
+                    {% assign col_url = my_collection.url %}
+                    {% if section.settings.col_3_link %}
+                    {% assign col_url = section.settings.col_3_link %}
+                    {% endif %} 
+                    <a class="button home-collection-link" href="{{ col_url }}">{{ section.settings.col_3_btn_text }}</a>
+                </div> 
+            {% endif %}
+
+            {% if  section.settings.col_4 %}
+                {% assign my_collection = collections[ section.settings.col_4 ] %} 
+                <div class="collection-card">
+                    <div class="collection-img">
+                            {% assign img_col = my_collection.image.src | img_url: 'x360' %}
+                            {% if section.settings.img_col_4 %}
+                                {% assign img_col = section.settings.img_col_4  | img_url: 'x360' %}
+                            {% endif %} 
+
+                        <img class="lazyload" data-src="{{ img_col }}" alt="">
+                    </div>
+                    {% assign col_url = my_collection.url %}
+                    {% if section.settings.col_4_link %}
+                    {% assign col_url = section.settings.col_4_link %}
+                    {% endif %} 
+                    <a class="button home-collection-link" href="{{ col_url }}">{{ section.settings.col_4_btn_text }}</a>
+                </div> 
+            {% endif %}
+             
+
+        </div>
+        <div class="bubble-bottom"></div>
+    </div>    
+</section>
+
+{% schema %}
+{
+  "name": "4 Colecciones", 
+  "settings": [ 
+
+             {
+            "type":      "collection",
+            "id":        "col_1",
+            "label":     "Colección 1" 
+            },
+             {
+            "type": "image_picker",
+            "id": "img_col_1",
+            "label": "Imagen de la colección 1"
+            },
+            
+            {
+            "type": "text",
+            "id": "col_1_btn_text",
+            "label": "Texto botón",
+            "default": "Perfumes de hombre"
+            },
+            {
+            "id": "col_1_link",
+            "type": "url",
+            "label": "Enlace del botón",
+            "info": "Dejar en blanco para link a colección"
+            }
+            ,
+            {
+            "type":      "collection",
+            "id":        "col_2",
+            "label":     "Colección 2" 
+            },
+             {
+            "type": "image_picker",
+            "id": "img_col_2",
+            "label": "Imagen de la colección 2"
+            },
+            
+            {
+            "type": "text",
+            "id": "col_2_btn_text",
+            "label": "Texto botón",
+            "default": "Perfumes de mujer"
+            },
+            {
+            "id": "col_2_link",
+            "type": "url",
+            "label": "Enlace del botón",
+            "info": "Dejar en blanco para link a colección"
+            },
+
+
+
+             {
+            "type":      "collection",
+            "id":        "col_3",
+            "label":     "Colección 3" 
+            },
+             {
+            "type": "image_picker",
+            "id": "img_col_3",
+            "label": "Imagen de la colección 3"
+            },
+            
+            {
+            "type": "text",
+            "id": "col_3_btn_text",
+            "label": "Texto botón",
+            "default": "Perfumes unisex"
+            },
+            {
+            "id": "col_3_link",
+            "type": "url",
+            "label": "Enlace del botón",
+            "info": "Dejar en blanco para link a colección"
+            }
+            ,
+
+             {
+            "type":      "collection",
+            "id":        "col_4",
+            "label":     "Colección 4" 
+            },
+             {
+            "type": "image_picker",
+            "id": "img_col_4",
+            "label": "Imagen de la colección 4"
+            },
+            
+            {
+            "type": "text",
+            "id": "col_4_btn_text",
+            "label": "Texto botón",
+            "default": "Perfumes nicho"
+            },
+            {
+            "id": "col_4_link",
+            "type": "url",
+            "label": "Enlace del botón",
+            "info": "Dejar en blanco para link a colección"
+            }
+
+   ],
+   "presets": [
+   {
+       "category":"Home",
+       "name": "4 Colecciones"
+    }
+   ]
+}
+{% endschema %}

@@ -1,0 +1,44 @@
+<div class="product-brothers-section" style="background: var(--contrast-color);">
+    <div class="container-fluid">
+      <h3 class="section-title">{{ settings.title_brother }}</h3>
+      <div class="most-sold" id="product-brothers">
+      
+      </div>
+    </div>
+  </div>
+  
+  
+  {% liquid
+  
+  assign categoria = ''
+  assign marca = ''
+  
+  for tag in product.tags
+  if tag contains 'categoria'
+  assign categoria = tag
+  elsif tag contains 'marca'
+  assign marca = tag
+  endif
+  
+  endfor
+  
+  
+  %}
+  
+  
+  <script>
+      var categoria = '{{ categoria }}';
+      var marca = "{{ marca }}";
+      var productId = {{ product.id }};
+      var buy_btn_str = "{{ 'botones.anadelo_por' | t | upcase }}";
+      var agotado_str = "{{ 'botones.sin_stock' | t | upcase }}";
+      
+  </script>
+  
+  {% schema %}
+    {
+      "name": "Product brothers",
+      "settings": [
+      ]
+    }
+  {% endschema %}

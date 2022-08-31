@@ -1,0 +1,213 @@
+{%- assign TIENDA = shop.url | split: '.' | last | upcase %}
+{% assign product_title_parts = prod.title | split: '|' %}
+{% assign titulo_producto = product_title_parts[0] %}
+
+{% assign similar_a = 'general.Similar_a' | t %}
+{% assign de = 'general.de' | t %}
+{% assign de_split = ' ' | append: de | append: ' ' %}
+{% assign marca = product_title_parts[1] | replace: similar_a , ' ' | split: de_split | last %}
+{% assign imitation_product = product_title_parts[1] %}
+{% if similar_a !=blank %}
+{% assign imitation_product = imitation_product | replace: similar_a, ' ' %}
+{% endif %}
+{% assign familias_arr = '' %}
+{% assign familias_todas_arr = '' %}
+
+{% if prod.title contains 'de Parfum Gucci' %}
+{% assign marca = 'Gucci' %}
+{% assign imitation_product = 'Eau de Parfum Gucci' %}
+{% endif %}
+{% if prod.title contains 'de Loewe de Loewe' %}
+{% assign marca = 'Loewe' %}
+{% assign imitation_product = 'Agua de Loewe' %}
+{% endif %}
+{% if prod.title contains 'de Rochas de Rochas' %}
+{% assign marca = 'Rochas' %}
+{% assign imitation_product = 'Eau de Rochas' %}
+{% endif %}
+{% if prod.title contains 'Bleu de Chanel' %}
+{% assign marca = 'Chanel' %}
+{% assign imitation_product = 'Bleu de Chanel' %}
+{% endif %}
+{% if prod.title contains 'Oud Eau de Cologne Concentrée de Acqua di Parma' %}
+{% assign marca = 'Acqua di Parma' %}
+{% assign imitation_product = 'Oud Eau de Cologne Concentrée' %}
+{% endif %}
+
+
+
+{% assign notify = false %}
+{% assign categoria = false %}
+{% assign intensidad = false %}
+{% assign intensidad_txt = '' %}
+{% assign estacion = false %}
+{% assign marca = 'Divain' %}
+{% assign uso = false %}
+{% assign familia = false %}
+{% assign subfamilia = false %}
+{% assign subfamilia2 = false %}
+{% assign envase = '100 ml' %}
+{% assign pack = false %}
+{% assign accesorio = false %}
+{% assign muestra = false %}
+{% assign n_opiniones = false %}
+{% assign oferta = false %}
+{% assign oferta1 = '' %}
+{% assign oferta2 = '' %}
+
+{% for tag in prod.tags %}
+{% assign tag = tag | strip %}
+
+{% if tag contains 'accesorios' or tag contains 'pack' %}
+{% assign similar_a = '' %}
+{% endif %}
+
+{% if tag contains 'pack' %}
+{% assign pack = true %}
+{% endif %}
+
+{% if tag contains 'accesorios' %}
+{% assign accesorio = true %}
+{% endif %}
+
+{% if tag contains 'notify' %}
+{% assign notify = true %}
+{% endif %}
+
+{% assign tag_parts = tag | split: ':' %}
+{% if tag_parts[0] == 'intensidad' %}
+{% assign intensidad = tag_parts[1] %}
+
+{% elsif tag_parts[0] == 'estacion' %}
+{% assign estacion = 'filtros.' | append: tag_parts[1] | remove: ' ' | t %}
+
+{% elsif tag_parts[0] == 'marca' %}
+{% if tag_parts[1] == 'MUESTRAS' %}{% assign muestra = true %}{% endif %}
+{% assign marca = tag_parts[1] %}
+
+{% elsif tag_parts[0] == 'uso' %}
+{% assign uso = 'general.' | append: tag_parts[1] | t | capitalize %}
+
+{% elsif tag_parts[0] == 'familia' %}
+{% assign familia = 'familias.' | append: tag_parts[1] | t %}
+{% assign familias_arr = familias_arr | append:' ' | append: familia %}
+{% assign familias_todas_arr = familias_todas_arr | append:' ' | append: familia %}
+
+{% elsif tag_parts[0] == 'subfamilia' %}
+{% assign subfamilia = 'familias.' | append: tag_parts[1] | t %}
+{% assign familias_todas_arr = familias_todas_arr | append:' ' | append: subfamilia %}
+
+{% elsif tag_parts[0] == 'subfamilia2' %}
+{% assign subfamilia2 = 'familias.' | append: tag_parts[1] | t %}
+{% assign familias_todas_arr = familias_todas_arr | append:' ' | append: subfamilia2 %}
+
+{% elsif tag_parts[0] == 'envase' %}
+{% assign envase = tag_parts[1] %}
+
+{% elsif tag_parts[0] == 'n_opiniones' %}
+{% assign n_opiniones = tag_parts[1] %}
+
+{% elsif tag_parts[0] == 'categoria' %}
+
+
+{% unless tag_parts[1] == 'nicho' or tag_parts[1] == 'Home' %}
+{% assign categoria = 'categorias.' | append: tag_parts[1] | t | upcase %}
+{% endunless %}
+
+
+{% assign oferta1 = '' %}
+{% assign oferta2 = '' %}
+{% assign specialTag = '' %}
+{% assign  homeTag = '' %}
+
+
+{% elsif tag_parts[0] == 'special' %}
+{% assign specialTag = '<span class="special">' | append: settings.special | append: '</span>' %}
+
+{% elsif tag_parts[0] == 'oferta2' %}
+{% assign oferta1 = '<span class="tagoffer2">' | append: settings.oferta2_text | append: '</span>' %}
+
+{% elsif tag_parts[0] == 'oferta' %}
+{% assign oferta2 = '<span class="tagoffer">' | append: tag_parts[1] | append: '</span>' %}
+
+{% elsif tag_parts[0] == 'musthave' %}
+{% assign oferta2 = '<span class="musthave">' | append: settings.must_have_text | append: '</span>' %}
+
+{% elsif tag_parts[0] == 'novedad' %}
+{% assign oferta2 = '<span class="novedad">' | append: settings.novedad_text | append: '</span>' %}
+
+{% elsif tag_parts[0] == 'home' %}
+{% assign homeTag = '<span class="home-tag">' | append: settings.home_text | append: '</span>' %}
+{% endif %}
+
+
+{% endfor %}
+
+{% if marca == '' or marca == 'undefined' or marca == false %}{% assign marca = 'Divain' %}{% endif %}
+
+{% if muestra %}
+	{% assign marca = '' %}
+	{% assign de = '' %}
+	{% assign imitation_product = product_title_parts[1] %}
+{% endif %}
+{% if marca contains 'Kilian' or marca contains 'kilian' %}
+{% assign marca = '' %}
+{% assign de = '' %}
+{% endif %}
+
+{% if marca == 'Divain' or marca == 'DIVAIN' %} {% assign similar_a = '' %} {% endif %}
+{% if oferta1 !=blank or oferta2!=blank or specialTag!=blank %}
+{% assign oferta =  specialTag | append: oferta1 | append: oferta2 %}
+
+{% elsif oferta1 !=blank or oferta2!=blank %}
+{% assign oferta =  oferta1 | append: oferta2 %}
+
+{% endif %}
+{% if oferta == false %}{% assign oferta = '' %}{% endif %}
+{% if homeTag != blank %}
+{% assign oferta = oferta | append: homeTag %}
+{% endif %}
+
+{% if intensidad %}
+{% if intensidad == '1' %}
+{% assign intensidad_txt = 'general.intensidad.Baja' | t %}
+{% elsif intensidad == '2' %}
+{% assign intensidad_txt = 'general.intensidad.Media' | t %}
+{% elsif intensidad == '3' %}
+{% assign intensidad_txt = 'general.intensidad.Fuerte' | t %}
+{% endif %}
+{% endif %}
+
+{% assign familias_arr = familias_arr | split:' ' %}
+{% assign familias_todas_arr = familias_todas_arr | split: ' ' | uniq %}
+
+{% if TIENDA == 'ES' %}
+{% assign pack_col = 'packdemuestras' %}
+{% endif %}
+{% if TIENDA == 'COM' %}
+{%- assign pack_col = 'sample-pack' %}             
+{% endif %}
+{% if TIENDA == 'FR' %}
+{%- assign pack_col = 'pack-dechantillons' %}             
+{% endif %}
+{% if TIENDA == 'IT' %}
+{%- assign pack_col = 'confezione-di-campioni' %}             
+{% endif %}
+{% if TIENDA == 'DE' %}
+{%- assign pack_col = 'duftproben-set' %}             
+{% endif %}
+{% if TIENDA == 'PT' %}
+{%- assign pack_col = 'pack-amostras' %}             
+{% endif %}
+{% if TIENDA == 'NL' %}
+{%- assign pack_col = 'geursample-set' %}             
+{% endif %}
+{% if TIENDA == 'SE' %}
+{%- assign pack_col = 'parfymprover-set' %}             
+{% endif %}
+{% if TIENDA == 'DK' %}
+{%- assign pack_col = 'parfumeprover' %}             
+{% endif %}
+{% if TIENDA == 'FI' %}
+{%- assign pack_col = 'naytepakkaus' %}             
+{% endif %}

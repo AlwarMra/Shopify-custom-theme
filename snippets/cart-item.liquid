@@ -1,0 +1,92 @@
+{% include 'product-tags' | prod: item.product %}
+{%- assign TIENDA = shop.url | split: '.' | last | upcase  %} 
+{% unless item.original_line_price == 0 %}
+<div class="cart-content cart-item-template">
+  <div class="product-cart col1">
+    <a class="cart-product-img" href="{{ item.url | within: collections.all }}">
+      {% if item.properties._id_associated %}
+      <span class="try-buy-icon">{% render 'icon' with 'tryandbuy' %}</span>
+      {% else %}
+      <img src="{{ item | img_url: 'medium' }}" alt="{{ item.title | escape }}">
+    {% endif %}
+    </a>
+    <a class="product-title" href="{{ item.url }}">
+      {% if item.vendor contains 'Rise' %}
+      <div class="card-title">
+        <p><span class="card-title-top" style="font-size: 18px;">{{ titulo_producto }}</span>
+        </p>
+      </div>
+
+      {% else %}
+      <div class="card-title">
+        {% if item.properties._id_associated %}
+        <p class="card-title-top">{{ 'product.muestra_gratis' | t | upcase  }} <span class="trybuy-modal">{{ 'product.tryandbuy' | t }}</span> <a class="info" href="{{ 'product.trybuy_link' | t }}"><span>i</span></a><p>
+           <p class="product-name">{{ titulo_producto }} - {{ similar_a }} {{ imitation_product }} {{ de }} {% if TIENDA == 'DE' %}Divain{% else %}{{ marca }}{% endif %}</p>
+        {% else %}
+        <p class="card-title-top">{{ titulo_producto }} - {{ similar_a }}</p>
+          <p class="product-name"> {{ imitation_product }} {{ de }} {% if TIENDA == 'DE' %}Divain{% else %}{{ marca }}{% endif %}</p>
+       
+        {% endif %}
+      </div>
+      {% endif %}
+    </a>
+  </div>
+  <div class="cart-quantity col2">
+    {% unless item.vendor contains 'Rise' or  item.properties._id_associated %}
+    <table class="minus-plus">
+      <tr>
+        <th class="btn_quantity maincart trash minus" data-handle="{{ item.product.handle }}" data-rel='{{ item.id }}' data-q='{{ item.quantity }}'>
+          <span class="">{% include 'icon' with 'minus' %}</span>
+        </th>
+        <th> <span class="cart__item dv_quantity" name="updates[]" id="quantity updates_{{ item.key }}" value="{{ item.quantity }}"
+            data-rel='{{ item.id }}' data-q='{{ item.quantity }}' {% if item.properties._id_associated %}data-associated="{{ item.properties._id_associated }}"{% endif %}>{{ item.quantity }}</span> </th>
+        <th class="btn_quantity maincart plus" data-rel='{{ item.id }}' data-q='{{ item.quantity }}'>
+          <button class="" style="width:100%;">{% include 'icon' with 'add' %}</button>
+          </th>
+      </tr>
+    </table>
+    {% endunless %}
+    {% unless item.variant.price == 0 %}
+    <a style="cursor: pointer;" class="delete-product cart-remove cartTemplate"  data-rel="{{ item.id }}" data-q="0" data-handle="{{ item.product.handle }}">{{ 'general.borrar' | t }}</a>
+  	{% endunless %}
+  </div>
+
+  <div class="current-cart-price col3">
+    {% if item.original_line_price != item.line_price %}<div class="qb-total-line-item" data-id="{{ item.key }}"><span
+        class="crossed-price" style="font-size:.75em;margin-bottom:.5rem;">{{ item.original_line_price | money }}</span>
+    </div>
+    {% elsif item.variant.compare_at_price != blank and item.variant.compare_at_price != 0 %}<div class="qb-total-line-item" data-id="{{ item.key }}">
+      <span class="crossed-price" style="font-size:.75em;margin-bottom:.5rem;">{{ item.variant.compare_at_price | times: item.quantity | money }}</span>
+    </div>{% endif %}
+    <div class="qb-total-line-item" data-id="{{ item.key }}">{{ item.line_price | money }}</div>
+    {% for discount in item.discounts %}{{ discount.title }}{% endfor %}
+  </div>
+</div>
+
+{% for variant in item.product.variants %}
+{% if variant.title contains 'T&B' %}
+<div class="cart-content cart-item-template">
+  <div class="product-cart col1">
+    <a class="cart-product-img" href="{{ item.url | within: collections.all }}">
+      <span class="try-buy-icon">{% render 'icon' with 'tryandbuy' %}</span>
+    </a>
+    <a class="product-title" href="{{ item.url }}">
+      <div class="card-title">
+        <p class="card-title-top">{{ 'product.muestra_gratis' | t | upcase  }} <br><span class="trybuy-modal" style="display:inline-block; margin-top: .5rem;">{{ 'product.tryandbuy' | t }}</span> <a class="info" href="{{ 'product.trybuy_link' | t }}"><span>i</span></a><p>
+           <p class="product-name">{{ titulo_producto }} - {{ similar_a }} {{ imitation_product }} {{ de }} {% if TIENDA == 'DE' %}Divain{% else %}{{ marca }}{% endif %}</p>
+      </div>
+
+    </a>
+  </div>
+  <div class="cart-quantity col2">
+  </div>
+</div>
+
+
+
+
+
+
+{% endif %}
+{% endfor %}
+{% endunless %}

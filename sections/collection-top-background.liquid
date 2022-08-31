@@ -1,0 +1,309 @@
+{% assign align_class = section.settings.align_class %}
+{% assign u = collection.url %}
+{% assign desc = collection.description | split: '==TEXTO==' %}
+{% assign desc1 = desc[1] %}
+
+<section class="home-top- home-top-background h-t-b-o">
+    <div class="container">
+      
+      
+            <header>
+              {% if desc1 !=blank %}
+              <p>{{ desc1 }}</p>
+              {% else %}
+                {% if section.settings.frase_secundaria != ''  %}
+                <p class="subheading {{ align_class }}" style="color:{{ section.settings.color_frase_principal }}">{{ section.settings.frase_secundaria }}</p>
+                {% endif %}
+
+                <div class="section-title-wrapper">
+                    <p class="section-title {{ align_class }}"  style="color:{{ section.settings.color_frase_principal }}">  
+                            {{ section.settings.frase_principal }}  
+                    </p> 
+                </div>
+               {% endif %}
+            </header>
+
+
+            <div class="home-top-cards {{ align_class }}"> 
+
+            {% if  section.settings.col_1 %}
+            {% assign my_collection = collections[ section.settings.col_1 ]%}
+                <div class="home-top-card ">
+                    <div class="home-top-image"> 
+                        {% assign col_url = my_collection.url %}
+                        {% if section.settings.col_1_link %}{% assign col_url = section.settings.col_1_link %}{% endif %}
+                        {% comment %}{% assign img_col = my_collection.image.src | img_url: 'x360' %}{% endcomment %}
+                        {% if section.settings.img_col_1 %}
+                        {% assign img_col = section.settings.img_col_1.src  | img_url: 'x360' %}
+                        {% endif %} 
+                        <a href="{% if u == col_url %}javascript:;{% else %}{{ col_url }}{% endif %}" class="{% if u == col_url %}inCol{% endif %} border_image"></a> 
+                        {% assign col_title = my_collection.title  %}
+                        {% if section.settings.col_1_title != ''  %}
+                        {% assign col_title = section.settings.col_1_title %}
+                        {% endif %}
+                        <span class="{% if u == col_url %}inCol{% endif %} card-title border_image_h2"  style="color:{{ section.settings.color_col_1 }}">{{ col_title }}</span> 
+                    </div>
+                  
+                    {% assign btn_text = section.settings.col_1_btn_text  %} 
+                    <a class="button home-collection-link" href="{{ col_url }}">{{ btn_text }}</a>
+                </div>
+            {% endif %}
+
+            {% if  section.settings.col_2 %}
+            {% assign my_collection = collections[ section.settings.col_2 ] %}
+                <div class="home-top-card ">
+                    <div class="home-top-image">
+                        
+                        {% assign col_url = my_collection.url %}
+                        {% if section.settings.col_2_link %}{% assign col_url = section.settings.col_2_link %}{% endif %}
+                        {% comment %}{% assign img_col = my_collection.image.src | img_url: 'x360' %}{% endcomment %}
+                        {% if section.settings.img_col_2 %}
+                        {% assign img_col = section.settings.img_col_2 | img_url: 'x360' %}
+                        {% endif %} 
+                        <a href="{% if u == col_url %}javascript:;{% else %}{{ col_url }}{% endif %}" class="{% if u == col_url %}inCol{% endif %} border_image" style="background-image: url('{{img_col}}')"></a> 
+                        {% assign col_title = my_collection.title  %}
+                        {% if section.settings.col_2_title != ''  %}
+                        {% assign col_title = section.settings.col_2_title %}
+                        {% endif %}
+                        <span class="{% if u == col_url %}inCol{% endif %} card-title border_image_h2"  style="color:{{ section.settings.color_col_2 }}">{{ col_title }}</span> 
+                    </div>
+                   
+                    {% assign btn_text = section.settings.col_2_btn_text  %} 
+                    <a class="button home-collection-link" href="{{ col_url }}">{{ btn_text }}</a>
+                </div>
+            {% endif %}
+
+            {% if  section.settings.col_3 %}
+            {% assign my_collection = collections[ section.settings.col_3 ]%}
+                <div class="home-top-card ">
+                    <div class="home-top-image">
+                        
+                        {% assign col_url = my_collection.url %}
+                        {% if section.settings.col_3_link %}{% assign col_url = section.settings.col_3_link %}{% endif %}
+                        {% comment %}{% assign img_col = my_collection.image.src | img_url: 'x360' %}{% endcomment %}                        {% if section.settings.img_col_3 %}
+                        {% assign img_col = section.settings.img_col_3  | img_url: 'x360' %}
+                        {% endif %} 
+                        <a href="{% if u == col_url %}javascript:;{% else %}{{ col_url }}{% endif %}" class="{% if u == col_url %}inCol{% endif %} border_image" style="background-image: url('{{img_col}}')"></a> 
+                        {% assign col_title = my_collection.title  %}
+                        {% if section.settings.col_3_title != ''  %}
+                        {% assign col_title = section.settings.col_3_title %}
+                        {% endif %}
+                        <span class="{% if u == col_url %}inCol{% endif %} card-title border_image_h2" style="color:{{ section.settings.color_col_3 }}">{{ col_title }}</span> 
+                    </div>
+                    
+                    {% assign btn_text = section.settings.col_3_btn_text  %} 
+                    <a class="button home-collection-link" href="{{ col_url }}">{{ btn_text }}</a>
+                </div>
+            {% endif %} 
+            </div>
+    </div>
+</section>
+<style> 
+
+  {% if collection.image %}
+    .h-t-b-o { 
+        background-image: url('{{ collection.image.src | image_url }}');  
+          background-position: unset;
+    }  
+  @media(max-width:768px) {
+  .h-t-b-o { 
+  	  background-position: cover;
+  }}
+  {% else %}
+    .h-t-b-o { 
+        background-image: url('{{ section.settings.img_fondo_video | image_url }}');  
+         
+    }
+      @media(max-width:768px) {
+
+      .h-t-b-o{ 
+        background-image: url('{{ section.settings.img_fondo_movil | image_url }}');  
+          }
+      }
+  {% endif %}
+  .home-top-background .home-top-cards .home-top-card {
+  	margin: 0 5%;
+  }
+  .home-top-background .home-top-cards .home-top-card .home-top-image .border_image {
+    {% if section.settings.border_check %}
+    border:.18rem solid {{ section.settings.border_color }};
+    {% endif %}
+    {% if section.settings.shadow_check %}
+    box-shadow: 2px 2px 10px 0 {{ section.settings.shadow_color }};
+    {% endif %}
+    border-radius: {{ section.settings.border_radius }}px;
+    background-color: {{ section.settings.btn_back_color }};
+  }
+</style>
+
+
+
+{% schema %}
+{
+  "name": "Collection top background", 
+  "settings": [ 
+        {
+        "type": "image_picker",
+        "id": "img_fondo_video",
+        "label": "Imagen fondo sección" 
+        },
+		{
+		  "type": "image_picker",
+          "id": "img_fondo_movil",
+          "label": "Imagen fondo Móvil" 
+		},
+        {
+            "type":      "select",
+            "id":        "align_class",
+            "label":     "Alinear a",
+            "default":"center",
+            "options": [
+                { 
+                "value": "to_left",
+                "label": "Izquierda"
+                },
+                { 
+                "value": "to_right",
+                "label": "Derecha"
+                },
+                { 
+                "value": "center",
+                "label": "Centro"
+                }
+                ]
+            },
+        
+
+        {
+        "type": "text",
+        "id": "frase_secundaria",
+        "label": "Frase secundaria",
+        "default": "Descubre cerca de 500 fragancias de alta calidad"
+        }, 
+        {
+        "type": "text",
+        "id": "frase_principal",
+        "label": "Frase principal",
+        "default": "Tus perfumes de equivalencia por "
+        },
+        {
+        "type":      "color",
+        "id":        "color_frase_principal",
+        "label":     "Color rótulos",
+        "default":   "#050505" 
+        }, 
+            {
+            "type": "header",
+            "content": "Colecciones"
+            },
+ 
+            {
+            "type":      "collection",
+            "id":        "col_1",
+            "label":     "Colección 1" 
+            },
+            {
+            "type": "text",
+            "id": "col_1_title",
+            "label": "Título colección alternativo",
+            "info": "Dejar en blanco para título colección"
+             }, 
+            {
+            "type":      "color",
+            "id":        "color_col_1",
+            "label":     "Color Rótulo colección 1",
+            "default":   "#050505" 
+            }
+          
+            ,
+            {
+            "type":      "collection",
+            "id":        "col_2",
+            "label":     "Colección 2" 
+            },
+            {
+            "type": "text",
+            "id": "col_2_title",
+            "label": "Título colección 2 alternativo",
+            "info": "Dejar en blanco para título colección"
+             }, 
+            {
+            "type":      "color",
+            "id":        "color_col_2",
+            "label":     "Color Rótulo colección 2",
+            "default":   "#050505" 
+            }, 
+
+             {
+            "type":      "collection",
+            "id":        "col_3",
+            "label":     "Colección 3" 
+            },
+            {
+            "type": "text",
+            "id": "col_3_title",
+            "label": "Título colección 3 alternativo",
+            "info": "Dejar en blanco para título colección"
+             },
+             {
+                "type":      "color",
+                "id":        "color_col_3",
+                "label":     "Color Rótulo colección 3",
+                "default":   "#050505" 
+                },
+          {
+              "type":"header",
+              "content":"Buttons styles"
+          },		  {
+			"type":"checkbox",
+			"default":true,
+			"label":"Border?",
+			"id":"border_check"
+			},
+		 {
+			"type":"color",
+			"default":"#0e6894",
+			"id":"border_color",
+			"label":"Border color"
+		},
+
+		  {
+			"type":"checkbox",
+			"default":true,
+			"label":"Shadow?",
+			"id":"shadow_check"
+			},
+		 {
+			"type":"color",
+			"default":"#0e6894",
+			"id":"shadow_color",
+			"label":"Shadow color"
+		},
+		{
+			"type":"range",
+			"unit":"px",
+			"min":0,
+			"step":1,
+			"max":40,
+			"default":4,
+			"id":"border_radius",
+			"label":"Border radius"
+		},
+		 {
+			"type":"color",
+			"default":"#ffffff",
+			"id":"btn_back_color",
+			"label":"Background color"
+		}
+
+             
+
+   ],
+   "presets": [
+   {
+       "category":"Home",
+       "name": "Collection top background"
+    }
+   ]
+}
+{% endschema %}

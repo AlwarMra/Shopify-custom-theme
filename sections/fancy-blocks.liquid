@@ -1,0 +1,358 @@
+<section class="fancy-blocks">
+  <h2 class="section-title">{{ section.settings.title }}</h2>
+    <h2 class="subtitle">{{ section.settings.subtitle }}</h2>  
+    
+    
+      <div class="mv-background-1 lazyload" data-bg="{{ section.settings.back_img_mv_1 | img_url: 'x600' }}"></div>
+      <div class="mv-background-2 lazyload" data-bg="{{ section.settings.back_img_mv_2 | img_url: 'x600' }}"></div>
+      <div class="ds-background"></div>
+  
+    <div class="fancy-blocks-cards">
+      <div class="fancy-row">
+      
+      {% if section.settings.img_1 %}
+      <a class="fancy-card fancy-row-card-first" href="{{ section.settings.link_1 }}">
+        <div class="aspect-ratio-box">
+            <img class="lazyload" data-src="{{ section.settings.img_1 | img_url: 'x800' }}">
+            <p class="card-text">{{ section.settings.text_1 }}</p>
+        </div>
+      
+        <div class="fancy-btn"><p>{{ section.settings.btn_text_1 }}</p><p class="button"><span>{{ section.settings.btn_text_small_1 }}</span></p></div>
+      </a>
+    {% endif %}
+        
+     {% if section.settings.img_2 %}
+      <a class="fancy-card fancy-row-card-middle" href="{{ section.settings.link_2 }}">
+        <div class="aspect-ratio-box">
+            <img class="lazyload" data-src="{{ section.settings.img_2 | img_url: 'x760' }}">
+                <p class="card-text">{{ section.settings.text_2 }}</p>
+        </div>
+     
+        <div class="fancy-btn"><p>{{ section.settings.btn_text_2 }}</p><p class="button"><span>{{ section.settings.btn_text_small_2 }}</span></p></div>
+      </a>
+    {% endif %}
+      
+      </div>
+    
+     {% if section.settings.img_3 %}
+      <a class="fancy-card fancy-row-card-last" href="{{ section.settings.link_3 }}">
+        <div class="aspect-ratio-box">
+            <img class="lazyload" data-src="{{ section.settings.img_3 | img_url: 'x1200' }}">
+                <p class="card-text">{{ section.settings.text_3 }}</p>
+        </div>
+      
+        <div class="fancy-btn"><p>{{ section.settings.btn_text_3 }}</p><p class="button"><span>{{ section.settings.btn_text_small_3 }}</span></p></div>
+      </a>
+    {% endif %}
+    
+    
+    </div>
+    
+    
+  </section>
+  <style>
+    .fancy-blocks {
+      background: {{ section.settings.section_color }};
+      padding: 3rem 0;
+      position: relative;
+    }
+      .fancy-blocks .subtitle {
+      text-align: center;
+      width: 80%;
+      margin: 2rem auto;
+      color: var(--text-color);
+    font-family: futura;
+    }
+    .mv-background-1 {
+      height: 25%;
+      top: 25%;
+    }
+    .mv-background-2 {
+      height: 25%;
+      bottom: 0;
+    }
+    .mv-background-1, .mv-background-2 {
+      position: absolute;
+      z-index:1;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      width: 100%;
+    }
+    .ds-background {
+      display: none;
+    }
+    .fancy-card {
+      margin: 0 auto 2rem;
+      width: 80%;
+      display: block;
+      text-decoration: none;
+    }
+    .fancy-blocks-cards {
+      max-width: 1200px;
+      width: 95%;
+      margin: 0 auto;
+      position: relative;
+      z-index:2;
+    }
+    .fancy-card .card-text {
+          font-family: 'amalfi';
+      color: #ffffff;
+      position: absolute;
+      z-index: 1;
+      font-size: 2rem;
+      bottom: 1.2rem;  
+      left: 1rem;
+      line-height: 2;
+    }
+    .fancy-btn {
+      display: flex;
+      flex-wrap: nowrap;
+      justify-content: space-between;
+      align-items: center;
+      background: white;
+      position: relative;
+    }
+    .fancy-btn p {
+      font-size: 1rem;
+      padding: 1rem;
+      margin: 0;
+    }
+    .fancy-btn span {
+    	font-size: 1rem;
+    }
+    .fancy-btn .button {
+      color: #ffffff;
+      background: #000000;
+      padding: 2rem 1rem;
+    }
+    .fancy-btn span {
+      color: inherit;
+    }
+    @media(min-width: 764px) {
+    .ds-background {
+      display: block;
+      background: url('{{ section.settings.back_img_ds | img_url: 'x1400' }}');
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+        position: absolute;
+      bottom: 2rem;
+      height: 65%;
+      width: 96%;
+      left:50%;
+        transform: translateX(-50%);
+    }
+    .mv-background-1, .mv-background-2 {
+     display: none;
+    }
+      .fancy-row {
+        display: flex;
+      }
+      .fancy-row .fancy-btn{
+      	height: 100px;
+      }
+      .fancy-row .fancy-btn span {
+      	position: relative;
+        top: 25%;
+      }
+      .fancy-card {
+        width: 100%;
+          margin: 1rem;
+        margin-bottom: 4rem;
+      }
+      .fancy-card .aspect-ratio-box {
+        height: 100%;
+      }
+      .fancy-row-card-first {
+        width: 65%;
+      }
+      .fancy-row-card-first .aspect-ratio-box{
+    padding-top: 37.25%;
+      }
+      .fancy-row-card-middle {
+        width: 35%;
+      }
+      .fancy-row-card-middle .card-text{
+        right: 2rem;
+        left: auto;
+      }
+      .fancy-row-card-middle .aspect-ratio-box{
+    padding-top: 43.25%;
+    }
+      .fancy-row-card-last {
+        width: calc(100% - 2rem);
+        display: flex;
+        margin-top:4rem;
+      }
+      .fancy-row-card-last .card-text{
+        bottom: 50%;
+          transform: translateY(50%);
+      }
+      .fancy-row-card-last .aspect-ratio-box{
+    padding-top: 18%;
+        width: 67%;
+    }
+      .fancy-row-card-last .fancy-btn{
+        width: 35%;
+      }
+          .fancy-row-card-last .fancy-btn .button{
+            color: #000000;
+            background: #ffffff;
+            height: 100%;
+            width: 29%;
+            text-decoration: underline;
+            /*white-space: nowrap;*/
+          }
+      .fancy-btn .button {
+      	height: 100%;
+      }
+      .fancy-row-card-last .fancy-btn span{
+        position: relative;
+          top: 38%;
+        right:10px;
+      }
+    }
+  </style>
+  {% schema %}
+  {
+    "name": "Fancy blocks", 
+    "settings": [ 
+        {
+      "id":"title",
+      "type":"text",
+      "label":"Title",
+      "default":"Title"
+      },
+      {
+      "id":"subtitle",
+      "type":"text",
+      "label":"Subtitle",
+      "default":"Subtitle"
+      },
+      {
+      "type":"color",
+      "label":"Background color",
+      "id":"section_color",
+      "default":"#fff8f5"
+      },
+        {
+        "type":"image_picker",
+        "id":"back_img_mv_1",
+        "label":"Background image (mobile)"
+        },
+        {
+        "type":"image_picker",
+        "id":"back_img_mv_2",
+        "label":"Background image (mobile)"
+        },
+        {
+        "type":"image_picker",
+        "id":"back_img_ds",
+        "label":"Background image (desktop)"
+        },
+       {
+      "type":"header",
+      "content":"First card"
+      },
+      {
+      "id":"img_1",
+      "label":"Image",
+      "type":"image_picker"
+      },
+        {
+      "id":"text_1",
+      "type":"text",
+      "label":"Text",
+      "default":"Text"
+      },
+      {
+      "id":"btn_text_1",
+      "type":"text",
+      "label":"Button text",
+      "default":"Text"
+      },
+      {
+        "id":"btn_text_small_1",
+        "type":"text",
+        "label":"Button text",
+        "default":"Ver más"
+        },     
+      {
+      "id":"link_1",
+      "type":"url",
+      "label":"URL"
+      },
+      {
+      "type":"header",
+      "content":"Second card"
+      },
+      {
+      "id":"img_2",
+      "label":"Image",
+      "type":"image_picker"
+      },
+        {
+      "id":"text_2",
+      "type":"text",
+      "label":"Text",
+      "default":"Text"
+      },
+        {
+      "id":"btn_text_2",
+      "type":"text",
+      "label":"Text",
+      "default":"Text"
+      },
+      {
+        "id":"btn_text_small_2",
+        "type":"text",
+        "label":"Button text",
+        "default":"Ver más"
+        }, 
+      {
+      "id":"link_2",
+      "type":"url",
+      "label":"URL"
+      },
+      {
+      "type":"header",
+      "content":"Third card"
+      },
+      {
+      "id":"img_3",
+      "label":"Image",
+      "type":"image_picker"
+      },
+        {
+      "id":"text_3",
+      "type":"text",
+      "label":"Text",
+      "default":"Text"
+      },
+        {
+      "id":"btn_text_3",
+      "type":"text",
+      "label":"Text",
+      "default":"Text"
+      },
+      {
+        "id":"btn_text_small_3",
+        "type":"text",
+        "label":"Button text",
+        "default":"Ver más"
+        }, 
+      {
+      "id":"link_3",
+      "type":"url",
+      "label":"URL"
+      }
+     ],
+     "presets": [
+     {
+         "category":"Home",
+         "name": "Fancy blocks"
+      }
+     ]
+  }
+  {% endschema %}

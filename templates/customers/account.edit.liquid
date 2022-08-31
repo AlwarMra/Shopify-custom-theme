@@ -1,0 +1,78 @@
+{%- assign TIENDA = shop.url | split: '.' | last | upcase  %}
+
+<div class="account">
+  <div class="account-container" data-section-type="addresses" data-section-id="addresses">
+    <header class="PageHeader">
+      <a href="/account" class="title-logout">{{ 'customers.volver_a_mi_cuenta' | t | upcase}}</a>
+  
+      <div class="SectionHeader">
+        <h1 class="account-title" style="text-align: center;">{{ 'customers.editar' | t | upcase}}</h1>
+  
+   
+  
+      </div>
+    </header>
+  
+  
+      <form class="login-form account-form" id="editCustomer" method="get">
+      
+        <input type="hidden" name="t" value="{{ TIENDA }}">
+        <input type="hidden" name="customer_id" value="{{ customer.id }}"> 
+        
+        <div class="form-item">
+          <input type="text" value="{{ customer.first_name }}"   name="first_name" aria-label="{{ 'customers.nombre' | t }}" placeholder="{{ 'customers.nombre' | t }}" autofocus>
+        </div>
+        <div class="form-item">
+          <input type="text" value="{{ customer.last_name }}"  name="last_name" aria-label="{{ 'customers.apellido' | t }}" placeholder="{{ 'customers.apellido' | t }}">
+        </div>
+  
+        <div class="form-item">
+          <input type="email" value="{{ customer.email }}"  name="email" aria-label="{{ 'customers.email' | t }}" placeholder="{{ 'customers.email' | t }}" required="required">
+        </div>
+  
+        <div class="form-item">
+          <label for="birthday"><p style="font-size: .75rem; text-align: left; margin-bottom: 5px;">{{ 'customers.cumple' | t }}</p>
+          <input type="date" name="birthday" value="{{ customer.metafields.divain.birthday.value }}" required="required">
+          </label>
+        </div>
+                  
+        <div class="form-item">      
+          <div class="select-country">         
+            <span class="select-icon">{% include 'icon' with 'select-arrow' %}</span>   
+            <p style="font-size: .75rem; text-align: left; margin-bottom: 5px;">{{ 'customers.preference' | t }}</p>
+            <select name="preference" title="">
+              <option value="hombre" {% if preference == 'men' %}selected{% endif %}>{{ 'categorias.hombre' | t }}</option>
+              <option value="mujer" {% if preference == 'women' %}selected {% endif %}>{{ 'categorias.mujer' | t }}</option>
+              <option value="unisex" {% if preference == 'unisex' %}selected{% endif %}>{{ 'categorias.unisex' | t }}</option>
+            </select>  
+          </div> 
+        </div>   
+        
+        <button class="button button-account" style="position:relative;">{{ 'customers.editar' | t | upcase }}</button>
+        </form>
+  </div>
+  
+  
+  
+  </div>
+  
+  
+  <style>
+      
+    .success-edit:after {
+            position: absolute;
+          top: 100%;
+          content: '{{ 'customers.editado' | t }}';
+          background: #000;
+          text-align: center;
+          color: white;
+          opacity: .7;
+          padding: .5rem;
+          left: 50%;
+          font-size: .75rem;
+          transform: translateX(-50%);
+          transition: all .3s ease-in-out;
+          border-radius: 4px;
+    }
+  
+  </style>

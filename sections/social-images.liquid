@@ -1,0 +1,138 @@
+<section class="social-images container page-width">
+    <div class="text-container">
+        <h2 class="section-title">{{ section.settings.title }}</h2>
+        <p class="subtitle">{{ section.settings.subtitle }}</p>
+    </div>
+    <div class="social-slider">
+        {% for block in section.blocks %}
+        <a class="aspect-ratio-box" href="{{ block.settings.url }}">
+            <img class="lazyload" data-src="{{ block.settings.img | img_url: 'large' }}" alt="{{ block.settings.img.alt }}">
+        </a>
+        {% endfor %} 
+    </div>
+    <a href="{{ section.settings.url }}" class="button">{% if section.settings.btn_text !=blank %}{% else %}{{ 'botones.seguir_redes' | t }}{% endif %}</a>
+</section>
+
+<style>
+    .social-images {
+        max-width: 1000px;
+        margin: 3rem auto;
+        text-align: center;
+    }
+    .social-images .text-container {
+        margin-bottom: 3rem;
+    }
+    .social-images .text-container p {
+        text-align: center;
+        font-family: 'SFProText-Regular';
+        margin-top: 1rem;
+    }
+
+    .social-slider:after {
+        content: 'flickity';
+        display: none;
+    }
+    .social-slider .aspect-ratio-box {
+        width: 45%;
+        padding-top: 45%;
+        margin: 1rem;
+    }
+    .social-slider .flickity-button {
+        color: var(--main-color);
+        background: var(--secondary-color);
+    } 
+    .social-slider .flickity-prev-next-button.next {
+        right: -30px;
+    }
+    .social-slider .flickity-prev-next-button.previous {
+        left: -30px;
+    }
+    .social-images .button {
+        color: var(--contrast-color);
+        background: var(--main-color);
+        padding: 10px 20px;
+        display: inline-block;
+        margin-bottom: 10px;
+        font-size: 1rem;
+}
+    }
+    @media(max-width: 768px){
+        .social-slider .aspect-ratio-box {
+            width: 46%;
+            padding-top: 46%;
+            margin: .5rem;
+        }
+        .social-slider .flickity-button {
+            display: none;
+        } 
+    }
+    @media(min-width: 1024px) {
+        .social-slider {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-gap: 1rem;
+        }
+        .social-slider .aspect-ratio-box{
+            width: 100%;
+            padding-top: 100%;
+        }
+        .social-slider:after {
+            content: '';
+        }
+    }
+
+</style>
+{% schema %}
+{
+    "name":"Social images",
+    "settings": [
+    {
+        "id":"title",
+        "type":"text",
+        "label":"Title",
+        "default":"Lorem impsum"
+    },
+    {
+        "id":"subtitle",
+        "type":"text",
+        "label":"Subtitle",
+        "default":"Lorem impsum"
+    },
+    {
+        "type":"url",
+        "id":"url",
+        "label":"Button url"
+    },
+    {
+        "type":"text",
+        "id":"btn_text",
+        "label":"Button text (optional)"
+    }
+    ],
+    "blocks": [
+        {
+            "name":"Card",
+            "type":"image",
+            "limit":4,
+            "settings":[
+                {
+                    "type":"url",
+                    "id":"url",
+                    "label":"Image"
+                },
+                {
+                    "type":"image_picker",
+                    "id":"img",
+                    "label":"Image"
+                }
+            ]
+        }
+    ],
+    "presets":[
+    {
+        "name":"Social images",
+        "category":"home"
+    }
+    ]
+}
+{% endschema %}

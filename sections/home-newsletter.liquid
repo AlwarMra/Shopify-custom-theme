@@ -1,0 +1,108 @@
+<section class="home-newsletter">
+{%- assign formId = 'Contact_' | append: section.id -%}
+
+     
+    <div class="newsletter-image">
+        <div class="image-background">
+        </div>
+            <img src="{{ section.settings.img_newsletter | image_url }}" alt="">
+    </div>
+
+    <div class="newsletter-info"> 
+        <h4 class="section-title">{{ section.settings.titular }}</h4>
+        <br>
+        {% if section.settings.texto_secundario != '' %}
+        {{ section.settings.texto_secundario }}
+        {% endif %}
+        <div class="footer-submit">
+        {% form 'customer', id: formId, novalidate: 'novalidate', class: 'submit-email' %}
+                 {%- if form.posted_successfully? -%}
+                    <p class="">{{ 'general.newsletter_form.confirmacion' | t }}</p>
+                  {%- endif -%} 
+                  <div>
+
+                  <input type="hidden" name="contact[tags]" value="{{ section.settings.tags }}">
+                    <input
+                    placeholder="{{ 'general.newsletter_form.email_placeholder'  | t }}" 
+                    type="email"
+                    name="contact[email]"
+                    id="{{ formId }}-email"
+                    value="{{ form.email }}"
+                    aria-required="true"
+                    autocorrect="off"
+                    autocapitalize="off"
+                    required="required"
+                    ><button type="submit">{{ section.settings.btn_text}}</button>
+                </div>
+                    {% comment ------ creo que no van a poner el check de momento --------%}
+                        <label for="newsletter_check" class="privacy-acceptance">
+                            <input id="newsletter_check" class="checkmark" type="checkbox" required="required">
+                            <span>{{ section.settings.texto_privacidad }}</span>
+                        </label>
+                    {% endcomment %}
+                    {%- if form.errors contains 'email' -%}
+                    <span id="{{ formId }}-email-error" class="input-error-message"></span>
+                    <span class="visually-hidden">{{ 'general.error' | t }} </span> 
+                    <span>{{ form.errors.translated_fields['email'] | capitalize }} {{ form.errors.messages['email'] }}.</span>
+                {%- endif -%}
+            {% endform %}
+        </div> 
+    </div>
+
+
+</section>
+
+<script>
+    //----TODO: script de subscription
+
+</script>
+{% schema %}
+{
+  "name": "Newsletter subscription", 
+  "settings": [ 
+        {
+        "type": "image_picker",
+        "id": "img_newsletter",
+        "label": "Imagen",
+        "info":"PNG, la imagen será rotada para encajar en el diseño"
+        }, 
+        {
+        "type": "text",
+        "id": "titular",
+        "label": "Titular",
+        "default": "Siempre hay más de un perfume diseñado para ti "
+        },
+        {
+        "type": "richtext",
+        "id": "texto_secundario",
+        "label": "Texto secundario",
+        "default": "<p>¡Descúbrelo en nuestro catálogo!</p>"
+        }, 
+        {
+        "type": "text",
+        "id": "btn_text",
+        "label": "Texto botón",
+        "default": "DESCARGAR"
+        },
+        {
+        "type": "text",
+        "id": "tags",
+        "label": "Tags a incluir (separadas por comas)",
+        "default": "Newsletter",
+        "info":"Una o más tags que se incluirán en la ficha de cliente que se cree con este registro"
+        },
+        {
+        "type": "text",
+        "id": "texto_privacidad",
+        "label": "Texto privacidad",
+        "default": "<p>Acepto las condiciones de uso y la política de privacidad</p>"
+        }
+   ],
+   "presets": [
+   {
+       "category":"Home",
+       "name": "Newsletter subscription"
+    }
+   ]
+}
+{% endschema %}

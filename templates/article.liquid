@@ -1,0 +1,20 @@
+{% assign number_of_comments = article.comments_count %}
+{% if comment and comment.created_at %}
+{% assign number_of_comments = article.comments_count %}
+{% endif %}
+
+
+<div class="blog blog-background">
+  <div class="blog-container">
+    {% section 'blog-header' %}
+    {%- if article.image  -%}
+    <div class="article-image-wrapper"
+      style=" width: 100%; background-image: url('{{ article.image | img_url: 'x900' }}')">
+    </div>
+    {%- endif -%}
+    <div class="blog-flex">
+      {% section 'article-template' %}
+      {% section 'side-blog' %}
+    </div>
+  </div>
+</div>

@@ -1,0 +1,375 @@
+<script>
+    function isMobile() { return window.innerWidth <= 764; }
+    function isDesktop() { return window.innerWidth >= 1024; }
+
+    // Datalayer
+    {% if customer %}
+    var customer = {{ customer.id }};
+    {% else %}
+    var customer = 'anon'
+    {% endif %}
+    dataLayer = [{
+      'pageCategory': '{{ template.name }}',
+      'visitorType': customer
+    }];
+    dataLayer.push({
+      'event': 'impression',
+      'ecommerce': {
+        'currencyCode': 'EUR',
+        'impressions': []
+      }
+    }
+    );
+    //DT object
+    var DT = {
+    str: [],
+    init: function (params) {
+        this.shop_url = params.shop_url
+        this.money_format = params.money_format
+        this.gastos_envio = params.gastos_envio
+    }, isMobile() {
+        return window.innerWidth <= 764;
+
+    }, isDesktop() {
+        return window.innerWidth >= 1024;
+
+    } 
+
+}
+    DT.init({
+      shop_url: '{{ shop.url }}',
+      shop_locale: '{{ shop_locale.iso_code }}',
+      money_format: '{{ shop.money_format }}',
+      gastos_envio: {{ settings.gastos_envio | remove: ',' }}
+    });
+
+    // Translations
+    DT.str['Similar a'] = "{{  'general.Similar_a' | t }}";
+    DT.str['de'] = "{{  'general.de' | t }}";
+    DT.str['iva_incluido'] = "{{  'general.iva_incluido' | t }}";
+    DT.str['no_tienes_productos'] = "{{  'general.no_tienes_productos' | t }}";
+    DT.str['total'] = "{{  'general.total' | t }}";
+    DT.str['subtotal'] = "{{  'general.subtotal' | t }}";
+    DT.str['gastos_envio'] = "{{  'general.gastos_envio' | t }}";
+    DT.str['muestra_gratis'] = "{{ 'product.muestra_gratis' | t | upcase  }}";
+    DT.str['tryandbuy'] = "{{ 'product.tryandbuy' | t }}";
+    DT.str['trybuy_link'] = "{{ 'product.trybuy_link' | t }}";
+    DT.str['Ver_menos_sobre_el_perfume'] = "{{  'product.Ver_menos_sobre_el_perfume' | t }}";
+    DT.str['Ver_mas_sobre_el_perfume'] = "{{  'product.Ver_mas_sobre_el_perfume' | t }}";
+    DT.str['completa_pedido']= "{{ 'general.completa_pedido' | t }}";
+
+    DT.str["todos"] = "{{ 'categorias.todos' | t }}";
+    DT.str["hombre"] = "{{ 'categorias.hombre' | t }}";
+    DT.str["mujer"] = "{{ 'categorias.mujer' | t }}";
+    DT.str["unisex"] = "{{ 'categorias.unisex' | t }}";
+    DT.str["nicho"] = "{{ 'categorias.nicho' | t }}";
+    DT.str["kids"] = "{{ 'categorias.kids' | t }}";
+    DT.str["mascotas"] = "{{ 'categorias.mascotas' | t }}";
+    DT.str["accesorios"] = "{{ 'categorias.accesorios' | t }}";
+
+    DT.str["acuatica"] = "{{ 'familias.acuatica' | t | capitalize}}";
+    DT.str["amaderada"] = "{{ 'familias.amaderada' | t | capitalize}}";
+    DT.str["almizcle"] = "{{ 'familias.almizcle' | t | capitalize}}";
+    DT.str["citrica"] = "{{ 'familias.citrica' | t | capitalize}}";
+    DT.str["chipre"] = "{{ 'familias.chipre' | t | capitalize}}";
+    DT.str["cuero"] = "{{ 'familias.cuero' | t | capitalize}}";
+    DT.str["especiada"] = "{{ 'familias.especiada' | t | capitalize}}";
+    DT.str["fougere"] = "{{ 'familias.fougere' | t | capitalize}}";
+    DT.str["floral"] = "{{ 'familias.floral' | t | capitalize}}";
+    DT.str["frutal"] = "{{ 'familias.frutal' | t | capitalize}}";
+    DT.str["oriental"] = "{{ 'familias.oriental' | t | capitalize}}";
+    DT.str["vainilla"] = "{{ 'familias.vainilla' | t | capitalize}}";
+    DT.str["aromatica"] = "{{ 'familias.aromatica' | t | capitalize}}";
+    DT.str["aldehidica"] = "{{ 'familias.aldehidica' | t | capitalize}}";
+    DT.str["verde"] = "{{ 'familias.verde' | t | capitalize}}";
+    DT.str["ambar"] = "{{ 'familias.ambar' | t | capitalize}}";
+
+    DT.str["Intensidad"] = "{{  'general.Intensidad' | t }}";
+    DT.str["Baja"] = "{{  'general.Baja' | t }}";
+    DT.str["Media"] = "{{  'general.Media' | t }}";
+    DT.str["Fuerte"] = "{{  'general.Fuerte' | t }}";
+    DT.str["Perfume_equivalente_a"] = "{{  'general.Perfume_equivalente_a' | t }}";
+    DT.str["dia"] = "{{  'general.dia' | t }}";
+    DT.str["Dia"] = "{{  'general.dia' | t }}";
+    DT.str["noche"] = "{{  'general.noche' | t }}";
+    DT.str["familia_olfativa"] = "{{  'general.familia_olfativa' | t }}";
+    DT.str["Estacion"] = "{{  'general.Estacion' | t }}";
+    DT.str["Uso"] = "{{  'general.Uso' | t }}";
+    DT.str["muestras"] = "{{'product.muestras' | t }}";
+
+    DT.str['wishlist_in'] = "{{ 'wishlist.wishlist_in' | t }}";
+    DT.str['wishlist_out'] = "{{ 'wishlist.wishlist_out' | t }}";
+    DT.str['wishlist_share_title'] = "{{ 'wishlist.wishlist_share_title' | t }}";
+    DT.str['wishlist_share_text'] = "{{ 'wishlist.wishlist_share_text' | t }}";
+
+    DT.str["oferta2"] = '{{ settings.oferta2_text }}';
+    DT.str["oferta"] = '{{ settings.oferta_text }}';
+    DT.str["novedad"] = '{{ settings.novedad_text }}';
+    DT.str["musthave"] = '{{ settings.must_have_text }}';
+    DT.str["special"] = '{{ settings.special }}';
+    DT.str["home_tag"] = '{{ settings.home_text }}';
+
+    window.envio_icon = `<svg height="16" viewBox="0 0 24 16" width="24" xmlns="http://www.w3.org/2000/svg"><g fill-rule="evenodd" fill="none"><g fill-rule="nonzero" fill="var(--text-accent)"><g><g><path d="M17.263 10.105c-1.625 0-2.947 1.322-2.947 2.948 0 1.625 1.322 2.947 2.947 2.947 1.626 0 2.948-1.322 2.948-2.947 0-1.626-1.323-2.948-2.948-2.948zm0 4.421c-.813 0-1.474-.66-1.474-1.473 0-.813.661-1.474 1.474-1.474s1.474.66 1.474 1.474c0 .812-.661 1.473-1.474 1.473zM7.579 10.105c-1.625 0-2.947 1.322-2.947 2.948C4.632 14.678 5.954 16 7.579 16s2.947-1.322 2.947-2.947c0-1.626-1.322-2.948-2.947-2.948zm0 4.421c-.813 0-1.474-.66-1.474-1.473 0-.813.661-1.474 1.474-1.474.812 0 1.474.66 1.474 1.474 0 .812-.661 1.473-1.474 1.473zM19.267 2.06c-.125-.23-.379-.376-.657-.376h-3.873v1.363h3.42l2.002 3.69 1.315-.612-2.207-4.066z" transform="translate(-223 -735) translate(0 720) translate(223 15)" /><path d="M10.105 12.211H15.579V13.895H10.105zM5.124 12.21h-2.67c-.425 0-.77.378-.77.843 0 .465.345.842.77.842h2.67c.426 0 .77-.377.77-.842 0-.466-.344-.842-.77-.842zM23.005 7.972l-1.433-1.85c-.138-.178-.35-.282-.575-.282h-5.294V.73c0-.403-.326-.73-.728-.73H2.834c-.403 0-.729.327-.729.73 0 .403.326.73.729.73h11.412v5.11c0 .403.326.73.729.73h5.665l1.061 1.37v3.765h-2.015c-.403 0-.729.327-.729.73 0 .403.326.73.729.73h2.743c.403 0 .729-.327.729-.73V8.42c0-.162-.054-.32-.153-.448zM5.55 8.421H2.03c-.423 0-.766.377-.766.842 0 .465.343.842.766.842H5.55c.423 0 .766-.377.766-.842 0-.465-.343-.842-.766-.842zM6.86 5.895H.72c-.398 0-.72.377-.72.842 0 .465.322.842.72.842h6.14c.397 0 .719-.377.719-.842 0-.465-.322-.842-.72-.842z" transform="translate(-223 -735) translate(0 720) translate(223 15)" /><path d="M8.123 2.947h-6.14c-.398 0-.72.377-.72.842 0 .466.322.843.72.843h6.14c.397 0 .72-.377.72-.843 0-.465-.323-.842-.72-.842z" transform="translate(-223 -735) translate(0 720) translate(223 15)"/></g></g></g></g></svg>`;
+    //Liquid js variables
+    {%- assign TIENDA = shop.url | split: '.' | last | upcase  %} 
+    {% if shop.url contains 'sandbox' %}{%- assign TIENDA = 'SAND' %} {% endif %}
+
+    {% liquid
+        assign is = false 
+        assign catalogue = ''
+        assign flyer = '39842459320419'
+        if TIENDA == 'DE' 
+        assign catalogue = '40069759762480'
+        elsif TIENDA == 'UK'
+        assign catalogue = '42667043553467'
+        elsif TIENDA == 'ES'
+        assign catalogue = '39624690368611'
+        elsif TIENDA == 'COM'
+        assign catalogue = '40274470600738'
+        elsif TIENDA == 'FR'
+        assign catalogue = '40093977575472'
+        elsif TIENDA == 'IT'
+        assign catalogue = '42684603793595'
+        elsif TIENDA == 'PT'
+        assign catalogue = '39411545210944'
+        elsif TIENDA == 'NL'
+        assign catalogue = '41263843967173'
+        elsif TIENDA == 'SE'
+        assign catalogue = '40656096297007'
+        elsif TIENDA == 'DK'
+        assign catalogue = '41171185008831'
+        elsif TIENDA == 'FI'
+        assign catalogue = '42485775499512' 
+        elsif TIENDA == 'MX'
+        assign catalogue = '41648472064182' 
+        assign flyer = '41648481599670'
+        endif
+    %}
+    window.promo_assets = { 
+    "catalogue": {{ catalogue }},
+    "flyer": {{ flyer }}
+    }
+    window.routes = {
+        predictive_search_url: '{{ routes.predictive_search_url }}'
+    };
+    window.envio_gratis_show = {{ settings.envio_gratis_show }};
+    window.envio_gratis_text = '{{ settings.envio_gratis_text }}';
+    window.envio_gratis_finish = '{{ settings.envio_gratis_text_finish }}';
+    window.envio_gratis_importe = {{ settings.envio_gratis_importe }};
+    {%- assign TIENDA = shop.url | split: '.' | last | upcase  %}
+    window.country = '{{ TIENDA }}';
+    
+    window.buy_button_text = "{{ 'botones.anadelo_por' | t | upcase }}";
+    window.buy_now = "{{ 'botones.comprar_ahora' | t }}";
+    window.agotado = "{{ 'botones.sin_stock' | t | upcase }}";
+    window.similar_a = "{{ 'general.Similar_a' | t | capitalize}}";
+    window.de = "{{ 'general.de' | t | capitalize}}";
+    window.money_format = "{{ shop.money_format }}";
+
+    {% assign col = settings.crossed_sell.products | sort: 'price' %}
+    window.cross_sell_products = [
+      {% for crossed_product in col limit: 5 %}
+    	{% assign prod_parts = crossed_product.title | split: '|' %}
+      									
+      {% liquid
+		 assign free = false
+		 for variant in crossed_product.variants
+		 if variant.price == 0 and variant.inventory_policy == 'continue'
+		 assign free = variant.id
+		 endif 
+		 endfor 
+	   %}
+      {
+        url: "{{ crossed_product.url }}",
+        img: "{{ crossed_product.featured_image | img_url: 'x100' }}",
+        title: "{{ crossed_product.title }}",
+        title_top: "{{ prod_parts[0] }} - {{ 'general.Similar_a' | t  }}",
+        name: "{{ prod_parts[1] }}",
+        price: {{ crossed_product.variants[0].price }},
+        compare_price: {% if crossed_product.variants[0].compare_at_price %}{{ crossed_product.variants[0].compare_at_price }} {% else %} ''{% endif %},
+        price_format: "{{ crossed_product.variants[0].price | money | strip_html }}",
+        price_format_compared: "{{ crossed_product.variants[0].compare_at_price | money | strip_html }}",
+        id:{{ crossed_product.variants[0].id }},
+        free: "{{ free }}"
+      }{% unless forloop.last %},{% endunless %}
+      {% endfor %}
+    ]
+    
+    DT.init({
+      shop_url: '{{ shop.url }}',
+      shop_locale: '{{ shop_locale.iso_code }}',
+      money_format: '{{ shop.money_format }}',
+      gastos_envio: {{ settings.gastos_envio | remove: ',' }}
+    });
+
+    DT.cards = {
+        init: function(prod) {
+            var html_products = '';
+            var product_title_parts = prod.title.split('|');
+            var titulo_producto = product_title_parts[0];
+            var similar_a = window.similar_a;
+            var imitation_product = product_title_parts[1].replace(window.similar_a, "");
+            var categoria = false;
+            var subfamilia = false;
+            var familias_arr = [];
+            var familias_todas_arr = [];
+            var oferta = false;
+            var oferta1 = '';
+            var oferta2 = '';
+            var special = '';
+            var categoria_tag = '';
+          	var home_tag = '';
+
+            _.each(prod.tags, function (tag) {
+                var tag_parts = tag.split(':')
+                if (tag_parts[0] == 'categoria') {
+                    if (tag_parts[1] != 'nicho') {
+                        categoria = DT.str[`${tag_parts[1]}`];
+                    }
+                    categoria_tag = `<span class="category">${categoria}</span>`;
+                }
+                if (tag_parts[0] == 'marca') {
+                    if (tag_parts[1] == 'DIVAIN') {
+                        similar_a = '';
+                    }
+                }
+
+                if (tag_parts[0] == 'familia') {
+                    familia = tag_parts[1]
+                    familias_arr.push(familia)
+                    familias_todas_arr.push(familia)
+                }
+                if (tag_parts[0] == 'subfamilia' || tag_parts[0] == 'subfamilia2') {
+                    subfamilia = tag_parts[1]
+                    familias_todas_arr.push(subfamilia)
+                }
+                if(tag_parts[0] == 'home' && DT.str["home_tag"] != '') {
+                  	home_tag = `<span class="home-tag">${DT.str["home_tag"]}</span>`;
+                }
+                if (tag_parts[0] == 'oferta2' && DT.str["oferta2"] != '') {
+                    oferta2 = `<span class="tagoffer2">${DT.str["oferta2"]}</span>`;
+                }
+                if (tag_parts[0] == 'special' && DT.str["special"] != '') {
+                  special = `<span class="special">${DT.str["special"]}</span>`;
+                }
+                if (tag_parts[0] == 'oferta' && tag_parts[1] != '') {
+                    oferta1 = `<span class="tagoffer">${tag_parts[1]}</span>`;
+                }
+                if (tag_parts[0] == 'musthave' && DT.str["musthave"]) {
+                    oferta1 = `<span class="musthave">${DT.str["musthave"]}</span>`
+                }
+                if (tag_parts[0] == 'novedad' && DT.str["novedad"]) {
+                    oferta1 = `<span class="novedad">${DT.str["novedad"]}</span>`
+                }
+              if (oferta1 != '' || oferta2 != '' || special != '') {oferta = `<p class="card-offer">${categoria_tag} ${special} ${oferta2} ${oferta1} ${home_tag}</p>`}
+                else if (oferta1 != '' || oferta2 != '') { oferta = `<p class="card-offer">${categoria_tag} ${oferta2} ${oferta1} ${home_tag}</p>`}
+            });
+
+            familias_todas_arr = _.uniq(familias_todas_arr)
+
+
+            var url = '/products/' + prod.handle
+            var btn_comprar = 'GGGG'
+            var envase = ''
+            if (prod.variants[0].available) {
+                var freeSample="false";
+                for(let i = 0; prod.variants.length>i; i++){
+                    if (prod.variants[i].price == 0) {
+                    freeSample = prod.variants[i].id}
+                }
+                var comparedPrice = "";
+                if(prod.variants[0].compare_at_price) comparedPrice = Shopify.formatMoney(prod.variants[0].compare_at_price, window.money_format);
+
+
+                if(prod.variants[0].title == '100ml') envase = ' | 100ml'
+
+                var card_price = `<p><span class="crossed-price">${comparedPrice}</span> <span class="offer-price">${Shopify.formatMoney(prod.variants[0].price, window.money_format)}</span>${envase}</p>`
+
+                    comparedPrice = prod.variants[0].compare_at_price;
+                    btn_comprar = `<button id="add_to_cart-${prod.pr_id}-card" class="button button-add" data-variant="${prod.variants[0].id}" data-compared="${comparedPrice}" data-free="${freeSample}"><span>${window.buy_now }</span></button>`;
+            }else {
+                    btn_comprar =`<button class="button button-add" style="background-color: #ffede6; font-weight: bold;"><span>${window.agotado}</span></button></div>`;
+                }
+
+            var img_1 = prod.images[0].split('.jpg')[0] + '_400x.jpg';
+            var img_2 = prod.images[2].split('.jpg')[0] + '_400x.jpg';
+            if (prod.best_seller) {
+                img_1 = prod.images[2].split('.jpg')[0] + '_400x.jpg';
+                img_2 = prod.images[0].split('.jpg')[0] + '_400x.jpg';
+            }
+
+            var sku =''
+            var stars_section = ''
+          
+          if(!window.country == 'MX') { 
+            sku = "TRUSTPILOT_SKU_VALUE_" + prod.id + "," + prod.variants[0].sku + ",TRUSTPILOT_SKU_VALUE_" + prod.variants[0].id
+            var stars_section = ' <div id="TP_' + prod.variants[0].id + '" class="trustpilot-widget" data-locale="' + window.truspilot.locale + '"'
+                + ' data-template-id="' + window.truspilot.template_id + '"'
+                + ' data-businessunit-id="' + window.truspilot.businessunit_id + '"'
+                + ' data-style-height="24px"'
+                + ' data-style-width="100%"'
+                + ' data-theme="light"'
+                + ' data-sku="' + sku + '">'
+                + ' </div>'
+          }
+
+
+
+            //FAMILIAS
+            var familias_html = ' <div class="card-subfamilias">';
+            _.each(familias_todas_arr, function (fam) {
+                if (familias_arr.indexOf(fam) >= 0) {
+                    familias_html += '<span class="card-subfamilia familia-principal">' + DT.str[fam] + '</span> '
+                } else {
+                    familias_html += '<span class="card-subfamilia">' + DT.str[fam] + '</span> '
+                }
+            })
+            familias_html += ' </div>'
+            //OFERTA
+            var oferta_html = ''
+            if (oferta) {
+                oferta_html = oferta;
+            }
+			console.log
+            if (window.country === 'DE') {
+                html_products += '<div class="card" data-categoria="' + categoria+'">' 
+                    +`<a class="linkable-card" href="${url}">`
+                    +`<div class="card-img aspect-ratio-box">`
+                    +`<img class="lazyload" data-src="${img_1}">`   
+                    +`<img class="lazyload hidden-img" data-src="${img_2}">`
+                    +`<div class="love-container" data-handle="${prod.handle}">` 
+                    +`<span class="love-icon">` 
+                    +`<svg viewBox="-8 -28 528.00002 512" xmlns="http://www.w3.org/2000/svg"><path d="m471.382812 44.578125c-26.503906-28.746094-62.871093-44.578125-102.410156-44.578125-29.554687 0-56.621094 9.34375-80.449218 27.769531-12.023438 9.300781-22.917969 20.679688-32.523438 33.960938-9.601562-13.277344-20.5-24.660157-32.527344-33.960938-23.824218-18.425781-50.890625-27.769531-80.445312-27.769531-39.539063 0-75.910156 15.832031-102.414063 44.578125-26.1875 28.410156-40.613281 67.222656-40.613281 109.292969 0 43.300781 16.136719 82.9375 50.78125 124.742187 30.992188 37.394531 75.535156 75.355469 127.117188 119.3125 17.613281 15.011719 37.578124 32.027344 58.308593 50.152344 5.476563 4.796875 12.503907 7.4375 19.792969 7.4375 7.285156 0 14.316406-2.640625 19.785156-7.429687 20.730469-18.128907 40.707032-35.152344 58.328125-50.171876 51.574219-43.949218 96.117188-81.90625 127.109375-119.304687 34.644532-41.800781 50.777344-81.4375 50.777344-124.742187 0-42.066407-14.425781-80.878907-40.617188-109.289063zm0 0"/></svg>` 
+                    +`</span></div>` 
+                    + oferta_html + familias_html
+                    +`</div>`
+                    +`<div class="card-whole-text">`
+                    +`<div class="card-rating">${stars_section}</div>`
+                    +`<h3 class="card-title">`
+                    +`<p><span class="card-title-top">${titulo_producto} - ${similar_a}<span><br><span class="product-name">${imitation_product}</h3>`
+                    + btn_comprar +
+                    '</div></div>'
+            } else {
+                html_products += '<div class="card" data-categoria="' + categoria+'">' 
+                    +`<a class="linkable-card" href="${url}">`
+                    +`<div class="card-img aspect-ratio-box">`
+                    +`<img class="lazyload" data-src="${img_1}">`   
+                    +`<img class="lazyload hidden-img" data-src="${img_2}">`
+                    +`<div class="love-container" data-handle="${prod.handle}">` 
+                    +`<span class="love-icon">` 
+                    +`<svg viewBox="-8 -28 528.00002 512" xmlns="http://www.w3.org/2000/svg"><path d="m471.382812 44.578125c-26.503906-28.746094-62.871093-44.578125-102.410156-44.578125-29.554687 0-56.621094 9.34375-80.449218 27.769531-12.023438 9.300781-22.917969 20.679688-32.523438 33.960938-9.601562-13.277344-20.5-24.660157-32.527344-33.960938-23.824218-18.425781-50.890625-27.769531-80.445312-27.769531-39.539063 0-75.910156 15.832031-102.414063 44.578125-26.1875 28.410156-40.613281 67.222656-40.613281 109.292969 0 43.300781 16.136719 82.9375 50.78125 124.742187 30.992188 37.394531 75.535156 75.355469 127.117188 119.3125 17.613281 15.011719 37.578124 32.027344 58.308593 50.152344 5.476563 4.796875 12.503907 7.4375 19.792969 7.4375 7.285156 0 14.316406-2.640625 19.785156-7.429687 20.730469-18.128907 40.707032-35.152344 58.328125-50.171876 51.574219-43.949218 96.117188-81.90625 127.109375-119.304687 34.644532-41.800781 50.777344-81.4375 50.777344-124.742187 0-42.066407-14.425781-80.878907-40.617188-109.289063zm0 0"/></svg>` 
+                    +`</span></div>` 
+                    + oferta_html
+                    +`</div>`
+                    +`<div class="card-whole-text">`
+                    +`<div class="card-rating">${stars_section}</div>`
+                    +`<h3 class="card-title">`
+                    +`<p><span class="card-title-top">${titulo_producto} - ${similar_a}<span><br><span class="product-name">${imitation_product}</h3>`
+                    +card_price
+                    + btn_comprar +
+                    '</div></div>'
+            }     
+            return html_products;    
+        }
+    }
+</script>

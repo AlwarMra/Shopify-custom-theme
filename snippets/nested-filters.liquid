@@ -1,0 +1,78 @@
+{% assign thisCollection = false %}
+{% assign menu = linklists['nested-collections'] %}
+
+     {%for link in menu.links %}
+    	
+       {% if link.object.handle == collection.handle %}
+        
+      {%  assign thisCollection = true %}
+      {% assign relatedCollections = link %}
+       {% endif %}
+    
+   {% endfor %}
+
+{% if thisCollection %}
+
+<div class="subcollections-container">
+    <div class="mother-col subcollection active" data-subcol="all">
+      <p>{{ relatedCollections.title }}</p>
+    </div>
+   {% for link in relatedCollections.links %}
+    {% if link.object.handle contains 'must' %}
+    <div class="subcollection" data-subcol="musthave">
+      <p>{{ link.title }}</p>
+    </div>
+    
+    {% elsif link.object.handle contains 'layering' %}
+    <div class="subcollection" data-subcol="layering">
+      <p>{{ link.title }}</p>
+    </div>    
+    
+    {% elsif link.object.handle contains 'new'
+    	or link.object.handle contains 'nuevo'
+    	or link.object.handle contains 'neuste'
+    	or link.object.handle contains 'nieu'
+    	or link.object.handle contains 'novidades'
+    	or link.object.handle contains 'novedad'
+      	or link.object.handle contains 'nyheter'
+  		or link.object.handle contains 'nyheder'
+      or link.object.handle contains 'uutuudet'
+    %}  
+    <div class="subcollection" data-subcol="novedad">
+      <p>{{ link.title }}</p>
+    </div>  
+
+    {% elsif link.object.handle contains 'pack'
+    	or link.object.handle contains 'proben'
+    	or link.object.handle contains 'sample'
+  		or link.object.handle contains 'parfumeprover'
+      or link.object.handle contains 'pakkaus'
+    
+    %}  
+    <div class="subcollection" data-subcol="packdemuestras">
+      <p>{{ link.title }}</p>
+    </div>  
+
+  
+      {% elsif link.object.handle contains 'regalo'
+    	or link.object.handle contains 'cadeau'
+    	or link.object.handle contains 'gift'
+  		or link.object.handle contains 'geschenk'
+  		or link.object.handle contains 'presente'
+      	or link.object.handle contains 'gavor'
+  		or link.object.handle contains 'gave'
+      or link.object.handle contains 'lahja'
+    
+    %}  
+    <div class="subcollection" data-subcol="regalo">
+      <p>{{ link.title }}</p>
+    </div>  
+    
+    {% endif %}
+  
+  
+   {% endfor %} 
+  
+  </div>
+
+{% endif %}

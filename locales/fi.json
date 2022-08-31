@@ -1,0 +1,320 @@
+{
+  "general": {
+    "404": {
+      "title": "Ei löydetty",
+      "subtext_html": "Etsimäänne sivua ei ole löydetty"
+    },
+    "perfumes_colecciones_html": "Jäljitelmähajuvedet.<br>Yli 600 korkealaatuista tuoksua.",
+    "de": "from",
+    "Similar_a": "Hajuvesi",
+    "Perfume_equivalente_a": "Vastaavia hajuvesiä",
+    "dia": "Päivä",
+    "noche": "Yö",
+    "familia_olfativa": "Tuoksuperhe",
+    "colecciones": "Kokoelmat",
+    "Estacion": "Vuodenaika",
+    "Uso": "Suositeltu käyttö",
+    "descuento": "Alennus",
+    "perfumes_de_equivalencia": "Hajuvesijäljitelmät",
+    "buscar_perfumes_de_equivalencia": "Löydä vastaavat hajuvedet",
+    "encuentra_tu_perfume_divain": "Löydä sinun DIVAIN hajuvetesi",
+    "busca_tu_perfume_o_marca": "Löydä hajuvetesi tai merkkisi...",
+    "cerrar": "Sulje",
+    "volver": "Takaisin",
+    "mas_vendidos": "Suosituimmat",
+    "marcas": "Merkit",
+    "todas_las_marcas": "Kaikki merkit",
+    "conoce_equivalencias": "Löydä vastaavuudet",
+    "iva_incluido": "Sisältää verot",
+    "no_tienes_productos": "Ostoskärrysi on tyhjä",
+    "carrito": "Ostoskärry",
+    "tramitar_pedido": "Vahvista ostoksesi",
+    "seguir_comprando": "JATKA OSTAMISTA",
+    "total": "Loppuhinta",
+    "subtotal": "Välisumma",
+    "gastos_envio": "Postikulut",
+    "producto": "Tuote",
+    "cantidad": "Määrä",
+    "borrar": "Poista",
+    "intensidad": {
+      "Intensidad": "Voimakkuus",
+      "Baja": "Mieto",
+      "Media": "Keskivoimainen",
+      "Fuerte": "Voimakas"
+    },
+    "newsletter_form": {
+      "email_placeholder": "Email",
+      "confirmacion": "Kiitos rekisteröimisestä!",
+      "descargar": "Tallenna"
+    },
+    "error": "Virhe",
+    "home": "Kotisivu",
+    "buscar_marca": "Löydä merkkisi",
+    "pagination": {
+      "previous_page": "Edellinen sivu",
+      "go_to_page": "Mene sivuun",
+      "next_page": "Seuraava sivu"
+    },
+    "inspirado_en": "",
+    "completa_pedido": ""
+  },
+  "product": {
+    "precio": "Hinta",
+    "addto": "Lisää",
+    "Envase": "Pullo",
+    "opiniones": "Mielipiteitä",
+    "Ver_menos_sobre_el_perfume": "Näe vähemmän tietoja hajuvedestä",
+    "Ver_mas_sobre_el_perfume": "Näe lisää lietoja hajuvedestä",
+    "envio_gratis": "Ilmainen lähetys yli 40€:n tilauksille",
+    "envio_tiempo": "Vastaanota tilauksesi 9:ssä päivässä",
+    "envio_devol": "Ilmainen palautus. Takaamme 100% palautuksen",
+    "muestras": "Näytteet",
+    "muestras_error": "Sinulla on vielä näytteitä joista valita!",
+    "notas": "Tuoksunuotit",
+    "ingredientes": "Ainesosat",
+    "caracteristicas": "Ominaisuudet",
+    "muestra_gratis": "Ilmainen näyte",
+    "tryandbuy": "TRY & BUY",
+    "trybuy_link": "\/pages\/try-and-buy",
+    "reviews":"Arvostelut {{ title }} {{ imitation }}"
+  },
+  "botones": {
+    "comprar_ahora": "Osta nyt",
+    "add_to_cart": "Lisää ostoskärryyn",
+    "anadelo_por": "Osta vain",
+    "sin_stock": "Pian taas saatavissa",
+    "agotado": "Väliaikaisesti loppunut",
+    "agotado_2": "Loppuunmyyty",
+    "all_marcas": "KAIKKI MERKIT",
+    "ver_mas": "Näe lisää",
+    "seguir_redes": "Seurata mediassa",
+    "download":"Ladata"
+  },
+  "pack": {
+    "Precio_del_pack": "Pakkauksen hinta"
+  },
+  "categorias": {
+    "todos": "Kaikki",
+    "hombre": "Miehet",
+    "mujer": "Naiset",
+    "unisex": "Unisex",
+    "nicho": "Niche",
+    "kids": "Lapset",
+    "mascotas": "Lemmikit",
+    "accesorios": "Lisätarvikkeet"
+  },
+  "familias": {
+    "acuatica": "Vesinen",
+    "amaderada": "Puinen",
+    "almizcle": "Myskinen",
+    "citrica": "Sitrus",
+    "chipre": "Chypre",
+    "cuero": "Nahka",
+    "especiada": "Mausteinen",
+    "fougere": "Fougere",
+    "floral": "Kukkainen",
+    "frutal": "Hedelmäinen",
+    "oriental": "Itämainen",
+    "vainilla": "Vanilja",
+    "aromatica": "Aromaattinen",
+    "gourmand": "Gourmand",
+    "verde": "Vihreä",
+    "amaderado": "Puinen",
+    "aldehidica": "Etyylinen",
+    "ambar": "Meripihka"
+  },
+  "filtros": {
+    "filtros": "Suodattimet",
+    "ordenar": "Järjestellä",
+    "ordenar_por": "Lajitteluperuste",
+    "precio_menor_a_mayor": "Kalliimmasta halvimpaan",
+    "precio_mayor_a_menor": "Halvemmasta Kalliimpaan",
+    "nuevo_a_antiguo": "Uudemmat tuotteet",
+    "antiguo_a_nuevo": "Vanhemmat tuotteet",
+    "filtrar_coleccion_por": "Suodata kokoelma osasto",
+    "filtrar_por": "Suodata",
+    "intensidad": "Voimakkuus",
+    "familias_olfativas": "Tuoksu perhe",
+    "estacion": "Vuoden aika",
+    "invierno": "Talvi",
+    "primavera": "Kevät",
+    "verano": "Kesä",
+    "otono": "Syksy",
+    "filtrar": "Suodata",
+    "limpiar": "Poista",
+    "genero": "Sukupuoli",
+    "momento": "Hetki",
+    "filtrar_familia": "Suodata tuoksuperheen mukaan"
+  },
+  "customers": {
+    "contrasena": "Salasana",
+    "nombre": "Etunimi",
+    "apellido": "Sukunimi",
+    "email": "Sähköpostiosoite",
+    "entrar_en_mi_cuenta": "Kirjaudu DIVAIN tililleni",
+    "introduce_email_y_pass": "Ole hyvä ja syötä sähköpostiosoitteesi  sekä salasanasi",
+    "olvide_pass": "Unohditko salasanasi?",
+    "entrar": "Sisään",
+    "crear_cuenta": "Rekisteröidy",
+    "recuperar_contrasena": "Palauta salasana",
+    "recuperado_con_exito": "Palautus onnistunut",
+    "recuperar": "Palauta",
+    "recuerdas_tu_contrasena": "Muistatko salasanasi? ",
+    "volver_a_entrar": "Kirjoittaudu tililleni uudestaan",
+    "logout": "Kirjaudu ulos",
+    "mi_cuenta": "Tilini",
+    "bienvenido": "Tervetuloa takaisin",
+    "mis_pedidos": "Tilaukseni",
+    "no_tienes_pedidos": "Sinulla ei ole tilauksia vielä",
+    "pedido": "Tilaus",
+    "fecha": "Päivämäärä",
+    "estado_pago": "Maksun tila",
+    "estado_entrega": "Toimituksen tila",
+    "total": "Loppusumma",
+    "sin_direcciones": "Ei osoitteita",
+    "no_hay_direcciones_guardadas": "Et ole tallentanut yhtään osoitetta",
+    "gestionar_direcciones": "Muokkaa osoitteita",
+    "direcciones": "Osoitteet",
+    "activar_cuenta": "Aktivoi tilisi",
+    "introduce_la_contrasena": "Ole hyvä ja syötä salasanasi",
+    "enviar": "Lähetä",
+    "declinar": "Peruuta",
+    "volver_a_mi_cuenta": "Takaisin tililleni",
+    "mis_direcciones": "Osoitteni",
+    "anadir_nueva_direccion": "Lisää uusi osoite",
+    "direccion_por_defecto": "Pääosoite",
+    "direccion": "Osoite",
+    "rellena_los_siguientes_datos": "Täytä seuraavat tiedot",
+    "establecer_direccion_predeterminada": "Käytä pääosoitteena",
+    "anadir_direccion": "Lisää osoite",
+    "editar_una_direccion": "Muokkaa osoitetta",
+    "editar": "Muokkaa",
+    "pedido_realizado_el": "Tilauspäivä ",
+    "pedido_cancelado_el": "Peruutuspäivä",
+    "producto": "Tuote",
+    "cantidad": "Määrä",
+    "descuento": "Alennus",
+    "subtotal": "Välisumma",
+    "direccion_envio": "Lähetysosoite",
+    "direccion_facturacion": "Laskutusosoite",
+    "crea_tu_cuenta_divain": "Luo DIVAIN tilisi",
+    "crear_mi_cuenta": "Luo tilini",
+    "reiniciar_pass": "Palauta salasana",
+    "introduce_nueva_contrasena": "Syötä uusi salasana",
+    "reset": "Palauta",
+    "cumple": "Syntymäpäivä",
+    "preference": "Etsimäni hajudevet",
+    "edit_mis_datos": "Muokkaa tietojani"
+  },
+  "blog": {
+    "todo": "Kaikki",
+    "leer_mas": "Lue lisää",
+    "escrito_por": "Kirjoittanut"
+  },
+  "gift_card": {
+    "issued": {
+      "subtext": "Tässä on lahjakorttisi!",
+      "illustration_alt": "Lahjakortti kuva",
+      "disabled": "Lahjakorttisi on poistettu käytöstä",
+      "expired": "Lahjakorttisi on vanhentunut {{ expiry }}.",
+      "expires_on": "Lahjakorttisi viimeinen käyttöpäivä on {{ expiry }}.",
+      "redeem_html": "Tällä kortilla saat lahjakorttisi",
+      "shop_link": "Aloita ostokset",
+      "code": "Koodi",
+      "initial_amount_html": "Määra: {{initial_amount}}",
+      "remaining_balance_html": "Jäljellä oleva määrä: {{balance}}",
+      "add_to_apple_wallet": "Lisää Aplle Wallettiin"
+    }
+  },
+  "announce": {
+    "entrega": "Toimitus kahdeksassa päivässä",
+    "devolucion": "14 päivän palautustakuu",
+    "trust": "4,7\/5 Truspilotissa",
+    "tryandbuy": "Try&Buy ilmainen palautus",
+    "envio_precio": "Ilmainen toimitus {{ price }}",
+    "envio": "Vastaanota tilauksesi 9:ssä päivässä"
+  },
+  "wishlist": {
+    "wishlist_out": "Lisää tuote toivelistallesi",
+    "wishlist_in": "Tämä tuote on toivelistalllasi",
+    "add_all": "Lisää kaikki",
+    "copiar": "Kopioi",
+    "copiado": "Kopioitu!",
+    "add_all_message": "Lisää kaikki tuotteet!",
+    "wishlist_share_title": "DIVAIN toivelista",
+    "wishlist_share_text": "Vilkaise toivelistaani!"
+  },
+  "pagefly": {
+    "products": {
+      "product": {
+        "regular_price": "Regular price",
+        "sold_out": "Sold out",
+        "unavailable": "Unavailable",
+        "on_sale": "Sale",
+        "quantity": "Quantity",
+        "add_to_cart": "Add to cart",
+        "back_to_collection": "Back to {{ title }}",
+        "view_details": "View details"
+      }
+    },
+    "article": {
+      "tags": "Tags:",
+      "all_topics": "All topics",
+      "by_author": "by {{ author }}",
+      "posted_in": "Posted in",
+      "read_more": "Read more",
+      "back_to_blog": "Back to {{ title }}"
+    },
+    "comments": {
+      "title": "Leave a comment",
+      "name": "Name",
+      "email": "Email",
+      "message": "Message",
+      "post": "Post comment",
+      "moderated": "Please note, comments must be approved before they are published",
+      "success_moderated": "Your comment was posted successfully. We will publish it in a little while, as our blog is moderated.",
+      "success": "Your comment was posted successfully! Thank you!",
+      "comments_with_count": {
+        "one": "{{ count }} comment",
+        "other": "{{ count }} comments"
+      }
+    },
+    "password_page": {
+      "login_form_message": "Enter store using password:",
+      "login_form_password_label": "Password",
+      "login_form_password_placeholder": "Your password",
+      "login_form_submit": "Enter",
+      "signup_form_email_label": "Email",
+      "signup_form_success": "We will send you an email right before we open!",
+      "password_link": "Enter using password"
+    }
+  },
+  "search": {
+    "no_results": "Ei tuloksia haulle “{{ terns }}”. Tarkista kielioppi tai kokeile millä tahansa muulla termillä",
+    "results_with_count": {
+      "one": "{{ count }} tulos löytyi haulle \"{{ termit }}\"",
+      "other": "{{ count }} tulosta löytyi haulle \"{{ terms }}\""
+    },
+    "title": "Hakutulokset",
+    "page": " Sivu",
+    "products": "Tuotteet",
+    "collections": "Luokat",
+    "search_for": "Hae “{{ terms }}”",
+    "predictive_empty":"Emme löytäneet etsimääsi. Lataa luettelo nähdäksesi kaikki hajuvesimme!",
+    "catalogue_link":"https://cdn.shopify.com/s/files/1/0612/2812/2360/files/FI_Katalogi_Divain_Kesakuuta.pdf?v=1654014958"
+  },
+  "shopify": {
+    "checkout": {
+      "alternative_payment_method_banner": {
+        "or": ""
+      },
+      "general": {
+        "continue_to_shipping_method": ""
+      },
+      "payment_gateway": {
+        "cash_on_delivery_label": ""
+      },
+      "banner_text_html":"Vielä rekisteröimätön? <a href='/login'>Tee se täällä!</a>"
+    }
+  }
+}

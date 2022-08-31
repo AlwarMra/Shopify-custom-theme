@@ -1,0 +1,178 @@
+{% if section.blocks.size == 2 %}
+{% assign class = 'grid-2' %}
+{% elsif  section.blocks.size == 3 %}
+{% assign class = 'grid-3' %}
+{% endif %}
+
+<section class="blog-cards">
+    <div class="blog-cards-text-container">
+        <h2 class="section-title">{{ section.settings.title }}</h2>
+        <p class="subtitle">{{ section.settings.subtitle }}</p>
+    </div>
+    <div class="">
+        <div class=" blog-slider-cards container page-width grid {{ class }}">
+        {% for block in section.blocks %}
+                <div class="blog-card">
+                    <div>
+                        <div class="aspect-ratio-box">
+                            {% if block.settings.img  %}
+                            {% assign art_img = block.settings.img | img_url: 'large' %}
+                            {% else %}
+                            {% assign art_img = block.settings.article.image | img_url: 'large' %}
+                            {% endif %}
+                            <img class="lazyload" data-src="{{ art_img }}" alt="{{ block.settings.article.title }}">
+                        </div>
+                        <div class="blog-card-content">
+                            <div>
+
+                                <!-- <h3 class="section-title">{{ block.settings.article.title }}</h3> -->
+                                {% if block.settings.desc != blank %}
+                                <p class="">{{ block.settings.desc }}</p>
+                                {% else %}
+                                <p class="">{{ block.settings.article.excerpt }}</p>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="blog-card-btn">
+                        <a class="read-more" href="{{ block.settings.article.url }}">{{ 'blog.leer_mas' | t }}</a>
+                        <a href="{{ block.settings.article.url }}"><span class="icon-long-arrow">{% render 'icon' with 'long-arrow' %}</span></a>
+                    </div>
+                </div>
+        {% endfor %}
+        </div>
+</div>
+</section>
+
+<style>
+    .blog-cards {
+        margin: 3rem auto;
+    }
+    .blog-cards .subtitle {
+        text-align: center;
+        font-family: 'SFProText-Regular';
+        margin-top: 1rem;
+    }
+    .blog-cards-text-container {
+        margin-bottom: 5rem;
+    }
+
+    .blog-card  {
+        max-width: 420px;
+        width: 80%;
+        margin: 0 .5rem 2rem;
+        position: relative;
+        bottom: 4rem;
+        display: flex;
+        flex-flow: column;
+        justify-content: space-between;
+        box-shadow: 0 0 10px 0 rgb(0 0 0 / 10%);
+    }
+    .blog-cards .aspect-ratio-box {
+        padding-top: 56.25%;
+    }
+    .blog-card-content {
+        background: var(--contrast-color);
+        padding: 1rem;
+        text-align: center;
+    }
+    .blog-card-content .section-title {
+        padding-bottom: 1rem;
+    }
+    .blog-card-content p {
+        line-height: 1.5;
+        margin-bottom: 10px;
+    }
+    .blog-card-btn {
+        padding: 1rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .blog-card-btn .icon-long-arrow {
+        position: relative;
+        top: 10px;
+        width: 6rem;
+        display: inline-block;
+    }
+    .blog-slider-cards::after {
+        content: 'flickity';
+        display: none;
+    }
+    @media(min-width: 768px) {
+        .blog-cards .aspect-ratio-box {
+        padding-top: 75%;
+    }
+    .blog-cards .grid {
+        display: grid;
+        grid-gap: 2rem;
+        margin: 0 auto;
+        padding-bottom: 0;
+    }
+    .blog-cards .grid.grid-2 {
+        grid-template-columns: 1fr 1fr;
+    }
+    .blog-cards .grid.grid-3 {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+    .blog-slider-cards::after {
+        content: '';
+    }
+    .blog-card {
+        width: 100%;
+        margin: 0 auto 2rem;
+    }
+    }
+    
+</style>
+
+{% schema %}
+{
+    "name":"Blog cards",
+    "settings": [
+        {
+            "id":"title",
+            "type":"text",
+            "label":"Title",
+            "default":"Lorem impsum"
+        },
+        {
+            "id":"subtitle",
+            "type":"text",
+            "label":"Subtitle",
+            "default":"Lorem impsum"
+        }
+    ],
+    "blocks": [
+        {
+            "name":"Card",
+            "type":"card",
+            "limit":3,
+            "settings": [
+                {
+                  "type":"article",
+                  "id":"article",
+                  "label":"Article"  
+                },
+                {
+                    "type":"image_picker",
+                    "id":"img",
+                    "label":"Image (optional)"
+                },
+                {
+                    "id":"desc",
+                    "type":"textarea",
+                    "label":"Description (optional)",
+                    "info":"Article excerpt is taken by default"
+                }
+            ]
+        }
+    ],
+    "presets": [
+        {
+        "category":"Home",
+        "name": "Blog cards"
+         }
+    ]
+}
+{% endschema %}

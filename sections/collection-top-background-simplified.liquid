@@ -1,0 +1,127 @@
+{% assign align_class = section.settings.align_class %}
+{% assign u = collection.url %}
+{% assign desc = collection.description | split: '==TEXTO==' %}
+{% assign desc1 = desc[1] %}
+
+<section class="home-top- home-top-background h-t-b-o">
+    <div class="container">
+            <div>
+              {% if desc1 !=blank %}
+              <p>{{ desc1 }}</p>
+              {% else %}
+                {% if section.settings.frase_secundaria != ''  %}
+                <p class="subheading {{ align_class }}" style="color:{{ section.settings.color_frase_principal }}">{{ section.settings.frase_secundaria }}</p>
+                {% endif %}
+
+                <div class="section-title-wrapper">
+                    <p class="section-title {{ align_class }}"  style="color:{{ section.settings.color_frase_principal }}">  
+                            {{ section.settings.frase_principal }}  
+                    </p> 
+                </div>
+               {% endif %}
+            </div>
+    </div>
+</section>
+<style> 
+  {% if collection.image %}
+    .h-t-b-o { 
+        background-image: url('{{ collection.image.src | image_url }}');  
+          background-position: unset;
+    }  
+  @media(max-width:768px) {
+  .h-t-b-o { 
+  	  background-position: cover;
+  }}
+  {% else %}
+    .h-t-b-o { 
+        background-image: url('{{ section.settings.img_fondo_video | image_url }}');  
+         
+    }
+      @media(max-width:768px) {
+
+      .h-t-b-o{ 
+        background-image: url('{{ section.settings.img_fondo_movil | image_url }}');  
+          }
+      }
+  {% endif %}
+  .home-top-background .home-top-cards .home-top-card {
+  	margin: 0 5%;
+  }
+  .home-top-background .home-top-cards .home-top-card .home-top-image .border_image {
+    {% if section.settings.border_check %}
+    border:.18rem solid {{ section.settings.border_color }};
+    {% endif %}
+    {% if section.settings.shadow_check %}
+    box-shadow: 2px 2px 10px 0 {{ section.settings.shadow_color }};
+    {% endif %}
+    border-radius: {{ section.settings.border_radius }}px;
+    background-color: {{ section.settings.btn_back_color }};
+  }
+</style>
+
+
+
+{% schema %}
+{
+  "name": "Collection top background", 
+  "settings": [ 
+        {
+        "type": "image_picker",
+        "id": "img_fondo_video",
+        "label": "Imagen fondo sección" 
+        },
+		{
+		  "type": "image_picker",
+          "id": "img_fondo_movil",
+          "label": "Imagen fondo Móvil" 
+		},
+        {
+            "type":      "select",
+            "id":        "align_class",
+            "label":     "Alinear a",
+            "default":"center",
+            "options": [
+                { 
+                "value": "to_left",
+                "label": "Izquierda"
+                },
+                { 
+                "value": "to_right",
+                "label": "Derecha"
+                },
+                { 
+                "value": "center",
+                "label": "Centro"
+                }
+                ]
+            },
+        
+
+        {
+        "type": "text",
+        "id": "frase_secundaria",
+        "label": "Frase secundaria",
+        "default": "Descubre cerca de 500 fragancias de alta calidad"
+        }, 
+        {
+        "type": "text",
+        "id": "frase_principal",
+        "label": "Frase principal",
+        "default": "Tus perfumes de equivalencia por "
+        },
+        {
+        "type":      "color",
+        "id":        "color_frase_principal",
+        "label":     "Color rótulos",
+        "default":   "#050505" 
+        }
+
+   ],
+   "presets": [
+   {
+       "category":"Home",
+       "name": "Collection top background"
+    }
+   ]
+}
+{% endschema %}

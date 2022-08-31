@@ -1,0 +1,63 @@
+<div class="search-error" style="background-image: url('{{section.settings.error_background.src | img_url: 'x1000' }};')">
+
+  <div class="search-card" style="margin:auto">
+      <h3 class="section-title">{{section.settings.title}}</h3>
+      <p class="text-underline">{{section.settings.search_text}}</p>
+      
+     <form action="/search" method="get" role="search" class="searcher-bar">
+        <input type="hidden" name="type" value="product">
+        <input type="search" name="q" value="{{ search.terms | escape }}" placeholder="{{'general.buscar_perfumes_de_equivalencia' | t }}">
+      <button type="submit">{% include 'icon' with 'searcher' %}</button>
+      </form> 
+    
+    {% comment %}
+      <div class="searcher-bar">
+          <input class="nav-input nav-link-hide" placeholder="{{'general.buscar_perfumes_de_equivalencia' | t }}" type="search">
+          <a href="">
+              {% include 'icon' with 'searcher' %}
+          </a>
+      </div> 
+    {% endcomment %}
+    
+      <a href="/" class="button button-account">{{section.settings.button_text}}</a>
+      {% comment %}
+      <p class="contact-p">Puedes ponerte en contacto con nosotros a través del chat siguiendo este <a href="">enlace.</a></p>
+      {% endcomment %}
+  </div>
+
+</div>
+
+
+{% schema %}
+{
+"name": "Ups... Volvamos a buscar", 
+"settings": [ 
+  {
+      "type":"image_picker",
+      "id":"error_background",
+      "label":"Image background"
+  },
+  {
+      "type":"text",
+      "id":"title",
+      "label":"Título"
+  },
+  {
+      "type":"text",
+      "id":"search_text",
+      "label":"Texto explicativo"
+  },
+  {
+      "type":"text",
+      "id":"button_text",
+      "label":"Texto botón"
+  }
+ ],
+ "presets": [
+ {
+     "category":"Search",
+     "name": "Search again"
+  }
+ ]
+}
+{% endschema %}

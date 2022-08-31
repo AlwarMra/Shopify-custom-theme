@@ -1,0 +1,128 @@
+<!-- CART  --> 
+<div id="cart_modal" class="minicart close">
+
+	<div id="minicart-header">
+		<p class="section-title minicart-title">
+			{{  'general.carrito' | t }}  
+			<span class="minicart__qty-total"></span>
+		</p>
+		<p class="close close-cart">&times;</p> 
+			 
+	</div>
+	<div id="minicart-header-banner"> 
+		<div class="envio-gratis"></div>
+	</div>
+
+	<form action="/cart" method="post" novalidate>
+		<div class="minicart-content" data-scrollable="">
+			<div id="cart_modal_inner"></div>  
+			{% if settings.crossed_sell != blank %}
+			<div class="minicart-crossed-sell" id="cross-sell">			
+			</div>
+			{% endif %}
+		</div>
+
+
+
+
+		<div class="minicart-buttons-box">
+			
+		<div class="minicart-totals">
+			<div class="minicart-totals-inner" id="cart_modal_totals_inner"></div> 
+		</div>
+
+		<div class="minicart-trust-stamps">
+			<div class="stamp">
+				<img src="{{  settings.img_confianza_1 | img_url}}" alt="{{ settings.alt_confianza_1  }}">				 
+			</div>
+			<div class="stamp">
+				<img src="{{  settings.img_confianza_2 | img_url}}" alt="{{ settings.alt_confianza_2  }}">				 
+			</div>
+			<div class="stamp">
+				<img src="{{  settings.img_confianza_3 | img_url}}" alt="{{ settings.alt_confianza_3  }}">				 
+			</div>
+			<div class="stamp">
+				<img src="{{  settings.img_confianza_4 | img_url}}" alt="{{ settings.alt_confianza_4  }}">
+			</div>
+			 
+			</div>
+			<a id="cart_modal_checkout" class="button button-register go-checkout" href="/checkout"> 
+				{{  'general.tramitar_pedido' | t }}  
+			</a>
+			
+			<button id="cart_modal_seguir" class="button button-close-cart">
+				{{  'general.seguir_comprando' | t }} 
+			</button>
+			
+		</div>
+	</form>
+</div>
+
+
+
+
+<script type="text/template" id="cart_line_template">
+<div class="cart__item" data-rel='<%= id %>'> 
+
+	<div class="cart__wrapper cart-sample">
+		<div class="cart__img">
+			<a href="<%= url %>">
+				<img src="<%= img_url %>">
+			</a>
+		</div>
+
+		<div class="cart__content">
+			<div class="cart__info">
+				<div class="cart__title">
+					<a href="<%= url %>"><%= title %></a>
+					<table class="minus-plus">
+						<tr>
+							<th class="cart-qty-control-minicart minus" data-rel='<%= id %>' data-handle='<%= handle %>' data-q='<%= quantity %>'>
+								<a href="#">{% include 'icon' with 'minus' %}</a>
+							</th>
+							<th> <span class="cart-qty" data-rel='<%= id %>'><%= quantity %></span> </th>
+							<th class="cart-qty-control-minicart plus"  data-rel='<%= id %>' data-q='<%= quantity %>'>
+								<a href="#">{% include 'icon' with 'add' %}</a>
+							</th>
+						</tr>
+					</table>                    
+                    <span class="cart__price">
+						<p class="discounted-cart-price"><%= discount_price %></p>
+						<%= formatted_price %>
+					</span>
+					<a class="delete-product read-more cart-remove icon-icon-trash-cancel-line" data-rel='<%= id %>' data-q="0" data-handle='<%= handle %>'>{{  'general.borrar' | t }}  </a>  
+				</div>
+				
+
+				 
+			</div>
+		
+		</div>
+	</div>
+</div>
+
+
+
+<% if  (sample) { %>
+<div class="cart__item" data-rel='<%= id %>'> 
+
+	<div class="cart__wrapper cart-sample">
+    
+    <div class="cart__img">
+    	<a href="<%= url %>">
+  		<span class="try-icon">{% render 'icon' with 'tryandbuy' %}</span>
+  		</a>
+  	</div>
+    <div class="cart__content">
+    <p class="trybuy-first-line"><%= try_title_top %></p>
+		<p class="trybuy-second-line"><%= try_title_bottom %></p>
+  	</div>
+    </div>
+    </div>
+    <%  } %>
+</script>
+<script>
+window.cart = {{ cart | json }}
+</script>
+
+

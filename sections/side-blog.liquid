@@ -1,0 +1,70 @@
+<div class="side-blog"> 
+
+    <div class="dv_articles_side_content"> 
+      {{ pages['side-blog-form-catalogo'].content }}
+    </div>
+  
+    <div class="dv_articles_side_content"> 
+      {{ pages['side-blog-promo'].content }}
+      <br>
+    </div>
+    <div class="dv_articles_side_separador"></div>
+
+    {% if section.settings.featured_article_1  != '' %}
+    <div class="side-blog-articles">
+        {% assign article = articles[section.settings.featured_article_1] %}
+        {% if article %} 
+        {%- include 'article-item', article: article -%}
+        {% endif %}
+        {% if section.settings.featured_article_2  != '' %}
+        {% assign article = articles[section.settings.featured_article_2] %} 
+        {%- include 'article-item', article: article -%}
+        {% endif %} 
+        {% if section.settings.featured_article_3 != '' %}
+        {% assign article = articles[section.settings.featured_article_3] %} 
+        {%- include 'article-item', article: article -%}
+        {% endif %} 
+    </div>
+    {% endif %}
+
+    <div class="dv_articles_side_separador"></div>
+
+    <div class="dv_articles_side_content"> 
+      {{ pages['side-blog-form-descargas'].content }}  
+    </div>
+    
+
+
+</div>
+
+
+
+
+
+
+
+
+{% schema %}
+{
+  "name": "Blog Sidebar",
+  "settings": [
+    {
+    "type": "article",
+    "id": "featured_article_1",
+	"label": "Articlo 1"
+    } 
+    ,
+    {
+    "type": "article",
+    "id": "featured_article_2",
+    "label": "Articlo 2"
+    } 
+    ,
+    {
+    "type": "article",
+    "id": "featured_article_3",
+    "label": "Articlo 3"
+    }   
+  ]
+}
+{% endschema %}

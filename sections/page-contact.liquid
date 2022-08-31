@@ -1,0 +1,23 @@
+<div class="account-page">
+
+    <h1 class="section-title">{{ page.title }}</h1>
+    {% form 'contact', class: 'account-form' %}
+    {% if form.posted_successfully? %} Thank you for your contact {% endif %}
+    {{ form.errors | default_errors }}
+    <div class="form-item">
+      <input type="text" id="ContactFormName" name="contact[name]" placeholder="Nombre">
+    </div>
+    <div class="form-item">
+      <input type="email" id="ContactFormEmail" name="contact[email]" placeholder="Email">
+    </div>
+    <div class="form-item">
+      <input type="tel" id="ContactFormPhone" name="contact[phone]" placeholder="Teléfono">
+    </div>
+    <div class="form-item">
+      <textarea style="width: 100%;" rows="10" id="ContactFormMessage" name="contact[body]"
+        placeholder="Mensaje..."></textarea>
+    </div>
+    <input class="button button-account" type="submit" value="ENVIAR">
+    {% endform %}
+  
+  </div>

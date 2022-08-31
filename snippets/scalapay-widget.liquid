@@ -1,0 +1,37 @@
+{%- if enabled -%}
+
+	{% if template.suffix == 'secondary' %}
+	{% assign color = settings.product_template_text %}
+	{% elsif template.suffix == 'tertiary' %}
+	{% assign color = settings.product_template_text_2 %}
+	{% else %}
+	{% assign color =  settings.main_color %}
+	{% endif %}
+
+  {%- assign scalapay_max_amount = 1500 -%}
+  {%- assign price_numeric = price | plus: 0 | divided_by: 100.00 -%}
+  
+  {%- if includejs!='No' -%}
+  <script src="https://cdn.scalapay.com/js/scalapay-widget/webcomponents-bundle.js"></script>
+  <script src="https://cdn.scalapay.com/js/scalapay-widget/scalapay-widget.js"></script>
+  {%- endif -%}
+
+  <div style="margin: 0 0 10px 0;min-height:20px;">
+    <scalapay-widget
+      amount="{{ price | plus: 0 | divided_by: 100.00 }}"
+      min="5"
+      max="{{ scalapay_max_amount }}"
+      amountSelectorArray='["#cart_modal_total > div.cart-totals-value", ".product-price > span"]'
+      size="100px"
+      logoSize="100%"
+      priceColor="{{color}}"
+      logoColor="{{color}}"
+      logoAlignment=""
+      numberOfPayments="3"
+      hideLogo="false"
+      hidePrice="{{hidePrice}}"
+      locale="{{ request.locale.iso_code }}"
+      priceBoxSelector='#cart_modal'>
+    </scalapay-widget>
+  </div>
+{%- endif -%}

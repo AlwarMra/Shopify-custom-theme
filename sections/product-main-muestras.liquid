@@ -1,0 +1,449 @@
+<script src="{{ 'muestras.min.js' | asset_url }}" defer="defer"></script>
+{% include 'product-tags' | prod: product %}
+{% assign col_bro_1 = section.settings.col_bro_1 %}
+{% assign col_bro_2 = section.settings.col_bro_2 %}
+{%- assign TIENDA = shop.url | split: '.' | last | upcase %}
+<section class="container">
+    <div class="product-display">
+        <div class="container-fluid">
+            <div class="product-photo">
+
+                <div class="golden-frame-absolute">
+                    <div class="golden-frame">
+                        <div class="tablet">
+                            <p class="breadcrumbs" style="padding: 0; width: 145%; line-height: 1.4;">
+
+                                {% assign bc_collection = false %}
+
+                                {%- assign col = collections[settings.collection_hombre]-%}
+                                {%- for col_p in product.collections -%}
+                                {%- if col_p.handle == col.handle -%}
+                                {%- assign bc_collection = col.handle -%}
+                                {%- break -%}
+                                {%- endif -%}
+                                {%- endfor -%}
+
+                                {% if bc_collection == false %}
+                                {%- assign col = collections[settings.collection_mujer]-%}
+                                {%- for col_p in product.collections -%}
+                                {%- if col_p.handle == col.handle -%}
+                                {%- assign bc_collection = col.handle -%}
+                                {%- break -%}
+                                {%- endif -%}
+                                {%- endfor -%}
+                                {% endif %}
+
+                                {% if bc_collection == false %}
+                                {%- assign col = collections[settings.collection_unisex]-%}
+                                {%- for col_p in product.collections -%}
+                                {%- if col_p.handle == col.handle -%}
+                                {%- assign bc_collection = col.handle -%}
+                                {%- break -%}
+                                {%- endif -%}
+                                {%- endfor -%}
+                                {% endif %}
+
+                                {% if bc_collection == false %}
+                                {%- assign col = collections[settings.collection_kids]-%}
+                                {%- for col_p in product.collections -%}
+                                {%- if col_p.handle == col.handle -%}
+                                {%- assign bc_collection = col.handle -%}
+                                {%- break -%}
+                                {%- endif -%}
+                                {%- endfor -%}
+                                {% endif %}
+
+                                {% if bc_collection == false %}
+                                {%- assign col = collections[settings.collection_nicho]-%}
+                                {%- for col_p in product.collections -%}
+                                {%- if col_p.handle == col.handle -%}
+                                {%- assign bc_collection = col.handle -%}
+                                {%- break -%}
+                                {%- endif -%}
+                                {%- endfor -%}
+                                {% endif %}
+
+                                {% if bc_collection == false %}
+                                {%- assign col = collections[settings.collection_mascotas]-%}
+                                {%- for col_p in product.collections -%}
+                                {%- if col_p.handle == col.handle -%}
+                                {%- assign bc_collection = col.handle -%}
+                                {%- break -%}
+                                {%- endif -%}
+                                {%- endfor -%}
+                                {% endif %}
+
+
+
+                                {% assign my_collection = collections[bc_collection] %}
+                                <a style="font-size: .75rem;" href="/" title="{{ 'general.home' | t }}">{{
+                                    'general.home' | t }}</a> / <a style="font-size: .75rem;"
+                                    href="{{ my_collection.url }}" title="{{ my_collection.title }}">{{
+                                    my_collection.title }}</a> / <a style="font-size: .75rem;"
+                                    href="{{ product.url }}">{{ titulo_producto }} {% unless TIENDA == 'DE' %}- {{
+                                    similar_a }} {{
+                                    imitation_product }} {% endunless %} {% comment %} {{ 'general.de' | t }} {{ marca
+                                    }}{% endcomment %}</a>
+                            </p>
+                        </div>
+                        <div class="space-between mobile">
+                            <!-- <p>{% if familia %}{{ familia }}{% endif %}</p>-->
+                            <p id="product-bread-open">{{titulo_producto}} <span
+                                    style="display: inline-block; margin-bottom:.2rem;">{% include 'icon' with
+                                    'tiny-chevron' %}</span>
+
+                            </p>
+
+                        </div>
+
+                        <div class="mobile" id="prod-breadcrumbs">
+                            <a style="font-size: .75rem;" href="/" title="{{ 'general.home' | t }}">{{ 'general.home' |
+                                t }}</a>
+                            <br>
+                            <a style="font-size: .75rem;" href="{{ my_collection.url }}"
+                                title="{{ my_collection.title }}">{{ my_collection.title }}</a>
+                        </div>
+
+                        <div class="product-title" id="variant-id">
+                            {%- if TIENDA == 'DE' -%}
+                            <h1>
+                                <span {% if imitation_product.size> 20 %} style="line-height:1.9rem;"{% endif
+                                    %}>{{imitation_product}} </span><br>
+                                <span class="product-name main">{{titulo_producto}}</span><br>
+                            </h1>
+                            {%- else -%}
+                            <h1>{{titulo_producto}} - {{ similar_a }} <span class="imitation-firm">{% if n <2 %}{{ marca
+                                        }}{% else %}<a href="/collections/{{marca | handle }}">{{marca}}</a>{% endif
+                                        %}</span>
+                                <br>
+                                <span class="product-name main" {% if imitation_product.size> 20 %} style="line-height:
+                                    1.9rem;"{% endif %}>{{imitation_product}} </span><br>
+                            </h1>
+                            {%- endif -%}
+                        </div>
+                        <div class="space-between secondary-info ">
+                            <p>
+                            </p>
+                            <div id="intensity">{% if intensidad %}<h2>{{ 'general.intensidad.Intensidad' | t }} </h2>{{
+                                intensidad_txt }} {% endif %}
+                                <a class="share-icon" id="share-icon-1" href="#">{% include 'icon' with 'share' %}</a>
+
+
+                                <div class="share-section" id="share-section-1" style="display:none" aria-hidden="true">
+                                    {%- assign share_url = shop.url | append: product.url -%}
+                                    {%- assign twitter_text = product.title -%}
+                                    {%- assign pinterest_description = product.description | strip_html | truncatewords:
+                                    15 | url_param_escape -%}
+                                    {%- assign pinterest_image = product.featured_image | img_url: 'large' | prepend:
+                                    'https:' -%}
+                                    <a class="share-item" href="https://www.facebook.com/sharer.php?u={{ share_url }}"
+                                        target="_blank" rel="noopener">{%- include 'icon' with 'facebook' -%} <span
+                                            clas="share-text">Facebook</span></a>
+                                    <a class="share-item"
+                                        href="https://pinterest.com/pin/create/button/?url={{ share_url }}{% if pinterest_image != blank %}&media={{ pinterest_image }}{% endif %}&description={{ pinterest_description }}"
+                                        target="_blank" rel="noopener">{%- include 'icon' with 'pinterest' -%}
+                                        <span>Pinterest</span></a>
+                                    <a class="share-item" href="whatsapp://send?text={{ share_url }}"
+                                        data-action="share/whatsapp/share" target="_blank" rel="noopener">{%- include
+                                        'icon' with 'whatsapp' -%}<span>Whatsapp</span></a>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="product-carousel-container" style="position: relative">
+                            {% if oferta %}
+                            {{ oferta }}
+                            {% endif %}
+                            <div class="main-product-photo-carousel">
+
+                                {% for image in product.images %}
+                                {%- assign img_url = image | img_url: '1x1' | replace: '_1x1.', '_300x.' -%}
+                                <img src="{{ img_url }}" alt="">
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <div class="main-product-photo space-between">
+                            {% if oferta %}
+                            {{ oferta }}
+                            {% endif %}
+                            <img src="{{ product.images[0] | img_url: 'x360' }}">
+                            {% comment %}
+                            {% include 'responsive-image' with
+                            image: product.images[0],
+                            max_width: 700,
+                            max_height: 800,
+                            max_size: 1200,
+                            image_attributes: "data-product-featured-image",
+                            wrapper_attributes: "data-product-image-wrapper",
+                            image_class:"img_with_zoom"
+                            %}
+                            {% endcomment %}
+                        </div>
+                    </div>
+                </div>
+                <div class="relative-height">
+                    <div class="main-product-thumbnails">
+                        {% for image in product.images %}
+                        {%- assign img_url = image | img_url: '1x1' | replace: '_1x1.', '_50x.' -%}
+                        <img src="{{ img_url }}" alt="">
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            <p class="free-shipment">
+                <span>{% include 'icon' with 'envio' %}
+                    {{ 'product.envio_gratis' | t }} </span>
+            </p>
+            <div class="sticky-cart">
+                <div class="buying-div">
+                    <table class="minus-plus">
+                        <tr>
+                            <th class="btn_quantity minus" data-q="1"><a href="javascript:;">{% include 'icon' with
+                                    'minus' %}</a></th>
+                            <th> <span class="dv_quantity">1</span> </th>
+                            <th class="btn_quantity plus" data-q="1"><button style="width:100%;">{% include 'icon' with
+                                    'add' %}</button></th>
+                        </tr>
+                    </table>
+                    {% for variant in product.variants %}
+                    {%- if variant.compare_at_price > variant.price -%} <p data-variant="{{ forloop.index0 }}"
+                        class="variant-price" {% unless forloop.first %}style="display: none;" {% endunless %}><span
+                            class="current-price"
+                            style="color: var(--text-color) !important; margin: 0 !important; white-space: nowrap;">{{
+                            variant.price |
+                            money }}</span>
+                        <br><span class="crossed-price">{{ variant.compare_at_price | money }}</span>
+                    </p>
+                    </span>
+                    {% else %}
+                    <p data-variant="{{ forloop.index0 }}" class="variant-price" {% unless forloop.first
+                        %}style="display: none;" {% endunless %}><span class="current-price"
+                            style="color: var(--text-color) !important; margin: 0 !important; white-space: nowrap;">{{
+                            variant.price |
+                            money }}</span>
+                    </p>
+                    {% endif %}
+                    {% endfor %}
+                    <a class="button add_muestra" style="background: var(--main-color); cursor: pointer;"
+                        data-compared="{{ product.variants[0].compare_at_price }}"
+                        data-rel="{{ product.variants[0].id }}" data-q="1" href="#"> <span>
+                            {{ 'product.addto' | t }} </span> {%- include 'icon' with 'cart-desktop' -%}</a>
+                </div>
+            </div>
+
+            <div class="product-description">
+                <div>
+                    {{ product.description | split: settings.product_decription_separator | first }}
+
+
+                    <div class="">
+                        {% for variant in product.variants %}
+                        <button data-variant-id="{{ variant.id }}" data-variant="{{ forloop.index | minus:1 }}"
+                            class="button btn-muestras {% if forloop.first %}muestra-active{% endif %}">{{ variant.title
+                            }}</button>
+                        {% endfor %}
+                    </div>
+
+                    {% for variant in product.variants %}
+                    <div class="muestras-input-container" data-variant="{{ forloop.index | minus: 1 }}" {% unless
+                        forloop.first %}style="display: none;" {%endunless %}>
+                        {% for i in (1..6) %}
+                        <div class="input-wrapper" data-name="tags-input">
+                            <input type="hidden" name="tags-input">
+                            <input type="text" name="" id="" class="input-muestra">
+                            <div class="search-results" style="display: none;"></div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    {% endfor %}
+
+
+
+                    <p class="description-share-int">
+                        {{ 'general.intensidad.Intensidad' | t }} <span class="intensidad">{{ intensidad_txt }}</span>
+                        <a class="share-icon" id="share-icon-2" href="#">{% include 'icon' with 'share' %}</a>
+
+                        <span class="share-section" id="share-section-2" style="display:none" aria-hidden="true">
+                            {%- assign share_url = shop.url | append: product.url -%}
+                            {%- assign twitter_text = product.title -%}
+                            {%- assign pinterest_description = product.description | strip_html | truncatewords: 15 |
+                            url_param_escape -%}
+                            {%- assign pinterest_image = product.featured_image | img_url: 'large' | prepend: 'https:'
+                            -%}
+                            <a class="share-item" href="https://www.facebook.com/sharer.php?u={{ share_url }}"
+                                target="_blank" rel="noopener">{%- include 'icon' with 'facebook' -%} <span
+                                    clas="share-text">Facebook</span></a>
+                            <a class="share-item"
+                                href="https://pinterest.com/pin/create/button/?url={{ share_url }}{% if pinterest_image != blank %}&media={{ pinterest_image }}{% endif %}&description={{ pinterest_description }}"
+                                target="_blank" rel="noopener">{%- include 'icon' with 'pinterest' -%}
+                                <span>Pinterest</span></a>
+                            <a class="share-item" href="whatsapp://send?text={{ share_url }}"
+                                data-action="share/whatsapp/share" target="_blank" rel="noopener">{%- include 'icon'
+                                with 'whatsapp' -%}<span>Whatsapp</span></a>
+                        </span>
+
+                        <br>
+
+
+                    </p>
+
+
+                </div>
+
+
+                {% form 'product', product, class: "price-and-add general-product-form" %}
+
+                <input id="variant" type="text" style="display: none;" value="{{  product.variants[0].id }}"
+                    data-variant="0" data-q="1">
+
+
+                <div class="space-between">
+                    {% for variant in product.variants %}
+                    {%- if variant.compare_at_price > variant.price -%}
+                    <p data-variant="{{ forloop.index0 }}" class="variant-price" {% unless forloop.first
+                        %}style="display: none;" {% endunless %}><span class="price-text">{{ 'product.precio' | t |
+                            upcase }}:</span><span class="current-price">{{
+                            variant.price |
+                            money }}</span>
+                        <br><span class="crossed-price">{{ variant.compare_at_price | money
+                            }}</span>
+                    </p>
+                    {% else %}
+                    <p data-variant="{{ forloop.index0 }}" class="variant-price" {% unless forloop.first
+                        %}style="display: none;" {% endunless %}><span class="price-text">{{ 'product.precio' | t |
+                            upcase }}:</span><span class="current-price" style="color: var(--text-color) !important">{{
+                            variant.price | money }}
+                        </span></p>
+                    {%- endif -%}
+                    {% endfor %}
+
+
+                    <div>
+                        <table class="minus-plus">
+                            <tr>
+                                <th class="btn_quantity minus" data-q="1">
+                                    <a href="javascript:;">{% include 'icon' with 'minus' %}</a>
+                                </th>
+                                <th> <span id="quantity" class="dv_quantity">1</span> </th>
+                                <th class="btn_quantity plus" data-q="1">
+                                    <button class="" style="width:100%;">{% include 'icon' with 'add' %}</button>
+
+                                </th>
+                            </tr>
+                        </table>
+                        <p class="minus-trash btn_quantity trash">{{ 'general.borrar' | t }}</p>
+                        {% comment %}
+                        {% if cart.item_count < 2 %} <span class="shipping-price">{{ section.settings.precio_envio_txt
+                            }}</span>
+                            {% endif %}
+                            {% endcomment %}
+                    </div>
+                </div>
+
+                <div class="description-buttons" style="width: 100% !important;">
+                    <p class="msg">{{ 'product.muestras_error' | t }}</p>
+                    <a style="background:#f1a84c; padding: 1.5rem;" id="add_to_cart_muestra" data-q="1"
+                        style="padding: 1.5rem;" class="button" href="javascript:;">{{
+                        'botones.comprar_ahora' | t | upcase }}</a>
+                    <a style="display: block !important; padding: 1.5rem; background: var(--main-color); cursor: pointer;"
+                        href="javascript:;" class="button add_muestra" data-q="1">{{
+                        'botones.add_to_cart' | t |
+                        upcase }}</a>
+                </div>
+                {% endform %}
+                <div id="product-wishlist">
+                    <div class="love-container love-product" data-handle="{{ product.handle }}">
+                        <span class="love-icon">
+                            {% include 'icon' with 'love' %}
+                        </span>
+                        <span class="love-text">{{ 'wishlist.wishlist_out' | t }}</span>
+                    </div>
+                </div>
+                {% comment %}
+                {% include 'product-brothers' | prod:product | col_bro_1:col_bro_1 | col_bro_2:col_bro_2 %}
+                {% endcomment %}
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<div class="shipment-promotion">
+    <p>
+        <span>{% include 'icon' with 'envio' %}
+            {{ 'product.envio_gratis' | t }}</span>
+    </p>
+    <p>
+        <span>{% include 'icon' with 'reception' %}
+            {{ 'product.envio_tiempo' | t }} </span>
+    </p>
+    <p>
+        <span>{% include 'icon' with 'devolution' %}
+            {{ 'product.envio_devol' | t }}</span>
+    </p>
+</div>
+
+{% include 'product-zoom' %}
+<style>
+    .current-price {
+        color: $red-price;
+        font-size: 1.5em !important;
+        color: #b12704;
+        margin: 2rem 0 0 1rem;
+        font-family: 'futura-medium' !important;
+    }
+</style>
+<script>
+
+
+
+    {% assign current_variant = product.selected_or_first_available_variant %}
+    {% assign cat = '' %}
+    {% for tag in product.tags %}
+    {% if tag contains 'categoria' %}
+    {% assign tag = tag | split: 'categoria:' %}
+    {% assign cat = tag[1] %}
+    {% endif %}
+    {% endfor %}
+
+
+    dataLayer.push({
+        'event': 'detail',
+        'ecommerce': {
+            'detail': {
+                'products': [{
+                    'name': "{{ product.title }}",
+                    'id': '{{ product.variants[0].sku }}',
+                    'price': {{ product.price }},
+            'brand': '{{ marca }}',
+            'category': '{{ cat }}',
+        }]
+    }
+        }
+     });
+</script>
+{% schema %}
+{
+"name": "Página producto",
+"settings": [
+{
+"type":"header",
+"content":"Product brothers"
+},
+{
+"type":"collection",
+"id":"col_bro_1",
+"label":"Collection",
+"info":"It will retrieve the first collection's product matching the tag 'categoria:x'."
+},
+{
+"type":"collection",
+"id":"col_bro_2",
+"label":"Collection",
+"info":"It will retrieve a random collection's product"
+}
+]
+}
+
+{% endschema %}

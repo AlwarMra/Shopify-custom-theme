@@ -1,0 +1,64 @@
+{% section 'collection-welcoming' %}
+
+<div class="collection-layout">
+    <div class="collection-grid"> 
+      <div id="filter-column">{% render 'collection-filter-controls' %}</div> 
+      <div>
+        <div class="subcollections subcol-desktop">
+          {% render 'nested-filters' %}
+        </div>
+
+        {% section 'collection-cards' %}  
+        {% render 'collection-description' %}
+    </div>
+    </div>
+</div>
+<div style="background: black;">
+  <div class="bottom-disclaimers page-width">
+      {% assign delivery_price = settings.envio_gratis_importe | replace: '.','' | money %}
+      <p>{{ 'announce.tryandbuy' | t }}</p>
+      <p>{{ 'announce.envio_precio' | t: price: delivery_price }}</p>
+      <p class="desktop">{{ 'announce.envio' | t }}</p>
+    </div>
+</div>
+ {% section 'home-service' %}
+ {% section 'reviews' %}
+{{ 'filtros.min.js' | asset_url | script_tag }}
+
+{% section 'EBFilters' %}
+{% comment %}{% endcomment %}
+
+{% comment -------------GET ALL TAGS------------- %}
+{% assign collection = collections.all %}
+{% paginate collection.products by 1000 %} 
+<h3>All Tags</h3>
+<div id="tags">{% if collection.tags.size == 0 %}
+No tags found.{% else %}
+{% for tag in collection.tags %}<a href="{{ collection.url }}/{{ tag | handle }}">{{ tag }}</a>{% unless forloop.last %}, {% endunless %}{% endfor %}
+{% endif %}
+</div>
+{% endpaginate %}
+{% endcomment %}
+<style>
+  .mas-vendidos-sub-section {
+  	padding: 0;
+  }
+  .bottom-disclaimers {
+        padding: 1rem;
+        width: 100%;
+        background: var(--main-color);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      margin: 0 auto;
+    }
+    .bottom-disclaimers p {
+        text-align: center;
+        color: var(--contrast-color);
+        line-height: 1.5;
+
+    }
+    .bottom-disclaimers .mobile {
+        display: none;
+    }
+</style>

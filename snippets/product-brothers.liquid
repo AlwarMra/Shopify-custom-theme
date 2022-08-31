@@ -1,0 +1,82 @@
+{% liquid
+
+    assign prod_1 = ''
+    assign prod_bro_1 = ''
+    assign prod_2 = ''
+    assign categoria = ''
+    assign catBro = ''
+    assign count = 0
+    
+    for tag in product.tags
+      unless tag contains 'nicho'
+        if tag contains 'categoria'
+            assign categoria = tag
+        endif
+      endunless
+    endfor
+    
+    assign index = 'now' | date: '%S'
+    assign index = index | times: col_bro_1.products.size
+    assign index = index | divided_by: 60
+    for product_bro in col_bro_1.products offset: index
+    
+      for tag_bro in product_bro.tags
+            if tag_bro contains 'categoria'
+              unless tag contains 'nicho'
+                  assign catBro = tag_bro
+              endunless
+            endif
+      endfor
+    
+      if catBro == categoria
+        assign prod_1 = product_bro
+        break
+      endif
+    endfor
+    
+    if prod_1 == ''
+    assign index = 'now' | date: '%S'
+    assign index = index | times: collections['all'].products.size
+    assign index = index | divided_by: 60
+    for prod_bro in collections['all'].products offset: index limit:1
+        assign prod_1 = prod_bro
+    endfor 
+    endif
+    
+    assign index = 'now' | date: '%S'
+    assign index = index | times: col_bro_2.products.size
+    assign index = index | divided_by: 60
+    
+    for prod_bro in col_bro_2.products offset: index limit:1
+        assign prod_2 = prod_bro
+    endfor 
+    
+    %}
+    
+    <div class="product-brother-container">
+      {% if prod_1 != '' %}
+      <div class="product-brother">
+        <div class="img-container">
+           <a href="{{ prod_1.url }}"><img src="{{ prod_1.images[0] | img_url: 'x150' }}"></a>
+        </div>
+        <div class="text">
+          <p>{{ prod_1.title }}</p>
+          <p>{{ prod_1.price | money }}</p>
+          <p><a class="button-add" data-rel="{{ prod_1.variants[0].id }}" data-compared="{{ prod_1.variants[0].compare_at_price }}">{{ 'botones.add_to_cart' | t }}</a></p>
+        </div>
+      </div>
+     {% endif %}
+    
+      {% if prod_2 != '' %}
+      <div class="product-brother">
+        <div class="img-container">
+          <a href="{{ prod_2.url }}"><img src="{{ prod_2.images[0] | img_url: 'x150' }}"></a>
+        </div>
+        <div class="text">
+          <p>{{ prod_2.title }}</p>
+          <p>{{ prod_2.price | money }}</p>
+          <p><a class="button-add" data-rel="{{ prod_2.variants[0].id }}" data-compared="{{ prod_2.variants[0].compare_at_price }}">{{ 'botones.add_to_cart' | t }}</a></p>
+        </div>
+      </div>
+      {% endif %}
+    </div>

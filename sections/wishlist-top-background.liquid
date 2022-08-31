@@ -1,0 +1,47 @@
+<section class="home-top- home-top-background h-t-b-o">
+    <div class="container">
+    <header style="margin-bottom: 3rem;">
+        <h1 class="section-title" style="color: {{ section.settings.text_color }}">{{ page.title }}</h1>
+    </header>
+    </div>
+</section>
+
+<style> 
+    .h-t-b-o { 
+        background: #FFF2D0;
+        background-image: url('{{ section.settings.img_fondo_video | image_url }}');   
+    }
+      @media(max-width:768px) {
+
+      .h-t-b-o{ 
+        background-image: url('{{ section.settings.img_fondo_movil | image_url }}');  
+        }
+    }
+</style>
+
+
+
+{% schema %}
+{
+  "name": "Wishlist top background", 
+  "settings": [ 
+        {
+        "type": "image_picker",
+        "id": "img_fondo_video",
+        "label": "Imagen fondo sección" 
+        },
+		{
+		  "type": "image_picker",
+          "id": "img_fondo_movil",
+          "label": "Imagen fondo Móvil" 
+		},
+		{
+			"type":"color",
+			"label":"Color texto",
+			"id":"text_color",
+			"default":"#373636"
+		}
+   ]
+
+}
+{% endschema %}

@@ -1,0 +1,31 @@
+{%- if paginate.pages > 1 -%}
+  <div class="pagination">
+
+    <!-- <div class="pagination-progress">
+        <div class="first-ball"><div class="inner-ball"></div></div>
+        <div class="last-ball"><div class="inner-ball"></div></div>
+    </div> -->
+
+    <div class="pagination-nav">
+      {%- if paginate.previous -%}
+        <a class="pagination-item link" rel="prev" title="{{ 'general.pagination.previous_page' | t }}" href="{{ paginate.previous.url | remove: 'view=ajax' }}{{ hash }}">
+          {%- include 'icon' with 'paginate-left' -%}
+        </a>
+      {%- endif -%}
+
+      {%- for part in paginate.parts -%}
+        {%- if part.is_link -%}
+          <a href="{{ part.url | remove: 'view=ajax' }}{{ hash }}" class="pagination-item link" title="{{ 'general.pagination.go_to_page' | t: page: part.title }}">{{ part.title }}</a>
+        {%- else -%}
+          <span class="pagination-item {% if part.title == paginate.current_page %} is-active {% endif %}">{{ part.title }}</span>
+        {%- endif -%}
+      {%- endfor -%}
+
+      {%- if paginate.next -%}
+        <a class="pagination-item link " rel="next" title="{{ 'general.pagination.next_page' | t }}" href="{{ paginate.next.url | remove: 'view=ajax' }}{{ hash }}">
+          {%- include 'icon' with 'paginate-right' -%}
+        </a>
+      {%- endif -%}
+    </div>
+  </div>
+{%- endif -%}

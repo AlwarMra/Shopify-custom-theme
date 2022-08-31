@@ -1,0 +1,49 @@
+{%- assign TIENDA = shop.url | split: '.' | last | upcase  -%}
+{%- assign dateFormat = format | default:'%A %B %d, %Y' -%}
+
+{%- case TIENDA %}
+{%- when 'ES' or 'MX' -%}
+{%- assign currentDays = 'lunes,martes,miercoles,jueves,viernes,sábado,domingo' | split:',' -%}
+{%- assign currentMonths =  ',enero,febrero,marzo,abril,mayo,junio,julio,agosto,septiembre,octubre,noviembre,diciembre' | split:',' -%}
+
+{%- when 'PT' -%}
+{%- assign currentDays = 'segunda,terça,quarta,quinta,sexta,sábado,domingo' | split:',' -%}
+{%- assign currentMonths =  'janeiro,fevereiro,março,abril,maio,junho,julho,agosto,setembro,outubro,novembro, dezembro' | split:',' -%}
+
+{%- when 'COM' or 'UK' -%}
+{%- assign currentDays = 'Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday' | split:',' -%}
+{%- assign currentMonths = 'January,February,March,April,May,June,July,August,September,October,November,December' | split:',' -%}  
+
+{%- when 'FR' -%}
+{%- assign currentDays = 'lundi,mardi,mercredi,jeudi,vendredi,samedi,dimanche' | split:',' -%}
+{%- assign currentMonths = 'janvier,février,mars,avril,mai,juin,juillet,août,septembre,octobre,novembre,décembre' | split:',' -%}
+
+{%- when  'IT' -%}
+{%- assign currentDays = 'lunedì,martedì,mercoledì,giovedì,venerdì,sabato,domenica' | split:',' -%}
+{%- assign currentMonths = 'gennaio,febbraio,marzo,aprile,maggio,giugno,luglio,agosto,settembre,ottobre,novembre,dicembre' | split:',' -%}
+
+{%- when 'DE' -%}
+{%- assign currentDays = 'montag,dienstag,mittwoch,donnerstag,freitag,samstag,sonntag' | split:',' -%}
+{%- assign currentMonths = 'januar,februar,märz,april,mai,juni,juli,august,september,oktober,november,dezember' | split:',' -%}
+
+{%- when 'NL' -%}
+{%- assign currentDays = 'maandag,dinsdag,woensdag,donderdag,vrijdag,zaterdag,zondag' | split:',' -%}
+{%- assign currentMonths =  'januari,februari,maart,april,mei,juni,juli,augustus,september,oktober,november,december' | split:',' -%}
+
+{%- when 'SE' -%}
+{%- assign currentDays = 'måndag,tisdag,onsdag,torsdag,fredag,​​lördag,söndag' | split:',' -%}
+{%- assign currentMonths =  'Januari,februari,mars,april,maj,juni,juli,augusti,september,oktober,november,december' | split:',' -%}
+
+{%- when 'DK' -%}
+{%- assign currentDays = 'mandag,tirsdag,onsdag,torsdag,fredag ​,lørdag,søndag' | split:',' -%}
+{%- assign currentMonths =  'januar,februar,marts,april,maj,juni,juli,august, september,oktober,november,december' | split:',' -%}
+
+{%- when 'FI' -%}
+{%- assign currentDays = 'maanantai,tiistai,keskiviikko,torstai,perjantai,lauantai,sunnuntai' | split:',' -%}
+{%- assign currentMonths =  'tammikuu,helmikuu,maaliskuu,huhtikuu,toukokuu,kesäkuu,heinäkuu,elokuu,syyskuu,lokakuu,marraskuu,joulukuu' | split:',' -%}
+{%- endcase -%}
+
+{% assign date_parts = dateString | split: ' ' | first | split: '-' %}
+{% assign  mes = date_parts[1] | times: 1 %}
+{{ date_parts[2] }} {{ currentMonths[mes]}}, {{ date_parts[0] }}
+

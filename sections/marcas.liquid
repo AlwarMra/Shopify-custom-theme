@@ -1,0 +1,69 @@
+{%- assign menu_marcas = 'general.marcas' | t | downcase | replace: 'ä', 'a' -%}
+
+<div class="marcas">
+    <div class="collection-welcoming">
+        <h1 class="collection-page-title">
+            <p>{{ 'general.perfumes_de_equivalencia' | t | upcase  }}</p>
+            <p>{{ page.title | upcase }}</p>
+        </h1>
+    </div>
+
+    <div class="marcas-alph">
+        <h3 class="section-title">{{ 'general.todas_las_marcas' | t }}</h3>
+        <div class="index-letters">
+            {% assign letras_in = '' %}  
+            {% assign marcas = linklists[menu_marcas] %}
+            {% assign sortedLinks = marcas.links | sort: 'title' %}
+            {% for sub_link in sortedLinks %}
+            {% assign inicial = sub_link.title | split: '' | first %}
+            {% unless letras_in contains inicial %}
+            <a href="#" data-rel="{{ inicial }}" class='indice'>{{ inicial }}</a>
+            {% assign letras_in = letras_in | append: inicial %}
+            {% endunless %}
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="marcas-search">
+        <div class="searcher-bar">
+            <input id="in_search_marcas" class="nav-input nav-link-hide" placeholder="{{ 'general.buscar_marca' | t }}"
+                type="search">
+            <a href="">
+                {% include 'icon' with 'searcher' %}
+            </a>
+        </div>
+
+    </div>
+
+    <div class="alph-letter">
+        {% assign n_links = 0 %}
+        {% assign letras_in = '' %}
+        {% assign letras_in = '' %}
+
+        {% assign marcas = linklists[menu_marcas] %}
+        {% assign sortedLinks = marcas.links | sort: 'title' %}
+
+        {% for sub_link in sortedLinks %}
+        {% assign inicial = sub_link.title | split: '' | first %}
+        {% if letras_in contains inicial %}
+        <h3 class="marca_title" data-inicial="{{ inicial }}" data-rel="{{  sub_link.title | downcase }}"><a
+                href="{{ sub_link.url }}" class="letter-li"> {{ sub_link.title | escape }}</a></h3>
+        {% else %}
+        <h2 class="letter-title" id="letra_{{ inicial }}">{{ inicial }}</h2>
+        <h3 class="marca_title" data-inicial="{{ inicial }}" data-rel="{{  sub_link.title | downcase }}"><a
+                href="{{ sub_link.url }}" class="letter-li">{{ sub_link.title | escape }}</a></h3>
+
+        {% assign letras_in = letras_in | append: inicial %}
+        {% endif %}
+        {% endfor %}
+    </div>
+
+</div>
+
+{% schema %}
+{
+"name": "Marcas",
+"settings": [
+]
+}
+{% endschema %}

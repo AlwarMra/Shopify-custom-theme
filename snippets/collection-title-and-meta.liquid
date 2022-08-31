@@ -1,0 +1,22 @@
+{%- capture datos -%}   
+
+{%- endcapture -%}
+
+{% assign is_meta = true %}
+{%- assign lineas = datos | split: '%|%' -%} 
+{%- for linea in lineas %}{%- assign datos_col = linea | split: ';' -%}{%- assign handle = datos_col[0] | strip -%} 
+	{%- if handle == collection.handle -%}<title>{{ datos_col[1] | strip }}</title>
+  	 <meta name="description" content="{{ datos_col[2] | escape }}">
+	   {% assign is_meta = false %}
+      {%- break -%}
+	{%- endif -%}
+{%- endfor -%}
+
+{% if is_meta %}
+{% if seo_page %}
+<title>{{ seo_title }}</title>
+{% else %}
+<title>{{ page_title }}</title>
+{% endif %}
+<meta name="description" content="{{ collection.description | strip_html | escape }}">
+{% endif %}

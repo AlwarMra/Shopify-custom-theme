@@ -1,0 +1,86 @@
+{% assign alternative = false %}
+{% if template.suffix == 'secondary' %}
+{% assign color = settings.product_template_back  %}
+{% assign text = settings.product_template_text %}
+{% assign alternative = true %}
+{% elsif template.suffix == 'tertiary' %}
+{% assign color = settings.product_template_back_2  %}
+{% assign text = settings.product_template_text_2 %}
+{% assign alternative = true %}
+{% endif %}
+{% if alternative %}
+<style>
+#product-template,
+#sticky-cart {
+   background: {{ color }};
+}
+
+#product-template p,
+#product-template span,
+#product-template h1,
+#product-template h2,
+#product-template h3,
+#product-template h4,
+#product-template h5,
+#product-template b,
+#product-template li,
+#product-template em,
+#product-template strong,
+#product-template b,
+.variant-btn, 
+.button-add-p,
+#product-template .breadcrumbs,
+#product-template .breadcrumbs a,
+scalapay-widget, scalapay-widget span {
+   color: {{ text }} !important;
+}
+.button-buy {
+   color: {{ text }};
+   filter: brightness(2);
+}
+.variant-btn, .button-add-p {
+   border: 1px solid {{ text }};
+}
+
+.btn-facebook svg,
+.btn-pinterest svg,
+.btn-email svg {
+    fill: {{ text }};
+}
+.share-btn.btn-facebook:hover a,
+.share-btn.btn-pinterest:hover a,
+.share-btn.btn-email:hover a,
+.accordion-title span:before,
+.accordion-title span:after {
+    background-color: {{ text }};
+}
+
+.share-btn.btn-facebook:hover svg,
+.share-btn.btn-pinterest:hover svg,
+.share-btn.btn-email:hover svg {
+    fill: {{ color }};
+} 
+
+ .usp p {
+    color: {{ color }} !important;
+  }
+  .accordion-container {
+     border-bottom: 1px solid {{ text }};
+  }
+  .accordion-container:first-child {
+     border-top: 1px solid {{ text }};
+  }
+</style>
+{% endif %}
+
+<script>
+       window.paramsUltimas = true;
+    {% for tag in product.tags %}
+    {% if tag == 'SEARCHANISE_IGNORE' %}
+    window.paramsUltimas = false;
+    {% endif %}
+    {% endfor %} 
+   
+    window.ultimas_this_product = {{ product | json }};
+
+</script>

@@ -1,0 +1,320 @@
+{
+    "general": {
+      "404": {
+        "title": "Not Found",
+        "subtext_html": "The page you are looking for is not found"
+      },
+      "de": "from",
+      "Similar_a": "Similar to",
+      "Perfume_equivalente_a": "Perfume similar to",
+      "inspirado_en": "Inspired by",
+      "dia": "Day",
+      "noche": "Night",
+      "familia_olfativa": "Fragrance Family",
+      "colecciones": "Collections",
+      "Estacion": "Season",
+      "Uso": "Recommended use",
+      "descuento": "discount",
+      "perfumes_de_equivalencia": "SIMILAR PERFUMES",
+      "buscar_perfumes_de_equivalencia": "FIND SIMILAR PERFUMES",
+      "encuentra_tu_perfume_divain": "Find your DIVAIN perfume",
+      "busca_tu_perfume_o_marca": "Find your perfume or brand...",
+      "cerrar": "Close",
+      "volver": "Return",
+      "mas_vendidos": "Best Sellers",
+      "marcas": "Brands",
+      "todas_las_marcas": "All Brands",
+      "conoce_equivalencias": "Discover all our similar perfumes",
+      "iva_incluido": "VAT included",
+      "no_tienes_productos": "You do not have products in your cart",
+      "carrito": "Cart",
+      "completa_pedido": "Complete your order:",
+      "tramitar_pedido": "CHECKOUT",
+      "seguir_comprando": "CONTINUE SHOPPING",
+      "total": "Total",
+      "subtotal": "Subtotal",
+      "gastos_envio": "Shipping",
+      "producto": "Product",
+      "cantidad": "Quantity",
+      "borrar": "Remove",
+      "perfumes_colecciones_html": "Equivalence perfumes.<br>Over 600 high quality fragrances",
+      "intensidad": {
+        "Intensidad": "Intensity",
+        "Baja": "Low",
+        "Media": "Medium",
+        "Fuerte": "High"
+      },
+      "newsletter_form": {
+        "email_placeholder": "Email",
+        "confirmacion": "Thanks for signing up!",
+        "descargar": "Download"
+      },
+      "error": "Error",
+      "home": "Home",
+      "buscar_marca": "Find your brand",
+      "pagination": {
+        "previous_page": "Previous page",
+        "go_to_page": "Go to page",
+        "next_page": "Next page"
+      }
+    },
+    "product": {
+      "precio": "Price",
+      "addto": "ADD TO",
+      "Envase": "Bottle",
+      "notas": "Olfactory notes.",
+      "ingredientes": "Ingredients",
+      "caracteristicas": "Characteristics",
+      "opiniones": "Reviews",
+      "Ver_menos_sobre_el_perfume": "See less perfume information",
+      "Ver_mas_sobre_el_perfume": "See more perfume information",
+      "envio_gratis": "Free shipping on orders over 30€",
+      "envio_tiempo": "Receive your order in 3-5 working days",
+      "envio_devol": "Free returns. 100% money back guarantee",
+      "muestras": "Samples",
+      "muestras_error": "You still have samples to choose from!",
+      "muestra_gratis": "Free sample",
+      "tryandbuy": "TRY & BUY",
+      "trybuy_link": "\/pages\/try-buy",
+      "reviews":"Reviews on {{ title }} {{ imitation }}"
+    },
+    "botones": {
+      "comprar_ahora": "Buy Now",
+      "add_to_cart": "Add to Cart",
+      "anadelo_por": "ADD IT FOR",
+      "sin_stock": "Available soon",
+      "agotado": "Out of stock",
+      "agotado_2": "Sold out",
+      "all_marcas": "ALL BRANDS",
+      "ver_mas": "See more",
+      "seguir_redes": "Follow on media",
+      "download":"Download"
+    },
+    "pack": {
+      "Precio_del_pack": "Price per pack"
+    },
+    "categorias": {
+      "todos": "All",
+      "hombre": "Man",
+      "mujer": "Woman",
+      "unisex": "Unisex",
+      "nicho": "Niche",
+      "kids": "Kids",
+      "mascotas": "Pets",
+      "accesorios": "Accessories"
+    },
+    "familias": {
+      "acuatica": "Aquatic",
+      "amaderada": "Woody",
+      "almizcle": "Musk",
+      "citrica": "Citrus",
+      "chipre": "Chypre",
+      "cuero": "Leather",
+      "especiada": "Spicy",
+      "fougere": "Fougere",
+      "floral": "Floral",
+      "frutal": "Fruity",
+      "oriental": "Oriental",
+      "vainilla": "Vanilla",
+      "aromatica": "Aromatic",
+      "gourmand": "Gourmand",
+      "verde": "Green",
+      "amaderado": "Woody",
+      "aldehidica": "Aldehyde",
+      "ambar": "Amber"
+    },
+    "filtros": {
+      "filtros": "Filters",
+      "ordenar": "Sort",
+      "ordenar_por": "Sort by",
+      "precio_menor_a_mayor": "Price High to Low",
+      "precio_mayor_a_menor": "Price Low to High",
+      "nuevo_a_antiguo": "Newer products",
+      "antiguo_a_nuevo": "Older products",
+      "filtrar_coleccion_por": "Filter XXXXX by",
+      "filtrar_por": "Sort by",
+      "intensidad": "Intensity",
+      "familias_olfativas": "Fragrance Family",
+      "estacion": "Season",
+      "invierno": "Winter",
+      "primavera": "Spring",
+      "verano": "Summer",
+      "otono": "Autumn",
+      "filtrar": "Filter",
+      "limpiar": "Clear",
+      "genero": "Gender",
+      "momento": "Moment",
+      "filtrar_familia": "Filter by family"
+    },
+    "customers": {
+      "contrasena": "Password",
+      "nombre": "First name",
+      "apellido": "Last name",
+      "email": "Email",
+      "entrar_en_mi_cuenta": "Log in to my Divain Account",
+      "introduce_email_y_pass": "Please enter your email and password",
+      "olvide_pass": "Forget your password?",
+      "entrar": "Enter",
+      "crear_cuenta": "Create account",
+      "recuperar_contrasena": "Reset Password",
+      "recuperado_con_exito": "Reset Sucessful",
+      "recuperar": "Reset",
+      "recuerdas_tu_contrasena": "Do you remember your password? ",
+      "volver_a_entrar": "Return to Log In",
+      "logout": "Logout",
+      "mi_cuenta": "My Account",
+      "bienvenido": "Welcome back",
+      "mis_pedidos": "My Orders",
+      "no_tienes_pedidos": "You do not have any orders yet",
+      "pedido": "Order",
+      "fecha": "Date",
+      "estado_pago": "Payment satus",
+      "estado_entrega": "Delivery status",
+      "total": "Total",
+      "sin_direcciones": "No Addresses",
+      "no_hay_direcciones_guardadas": "You do not have any addresses saved",
+      "gestionar_direcciones": "Edit Addresses",
+      "direcciones": "Addresses",
+      "activar_cuenta": "Activate account",
+      "introduce_la_contrasena": "Please enter your password",
+      "enviar": "Submit",
+      "declinar": "Decline",
+      "volver_a_mi_cuenta": "Return to my account",
+      "mis_direcciones": "My Addresses",
+      "anadir_nueva_direccion": "Add a new address",
+      "direccion_por_defecto": "Default address",
+      "direccion": "Address",
+      "rellena_los_siguientes_datos": "Please fill in the following information",
+      "establecer_direccion_predeterminada": "Set as default address",
+      "anadir_direccion": "Add address",
+      "editar_una_direccion": "Edit address",
+      "editar": "Edit",
+      "pedido_realizado_el": "Order made on ",
+      "pedido_cancelado_el": "Order cancelled on",
+      "producto": "Product",
+      "cantidad": "quantity",
+      "descuento": "Discount",
+      "subtotal": "Subtotal",
+      "direccion_envio": "Shipping Address",
+      "direccion_facturacion": "Billing address",
+      "crea_tu_cuenta_divain": "Create your Divain account",
+      "crear_mi_cuenta": "Create my account",
+      "reiniciar_pass": "Reset password",
+      "introduce_nueva_contrasena": "Please enter a new password",
+      "reset": "Reset",
+      "cumple": "Birthday",
+      "preference": "Preference",
+      "edit_mis_datos": "Edit my profile"
+    },
+    "blog": {
+      "todo": "All",
+      "leer_mas": "Read more",
+      "escrito_por": "Written by"
+    },
+    "gift_card": {
+      "issued": {
+        "subtext": "Here is your gift card!",
+        "illustration_alt": "Gift card illustration",
+        "disabled": "Your gift card is disable",
+        "expired": "Your gift card has expired {{ expiry }}.",
+        "expires_on": "Your gift card expires on {{ expiry }}.",
+        "redeem_html": "Use this code to redeem your gift card",
+        "shop_link": "Start shopping",
+        "code": "Code",
+        "initial_amount_html": "Amount: {{initial_amount}}",
+        "remaining_balance_html": "Remaining: {{balance}}",
+        "add_to_apple_wallet": "Add to Apple Wallet"
+      }
+    },
+    "announce": {
+      "entrega": "Receive your order in 3-5 working days",
+      "devolucion": "14 day return guarantee",
+      "trust": "4,7\/5 on Truspilot",
+      "tryandbuy": "Try&Buy Free Return",
+      "envio_precio": "Free shipping from {{ price }}",
+      "envio": "Receive your order in 3-5 working days"
+    },
+    "wishlist": {
+      "wishlist_out": "Add this product to your wishlist",
+      "wishlist_in": "This product is in your wishlist",
+      "add_all": "Add all",
+      "copiar": "Copy",
+      "copiado": "Copied!",
+      "add_all_message": "Add all products!",
+      "wishlist_share_title": "Divain wishlist",
+      "wishlist_share_text": "Take a look to my Wishlist!"
+    },
+    "search": {
+      "no_results": "No results for “{{ terms }}” Check the grammar or try with any other term",
+      "results_with_count": {
+        "one": "{{ count }} result was found for \"{{ terms }}\"",
+        "other": "{{ count }} results were found for \"{{ terms }}\""
+      },
+      "title": "Search results",
+      "page": "Page",
+      "products": "Products",
+      "collections": "Categories",
+      "search_for": "Search “{{ terms }}”",
+      "predictive_empty":"We have not found what you were looking for. Download the catalog to see all our perfumes!",
+      "catalogue_link":"https://cdn.shopify.com/s/files/1/0106/6486/9945/files/COM_Catalogue_June.pdf?v=1654012777"
+    },
+    "shopify": {
+      "checkout": {
+        "alternative_payment_method_banner": {
+          "or": ""
+        },
+        "general": {
+          "continue_to_shipping_method": ""
+        },
+        "payment_gateway": {
+          "cash_on_delivery_label": ""
+        },
+        "banner_text_html":"Still unregistered? <a href='/login'>Do it here!</a>"
+      }
+    },
+    "pagefly": {
+      "products": {
+        "product": {
+          "regular_price": "Regular price",
+          "sold_out": "Sold out",
+          "unavailable": "Unavailable",
+          "on_sale": "Sale",
+          "quantity": "Quantity",
+          "add_to_cart": "Add to cart",
+          "back_to_collection": "Back to {{ title }}",
+          "view_details": "View details"
+        }
+      },
+      "article": {
+        "tags": "Tags:",
+        "all_topics": "All topics",
+        "by_author": "by {{ author }}",
+        "posted_in": "Posted in",
+        "read_more": "Read more",
+        "back_to_blog": "Back to {{ title }}"
+      },
+      "comments": {
+        "title": "Leave a comment",
+        "name": "Name",
+        "email": "Email",
+        "message": "Message",
+        "post": "Post comment",
+        "moderated": "Please note, comments must be approved before they are published",
+        "success_moderated": "Your comment was posted successfully. We will publish it in a little while, as our blog is moderated.",
+        "success": "Your comment was posted successfully! Thank you!",
+        "comments_with_count": {
+          "one": "{{ count }} comment",
+          "other": "{{ count }} comments"
+        }
+      },
+      "password_page": {
+        "login_form_message": "Enter store using password:",
+        "login_form_password_label": "Password",
+        "login_form_password_placeholder": "Your password",
+        "login_form_submit": "Enter",
+        "signup_form_email_label": "Email",
+        "signup_form_success": "We will send you an email right before we open!",
+        "password_link": "Enter using password"
+      }
+    }
+  }

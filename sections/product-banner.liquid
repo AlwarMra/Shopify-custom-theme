@@ -1,0 +1,66 @@
+<section class="page-banner-section" style="background: {{ settings.banner_back_color }}">  
+  <p class="title">{{ settings.banner_title }}</p>
+  <p class="subtitle">{{ settings.banner_subtitle }}</p>
+  <a href="{{ settings.banner_btn_url }}">{{ settings.banner_btn_text }}</a>
+</section>
+
+<style>
+	.page-banner-section .title {
+		font-family: 'amalfi';
+	}
+  .page-banner-section {
+    padding: 5rem 0;
+    margin-bottom: 6rem;
+  	text-align: center;
+    {% if settings.banner_img_mv %}
+    background-image: url('{{ settings.banner_img_mv | img_url: 'x600' }}') !important;
+        background-position:center !important;
+        background-repeat: no-repeat !important;
+        background-size: cover !important;
+    
+    {% endif %}
+  }
+  .page-banner-section p {
+    color: {{ settings.banner_text_color }};
+    font-family: 'futura';
+    width: 90%;
+    line-height: 1.5;
+    margin: 0 auto;
+    font-size: 1.5rem;
+  }
+  .page-banner-section .title {
+    font-weight: 700;
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+  .page-banner-section a {
+    text-decoration: none;
+    font-family: 'futura';
+    display: inline-block;
+    padding: 1rem;
+    margin: 2rem auto 0;
+    margin-top: 2rem;
+    color: {{ settings.banner_btn_text_color }};
+    background: {{ settings.banner_btn_back_color }};
+  }
+  
+  @media(min-width: 768px) {
+    .page-banner-section {
+              {% if settings.banner_img_ds %}
+            background-image: url('{{ settings.banner_img_ds | img_url: 'x1400' }}') !important;
+            background-position:center !important;
+            background-repeat: no-repeat !important;
+            background-size: cover !important;
+            {% else %}
+            background: {{ settings.banner_back_color }} !important;
+            {% endif %}
+  }
+  }
+</style>
+{% schema %}
+  {
+    "name": "Page banner",
+    "settings": [
+	]
+  }
+{% endschema %}

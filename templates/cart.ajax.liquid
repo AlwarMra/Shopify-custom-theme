@@ -1,0 +1,51 @@
+{% layout none %}
+
+{%- assign TIENDA = shop.url | split: '.' | last | upcase  %} 
+{% if shop.url contains 'sandbox' %}{%- assign TIENDA = 'SAND' %} {% endif %}
+
+{% liquid
+    assign is = false 
+	assign catalogue = ''
+    assign flyer = '39842459320419'
+    
+    if TIENDA == 'DE' 
+    assign catalogue = '40069759762480'
+    
+    elsif TIENDA == 'UK'
+    assign catalogue = '42667043553467'
+  
+    elsif TIENDA == 'ES'
+    assign catalogue = '39624690368611'
+
+    elsif TIENDA == 'COM'
+    assign catalogue = '40274470600738'
+
+    elsif TIENDA == 'FR'
+    assign catalogue = '40093977575472'
+
+    elsif TIENDA == 'IT'
+    assign catalogue = '42684603793595'
+
+    elsif TIENDA == 'PT'
+    assign catalogue = '39411545210944'
+
+    elsif TIENDA == 'NL'
+    assign catalogue = '41263843967173'
+
+    elsif TIENDA == 'SE'
+    assign catalogue = '40656096297007'
+
+    elsif TIENDA == 'DK'
+    assign catalogue = '41171185008831'
+
+    elsif TIENDA == 'FI'
+    assign catalogue = '42485775499512'
+
+    
+    endif
+%}
+
+{ 
+"catalogue": {{ catalogue }},
+"flyer":{{ flyer }}
+}

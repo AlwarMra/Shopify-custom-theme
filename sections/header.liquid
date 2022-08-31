@@ -1,0 +1,344 @@
+<header id="page-header">
+    <div class="container navigator">
+        <div style="overflow: unset; min-height: 40px;">
+            <div class="upper-nav page-width">
+                <div class="mobile-menu">
+                    <span id="mobile-menu">{% render 'icon' with 'menu' %}</span>
+                    <a href="/search" id="icon-searcher">{% render 'icon' with 'searcher' %}</a>
+                </div>
+                <div class="search-container-menu">
+                    {% render 'header-search' %}
+                </div>
+                <div class="logo-container">
+                    <a class="logo" href="/">
+                        <img class="" alt="logo" src="{{'logo.svg' | asset_url }}">
+                    </a>
+                </div>
+
+                <div class="nav-icon-container">
+                    <ul>
+                        <li>
+                            <a href="{{ section.settings.chat }}">
+                                <span class="icon-chat">{%- render 'icon' with 'chat' -%}</span>
+                            </a>
+                        </li>
+                        {% if section.settings.wishlist %}
+                            <li class="wish-link desktop-header">
+                                <a href="{{ section.settings.wishlist }}">
+                                    {% render 'icon' with 'love' %}
+                                </a>
+                            </li>
+                        {% endif %}
+                        <li class="desktop-header">
+                            <a href="{% if customer %}/account{% else %}/account/login{% endif %}">
+                                <span class="icon-account">
+                                    {%- render 'icon' with 'account' -%}
+                                </span>
+                            </a>
+                        </li>
+                        <li class="shopping-bag {% if cart.item_count > 0 %}has-items{% endif %}" id="btn_open_side_cart">
+                            <a href="javascript:;" id="openModal">
+                                <span class="nav-link-hide">{{ cart.total | money }}</span>
+                                <span>{%- render 'icon' with 'cart' -%}</span>
+                            </a>
+                            <div id="shopping-number" {% if cart.item_count == 0 %} style="display:none" {% endif %}>
+                                <span>0</span>
+                            </div>
+                        </li>
+
+
+                    </ul>
+                </div>
+
+            </div>
+
+
+            <nav class="nav-collections">
+                <div class="mobile-header lateral-menu-header">
+                    <div class="flex-icons">
+                        <a style="margin-right: .75rem;" href="{% if customer %}/account{% else %}/account/login{% endif %}">{% render 'icon' with 'account' %}
+                            <span>{{ 'customers.mi_cuenta' | t }}</span>
+                        </a>
+                        {% if section.settings.wishlist %}
+                        <a href="{{ section.settings.wishlist }}">
+                            {% render 'icon' with 'love' %}
+                            <span>{{ 'wishlist.wishlist_share_title' | t }}</span>
+                        </a>
+                        {% endif %}
+                    </div>
+                    <span class="close-header-menu">&times;</span>
+                </div>
+
+                <div>
+                <ul class="navigation scrollbar">
+                    {%- assign main_menu_handle = section.settings.navigation_menu | default: 'main-menu' -%}
+                    {%- assign main_menu = linklists[main_menu_handle] -%}
+                    {%- assign menu_marcas = 'general.marcas' | t | downcase | replace: 'ä', 'a' -%}
+                    {%- for link in main_menu.links -%}
+
+                        {% if link.handle == menu_marcas %}
+                            <li class="menu-link marcas-header {% if link.active %}header-link-active{% endif %} ">
+                                <a href="{{ link.url }}" class="menu-anchor">
+                                    {{ link.title | title | upcase }}
+                                </a>
+                                {% comment %}
+                                {% endcomment %}
+                                {%- render 'menu-marcas', menu_marcas: menu_marcas -%}
+                            </li>
+                        {% else %}
+                            
+                            <li class="menu-link {% if link.handle contains section.settings.high_text and section.settings.high_text != blank  %} high-link{% endif %}">
+                                <a href="{{ link.url }}" class="menu-anchor {% if link.active %}header-link-active{% endif %} {% if link.links != blank %}open-submenu{% endif %}"
+                                {% if link.links != blank %}data-menu="{{ link.handle }}"{% endif %}>
+                                    {{ link.title | title | upcase  }}
+                                    {% if link.links != blank %}
+                                        <span class="menu-link-arrow">{% render 'icon' with 'select-arrow' %}</span>
+                                    {% endif %}
+                                </a>
+                                {% if link.links != blank %}
+                                {% assign class = '' %}
+                                {% for block in section.blocks %}
+                                    {% if block.settings.handle == link.handle %}
+                                    {% assign class = "has-blocks" %}
+                                    {% break %}
+                                    {% endif %}
+                                {% endfor %}
+                                <div class="submenu {{ class }} ">
+                                    <div class="submenu-columns">
+                                        {%- for sub_link in link.links -%}  
+                                            <a href="{{ sub_link.url }}">
+                                                {{sub_link.title }}
+                                            </a>
+                                            {%- endfor -%} 
+                                    </div>
+                                    {% for block in section.blocks %}
+                                    {% assign block_handle = block.settings.handle | downcase %}
+                                    {% assign h = link.handle %}
+                                      {% if block_handle == h %}
+                                      <div class="header-blocks-container">
+                                        {% if block.settings.img_1 %}
+                                        <div>
+                                          <a href="{{ block.settings.url_1 }}">
+                                            <img class="lazyload" data-src="{{ block.settings.img_1 | img_url: 'medium' }}" alt="{{ block.settings.url_1.title }}">
+                                          </a>
+                                          <p>{{ block.settings.title_1 }}</p>
+                                        </div>
+                                        {% endif %}
+                                        {% if block.settings.img_2 %}
+                                        <div>
+                                          <a href="{{ block.settings.url_2 }}">
+                                            <img class="lazyload" data-src="{{ block.settings.img_2 | img_url: 'medium' }}" alt="{{ block.settings.url_1.title }}">
+                                          </a>
+                                          <p>{{ block.settings.title_2 }}</p>
+                                        </div>
+                                        {% endif %}
+                                      </div>
+                                      {% endif %}
+                                    {% endfor %}
+                                </div>
+                                {% endif %}
+                            </li>
+
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+                <ul>
+                    {%- for link in main_menu.links -%}
+                        {%- if link.links != blank -%}
+                            <li class="submenu-lateral" data-menu="{{ link.handle }}">
+                                <a class="submenu-lateral-header" href="javascript:;">
+                                    <span class="menu-link-arrow reverse">{% render 'icon' with 'select-arrow' %}</span>
+                                    {{ link.title }}</a>
+                                {%- for sub_link in link.links -%}
+                                    <a class="submenu-lateral-links" href="{{ sub_link.url }}">{{ sub_link.title | upcase }}
+                                    </a>
+                                {% endfor %}
+                                {% for block in section.blocks %}
+                                {% assign block_handle = block.settings.handle | downcase %}
+                                {% assign h = link.handle %}
+                                  {% if block_handle == h %}
+                                  {% if block.settings.img_1 %}
+                                  <a href="{{ block.settings.url_1 }}" class="submenu-lateral-links submenu-back">
+                                    {{ block.settings.title_1 | upcase }}
+                                  </a>
+                                  {% endif %}
+                                  {% if block.settings.img_2 %}
+                                  <a href="{{ block.settings.url_2 }}" class="submenu-lateral-links submenu-back">
+                                    {{ block.settings.title_2 | upcase }}
+                                  </a>
+                                  {% endif %}
+                                  {% endif %}
+                                  {% endfor %}
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+                </div>
+            </nav>
+        </div>
+
+    </div>
+
+</header>
+<style>
+    .high-link a{
+        background: {{ section.settings.link_color }} !important;
+        color: var(--contrast-color) !important;
+    }   
+    .high-link span{
+        background: none !important;
+        padding: 0 !important;
+    }
+    .header-link-active {
+  background: var(--main-color);
+  color: var(--contrast-color) !important;
+}
+.header-link-active .menu-anchor{
+  color: var(--contrast-color);
+}
+.header-link-active svg polyline {
+    stroke: var(--contrast-color);
+}
+</style>
+
+<script>
+
+
+
+    function headerMenu(){
+        const navCol = document.querySelector('.nav-collections')
+        if(navCol.classList.contains('mobile-lateral-menu')) {
+            document.getElementById('shopify-section-anouncement').classList.remove('is-lateral')
+            document.getElementById('shopify-section-header').classList.remove('is-lateral')
+            document.querySelector('html').classList.remove('no-scroll')
+            document.querySelector('.page-overlay').classList.remove('is-visible')
+            navCol.classList.remove('mobile-lateral-menu')
+        }else {
+            document.getElementById('shopify-section-anouncement').classList.add('is-lateral')
+            document.getElementById('shopify-section-header').classList.add('is-lateral')    
+            document.querySelector('html').classList.add('no-scroll')     
+            document.querySelector('.page-overlay').classList.add('is-visible')
+            navCol.classList.add('mobile-lateral-menu')
+        }
+
+    }
+    function closeOverlay(){
+        document.getElementById('shopify-section-anouncement').classList.remove('is-lateral')
+        document.getElementById('shopify-section-header').classList.remove('is-lateral')     
+        document.querySelector('.nav-collections').classList.remove('mobile-lateral-menu')
+        document.querySelector('.page-overlay').classList.remove('is-visible')
+        document.querySelector('html').classList.remove('no-scroll')
+    }
+
+    const mobileMenu = document.getElementById('mobile-menu')
+    const closeHeaderMenu = document.querySelector('.close-header-menu')
+    const pageOverlay = document.querySelector('.page-overlay')
+    const iconSearcher = document.getElementById('icon-searcher')
+
+
+    iconSearcher.addEventListener('click', (e)=> {
+        e.preventDefault()
+        document.querySelector('.search-container-menu').classList.toggle('open')
+    })
+    mobileMenu.addEventListener('click', headerMenu);
+    closeHeaderMenu.addEventListener('click', headerMenu);
+    pageOverlay.addEventListener('click', closeOverlay)
+
+
+</script>
+
+{% schema %}
+
+{
+    "name": "Header",
+    "settings": [
+        {
+            "type": "header",
+            "content": "Navigation"
+        }, {
+            "type": "link_list",
+            "id": "navigation_menu",
+            "label": "Menu",
+            "default": "main-menu"
+        }, {
+            "type": "url",
+            "id": "chat",
+            "label": "Chat"
+        }, {
+            "type": "url",
+            "id": "wishlist",
+            "label": "Wishlist link"
+        },
+        {
+            "type":"header",
+            "content":"Special link"
+        },
+        {
+            "type":"text",
+            "label":"The handle should be the same as the link we are targeting",
+            "id":"high_text"
+        },
+        {
+            "type":"color",
+            "id":"link_color",
+            "label":"Link color",
+            "default":"#FF1757"
+        }
+    ],
+    "blocks": [
+        {
+            "type":"menu",
+            "name":"Menu",
+            "settings": [
+            {
+                "type":"text",
+                "id":"handle",
+                "label":"Handle",
+                "info":"The handle should be the same as the link we are targeting"
+              },
+              {
+                "type":"header",
+                "content":"First block"
+              },
+              {
+                "type":"image_picker",
+                "label":"Imagen",
+                "id":"img_1",
+                "info":"Images should have a 3:4 ratio e.g. 150x200px"
+              },
+              {
+                "type":"url",
+                "label":"URL",
+                "id":"url_1"
+              },
+              {
+                "type":"text",
+                "label":"Title (optional)",
+                "id":"title_1"
+              },
+              {
+                "type":"header",
+                "content":"Second block"
+              },
+              {
+                "type":"image_picker",
+                "label":"Imagen",
+                "id":"img_2",
+                "info":"Images should have a 3:4 ratio e.g. 150x200px"
+              },
+              {
+                "type":"url",
+                "label":"URL",
+                "id":"url_2"
+              },
+              {
+                "type":"text",
+                "label":"Title (optional)",
+                "id":"title_2"
+              }               
+            ]
+        }
+    ]
+}
+
+{% endschema %}

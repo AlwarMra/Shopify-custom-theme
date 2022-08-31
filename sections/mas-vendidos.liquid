@@ -1,0 +1,251 @@
+{% assign my_template = template | split: '.' | first %}
+{% assign selected_filter = 'todos' %}
+
+{% if my_template == 'collection' %}
+    {% assign categoria  = false  %}
+        {% assign first_product = collection.products[0] %}
+        {% for tag in first_product.tags %}
+        {% assign tag_parts = tag | split: ':' %}
+            {% if tag_parts[0] == 'categoria' %}
+                {% assign categoria  = tag_parts[1]  %} 
+                {% break %}
+            {% endif %}
+        {% endfor %} 
+        {% if categoria %}
+        {% assign selected_filter = categoria %}
+        {% endif %}  
+{% endif %} 
+ 
+<section class="container page-width">    
+    <div class="most-sold" style="background: var(--contrast-color);"> 
+            <div class="space-between">
+                 <ul id="ul_filtros">
+                    <li {%if selected_filter == 'todos'%}class="selected-item"{% endif %} ><a class="btn_filtro_mas_vendidos" data-categoria="todos" href="#">{{ 'categorias.todos' | t }}</a></li>
+                    <li {%if selected_filter == 'hombre'%}class="selected-item"{% endif %}><a class="btn_filtro_mas_vendidos" data-categoria="hombre" href="#" >{{ 'categorias.hombre' | t }}</a></li>
+                    <li {%if selected_filter == 'mujer'%}class="selected-item"{% endif %}><a class="btn_filtro_mas_vendidos" data-categoria="mujer" href="#">{{ 'categorias.mujer' | t }}</a></li>
+                    <li {%if selected_filter == 'unisex'%}class="selected-item"{% endif %}><a class="btn_filtro_mas_vendidos" data-categoria="unisex" href="#">{{ 'categorias.unisex' | t }}</a></li>
+                    <li {%if selected_filter == 'nicho'%}class="selected-item"{% endif %}><a class="btn_filtro_mas_vendidos" data-categoria="nicho" href="#">{{ 'categorias.nicho' | t }}</a></li>
+                </ul>  
+                <!-- <p class="select-icon">Esta semana  <a id="show-info" href="/"> {% include 'icon' with 'select-arrow' %}</a></p> -->
+            </div>
+  
+            
+            {% assign collection  = collections[section.settings.collection_mas_vendidos] %}  
+            <div class="carrusel-bloque" id="MV_todos" > 
+            <div class="cards cards-carousel" id="mas_vendidas_cards" style="margin-bottom: 1rem;"> 
+                 {% for prod in collection.products limit:section.settings.n_prods %}
+                     {% include 'collection-card' with prod %}  
+                {% endfor %}
+            </div> 
+            {% for prod in collection.products limit:section.settings.n_prods %}
+            {% assign current_variant = prod.selected_or_first_available_variant %}
+            <script>
+             var impression = {
+             'name': "{{ prod.title }}",
+            'id': '{{ prod.variants[0].sku }}',
+            'price': {{ prod.price }},    
+            'brand': '{{ marca }}',
+               'category':'{{ categoria }}',  
+            'list': 'Más vendidos - Todos', // nombre del listado en que aparece
+            'position': {{ forloop.index }} 
+             }
+             for(let i = 0; dataLayer.length > i; i++) {
+               if(dataLayer[i].event == 'impression'){dataLayer[i].ecommerce.impressions.push(impression)}
+             }
+           </script>
+           {% endfor %}
+           </div>
+
+
+
+           <div class="carrusel-bloque" id="MV_hombre" style="display: none;"   > 
+            <div class="cards cards-carousel">
+                 {% assign collection  = collections[settings.collection_hombre] %}  
+                 {% for prod in collection.products limit:section.settings.n_prods %}
+                     {% include 'collection-card' with prod %}  
+                 {% endfor %}
+            </div> 
+            {% for prod in collection.products limit:section.settings.n_prods %}
+            {% assign current_variant = prod.selected_or_first_available_variant %}
+            <script>
+                var impression = {
+                'name': "{{ prod.title }}",
+               'id': '{{ prod.variants[0].sku }}',
+               'price': {{ prod.price }},    
+               'brand': '{{ marca }}',
+                  'category':'{{ categoria }}',  
+               'list': 'Más vendidos - Hombre', // nombre del listado en que aparece
+               'position': {{ forloop.index }} 
+                }
+                for(let i = 0; dataLayer.length > i; i++) {
+                  if(dataLayer[i].event == 'impression'){dataLayer[i].ecommerce.impressions.push(impression)}
+                }
+              </script>
+            {% endfor %}
+           </div>
+
+
+           <div class="carrusel-bloque" id="MV_mujer" style="display: none;"   > 
+            <div class="cards cards-carousel">
+                 {% assign collection  = collections[settings.collection_mujer] %}  
+                 {% for prod in collection.products limit:section.settings.n_prods %}
+                     {% include 'collection-card' with prod %}  
+                 {% endfor %}
+            </div> 
+            {% for prod in collection.products limit:section.settings.n_prods %}
+            {% assign current_variant = prod.selected_or_first_available_variant %}
+            <script>
+                var impression = {
+                'name': "{{ prod.title }}",
+               'id': '{{ prod.variants[0].sku }}',
+               'price': {{ prod.price }},    
+               'brand': '{{ marca }}',
+                  'category':'{{ categoria }}',  
+               'list': 'Más vendidos - Mujer', // nombre del listado en que aparece
+               'position': {{ forloop.index }} 
+                }
+                for(let i = 0; dataLayer.length > i; i++) {
+                  if(dataLayer[i].event == 'impression'){dataLayer[i].ecommerce.impressions.push(impression)}
+                }
+              </script>
+            {% endfor %}
+            <p class="counting-carousel"><span class="partial">1</span>/<span class="total"></span></p>
+           </div>
+
+           <div class="carrusel-bloque" id="MV_unisex" style="display: none;"   > 
+            <div class="cards cards-carousel">
+                 {% assign collection  = collections[settings.collection_unisex] %}  
+                 {% for prod in collection.products limit:section.settings.n_prods %}
+                     {% include 'collection-card' with prod %}  
+                 {% endfor %}
+            </div> 
+            {% for prod in collection.products limit:section.settings.n_prods %}
+            {% assign current_variant = prod.selected_or_first_available_variant %}
+            <script>
+                var impression = {
+                'name': "{{ prod.title }}",
+               'id': '{{ prod.variants[0].sku }}',
+               'price': {{ prod.price }},    
+               'brand': '{{ marca }}',
+                  'category':'{{ categoria }}',  
+               'list': 'Más vendidos - Nicho', // nombre del listado en que aparece
+               'position': {{ forloop.index }} 
+                }
+                for(let i = 0; dataLayer.length > i; i++) {
+                  if(dataLayer[i].event == 'impression'){dataLayer[i].ecommerce.impressions.push(impression)}
+                }
+              </script>
+            {% endfor %}  
+            <p class="counting-carousel"><span class="partial">1</span>/<span class="total"></span></p>
+           </div>
+
+           <div class="carrusel-bloque" id="MV_nicho" style="display: none;"   > 
+             <div class="cards cards-carousel">
+                 {% assign collection  = collections[settings.collection_nicho] %}  
+                 {% for prod in collection.products limit:section.settings.n_prods %}
+                     {% include 'collection-card' with prod %}  
+                 {% endfor %}
+            </div> 
+            {% for prod in collection.products limit:section.settings.n_prods %}
+            {% assign current_variant = prod.selected_or_first_available_variant %}
+            <script>
+                var impression = {
+                'name': "{{ prod.title }}",
+               'id': '{{ prod.variants[0].sku }}',
+               'price': {{ prod.price }},    
+               'brand': '{{ marca }}',
+                  'category':'{{ categoria }}',  
+               'list': 'Más vendidos - Nicho', // nombre del listado en que aparece
+               'position': {{ forloop.index }} 
+                }
+                for(let i = 0; dataLayer.length > i; i++) {
+                  if(dataLayer[i].event == 'impression'){dataLayer[i].ecommerce.impressions.push(impression)}
+                }
+              </script>
+            {% endfor %}
+           </div>        
+    </div>
+    
+    <div style="text-align: center; margin-bottom: 3rem;">
+      {% if section.settings.btn_url != blank %}
+      <a href="{{ section.settings.btn_url }}" class="button mas-vendidos-btn">
+        {% if section.settings.btn_text != blank %}{{ section.settings.btn_text }}
+        {% else %}
+        {{ 'botones.ver_mas' | t }}
+        {% endif %}
+      </a>
+      {% endif %}
+    </div>
+</section>
+<style>
+
+.mas-vendidos-btn {
+  margin-top: 1rem;
+    color: var(--main-color);
+    background: var(--secondary-color);
+    padding: 10px 20px;
+    display: inline-block;
+    margin-bottom: 10px;
+    font-size: 1rem;
+}
+  @media(min-width: 1000px) {
+    .cards .flickity-prev-next-button.next {
+      right: -50px;
+    }
+    .cards .flickity-prev-next-button.previous {
+      left: -50px;
+    }
+  }
+</style>
+<script>
+  window.mas_vendidos_params = "{{ selected_filter }}"
+</script>
+
+{% schema %}
+    {
+      "name": "Más vendidos", 
+      "settings": [ 
+            {
+                "type": "text",
+                "id": "title_part_1",
+                "label": "Título parte sin subrayado",
+                "default": "Más"
+            },
+            { 
+                "type": "collection",
+                "id": "collection_mas_vendidos",
+                "label": "Colección más vendidos" 
+            },
+            {
+                "type":      "range",
+                "id":        "n_prods",
+                "min":       5,
+                "max":        50,
+                "step":       1,
+                "unit":       "pr",
+                "label":     "Número productos mostrados",
+                "default":   10
+            },
+            {
+              "id":"btn_url",
+              "label":"Button url",
+              "type":"url"
+            },
+            {
+              "type":"text",
+              "id":"btn_text",
+              "label":"Button text"
+            }
+        ],
+        "presets": [
+        {
+            "category":"Home",
+            "name": "Más vendidos"
+         }
+        ]
+    }
+
+{% endschema %}
+
+
+ 

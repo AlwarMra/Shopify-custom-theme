@@ -1,0 +1,51 @@
+<header class="blog-header">
+    <div>  
+
+      {% assign image_src =   'Marca_DIVAIN.svg' | asset_url %}
+      {% if section.settings.logo %}
+       {% assign image_src =  section.settings.logo | image_url %}
+      {% endif %}
+
+        <div class="blog-logo"> 
+          <a href="{{ blog.url }}"> 
+            <img class="logo" src="{{ image_src }}" alt="{{ section.settings.logo_alt | default: shop.name | escape }}"> 
+          </a>  
+        </div>
+
+        <div class="blog-tags"> 
+          <ul class="">
+            <li class="">
+              <a href="/blogs/{{ blog.handle }}" class="{% if current_tags == blank %}blog-active {% endif %} ">{{ 'blog.todo' | t |  capitalize}}</a>
+            </li>
+            {%- for tag in blog.all_tags -%}
+            <li class="">
+              <a href="/blogs/{{ blog.handle }}/tagged/{{ tag | handle }}" class=" {% if current_tags contains tag %} blog-active {% endif %} ">{{ tag }}</a>
+            </li>
+            {%- endfor -%}
+          </ul> 
+        </div> 
+    </div>
+
+
+
+</header>
+
+
+{% schema %}
+{
+  "name": "Blog header",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo del blog",
+      "info": "200 x 60px png recommended"
+    },
+    {
+      "type": "text",
+      "id": "logo_alt",
+      "label": "Alt del logo"
+    }
+  ]
+}
+{% endschema %}

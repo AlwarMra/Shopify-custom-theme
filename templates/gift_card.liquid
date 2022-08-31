@@ -1,0 +1,77 @@
+{% layout 'gift_card' %}
+    {% section 'topbar' %}
+  {% section 'anouncement' %}
+  {% section 'header' %}
+
+  <div class="account-container gift-template" id="gift-card">
+
+    <h1 class="section-title" style="margin-bottom: 1rem; text-transform: uppercase; font-family: DIN Neuzeit Grotesk, sans-serif; font-weight: 600;">{{ 'gift_card.issued.subtext' | t }}</h1>
+
+    <p class="gift-text">{{ 'gift_card.issued.redeem_html' | t }}</p>
+      <p class="gift-code">{{ 'gift_card.issued.code' | t }}: {{ gift_card.code | format_code }}</p>
+
+
+    <div class="gift-wrapper">
+
+  {%- if gift_card.enabled and gift_card.expired == false -%}
+  <div class="alert alert-success">
+    {%- assign formatted_initial_value = gift_card.initial_value | money_without_trailing_zeros: gift_card.currency -%}
+    <p>{{ 'gift_card.issued.initial_amount_html' | t: initial_amount: formatted_initial_value }}</p>
+
+    {%- if gift_card.balance != gift_card.initial_value -%}
+      {%- assign formatted_balance = gift_card.balance | money_without_trailing_zeros: gift_card.currency -%}
+      <p>{{ 'gift_card.issued.remaining_balance_html' | t: balance: formatted_balance }}</p>
+    {%- endif -%}
+
+    {%- if gift_card.expires_on -%}
+      {%- assign gift_card_expiry_date = gift_card.expires_on | date: format: 'month_day_year' -%}
+      <p>{{ 'gift_card.issued.expires_on' | t: expiry: gift_card_expiry_date }}</p>
+    {%- endif -%}
+  </div>
+  {%- else -%}
+  <div class="alert alert-error">
+    {%- if gift_card.expired and gift_card.enabled -%}
+      {%- assign gift_card_expiry_date = gift_card.expires_on | date: format: 'month_day_year' -%}
+      <p>{{ 'gift_card.issued.expired' | t: expiry: gift_card_expiry_date }}</p>
+    {%- else -%}
+      <p>{{ 'gift_card.issued.disabled' | t }}</p>
+    {%- endif -%}
+  </div>
+  {%- endif -%}
+
+
+
+    <div class="gift-image">
+      <img src="{{ gift_card.product.featured_image | image_url }}" alt="{{ 'gift_card.issued.illustration_alt' | t }}">
+    </div>
+{% comment %}
+    <div id="qr-code"></div>
+{% endcomment %}
+  </div>
+
+    <script>
+      new QRCode(document.getElementById("qr-code"), {
+        text: "{{ gift_card.qr_identifier }}",
+        width: 120,
+        height: 120
+      });
+    </script>
+
+
+
+    <footer>
+      <div style="max-width:400px; margin: 0 auto;">
+        {%- if gift_card.pass_url -%}
+          <div class="">
+            <a href="{{ gift_card.pass_url }}" class="button button-buy" style="font-size: 1.2rem; color: #fff;">
+              <img class="apple-wallet-image" src="{{ 'gift-card/add-to-apple-wallet.svg' | shopify_asset_url }}" width="120" height="40" alt="{{ 'gift_card.issued.add_to_apple_wallet' | t }}">
+            </a>
+          </div>
+        {%- endif -%}
+
+        <div class="">
+          <a href="{{ shop.url }}" class="button button-buy" style="font-size: 1.2rem; color: #fff" target="_blank">{{ 'gift_card.issued.shop_link' | t }}</a>
+        </div>
+      </div>
+    </footer>
+</div>

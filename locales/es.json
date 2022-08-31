@@ -1,0 +1,336 @@
+{
+    "general": {
+      "404": {
+        "title": "No encontrado",
+        "subtext_html": "La página que buscas no existe"
+      },
+      "de": "de",
+      "Similar_a": "Similar a",
+      "Perfume_equivalente_a": "Perfume equivalente a",
+      "inspirado_en": "Inspirado en",
+      "dia": "día",
+      "noche": "noche",
+      "familia_olfativa": "Familia olfativa",
+      "colecciones": "colecciones",
+      "Estacion": "Estación",
+      "Uso": "Uso recomendado",
+      "descuento": "descuento",
+      "perfumes_de_equivalencia": "PERFUMES DE EQUIVALENCIA",
+      "buscar_perfumes_de_equivalencia": "BUSCAR PERFUMES DE EQUIVALENCIA",
+      "encuentra_tu_perfume_divain": "Encuentra tu perfume DIVAIN",
+      "busca_tu_perfume_o_marca": "Busca tu perfume DIVAIN o marca...",
+      "cerrar": "Cerrar",
+      "volver": "volver",
+      "mas_vendidos": "Más Vendidos",
+      "marcas": "Marcas",
+      "todas_las_marcas": "Todas las marcas",
+      "conoce_equivalencias": "Conoce todas nuestras equivalencias",
+      "iva_incluido": "Iva incluido",
+      "completa_pedido": "Completa tu pedido:",
+      "no_tienes_productos": "No tienes productos en tu carrito",
+      "carrito": "Carrito",
+      "tramitar_pedido": "CONTINUAR",
+      "seguir_comprando": "SEGUIR COMPRANDO",
+      "total": "Total",
+      "subtotal": "Subtotal",
+      "gastos_envio": "Gastos de envio",
+      "producto": "Producto",
+      "cantidad": "Cantidad",
+      "borrar": "Borrar",
+      "perfumes_colecciones_html": "Perfumes de equivalencia.<br>Más de 600 fragancias de alta calidad",
+      "intensidad": {
+        "Intensidad": "Intensidad",
+        "Baja": "Baja",
+        "Media": "Media",
+        "Fuerte": "Fuerte"
+      },
+      "newsletter_form": {
+        "email_placeholder": "Email",
+        "confirmacion": "¡Gracias por apuntarte!",
+        "descargar": "Descargar"
+      },
+      "error": "Error",
+      "home": "Inicio",
+      "buscar_marca": "Busca tu marca",
+      "pagination": {
+        "previous_page": "Navegar a la página anterior",
+        "go_to_page": "Navegar a la página ",
+        "next_page": "Navegar a la página siguiente"
+      }
+    },
+    "product": {
+      "precio": "precio",
+      "addto": "AÑADIRLO AL",
+      "Envase": "Frasco",
+      "notas": "Notas olfativas",
+      "ingredientes": "Ingredientes",
+      "caracteristicas": "Características",
+      "opiniones": "opiniones",
+      "Ver_menos_sobre_el_perfume": "Ver menos sobre el perfume",
+      "Ver_mas_sobre_el_perfume": "Ver más sobre el perfume",
+      "envio_gratis": "Gastos de envío gratis a partir de 25€.",
+      "envio_tiempo": "Recibe tu pedido en 24 horas ",
+      "envio_devol": "Devolución gratis del 100% del importe",
+      "muestras": "Muestras",
+      "muestras_error": "¡Todavía te quedan muestras por escoger!",
+      "muestra_gratis": "Muestra gratuita",
+      "tryandbuy": "TRY & BUY",
+      "trybuy_link": "\/pages\/try-buy",
+      "reviews":"Opniones de {{ title }} {{ imitation }}"
+    },
+    "botones": {
+      "comprar_ahora": "Comprar ahora",
+      "add_to_cart": "Añadir al carrito",
+      "anadelo_por": "AÑÁDELO POR",
+      "sin_stock": "Próximanente disponible",
+      "agotado": "Agotado",
+      "agotado_2": "Agotado temporalmente",
+      "all_marcas": "Todas las marcas",
+      "ver_mas": "Ver más",
+      "seguir_redes": "Seguir en redes",
+      "download":"Descargar"
+    },
+    "pack": {
+      "Precio_del_pack": "Precio del pack"
+    },
+    "categorias": {
+      "todos": "Todos",
+      "hombre": "Hombre",
+      "mujer": "Mujer",
+      "unisex": "Unisex",
+      "nicho": "Nicho",
+      "kids": "Kids",
+      "mascotas": "Mascotas",
+      "accesorios": "Accesorios"
+    },
+    "familias": {
+      "acuatica": "Acuática",
+      "amaderada": "Amaderada",
+      "almizcle": "Almizcle",
+      "citrica": "Cítrica",
+      "chipre": "Chipre",
+      "cuero": "Cuero",
+      "especiada": "Especiada",
+      "fougere": "Fougére",
+      "floral": "Floral",
+      "frutal": "Frutal",
+      "oriental": "Oriental",
+      "vainilla": "Vainilla",
+      "aromatica": "Aromática",
+      "gourmand": "Gourmand",
+      "verde": "Verde",
+      "amaderado": "Amaderado",
+      "aldehidica": "Aldehídico",
+      "ambar": "Ámbar"
+    },
+    "filtros": {
+      "filtros": "Filtros",
+      "ordenar": "Ordenar",
+      "ordenar_por": "Ordenar por",
+      "precio_menor_a_mayor": "Precio mayor a menor",
+      "precio_mayor_a_menor": "Precio menor a mayor",
+      "nuevo_a_antiguo": "Productos más recientes",
+      "antiguo_a_nuevo": "Productos más antiguos",
+      "filtrar_por": "Filtrar por",
+      "filtrar_coleccion_por": "Filtrar XXXXX por",
+      "intensidad": "Intensidad",
+      "familias_olfativas": "Familias olfativas",
+      "estacion": "Estación",
+      "invierno": "Invierno",
+      "primavera": "Primavera",
+      "verano": "Verano",
+      "otono": "Otoño",
+      "filtrar": "Filtrar",
+      "limpiar": "Limpiar",
+      "genero": "Género",
+      "momento": "Momento",
+      "filtrar_familia": "Filtrar por familia"
+    },
+    "customers": {
+      "contrasena": "Contraseña",
+      "nombre": "Nombre",
+      "apellido": "Apellido",
+      "email": "Email",
+      "entrar_en_mi_cuenta": "Entrar en mi cuenta de DIVAIN",
+      "introduce_email_y_pass": "Por favor, introduce tu email y contraseña",
+      "olvide_pass": "¿Olvidaste tu contraseña?",
+      "entrar": "Entrar",
+      "crear_cuenta": "Crear una cuenta",
+      "recuperar_contrasena": "Recuperar contraseña",
+      "recuperado_con_exito": "Recuperado con éxito",
+      "recuperar": "Recuperar",
+      "recuerdas_tu_contrasena": "¿Recuerdas tu contraseña?",
+      "volver_a_entrar": "Volver a entrar en mi cuenta",
+      "logout": "Salir",
+      "mi_cuenta": "Mi cuenta",
+      "bienvenido": "Bienvenido de nuevo,",
+      "mis_pedidos": "Mis pedidos",
+      "no_tienes_pedidos": "No tienes ningún pedido todavía",
+      "pedido": "Pedido",
+      "fecha": "Fecha",
+      "estado_pago": "Estado del pago",
+      "estado_entrega": "estado de entrega",
+      "total": "total",
+      "sin_direcciones": "Sin direcciones",
+      "no_hay_direcciones_guardadas": "No hay ninguna dirección guardada",
+      "gestionar_direcciones": "Gestionar direcciones",
+      "direcciones": "Direcciones",
+      "activar_cuenta": "Activar cuenta",
+      "introduce_la_contrasena": "Por favor, introduzca una contraseña",
+      "enviar": "Enviar",
+      "declinar": "Declinar",
+      "volver_a_mi_cuenta": "Volver a mi cuenta",
+      "mis_direcciones": "Mis direciones",
+      "anadir_nueva_direccion": "Añadir una nueva dirección",
+      "direccion_por_defecto": "Dirección por defecto",
+      "direccion": "Dirección",
+      "rellena_los_siguientes_datos": "Por favor, rellena los siguientes datos",
+      "establecer_direccion_predeterminada": "Establecer como dirección predeterminada",
+      "anadir_direccion": "Añadir dirección",
+      "editar_una_direccion": "Editar una dirección",
+      "editar": "editar",
+      "pedido_realizado_el": "Pedido realizado el",
+      "pedido_cancelado_el": "Pedido cancelado el",
+      "producto": "producto",
+      "cantidad": "cantidad",
+      "descuento": "descuento",
+      "subtotal": "subtotal",
+      "direccion_envio": "Dirección de envío",
+      "direccion_facturacion": "Dirección de facturación",
+      "crea_tu_cuenta_divain": "Crea tu cuenta en DIVAIN",
+      "crear_mi_cuenta": "Crear mi cuenta",
+      "reiniciar_pass": "Reinciar contraseña",
+      "introduce_nueva_contrasena": "Por favor, introduce una nueva contraseña",
+      "reset": "reiniciar",
+      "cumple": "Cumpleaños",
+      "preference": "Preferencias",
+      "edit_mis_datos": "Editar mi perfil"
+    },
+    "blog": {
+      "todo": "Todo",
+      "leer_mas": "Leer más",
+      "escrito_por": "Escrito por"
+    },
+    "gift_card": {
+      "issued": {
+        "subtext": "¡Aquí está tu tarjeta regalo!",
+        "illustration_alt": "Gift card illustration",
+        "disabled": "Tu tarjeta regalo está desactivada.",
+        "expired": "Tu tarjeta regalo expira el {{ expiry }}.",
+        "expires_on": "Tu tarjeta regalo expira el {{ expiry }}.",
+        "redeem_html": "Usa este código para canjear tu tarjeta regalo",
+        "code": "Código",
+        "shop_link": "Comienza a comprar",
+        "initial_amount_html": "Cantidad: {{initial_amount}}",
+        "remaining_balance_html": "Remanente: {{balance}}",
+        "add_to_apple_wallet": "Añádelo a la Apple Wallet"
+      }
+    },
+    "announce": {
+      "entrega": "Entrega en 24 horas",
+      "devolucion": "Garantía 14 días devolución",
+      "trust": "4,7\/5 en Truspilot",
+      "tryandbuy": "Devolución gratuita Try&Buy",
+      "envio_precio": "Envío gratis a partir de {{ price }}",
+      "envio": "Envío en 24 horas"
+    },
+    "wishlist": {
+      "wishlist_out": "Añade este producto a tu lista de deseos",
+      "wishlist_in": "Este producto está en tu lista de deseos",
+      "add_all": "Añadir todo",
+      "copiar": "Copiar",
+      "copiado": "¡Copiado!",
+      "add_all_message": "¡Añádelos todos a la vez!",
+      "wishlist_share_title": "Divain wishlist",
+      "wishlist_share_text": "¡Échale un ojo a mi lista de deseos!"
+    },
+    "search": {
+      "no_results": "No se encontraron resultados para “{{ terms }}” Revisa la ortografía o usa una palabra o frase diferente.",
+      "results_with_count": {
+        "one": "Se encontró {{ count }} resultado para \"{{ terms }}\"",
+        "other": "Se encontraron {{ count }} resultados para \"{{ terms }}\""
+      },
+      "title": "Resultados de búsqueda",
+      "page": "Página",
+      "products": "Productos",
+      "collections": "Categorías",
+      "search_for": "Buscar “{{ terms }}”",
+      "predictive_empty":"No hemos encontrado lo que estabas buscando. ¡Descárgate el catálogo para ver todos nuestros perfumes! ",
+      "catalogue_link":"https://cdn.shopify.com/s/files/1/0037/1556/3635/files/ES_Catalogo_DIVAIN_Junio.pdf?v=1654013919"
+    },
+    "shopify": {
+      "checkout": {
+        "alternative_payment_method_banner": {
+          "or": "selecciona tu método de pago en la página siguiente"
+        },
+        "general": {
+          "continue_to_shipping_method": "Continuar con el pago"
+        },
+        "payment_gateway": {
+          "cash_on_delivery_label": "Pago contrarembolso +3,00€"
+        },
+        "banner_text_html":"¿Todavía no estás registrado? <a href='/login'>¡Hazlo aquí!</a>"
+      }
+    },
+    "pagefly": {
+      "products": {
+        "product": {
+          "regular_price": "Regular price",
+          "sold_out": "Sold out",
+          "unavailable": "Unavailable",
+          "on_sale": "Sale",
+          "quantity": "Quantity",
+          "add_to_cart": "Add to cart",
+          "back_to_collection": "Back to {{ title }}",
+          "view_details": "View details"
+        }
+      },
+      "article": {
+        "tags": "Tags:",
+        "all_topics": "All topics",
+        "by_author": "by {{ author }}",
+        "posted_in": "Posted in",
+        "read_more": "Read more",
+        "back_to_blog": "Back to {{ title }}"
+      },
+      "comments": {
+        "title": "Leave a comment",
+        "name": "Name",
+        "email": "Email",
+        "message": "Message",
+        "post": "Post comment",
+        "moderated": "Please note, comments must be approved before they are published",
+        "success_moderated": "Your comment was posted successfully. We will publish it in a little while, as our blog is moderated.",
+        "success": "Your comment was posted successfully! Thank you!",
+        "comments_with_count": {
+          "one": "{{ count }} comment",
+          "other": "{{ count }} comments"
+        }
+      },
+      "password_page": {
+        "login_form_message": "Enter store using password:",
+        "login_form_password_label": "Password",
+        "login_form_password_placeholder": "Your password",
+        "login_form_submit": "Enter",
+        "signup_form_email_label": "Email",
+        "signup_form_success": "We will send you an email right before we open!",
+        "password_link": "Enter using password"
+      }
+    },
+    "customer_accounts": {
+      "B2B": {
+        "draft_order_details": {
+          "payment_status": {
+            "confirmed": {
+              "overdue": {
+                "many": ""
+              },
+              "soon": {
+                "many": ""
+              }
+            }
+          }
+        }
+      }
+    }
+  }

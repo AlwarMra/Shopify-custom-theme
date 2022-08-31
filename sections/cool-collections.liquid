@@ -1,0 +1,277 @@
+
+<section class="cool-collections" style="background: {{ section.settings.section_color }}">
+  <h1 class="section-title">{{ section.settings.title }}</h1>
+    <p class="subtitle">{{ section.settings.subtitle }}</p>
+    
+    
+    <div class="cool-background"></div>
+    
+    <div class="cool-cards-cols">
+      {% if section.settings.img_1 %}
+    <a href="{{ section.settings.link_1 }}" class="cool-card">
+      <div class="aspect-ratio-box">
+        <img class="lazyload" data-src="{{ section.settings.img_1 | img_url: 'x360' }}">
+        <p class="cool-card-text">{{ section.settings.text_1 }}</p>
+      </div>
+      
+      <span class="button">{{ section.settings.btn_text_1 }}</span>
+    </a>
+    {% endif %}
+      
+        {% if section.settings.img_2 %}
+    <a href="{{ section.settings.link_2 }}" class="cool-card">
+      <div class="aspect-ratio-box">
+        <img class="lazyload" data-src="{{ section.settings.img_2 | img_url: 'x360' }}">
+        <p class="cool-card-text">{{ section.settings.text_2 }}</p>
+      </div>
+      
+      <span class="button">{{ section.settings.btn_text_2 }}</span>
+      </a>
+    {% endif %}
+        
+      
+       {% if section.settings.img_3 %}
+    <a href="{{ section.settings.link_3 }}" class="cool-card">
+      <div class="aspect-ratio-box">
+        <img class="lazyload" data-src="{{ section.settings.img_3 | img_url: 'x360' }}">
+        <p class="cool-card-text">{{ section.settings.text_3 }}</p>
+      </div>
+      
+      <span class="button">{{ section.settings.btn_text_3 }}</span>
+    </a>
+    {% endif %}
+         
+      
+    </div>
+  </section>
+  <style>
+    .cool-card {
+    	display: block;
+      text-decoration: none;
+    }
+    .cool-card .button {
+      color: {{ section.settings.btn_color }};
+      background: {{ section.settings.btn_back_color }};
+    }
+    
+    .cool-background {
+        position: absolute;
+        z-index: 1;
+        height: 75%;
+        width: 100%;
+        bottom: 50%;
+        transform: translateY(50%);
+        background: url('{{ section.settings.back_img_mv | img_url: 'x600' }}');
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }  
+    
+      @media(min-width: 764px) {
+        .cool-background {
+             background: url('{{ section.settings.back_img_ds | img_url: 'x1400' }}');
+             transform: translateY(0);
+             bottom: 0;
+               height: 65%;
+        }
+      }
+    
+    .cool-card-text {
+      font-family: 'amalfi';
+      color: {{ section.settings.text_color }};
+      text-shadow: 2px 2px {{ section.settings.shadow_color }};
+      position: absolute;
+      font-size: 2rem;
+      bottom: 1rem;  
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    .cool-collections {
+      padding: 2rem 0;
+      position: relative;
+    }
+    .cool-collections .subtitle {
+      text-align: center;
+      width: 80%;
+      margin: 2rem auto;
+      
+    }
+  
+    .cool-cards-cols {
+      position: relative;
+      z-index:2;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .cool-card {
+      width: 80%;
+      padding: 1rem;
+      margin: 0 auto;
+    }
+    .cool-card .aspect-ratio-box {
+      padding-top: 125%;
+    }
+    .cool-card .button {
+      font-size: 1rem;
+      padding: 1rem;
+      display: block;
+      width: 100%;
+      margin-top: 1.5rem;
+    }
+    @media(min-width: 768px) {
+      
+     .cool-cards-cols {
+      justify-content: center;
+      display: flex;
+    flex-wrap: nowrap;
+     }   
+      .cool-card {
+      width: 25%;
+        margin: 0 1.2rem;
+      }  
+    }
+  </style>
+  {% schema %}
+  {
+    "name": "Cool collections", 
+    "settings": [ 
+        {
+      "id":"title",
+      "type":"text",
+      "label":"Title",
+      "default":"Title"
+      },
+      {
+      "id":"subtitle",
+      "type":"text",
+      "label":"Subtitle",
+      "default":"Subtitle"
+      },
+      {
+      "type":"color",
+      "label":"Background color",
+      "id":"section_color",
+      "default":"#fff8f5"
+      },
+        {
+        "type":"image_picker",
+        "id":"back_img_mv",
+        "label":"Background image (mobile)"
+        },
+        {
+        "type":"image_picker",
+        "id":"back_img_ds",
+        "label":"Background image (desktop)"
+        },
+      {
+         "type":"color",
+      "id":"text_color",
+      "label":"Cards text color",
+      "default":"#ffffff"
+      },
+      {
+         "type":"color",
+      "id":"shadow_color",
+      "label":"Cards text shadow color",
+      "default":"#a9a9a9"
+      },
+      {
+         "type":"color",
+      "id":"btn_color",
+      "label":"Button text color",
+      "default":"#ffffff"
+      },
+      {
+         "type":"color",
+      "id":"btn_back_color",
+      "label":"Button background color",
+      "default":"#000000"
+      },
+      {
+      "type":"header",
+      "content":"First card"
+      },
+      {
+      "id":"img_1",
+      "label":"Image",
+      "type":"image_picker"
+      },
+        {
+      "id":"text_1",
+      "type":"text",
+      "label":"Text",
+      "default":"Text"
+      },
+      {
+      "id":"link_1",
+      "type":"url",
+      "label":"URL"
+      },
+      {
+        "id":"btn_text_1",
+        "type":"text",
+        "label":"Button text",
+        "default":"Ver más"
+      },
+      {
+      "type":"header",
+      "content":"Second card"
+      },
+      {
+      "id":"img_2",
+      "label":"Image",
+      "type":"image_picker"
+      },
+        {
+      "id":"text_2",
+      "type":"text",
+      "label":"Text",
+      "default":"Text"
+      },
+      {
+      "id":"link_2",
+      "type":"url",
+      "label":"URL"
+      },
+      {
+        "id":"btn_text_2",
+        "type":"text",
+        "label":"Button text",
+        "default":"Ver más"
+      },
+      {
+      "type":"header",
+      "content":"Third card"
+      },
+      {
+      "id":"img_3",
+      "label":"Image",
+      "type":"image_picker"
+      },
+        {
+      "id":"text_3",
+      "type":"text",
+      "label":"Text",
+      "default":"Text"
+      },
+      {
+      "id":"link_3",
+      "type":"url",
+      "label":"URL"
+      },
+      {
+        "id":"btn_text_3",
+        "type":"text",
+        "label":"Button text",
+        "default":"Ver más"
+      }
+     ],
+     "presets": [
+     {
+         "category":"Home",
+         "name": "Cool collections"
+      }
+     ]
+  }
+  {% endschema %}
+  

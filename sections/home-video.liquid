@@ -1,0 +1,125 @@
+<section class="home-video">
+  <div class="video-text">
+      <img src="{{'Marca_DIVAIN.svg' | asset_url }}" alt="">
+      <p class="video-paragraph">
+          {{ section.settings.txt_part_1}}<br>{{ section.settings.txt_part_2}} 
+      </p>
+  </div>
+
+{% comment %}
+  <div class="promotional-video"> 
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/{{ section.settings.id_video }}?rel=0&listType=user_uploads&list={{ section.settings.id_lista}}" loading="lazy" frameborder="0" allowfullscreen></iframe>
+  </div>
+{% endcomment %}
+    <div class="promotional-video" data-embed="{{ section.settings.id_video }}" data-list="{{ section.settings.id_lista}}"> 
+  <div class="play-button"></div>
+    </div>
+</section>
+
+<style>
+
+  .home-video{
+      background-image: url('{{ section.settings.img_fondo_video | image_url }}');
+  }
+.promotional-video{
+background-color: #000;
+  cursor: pointer;
+  padding-bottom: 59.25%;
+}
+.promotional-video img {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+}
+.promotional-video .play-button {
+width: 90px;
+height: 60px;
+background-color: #333;
+box-shadow: 0 0 30px rgba( 0,0,0,0.6 );
+z-index: 1;
+opacity: 0.8;
+border-radius: 6px;
+  cursor: pointer;
+}
+.promotional-video .play-button:before {
+content: "";
+border-style: solid;
+border-width: 15px 0 15px 26.0px;
+border-color: transparent transparent transparent #fff;
+}
+.promotional-video .play-button,
+.promotional-video .play-button:before {
+position: absolute;
+  top: 50%;
+left: 50%;
+transform: translate3d( -50%, -50%, 0 );
+}
+
+</style>
+<script>
+( function() {
+
+var youtube = document.querySelectorAll( ".promotional-video" );
+
+for (var i = 0; i < youtube.length; i++) {
+  var source = "https://img.youtube.com/vi/"+ youtube[i].dataset.embed +"/sddefault.jpg";
+  var image = new Image();
+      image.src = source;
+      image.addEventListener( "load", function() {
+        youtube[ i ].appendChild( image );
+      }( i ) );  
+      youtube[i].addEventListener( "click", function() {
+        var iframe = document.createElement( "iframe" );
+            iframe.setAttribute( "frameborder", "0" );
+            iframe.setAttribute( "allowfullscreen", "" );
+            iframe.setAttribute( "src", "https://www.youtube.com/embed/"+ this.dataset.embed +"?controls=0&rel=0&autoplay=1&listType=user_uploads&playlist?list="+this.dataset.list );
+            this.innerHTML = "";
+            this.appendChild( iframe );
+      } );  
+};
+} )();
+</script>
+
+{% schema %}
+{
+"name": "Video promocional", 
+"settings": [ 
+        {
+              "type": "text",
+              "id": "id_video",
+              "label": "Código video Youtube ",
+              "default": "6w0iR3Zwtkc"
+          },
+           {
+              "type": "text",
+              "id": "id_lista",
+              "label": "Id lista de Youtube ",
+              "default": "PLoVPQ4lTqgfBtmjSmouUWBDf6aeLKrnmd"
+          },
+            {
+              "type": "image_picker",
+              "id": "img_fondo_video",
+              "label": "Imagen fondo sección" 
+              },
+              {
+                  "type": "text",
+                  "id": "txt_part_1",
+                  "label": "Texto 1",
+                  "default": "DIVAIN es una tienda online de perfumes de equivalencia de alta calidad."
+              },
+              {
+                  "type": "text",
+                  "id": "txt_part_2",
+                  "label": "Texto 2",
+                  "default": "DIVAIN es tendencia y moda. Sus aromas de gusto exquisito, perennes en el tiempo, te harán sentirte único."
+              }
+
+ ],
+ "presets": [
+ {
+     "category":"Home",
+     "name": "Video promocional"
+  }
+ ]
+}
+{% endschema %}

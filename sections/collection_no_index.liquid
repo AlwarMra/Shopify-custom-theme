@@ -1,0 +1,34 @@
+<!-- COLLECTION no index-->  
+{%- capture datos -%}
+{%- for block in section.blocks -%}
+{{block.settings.collection }};
+{% endfor %}
+{%- endcapture -%}   
+{%- assign pages = datos | split: ';' -%} 
+{%- for page_handle in pages %} <!-- :::{{ page_handle}} -->
+	{%- assign page_handle =  page_handle | strip | strip_newlines | strip  -%}
+	{%- assign page_handle2 =  page_handle | strip_newlines| strip   -%} 
+	{%- if page_handle2 == collection.handle -%} 
+  <meta name="robots" content="noindex,nofollow">
+		{%- break -%}
+	{%- endif -%}
+{%- endfor -%}
+{% schema %}
+{
+  "name": "Collections NOINDEX",  
+  "blocks": [
+      {
+        "type": "collection-no-index",
+        "name": "Collection con No index",
+        "settings": [
+          {
+            "type": "collection",
+            "id": "collection",
+            "label": "Colección"
+          }  
+			
+        ]
+      }
+    ]
+}
+{% endschema %}

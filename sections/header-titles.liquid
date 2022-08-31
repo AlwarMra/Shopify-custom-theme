@@ -1,0 +1,245 @@
+<section class="header-separator">
+      <div class="container-fluid">
+
+        {% if section.settings.html_label == 'h1' %}<h1 class="header-title">
+          {% elsif section.settings.html_label == 'h2' %}<h2 class="header-title">
+      {% elsif section.settings.html_label == 'h3' %}<h3 class="header-title">
+        {% elsif section.settings.html_label == 'h4' %}<h4 class="header-title">
+          {% elsif section.settings.html_label == 'h5' %}<h5 class="header-title">
+      {% endif %}
+  
+      {{ section.settings.header_text }}
+  
+      {% if section.settings.html_label == 'h1' %}</h1>
+      {% elsif section.settings.html_label == 'h2' %}</h2>
+      {% elsif section.settings.html_label == 'h3' %}</h3>
+      {% elsif section.settings.html_label == 'h4' %}</h4>
+      {% elsif section.settings.html_label == 'h5' %}</h5>
+      {% endif %}
+      
+      {% if section.settings.subtext != blank %}
+        <p>{{ section.settings.subtext }}</p>
+        {% endif %}
+      
+        {% if section.settings.content_type == 'search' %}
+        <form action="/search" method="get" role="search" class="search-container">
+          <input type="search" placeholder="{{ 'general.busca_tu_perfume_o_marca' | t  }}">
+          <span class="search-icon">{% render 'icon' with 'searcher' %}</span>
+        </form>
+        {% elsif section.settings.content_type == 'buttons' %}
+        <p class="header-btns">
+          <a class="button" href="{{ section.settings.url_1 }}">{{ section.settings.btn_text_1 }}</a>
+          <a class="button" href="{{ section.settings.url_2 }}">{{ section.settings.btn_text_2 }}</a>
+        </p>
+        {% endif %}
+      </div>
+    </section>
+    
+    <style>
+      .header-separator {
+          padding: 3rem 1rem;
+        background:var(--main-color);
+      }
+      .header-title {
+        font-family: futura;
+        color: var(--contrast-color);
+        font-size: 2rem;
+        text-align: {{ section.settings.text_align }}; 
+        margin-bottom: 1rem;
+      }
+      .header-separator p {
+        text-align: {{ section.settings.text_align }};
+        color: var(--contrast-color); 
+        font-size: 1.2rem;
+        margin-bottom: 1rem;
+      }
+      .search-container {
+        margin: 0 auto;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        left: 20px;
+      }
+      .search-container span {
+        height: 40px;
+        width: 40px;
+        display: inline-block;
+        background: var(--contrast-color); 
+        position: relative;
+        right: 40px;
+        cursor: pointer;
+      }
+      .search-container span svg {
+        position: relative;
+        top: 10px;
+      }
+      .search-container span g {
+        fill: var(--main-color);
+      }
+      .search-container input {
+        width: 100%;
+        max-width: 600px;
+        height: 40px;
+        outline: none;
+        padding: 6px;
+        font-size: 1rem;
+        border: 3px solid var(--contrast-color);
+        background: var(--main-color);
+        color: var(--contrast-color);
+      }
+      .search-container     [type="search"] {
+        -moz-appearance:    textfield;
+        -webkit-appearance: textfield;
+        appearance: textfield;
+    }
+      .search-container input::placeholder {
+        color: var(--contrast-color);
+      }
+      .search-container input::-ms-input-placeholder{
+        color: var(--contrast-color);
+      }
+      .search-container input:-ms-input-placeholder{
+        color: var(--contrast-color);
+      }
+      .search-container input:-moz-placeholder{
+        color: var(--contrast-color);
+      }
+      .search-container input::-webkit-input-placeholder{
+        color: var(--contrast-color);
+      }
+      .search-container input::-moz-placeholder{
+        color: var(--contrast-color);
+        opacity: 1;
+      }
+      .header-btns {
+        text-align: center;
+      }
+      .header-btns a {
+        font-size: 1rem;
+        display: inline-block;
+        min-width: 200px;
+        border: 3px solid var(--contrast-color);
+        margin: 1em 15px;
+        padding: 10px 20px;
+      }
+      .header-btns a:first-child {
+        background: var(--contrast-color);
+        color: var(--main-color);
+      }
+      .header-btns a:last-child {
+        background: var(--main-color);
+        color: var(--contrast-color); 
+        
+      }
+
+    </style>  
+    {% if section.settings.content_type == 'search' %}
+    <script>
+      const searchContainer = document.querySelector('.search-container')
+      const searchIcon = document.querySelector('.search-icon')
+      
+      searchIcon.addEventListener('click', e =>{
+        searchProducts()
+      })
+      searchContainer.addEventListener('submit', e => {
+        e.preventDefault()
+        searchProducts()
+      })
+      function searchProducts(){
+       const searchVal = document.querySelector('.search-container input').value
+       const loc = document.location = '/search?q=' + searchVal + '&type=product'
+       searchVal != '' ? loc : document.location = '/search?q=&type=product'
+      }
+    </script>
+    {% endif %}
+    {% schema %}
+      {
+        "name": "Header titles",
+         "settings": [
+                {
+                 "type":"text",
+                 "id":"header_text",
+                 "label":"Title",
+                 "default":"Nuevas ofertas"
+                },
+                {
+                 "type":"text",
+                 "id":"subtext",
+                 "label":"Subtext",
+                 "default":"solo para ti"
+                },
+                {
+                 "type":"select",
+                 "label":"HTML tag",
+                 "default":"h2",
+                 "id":"html_label",
+                 "options": [
+                    { "value": "h1", "label": "h1"},
+                    { "value": "h2", "label": "h2"},
+                    { "value": "h3", "label": "h3"},
+                    { "value": "h4", "label": "h4"},
+                    { "value": "h5", "label": "h5"}
+                    ]
+    
+                },
+                {
+                 "type":"select",
+                 "label":"Text align",
+                 "id":"text_align",
+                 "default":"center",
+                 "options": [
+                    { "value": "center", "label": "center"},
+                    { "value": "left", "label": "left"},
+                    { "value": "right", "label": "right"}
+                    ]
+                },
+                {
+                  "type":"select",
+                  "label":"Content type",
+                  "id":"content_type",
+                  "default":"search",
+                  "options":[
+                    {"value":"search", "label":"Search form"},
+                    {"value":"buttons", "label":"Buttons"}
+                  ]
+                },
+                {
+                  "type":"header",
+                  "content":"Buttons"
+                },
+                {
+                  "type":"url",
+                  "id":"url_1",
+                  "label":"First URL"
+                },
+                {
+                  "type":"text",
+                  "id":"btn_text_1",
+                  "label":"First button text",
+                  "default":"Cool text"
+                },
+                {
+                  "type":"url",
+                  "id":"url_2",
+                  "label":"First URL"
+                },
+                {
+                  "type":"text",
+                  "id":"btn_text_2",
+                  "label":"First button text",
+                  "default":"Cool text"
+                }
+            ],
+        "presets":[
+            {
+           "category":"Home",
+           "name": "Header titles"
+            }
+        ]
+    
+      }
+    {% endschema %}
+    
+    

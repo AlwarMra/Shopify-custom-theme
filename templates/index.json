@@ -1,0 +1,100 @@
+{
+  "sections": {
+    "home-top-banner":{
+      "type":"home-top-banner",
+      "settings":{}
+    },
+    "mas-vendidos": {
+      "type": "mas-vendidos",
+      "settings": {
+      }
+    },
+    "header-titles": {
+      "type": "header-titles",
+      "settings": {
+        "header_text": "Nuevas ofertas",
+        "subtext": "solo para ti",
+        "html_label": "h1",
+        "text_align": "center",
+        "content_type": "search",
+        "url_1": "",
+        "btn_text_1": "Cool text",
+        "url_2": "",
+        "btn_text_2": "Cool text"
+      }
+    },
+    "home-service": {
+      "type":"home-service",
+      "blocks":{},
+      "settings":{}
+    },
+    "reviews": {
+      "type": "reviews",
+      "settings": {
+        "title": "Tú también te vas a enamorar",
+        "subtitle": "Nuestros clientes nos recomiendan ¡y repiten!"
+      }
+    },
+    "discover-cards":{
+    "type": "discover-cards",
+      "settings":{},
+      "blocks": {}
+    },
+    "blog-cards": {
+      "type": "blog-cards",
+      "settings": {},
+      "blocks":{}
+    },
+    "image-with-text": {
+      "type": "image-with-text",
+      "settings": {}
+    },
+    "home-collection-cards": {
+    "type": "home-collection-cards",
+      "settings":{}
+    },
+    "header-titles-2": {
+      "type": "header-titles",
+      "settings": {
+        "header_text": "¿No encuentras lo que buscas?",
+        "subtext": "Queremos ayudarte y te lo ponemos fácil",
+        "html_label": "h4",
+        "text_align": "center",
+        "content_type": "buttons",
+        "url_1": "",
+        "btn_text_1": "Cool text",
+        "url_2": "",
+        "btn_text_2": "Cool text"
+      }
+    },
+    "home-club": {
+    "type": "home-club",
+      "settings":{}
+    },
+    "social-images": {
+    "type": "social-images",
+      "settings":{},
+      "blocks":{}
+    },
+    "home-tabs": {
+    	"type": "home-tabs",
+      "blocks": {},
+      "settings":{}
+    }
+  },
+  "order": [
+    "home-top-banner",
+    "mas-vendidos",
+    "header-titles",
+    "home-service",
+    "reviews",
+    "discover-cards",
+    "blog-cards",
+    "image-with-text",
+    "home-collection-cards",
+    "header-titles-2",
+    "home-club",
+    "social-images",
+    "home-tabs"
+  ]
+}

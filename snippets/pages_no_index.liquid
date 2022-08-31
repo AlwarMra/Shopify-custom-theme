@@ -1,0 +1,12 @@
+{%- capture data  -%}
+{{ settings.handles }}
+{%- endcapture -%}
+
+{%- assign pages = data | split: ';' -%} 
+{%- for page_handle in pages %}
+	{%- assign page_handle =  page_handle | strip | strip_newlines | strip  -%}
+	{%- assign page_handle2 =  page_handle | strip_newlines | strip   -%}
+	{%- if page_handle2 == page.handle -%}  <meta name="robots" content="noindex, nofollow">
+		{%- break -%}
+	{%- endif -%}
+{%- endfor -%}

@@ -1,0 +1,112 @@
+<section class="container container-width trust-section">
+  
+    <div class="container-fluid">
+
+        <h3 class="section-title">{{ section.settings.titulo }}</h3>
+        <p class="trust-text">
+         <!-- TODO: adaptar el css porque el campo ya lleva un <p> obligatoriamente -->
+            {{ section.settings.texto }}
+        </p> 
+        <div class="trust-stamps">
+            <div class="stamp">
+                <img src="{{  settings.img_confianza_1 | img_url}}" alt="{{ settings.alt_confianza_1  }}">
+                <p class="stamp-text">{{ section.settings.stamp_text_1 }}</p>
+            </div>
+            <div class="stamp">
+                <img src="{{  settings.img_confianza_2 | img_url}}" alt="{{ settings.alt_confianza_2  }}">
+                <p class="stamp-text">{{ section.settings.stamp_text_2 }}</p>
+            </div>
+            <div class="stamp">
+                <img src="{{  settings.img_confianza_3 | img_url}}" alt="{{ settings.alt_confianza_3  }}">
+                <p class="stamp-text">{{ section.settings.stamp_text_3 }}</p>
+            </div>
+            <div class="stamp-break"></div>
+            <div class="stamp">
+                <img src="{{  settings.img_confianza_4 | img_url}}" alt="{{ settings.alt_confianza_4  }}">
+                <p class="stamp-text">{{ section.settings.stamp_text_4 }}</p>
+            </div>
+            <div class="stamp">
+                <img src="{{  settings.img_confianza_5 | img_url}}" alt="{{ settings.alt_confianza_5  }}">
+                <p class="stamp-text">{{ section.settings.stamp_text_5 }}</p>
+            </div>
+            <div class="stamp">
+                <img src="{{  settings.img_confianza_6 | img_url}}" alt="{{ settings.alt_confianza_6  }}">
+                <p class="stamp-text">{{ section.settings.stamp_text_6 }}</p>
+            </div>
+            <div class="stamp">
+                <img src="{{  settings.img_confianza_8 | img_url}}" alt="{{ settings.alt_confianza_6  }}">
+                <p class="stamp-text">{{ section.settings.stamp_text_8 }}</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+ 
+{% schema %}
+{
+  "name": "Sello de confianza", 
+  "settings": [  
+        {
+            "type": "text",
+            "id": "titulo",
+            "label": "Título",
+            "default": "¡COMPRA, PRUEBA Y DISFRUTA!"
+            },
+            {
+            "type": "richtext",
+            "id": "texto",
+            "label": "Texto confianza",
+            "default": "<p>Si has comprado uno de nuestros perfumes de equivalencia a través de la web www.divainparfums.es y no has quedado totalmente satisfecho, te reembolsaremos el importe total que hayas abonado. Consulta con todo detalle las condiciones de devolución. Te invitamos a que te suscribas a nuestro blog para estar al día de las ofertas y novedades. Puedes ponerte en contacto con nosotros a través de nuestro chat.</p>"
+            }
+             ,
+            {
+            "type": "text",
+            "id": "stamp_text_1",
+            "label": "Frase confianza icono 1",
+            "default": "TE ENIVAMOS DOS MUESTRAS GRATIS POR PERFUME QUE COMPRES Y LAS PUEDES ELEGIR AL FINALIZAR EL PEDIDO"
+            },
+            {
+            "type": "text",
+            "id": "stamp_text_2",
+            "label": "Frase confianza icono 2",
+            "default": "TE DEVOLVEMOS EL 100% DEL IMPORTE INCLUIDOS LOS GASTOS DE ENVÍO"
+            },
+            {
+            "type": "text",
+            "id": "stamp_text_3",
+            "label": "Frase confianza icono 3",
+            "default": "EN PEDIDOS REALIZADOS DE LUNES A JUEVES ANTES DE LAS 18:00"
+            },
+            {
+            "type": "text",
+            "id": "stamp_text_4",
+            "label": "Frase confianza icono 4",
+            "default": "NO TESTADO CON ANIMALES. RESPETAMOS EL MEDIO AMBIENTE "
+            },
+            {
+            "type": "text",
+            "id": "stamp_text_5",
+            "label": "Frase confianza icono 5",
+            "default": "TRABAJAMOS CON CERTIFICADOS DE SEGURIDAD PARA QUE TU COMPRA SEA SEGURA."
+            },
+            {
+            "type": "text",
+            "id": "stamp_text_6",
+            "label": "Frase confianza icono 6",
+            "default": "CALIDAD GARANTIZADA Y AL MEJOR PRECIO. POR ESO YA MILES DE CLIENTES CONFÍAN EN NOSOTROS"
+            },
+            {
+            "type": "text",
+            "id": "stamp_text_8",
+            "label": "Frase confianza icono 7",
+            "default": "PLANET FIRST"
+            }
+   ],
+   "presets": [
+   {
+       "category":"Home",
+       "name": "Sellos de confianza"
+    }
+   ]
+}
+{% endschema %}
