@@ -1,4 +1,4 @@
-# Shopify custom theme
+# Divain: Shopify custom theme
 
 **This theme is no longer under maintenance and it had not a general purpouse use, it is then not recommended for production**
 
